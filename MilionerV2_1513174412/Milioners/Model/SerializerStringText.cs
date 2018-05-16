@@ -6,6 +6,8 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Milioners
 {
@@ -15,7 +17,7 @@ namespace Milioners
         XmlSerializer serializer = null;
         public void Save(ICollection<Question> collection)
         {
-           
+
             stream = new FileStream("../../list.xml", FileMode.Create);
             serializer = new XmlSerializer(typeof(List<Question>));
             serializer.Serialize(stream, collection);
@@ -24,13 +26,29 @@ namespace Milioners
         }
         public ICollection<Question> Load()
         {
+            //  SqlConnection connect = new SqlConnection(@"Initial Catalog=Milion;Data Source=(local);Integrated Security=SSPI");
+            //   connect.OpenAsync();
+            SqlConnection connect = new SqlConnection(@"Initial Catalog=Milion;Data Source=(local);Integrated Security=SSPI");
+            SqlCommand command = new SqlCommand();
+            try
+            {
+                connect.Open();
+                command.Connection = connect;
+
+
+
+              
+            }
+            catch (Exception ex) { };
+
+
             List<Question> temp;
             try
             {
                 stream = new FileStream("../../list.xml", FileMode.Open);
                 serializer = new XmlSerializer(typeof(List<Question>));
                 temp = (List<Question>)serializer.Deserialize(stream);
-          
+
 
                 stream.Close();
 
@@ -40,7 +58,36 @@ namespace Milioners
             stream.Close();
             return new List<Question>();
         }
-        
+
+
+
+        async void CreateDB()
+        {
+            String str;
+            SqlConnection myConn = new SqlConnection("Server=localhost;Integrated security=SSPI;database=master");
+
+            str = "create database Milion";
+
+            SqlCommand myCommand = new SqlCommand(str, myConn);
+            try
+            {
+                await myConn.OpenAsync();
+                await myCommand.ExecuteNonQueryAsync();
+               
+            }
+            catch (System.Exception ex)
+            {
+           
+            }
+            finally
+            {
+                if (myConn.State == ConnectionState.Open)
+                {
+                    myConn.Close();
+                }
+            }
+        }
+
     }
 }
 //bool ferst = true;
