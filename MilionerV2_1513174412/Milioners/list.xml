@@ -1,0 +1,206 @@
+<?xml version="1.0"?>
+<ArrayOfQuestion xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Question>
+    <Questio>Как называется место на берегу, где обитают тюлени?</Questio>
+    <Answer_1>Лежбище</Answer_1>
+    <Answer_2>Стойбище</Answer_2>
+    <Answer_3>Пастбище</Answer_3>
+    <Answer_4>Гульбище</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Как мировая пресса называла премьер-министра Великобритании Маргарет Тэтчер?</Questio>
+    <Answer_1>Железная леди</Answer_1>
+    <Answer_2>Стальная леди</Answer_2>
+    <Answer_3>Оловянный солдатик</Answer_3>
+    <Answer_4>Крепкий орешек</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Какой из этих городов южнее остальных?</Questio>
+    <Answer_1>Каир</Answer_1>
+    <Answer_2>Токио</Answer_2>
+    <Answer_3>Мадрид</Answer_3>
+    <Answer_4>Сан-Франциско</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Через какой город мира проходит нулевой меридиан?</Questio>
+    <Answer_1>Гринвич</Answer_1>
+    <Answer_2>Гринсборо</Answer_2>
+    <Answer_3>Глазго</Answer_3>
+    <Answer_4>Гронинген</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Какая птица является символом Новой Зеландии?</Questio>
+    <Answer_1>Киви</Answer_1>
+    <Answer_2>Жако</Answer_2>
+    <Answer_3>Эму</Answer_3>
+    <Answer_4>Казуар</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Какого короля англичане прозвали "Львиное сердце"?</Questio>
+    <Answer_1>Ричард I</Answer_1>
+    <Answer_2>Вильгельм I</Answer_2>
+    <Answer_3>Георг I</Answer_3>
+    <Answer_4>Генрих I</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Как в народе называются финансовые институты, обещающие вкладчикам золотые горы?</Questio>
+    <Answer_1>Пирамиды</Answer_1>
+    <Answer_2>Гробницы</Answer_2>
+    <Answer_3>Захоронения</Answer_3>
+    <Answer_4>Сфинксы</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Какая награда вручается вместе с присвоением звания Героя России?</Questio>
+    <Answer_1>Медаль "Золотая Звезда"</Answer_1>
+    <Answer_2>Медаль "За отвагу"</Answer_2>
+    <Answer_3>Орден Суворова</Answer_3>
+    <Answer_4>Орден мужества</Answer_4>
+  </Question>
+  <Question>
+    <Questio>В каком городе родился Вольфганг Амадей Моцарт?</Questio>
+    <Answer_1>Зальцбург </Answer_1>
+    <Answer_2>Веймар</Answer_2>
+    <Answer_3>Прага</Answer_3>
+    <Answer_4>Вена</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Какую реку Юлий Цезарь перешел со словами "Жребий брошен"?</Questio>
+    <Answer_1>Рубикон</Answer_1>
+    <Answer_2>Припять</Answer_2>
+    <Answer_3>Нил</Answer_3>
+    <Answer_4>Евфрат</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Как называется искусство аранжировки цветов?</Questio>
+    <Answer_1>Икебана</Answer_1>
+    <Answer_2>Суши</Answer_2>
+    <Answer_3>Кэндо</Answer_3>
+    <Answer_4>Харакири</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Какая страна является мировым лидером по производству кофе?</Questio>
+    <Answer_1>Бразилия</Answer_1>
+    <Answer_2>Венесуэла</Answer_2>
+    <Answer_3>Мексика</Answer_3>
+    <Answer_4>Аргентина</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Что труднее всего дается не трезвому человеку?</Questio>
+    <Answer_1>Вязать лыко</Answer_1>
+    <Answer_2>Трепать нервы</Answer_2>
+    <Answer_3>Бить баклуши</Answer_3>
+    <Answer_4>Витать в облаках</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Как называют японских мафиози?</Questio>
+    <Answer_1>Якудза</Answer_1>
+    <Answer_2>Джакузи</Answer_2>
+    <Answer_3>Камикадзе</Answer_3>
+    <Answer_4>Коза Ностра</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Участник какого из перечисленных спортивных состязаний экипирован винтовкой?</Questio>
+    <Answer_1>Биатлон</Answer_1>
+    <Answer_2>Бейсбол</Answer_2>
+    <Answer_3>Бадминтон</Answer_3>
+    <Answer_4>Бобслей</Answer_4>
+  </Question>
+  <Question>
+    <Questio>В каком канадском городе находится самая высокая в мире телебашня?</Questio>
+    <Answer_1>Торонто</Answer_1>
+    <Answer_2>Оттава</Answer_2>
+    <Answer_3>Ванкувер</Answer_3>
+    <Answer_4>Монреаль</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Какой из этих романов написал не Хемингуэй?</Questio>
+    <Answer_1>"Триумфальная арка"</Answer_1>
+    <Answer_2>"Фиеста"</Answer_2>
+    <Answer_3>"По ком звонит колокол"</Answer_3>
+    <Answer_4>"Острова в океане"</Answer_4>
+  </Question>
+  <Question>
+    <Questio>В каком виде спорта прославился Евгений Кафельников?</Questio>
+    <Answer_1>Теннис</Answer_1>
+    <Answer_2>Бокс</Answer_2>
+    <Answer_3>Метание ядра</Answer_3>
+    <Answer_4>Охота на лис</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Как называется пара, присутствующая на церемонии бракосочетания вместе с молодыми?</Questio>
+    <Answer_1>Свидетели</Answer_1>
+    <Answer_2>Соучастники</Answer_2>
+    <Answer_3>Запасные</Answer_3>
+    <Answer_4>Защитники</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Как звали невесту Эдмона Дантеса, будущего графа Монте-Кристо?</Questio>
+    <Answer_1>Мерседес</Answer_1>
+    <Answer_2>Тойота</Answer_2>
+    <Answer_3>Хонда</Answer_3>
+    <Answer_4>Лада</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Какой цвет получается при смешении синего и красного?</Questio>
+    <Answer_1>Фиолетовый</Answer_1>
+    <Answer_2>Коричневый</Answer_2>
+    <Answer_3>Зеленый</Answer_3>
+    <Answer_4>Голубой</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Какая компания в Италии выпускает наибольшее количество автомобилей?</Questio>
+    <Answer_1>Фиат</Answer_1>
+    <Answer_2>Феррари</Answer_2>
+    <Answer_3>Ламборгини</Answer_3>
+    <Answer_4>Альфа Ромео</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Кто из древних философов, по преданию, жил в бочке?</Questio>
+    <Answer_1>Диоген</Answer_1>
+    <Answer_2>Демокрит</Answer_2>
+    <Answer_3>Платон</Answer_3>
+    <Answer_4>Сократ</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Каким из этих природных явлений А.Островский назвал свою пьесу?</Questio>
+    <Answer_1>Гроза</Answer_1>
+    <Answer_2>Снегопад</Answer_2>
+    <Answer_3>Шаровая молния</Answer_3>
+    <Answer_4>Гололед</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Какой туман кажется В.Добрынину похожим на обман в одной из его песен?</Questio>
+    <Answer_1>Синий</Answer_1>
+    <Answer_2>Утренний</Answer_2>
+    <Answer_3>Сиреневый</Answer_3>
+    <Answer_4>Желтый</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Кому принадлежат строки - пророчества: "Настанет год, России черный год, Когда царей корона упадет..."?</Questio>
+    <Answer_1>Лермонтов</Answer_1>
+    <Answer_2>Пушкин</Answer_2>
+    <Answer_3>Нострадамус</Answer_3>
+    <Answer_4>Некрасов</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Как называется маскировочная окраска военной техники и обмундирования?</Questio>
+    <Answer_1>Камуфляж</Answer_1>
+    <Answer_2>Макияж</Answer_2>
+    <Answer_3>Хаки</Answer_3>
+    <Answer_4>Камуфлет</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Какой материк омывается всеми четырьмя океанами?</Questio>
+    <Answer_1>Евразия</Answer_1>
+    <Answer_2>Северная Америка</Answer_2>
+    <Answer_3>Австралия</Answer_3>
+    <Answer_4>Южная Америка</Answer_4>
+  </Question>
+  <Question>
+    <Questio>Какие машины предпочитал угонять Юрий Деточкин?</Questio>
+    <Answer_1>Волга</Answer_1>
+    <Answer_2>Победа</Answer_2>
+    <Answer_3>Иномарки</Answer_3>
+    <Answer_4>Жигули</Answer_4>
+  </Question>
+</ArrayOfQuestion>
