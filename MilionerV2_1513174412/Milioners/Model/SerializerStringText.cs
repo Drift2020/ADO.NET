@@ -69,15 +69,16 @@ namespace Milioners
 
         public ICollection<Question> Load()
         {
-            SqlConnection connect = new SqlConnection(@"Initial Catalog=Milion;Data Source=(local);Integrated Security=SSPI");
+           
+            SqlConnection connect =  new SqlConnection("Server=localhost\\SQLVNEXT;Integrated security=SSPI;database=Milion");
             SqlCommand command = new SqlCommand();
-
-         
+           
+             
             try
             {
                 connect.Open();
                 command.Connection = connect;
-
+              
 
 
 

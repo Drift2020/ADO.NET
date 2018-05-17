@@ -69,10 +69,8 @@
     <Compile Include="Interfese\IDell.cs" />
     <Compile Include="Interfese\I_Add_Edit.cs" />
     <Compile Include="Interfese\I_Global.cs" />
-    <Compile Include="Model\ISerializerTask.cs" />
     <Compile Include="Model\ISerializer.cs" />
     <Compile Include="Model\Question.cs" />
-    <Compile Include="Model\SerializerDB.cs" />
     <Compile Include="Model\SerializerStringText.cs" />
     <Compile Include="Model\Сontainer.cs" />
     <Compile Include="Program.cs" />

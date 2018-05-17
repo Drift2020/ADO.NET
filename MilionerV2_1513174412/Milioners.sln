@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Milioners", "Milioners\Milioners.csproj", "{2A575774-2A94-4550-9AE3-867B6BDD707F}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Milion", "Milion\Milion.sqlproj", "{EE8A4868-02ED-4BED-8543-D444C8662D20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,12 @@ Global
 		{2A575774-2A94-4550-9AE3-867B6BDD707F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A575774-2A94-4550-9AE3-867B6BDD707F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A575774-2A94-4550-9AE3-867B6BDD707F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE8A4868-02ED-4BED-8543-D444C8662D20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE8A4868-02ED-4BED-8543-D444C8662D20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE8A4868-02ED-4BED-8543-D444C8662D20}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EE8A4868-02ED-4BED-8543-D444C8662D20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE8A4868-02ED-4BED-8543-D444C8662D20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE8A4868-02ED-4BED-8543-D444C8662D20}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
