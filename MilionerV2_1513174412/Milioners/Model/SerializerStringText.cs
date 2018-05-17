@@ -13,9 +13,12 @@ namespace Milioners
 {
     class XMLSerializer : ISerializer
     {
+
+
+
+        static string strServer = "";
         FileStream stream = null;
         XmlSerializer serializer = null;
-
 
         async void CreateDB()
         {
@@ -31,14 +34,11 @@ namespace Milioners
                 await myCommand.ExecuteNonQueryAsync();
                 myConn.Close();
 
-            
 
-                myConn = new SqlConnection("Server=localhost;Integrated security=SSPI;database=Milion");
 
-                str = "CREATE TABLE dbo.Questios(Questio nvarchar(255), Answer_1 nvarchar(255), Answer_2 nvarchar(255), Answer_3 nvarchar(255), Answer_4 nvarchar(255))";
-
+                myConn = new SqlConnection("Server=localhost;Integrated security=SSPI;database=milion");
+                str = "create table dbo.Questios(Questio nvarchar(255),Answer_1 nvarchar(255),Answer_2 nvarchar(255),Answer_3 nvarchar(255),Answer_4 nvarchar(255))";
                 myCommand = new SqlCommand(str, myConn);
-
                 await myConn.OpenAsync();
                 await myCommand.ExecuteNonQueryAsync();
             }
@@ -57,50 +57,55 @@ namespace Milioners
 
         public void Save(ICollection<Question> collection)
         {
+            SqlConnection connect = new SqlConnection(@"Initial Catalog=Milion;Data Source=(local)"+ strServer + ";Integrated Security=SSPI"); // провайдер SQL
+            SqlCommand command = new SqlCommand();
+            try
+            {
+                connect.Open();
+                for (int i = 0; i < collection.Count; i++)
+                try
+                {
+                        command = new SqlCommand();
 
 
-          
+
+                        command.CommandText = "INSERT INTO Questios ( Questio, Answer_1, Answer_2, Answer_3, Answer_4)VALUES (\'" + collection.ToList()[i].Questio +
+                            "\',\'" + collection.ToList()[i].Answer_1 +
+                            "\',\'" + collection.ToList()[i].Answer_2 +
+                            "\',\'" + collection.ToList()[i].Answer_3 +
+                            "\',\'" + collection.ToList()[i].Answer_4 + "\')";
+                        command.Connection = connect;
+                        int n = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+               
+                }
+                finally
+                {
+                    command.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                connect.Close();
+            }
             stream = new FileStream("../../list.xml", FileMode.Create);
             serializer = new XmlSerializer(typeof(List<Question>));
             serializer.Serialize(stream, collection);
             stream.Close();
             Console.WriteLine("Сериализация успешно выполнена!");
         }
-
         public ICollection<Question> Load()
         {
-           
-            SqlConnection connect =  new SqlConnection("Server=localhost\\SQLVNEXT;Integrated security=SSPI;database=Milion");
-            SqlCommand command = new SqlCommand();
-           
-             
-            try
-            {
-                connect.Open();
-                command.Connection = connect;
-              
-
-
-
-
-            }
-            catch (Exception ex)
-            {
-                CreateDB();
-            }
-            finally
-            {
-                command.Dispose();
-                connect.Close();
-            }
-
-
             List<Question> temp;
             try
             {
                 stream = new FileStream("../../list.xml", FileMode.Open);
                 serializer = new XmlSerializer(typeof(List<Question>));
                 temp = (List<Question>)serializer.Deserialize(stream);
+          
+
                 stream.Close();
 
                 return temp;
@@ -109,11 +114,7 @@ namespace Milioners
             stream.Close();
             return new List<Question>();
         }
-
-
-
-       
-
+        
     }
 }
 //bool ferst = true;
