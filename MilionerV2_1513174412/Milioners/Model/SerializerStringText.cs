@@ -62,20 +62,62 @@ namespace Milioners
             try
             {
                 connect.Open();
+                List<string> listBox1 = new List<string>();
+                try
+                {
+                  
+                 
+                    command.Connection = connect;
+                    command.CommandText = "select  Questio, Answer_1, Answer_2, Answer_3, Answer_4 from Questios";
+                    SqlDataReader reader =  command.ExecuteReader();
+                    int count = reader.FieldCount;
+                    while ( reader.Read())
+                    {
+                        string res = "", temp = "";
+                        for (int i = 0; i < count; i++)
+                        {
+                            temp = reader[i].ToString();
+                            res += temp + "  ";
+                        }
+                        listBox1.Add(res);
+                        res = "";
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                 
+                }
+                finally
+                {
+                    command.Dispose();
+                   // connect.Close();
+                }
+
                 for (int i = 0; i < collection.Count; i++)
                 try
                 {
                         command = new SqlCommand();
-
-
-
-                        command.CommandText = "INSERT INTO Questios ( Questio, Answer_1, Answer_2, Answer_3, Answer_4)VALUES (\'" + collection.ToList()[i].Questio +
-                            "\',\'" + collection.ToList()[i].Answer_1 +
-                            "\',\'" + collection.ToList()[i].Answer_2 +
-                            "\',\'" + collection.ToList()[i].Answer_3 +
-                            "\',\'" + collection.ToList()[i].Answer_4 + "\')";
                         command.Connection = connect;
-                        int n = command.ExecuteNonQuery();
+
+                        bool worc = true;
+
+                        for (int i1 = 0; i1 < listBox1.Count; i1++)
+                            if (listBox1[i1].Contains(collection.ToList()[i].Questio))
+                            {
+                                worc = false;
+                               
+                            }
+                        if(worc)
+                        {
+                            command.CommandText = "INSERT INTO Questios ( Questio, Answer_1, Answer_2, Answer_3, Answer_4)VALUES (\'" + collection.ToList()[i].Questio +
+                               "\',\'" + collection.ToList()[i].Answer_1 +
+                               "\',\'" + collection.ToList()[i].Answer_2 +
+                               "\',\'" + collection.ToList()[i].Answer_3 +
+                               "\',\'" + collection.ToList()[i].Answer_4 + "\')";
+
+                            int n = command.ExecuteNonQuery();
+                        }
                 }
                 catch (Exception ex)
                 {
@@ -90,29 +132,70 @@ namespace Milioners
             {
                 connect.Close();
             }
+            connect.Close();
+
             stream = new FileStream("../../list.xml", FileMode.Create);
             serializer = new XmlSerializer(typeof(List<Question>));
             serializer.Serialize(stream, collection);
             stream.Close();
             Console.WriteLine("Сериализация успешно выполнена!");
         }
+
         public ICollection<Question> Load()
         {
-            List<Question> temp;
+
+            #region outputDate
+            SqlConnection connect = new SqlConnection(@"Initial Catalog=Milion;Data Source=(local)" + strServer + ";Integrated Security=SSPI"); // провайдер SQL
+            SqlCommand command = new SqlCommand();
+            connect.Open();
+            List<Question> temp=new List<Question>();
             try
             {
-                stream = new FileStream("../../list.xml", FileMode.Open);
-                serializer = new XmlSerializer(typeof(List<Question>));
-                temp = (List<Question>)serializer.Deserialize(stream);
-          
 
-                stream.Close();
 
-                return temp;
+                command.Connection = connect;
+                command.CommandText = "select  Questio, Answer_1, Answer_2, Answer_3, Answer_4 from Questios";
+                SqlDataReader reader = command.ExecuteReader();
+                int count = reader.FieldCount;
+                while (reader.Read())
+                {
+                 
+                  
+                    temp.Add(new Question(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString()));
+                  
+                }
+                reader.Close();
             }
-            catch (Exception ex) { };
-            stream.Close();
-            return new List<Question>();
+            catch (Exception ex)
+            {
+                connect.Close();
+                command.Dispose();
+                return new List<Question>();
+
+            }
+            finally
+            {
+                command.Dispose();
+                connect.Close();
+            }
+            return temp;
+            #endregion outputDate
+
+            //List<Question> temp;
+            //try
+            //{
+            //    stream = new FileStream("../../list.xml", FileMode.Open);
+            //    serializer = new XmlSerializer(typeof(List<Question>));
+            //    temp = (List<Question>)serializer.Deserialize(stream);
+
+
+            //    stream.Close();
+
+            //    return temp;
+            //}
+            //catch (Exception ex) { };
+            //stream.Close();
+            //return new List<Question>();
         }
         
     }
