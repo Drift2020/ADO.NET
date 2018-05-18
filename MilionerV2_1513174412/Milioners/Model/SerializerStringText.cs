@@ -16,7 +16,7 @@ namespace Milioners
 
 
 
-        static string strServer = "";
+        static string strServer = "\\SQLVNEXT";
         FileStream stream = null;
         XmlSerializer serializer = null;
 
@@ -134,11 +134,11 @@ namespace Milioners
             }
             connect.Close();
 
-            stream = new FileStream("../../list.xml", FileMode.Create);
-            serializer = new XmlSerializer(typeof(List<Question>));
-            serializer.Serialize(stream, collection);
-            stream.Close();
-            Console.WriteLine("Сериализация успешно выполнена!");
+            //stream = new FileStream("../../list.xml", FileMode.Create);
+            //serializer = new XmlSerializer(typeof(List<Question>));
+            //serializer.Serialize(stream, collection);
+            //stream.Close();
+            //Console.WriteLine("Сериализация успешно выполнена!");
         }
 
         public ICollection<Question> Load()
@@ -147,10 +147,11 @@ namespace Milioners
             #region outputDate
             SqlConnection connect = new SqlConnection(@"Initial Catalog=Milion;Data Source=(local)" + strServer + ";Integrated Security=SSPI"); // провайдер SQL
             SqlCommand command = new SqlCommand();
-            connect.Open();
+            
             List<Question> temp=new List<Question>();
             try
             {
+                connect.Open();
 
 
                 command.Connection = connect;
