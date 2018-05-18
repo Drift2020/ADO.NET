@@ -31,10 +31,14 @@ namespace Milioners
         private void OnDell(object sender, EventArgs e)
         {
             // В ответ на изменения в Представлении необходимо изменить Модель         
-         
 
-            
+            ///////////////////////////////database
+            SQL myBag = new SQL();
+            myBag.Delete_Questio(c.Element(_view.Value - 1).Questio);
+            //////////////////////////////
+
             c.Remove(_view.Value-1);
+            
             _view.Max = c.Count();
             c.Save();
 

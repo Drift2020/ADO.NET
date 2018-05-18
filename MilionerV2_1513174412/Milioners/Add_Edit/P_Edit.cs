@@ -64,7 +64,13 @@ namespace Milioners
                 _c.Element(_view.Value - 1).Answer_2 = _model.Answer_2 ;
                 _c.Element(_view.Value - 1).Answer_3 = _model.Answer_3;
                 _c.Element(_view.Value - 1).Answer_4 = _model.Answer_4;
-              
+
+                ///////////////////////////////database
+                SQL myBag = new SQL();
+                myBag.Update_Questio(_model.Questio, _model.Answer_1, _model.Answer_2, _model.Answer_3, _model.Answer_4);
+                //////////////////////////////
+
+
                 _c.Save();
                 _view.Acsept_Edit();
             }
