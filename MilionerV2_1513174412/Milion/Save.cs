@@ -33,7 +33,7 @@ public partial class StoredProcedures
             ", Answer_2 = \'" + Answer_2.ToString() + "\'" +
             ", Answer_3 = \'" + Answer_3.ToString() + "\'" +
             ", Answer_4 = \'" + Answer_4.ToString() + "\'" +
-            " where Questio like ''");
+            " where Questio like \'" + Questio.ToString() + "\' ");
         SqlContext.Pipe.ExecuteAndSend(comm);
 
         // Put your code here
