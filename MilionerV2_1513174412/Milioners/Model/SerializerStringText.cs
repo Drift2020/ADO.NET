@@ -58,64 +58,19 @@ namespace Milioners
         public void Save(ICollection<Question> collection)
         {
 
-            SqlConnection connect = new SqlConnection();
-            SqlCommand cmd = new SqlCommand();
-            try
-            {
-                connect.ConnectionString =(@"Initial Catalog=Milion;Data Source=(local)" + strServer + ";Integrated Security=SSPI"); // провайдер SQL;
-                connect.Open();
-                cmd = new SqlCommand("Save", connect);
-                cmd.CommandType = CommandType.StoredProcedure;
-                SqlParameter param = cmd.Parameters.Add("q", SqlDbType.NVarChar);
-                param.Direction = ParameterDirection.Input;
-                param.Size = 255;
-                param.Value = "hi";
-
-                SqlParameter param1 = cmd.Parameters.Add("a1", SqlDbType.NVarChar);
-                param1.Direction = ParameterDirection.Input;
-                param1.Size = 255;
-                param1.Value = "hi";
-
-                SqlParameter param2 = cmd.Parameters.Add("a2", SqlDbType.NVarChar);
-                param2.Direction = ParameterDirection.Input;
-                param2.Size = 255;
-                param2.Value = "hi";
-
-                SqlParameter param3 = cmd.Parameters.Add("a3", SqlDbType.NVarChar);
-                param3.Direction = ParameterDirection.Input;
-                param3.Size = 255;
-                param3.Value = "hi";
-
-                SqlParameter param4 = cmd.Parameters.Add("a4", SqlDbType.NVarChar);
-                param4.Direction = ParameterDirection.Input;
-                param4.Size = 255;
-                param4.Value = "hi";
-
-                cmd.ExecuteNonQuery();
-            
-            }
-            catch (Exception ex)
-            {
-             
-            }
-            finally
-            {
-                cmd.Dispose();
-                connect.Close();
-            }
-
-
-            //SqlConnection connect = new SqlConnection(@"Initial Catalog=Milion;Data Source=(local)"+ strServer + ";Integrated Security=SSPI"); // провайдер SQL
+            SqlConnection connect = new SqlConnection(@"Initial Catalog=Milion;Data Source=(local)"+ strServer + ";Integrated Security=SSPI"); // провайдер SQL
             SqlCommand command = new SqlCommand();
             try
             {
                 connect.Open();
+                command.Connection = connect;
+
                 List<string> listBox1 = new List<string>();
                 try
                 {
                   
                  
-                    command.Connection = connect;
+                   
                     command.CommandText = "select  Questio, Answer_1, Answer_2, Answer_3, Answer_4 from Questios";
                     SqlDataReader reader =  command.ExecuteReader();
                     int count = reader.FieldCount;
@@ -134,19 +89,17 @@ namespace Milioners
                 }
                 catch (Exception ex)
                 {
-                 
+                    command.Dispose();
                 }
                 finally
                 {
-                    command.Dispose();
-                   // connect.Close();
+                    command.Dispose();                  
                 }
 
                 for (int i = 0; i < collection.Count; i++)
                 try
                 {
-                        command = new SqlCommand();
-                        command.Connection = connect;
+                      
 
                         bool worc = true;
 
@@ -158,18 +111,48 @@ namespace Milioners
                             }
                         if(worc)
                         {
-                            command.CommandText = "INSERT INTO Questios ( Questio, Answer_1, Answer_2, Answer_3, Answer_4)VALUES (\'" + collection.ToList()[i].Questio +
-                               "\',\'" + collection.ToList()[i].Answer_1 +
-                               "\',\'" + collection.ToList()[i].Answer_2 +
-                               "\',\'" + collection.ToList()[i].Answer_3 +
-                               "\',\'" + collection.ToList()[i].Answer_4 + "\')";
+                            //command.CommandText = "INSERT INTO Questios ( Questio, Answer_1, Answer_2, Answer_3, Answer_4)VALUES (\'" + collection.ToList()[i].Questio +
+                            //   "\',\'" + collection.ToList()[i].Answer_1 +
+                            //   "\',\'" + collection.ToList()[i].Answer_2 +
+                            //   "\',\'" + collection.ToList()[i].Answer_3 +
+                            //   "\',\'" + collection.ToList()[i].Answer_4 + "\')";
 
-                            int n = command.ExecuteNonQuery();
+                           
+                            command = new SqlCommand("Save", connect);
+                            command.CommandType = CommandType.StoredProcedure;
+                            SqlParameter param = command.Parameters.Add("q", SqlDbType.NVarChar);
+                            param.Direction = ParameterDirection.Input;
+                            param.Size = 255;
+                            param.Value = collection.ToList()[i].Questio;
+
+                            SqlParameter param1 = command.Parameters.Add("a1", SqlDbType.NVarChar);
+                            param1.Direction = ParameterDirection.Input;
+                            param1.Size = 255;
+                            param1.Value = collection.ToList()[i].Answer_1;
+
+                            SqlParameter param2 = command.Parameters.Add("a2", SqlDbType.NVarChar);
+                            param2.Direction = ParameterDirection.Input;
+                            param2.Size = 255;
+                            param2.Value = collection.ToList()[i].Answer_2;
+
+                            SqlParameter param3 = command.Parameters.Add("a3", SqlDbType.NVarChar);
+                            param3.Direction = ParameterDirection.Input;
+                            param3.Size = 255;
+                            param3.Value = collection.ToList()[i].Answer_3;
+
+                            SqlParameter param4 = command.Parameters.Add("a4", SqlDbType.NVarChar);
+                            param4.Direction = ParameterDirection.Input;
+                            param4.Size = 255;
+                            param4.Value = collection.ToList()[i].Answer_4;
+
+                            command.ExecuteNonQuery();
+                          
                         }
                 }
                 catch (Exception ex)
                 {
-               
+                        command.Dispose();
+                        connect.Close();
                 }
                 finally
                 {
@@ -179,8 +162,13 @@ namespace Milioners
             catch (Exception ex)
             {
                 connect.Close();
+                command.Dispose();
             }
-            connect.Close();
+            finally
+            {
+                connect.Close();
+                command.Dispose();
+            }
 
             //stream = new FileStream("../../list.xml", FileMode.Create);
             //serializer = new XmlSerializer(typeof(List<Question>));
@@ -195,8 +183,8 @@ namespace Milioners
             #region outputDate
             SqlConnection connect = new SqlConnection(@"Initial Catalog=Milion;Data Source=(local)" + strServer + ";Integrated Security=SSPI"); // провайдер SQL
             SqlCommand command = new SqlCommand();
-            
-            List<Question> temp=new List<Question>();
+
+            List<Question> temp = new List<Question>();
             try
             {
                 connect.Open();
@@ -208,10 +196,10 @@ namespace Milioners
                 int count = reader.FieldCount;
                 while (reader.Read())
                 {
-                 
-                  
+
+
                     temp.Add(new Question(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString()));
-                  
+
                 }
                 reader.Close();
             }
@@ -227,6 +215,9 @@ namespace Milioners
                 command.Dispose();
                 connect.Close();
             }
+
+           
+
             return temp;
             #endregion outputDate
 
@@ -243,7 +234,86 @@ namespace Milioners
             //stream.Close();
             //return new List<Question>();
         }
-        
+
+
+        public async void Delete_Questio(string Questio)
+        {
+            SqlCommand command = new SqlCommand();
+            SqlConnection connect = new SqlConnection(@"Initial Catalog=Milion;Data Source=(local)" + strServer + ";Integrated Security=SSPI"); // провайдер SQL
+            try
+            {
+                await connect.OpenAsync();
+
+                command = new SqlCommand("Delete_Questio", connect);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlParameter param = command.Parameters.Add("Questio", SqlDbType.NVarChar);
+                param.Direction = ParameterDirection.Input;
+                param.Size = 255;
+                param.Value = Questio;
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                if (connect != null)
+                    connect.Close();
+                if (command != null)
+                    command.Dispose();
+            }
+        }
+        public async void Update_Questio(string Questio)
+        {
+            SqlCommand command = new SqlCommand();
+            SqlConnection connect = new SqlConnection(@"Initial Catalog=Milion;Data Source=(local)" + strServer + ";Integrated Security=SSPI"); // провайдер SQL
+            try
+            {
+                await connect.OpenAsync();
+
+                command = new SqlCommand("Update_Questio", connect);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlParameter param = command.Parameters.Add("Questio", SqlDbType.NVarChar);
+                param.Direction = ParameterDirection.Input;
+                param.Size = 255;
+                param.Value = Questio;
+
+                SqlParameter param1 = command.Parameters.Add("Questio", SqlDbType.NVarChar);
+                param.Direction = ParameterDirection.Input;
+                param.Size = 255;
+                param.Value = Questio;
+
+                SqlParameter param2 = command.Parameters.Add("Questio", SqlDbType.NVarChar);
+                param.Direction = ParameterDirection.Input;
+                param.Size = 255;
+                param.Value = Questio;
+
+                SqlParameter param3 = command.Parameters.Add("Questio", SqlDbType.NVarChar);
+                param.Direction = ParameterDirection.Input;
+                param.Size = 255;
+                param.Value = Questio;
+
+                SqlParameter param4 = command.Parameters.Add("Questio", SqlDbType.NVarChar);
+                param.Direction = ParameterDirection.Input;
+                param.Size = 255;
+                param.Value = Questio;
+
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                if (connect != null)
+                    connect.Close();
+                if (command != null)
+                    command.Dispose();
+            }
+        }
+
     }
 }
 //bool ferst = true;
