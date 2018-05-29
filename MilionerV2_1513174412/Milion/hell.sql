@@ -27,3 +27,5 @@ Create Procedure Update_Questio @Questio_old nvarchar(255), @Questio nvarchar(25
 as
 external name Milion.StoredProcedures.Update_Questio -- имя_сборки.имя_класса.имя_процедуры
 go
+
+CREATE ASSEMBLY Milion authorization dbo from 'C:\Users\Buje_jy89\Documents\Visual Studio 2017\Projects\wpf\ADO.NET\MilionerV2_1513174412\Milion\bin\DebugMilion.dll'
