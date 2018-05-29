@@ -59,6 +59,8 @@ namespace Milioners
 
             if (_model.IsCorect())
             {
+                string Questio_old = _c.Element(_view.Value - 1).Questio;
+
                 _c.Element(_view.Value - 1).Questio = _model.Questio;
                 _c.Element(_view.Value - 1).Answer_1 = _model.Answer_1 ;
                 _c.Element(_view.Value - 1).Answer_2 = _model.Answer_2 ;
@@ -67,7 +69,7 @@ namespace Milioners
 
                 ///////////////////////////////database
                 SQL myBag = new SQL();
-                myBag.Update_Questio(_model.Questio, _model.Answer_1, _model.Answer_2, _model.Answer_3, _model.Answer_4);
+                myBag.Update_Questio(Questio_old, _model.Questio, _model.Answer_1, _model.Answer_2, _model.Answer_3, _model.Answer_4);
                 //////////////////////////////
 
 

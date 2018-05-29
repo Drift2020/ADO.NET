@@ -26,14 +26,14 @@ public partial class StoredProcedures
     }
 
     [Microsoft.SqlServer.Server.SqlProcedure]
-    public static void Update_Questio(SqlString Questio, SqlString Answer_1, SqlString Answer_2, SqlString Answer_3, SqlString Answer_4)
+    public static void Update_Questio(SqlString Questio_old,SqlString Questio, SqlString Answer_1, SqlString Answer_2, SqlString Answer_3, SqlString Answer_4)
     {
         SqlCommand comm = new SqlCommand("update Questios set Questio = \'" + Questio.ToString() + "\'"+
             ", Answer_1 = \'" + Answer_1.ToString() + "\'"+
             ", Answer_2 = \'" + Answer_2.ToString() + "\'" +
             ", Answer_3 = \'" + Answer_3.ToString() + "\'" +
             ", Answer_4 = \'" + Answer_4.ToString() + "\'" +
-            " where Questio like \'" + Questio.ToString() + "\' ");
+            " where Questio like \'" + Questio_old.ToString() + "\' ");
         SqlContext.Pipe.ExecuteAndSend(comm);
 
         // Put your code here

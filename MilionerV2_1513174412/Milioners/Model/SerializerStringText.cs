@@ -96,6 +96,7 @@ namespace Milioners
                     command.Dispose();                  
                 }
 
+
                 for (int i = 0; i < collection.Count; i++)
                 try
                 {

@@ -20,10 +20,10 @@ as
 external name Milion.StoredProcedures.Delete_Questio -- имя_сборки.имя_класса.имя_процедуры
 go
  
-update Questios set Answer_1 = '0' where Questio like '%Как мировая пресса называла премьер-министра Великобритании Маргарет Тэтчер?%'
+update Questios set Answer_1 = '0',Answer_2 = '0' where Questio like '%Как мировая пресса называла премьер-министра Великобритании Маргарет Тэтчер?%'
 go
 
-Create Procedure Update_Questio @Questio nvarchar(255), @Answer_1 nvarchar(255), @Answer_2 nvarchar(255), @Answer_3 nvarchar(255) , @Answer_4 nvarchar(255)
+Create Procedure Update_Questio @Questio_old nvarchar(255), @Questio nvarchar(255), @Answer_1 nvarchar(255), @Answer_2 nvarchar(255), @Answer_3 nvarchar(255) , @Answer_4 nvarchar(255)
 as
 external name Milion.StoredProcedures.Update_Questio -- имя_сборки.имя_класса.имя_процедуры
 go
