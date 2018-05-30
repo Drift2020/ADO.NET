@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Milioners.Properties {
+namespace DatabaseFirstEntities.Properties {
     using System;
     
     

@@ -46,6 +46,7 @@ namespace Milioners
         {
             SqlCommand command = new SqlCommand();
             SqlConnection connect = new SqlConnection(@"Initial Catalog=Milion;Data Source=(local)" + strServer + ";Integrated Security=SSPI"); // провайдер SQL
+  
             try
             {
                 await connect.OpenAsync();

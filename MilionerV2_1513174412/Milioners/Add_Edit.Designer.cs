@@ -1,4 +1,4 @@
-﻿namespace Milioners
+﻿namespace DatabaseFirstEntities
 {
     partial class Add_Edit
     {

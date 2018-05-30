@@ -307,7 +307,7 @@
             this.FandF.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.FandF.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
             this.FandF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.FandF.Image = global::Milioners.Properties.Resources._1;
+            this.FandF.Image = global::DatabaseFirstEntities.Properties.Resources._1;
             this.FandF.Location = new System.Drawing.Point(6, 19);
             this.FandF.Name = "FandF";
             this.FandF.Size = new System.Drawing.Size(53, 33);
@@ -319,7 +319,7 @@
             // 
             this.HelpCall.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
             this.HelpCall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.HelpCall.Image = global::Milioners.Properties.Resources._2;
+            this.HelpCall.Image = global::DatabaseFirstEntities.Properties.Resources._2;
             this.HelpCall.Location = new System.Drawing.Point(74, 19);
             this.HelpCall.Name = "HelpCall";
             this.HelpCall.Size = new System.Drawing.Size(53, 33);
@@ -331,7 +331,7 @@
             // 
             this.HelpRoom.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
             this.HelpRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.HelpRoom.Image = global::Milioners.Properties.Resources._3;
+            this.HelpRoom.Image = global::DatabaseFirstEntities.Properties.Resources._3;
             this.HelpRoom.Location = new System.Drawing.Point(141, 19);
             this.HelpRoom.Name = "HelpRoom";
             this.HelpRoom.Size = new System.Drawing.Size(53, 33);
@@ -353,7 +353,7 @@
             // 
             // AnsverPictureBox
             // 
-            this.AnsverPictureBox.Image = global::Milioners.Properties.Resources.Безымянный;
+            this.AnsverPictureBox.Image = global::DatabaseFirstEntities.Properties.Resources.Безымянный;
             this.AnsverPictureBox.Location = new System.Drawing.Point(447, 228);
             this.AnsverPictureBox.Name = "AnsverPictureBox";
             this.AnsverPictureBox.Size = new System.Drawing.Size(81, 95);
@@ -362,7 +362,7 @@
             // 
             // CallPictureBox
             // 
-            this.CallPictureBox.Image = global::Milioners.Properties.Resources.zvonok;
+            this.CallPictureBox.Image = global::DatabaseFirstEntities.Properties.Resources.zvonok;
             this.CallPictureBox.Location = new System.Drawing.Point(35, 98);
             this.CallPictureBox.Name = "CallPictureBox";
             this.CallPictureBox.Size = new System.Drawing.Size(133, 107);
@@ -374,7 +374,7 @@
             this.Exit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Exit.FlatAppearance.BorderSize = 0;
             this.Exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Exit.Image = global::Milioners.Properties.Resources.Exit;
+            this.Exit.Image = global::DatabaseFirstEntities.Properties.Resources.Exit;
             this.Exit.Location = new System.Drawing.Point(68, 27);
             this.Exit.Name = "Exit";
             this.Exit.Size = new System.Drawing.Size(62, 32);
@@ -387,7 +387,7 @@
             this.Flag.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Flag.FlatAppearance.BorderSize = 0;
             this.Flag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Flag.Image = global::Milioners.Properties.Resources._new;
+            this.Flag.Image = global::DatabaseFirstEntities.Properties.Resources._new;
             this.Flag.Location = new System.Drawing.Point(0, 27);
             this.Flag.Name = "Flag";
             this.Flag.Size = new System.Drawing.Size(62, 32);
@@ -590,8 +590,8 @@
         }
 
         #endregion
-       
-      
+
+
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button Start;
         private System.Windows.Forms.Button ExitG;

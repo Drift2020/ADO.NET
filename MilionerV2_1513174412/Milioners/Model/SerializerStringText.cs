@@ -117,8 +117,8 @@ namespace Milioners
                             //   "\',\'" + collection.ToList()[i].Answer_2 +
                             //   "\',\'" + collection.ToList()[i].Answer_3 +
                             //   "\',\'" + collection.ToList()[i].Answer_4 + "\')";
+                            Data_first.Save_d(collection.ToList()[i].Questio, collection.ToList()[i].Answer_1, collection.ToList()[i].Answer_2, collection.ToList()[i].Answer_3, collection.ToList()[i].Answer_4);
 
-                           
                             command = new SqlCommand("Save", connect);
                             command.CommandType = CommandType.StoredProcedure;
                             SqlParameter param = command.Parameters.Add("q", SqlDbType.NVarChar);
