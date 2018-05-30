@@ -1,4 +1,4 @@
-﻿namespace DatabaseFirstEntities
+﻿namespace Milioners
 {
     partial class Dell
     {
