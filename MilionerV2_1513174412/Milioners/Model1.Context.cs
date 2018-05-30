@@ -15,10 +15,10 @@ namespace Milioners
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class MilionEntities3 : DbContext
+    public partial class MilionEntities4 : DbContext
     {
-        public MilionEntities3()
-            : base("name=MilionEntities3")
+        public MilionEntities4()
+            : base("name=MilionEntities4")
         {
         }
     
@@ -27,6 +27,7 @@ namespace Milioners
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Questio> Questios { get; set; }
     
         public virtual int Delete_Questio(string questio)
         {
