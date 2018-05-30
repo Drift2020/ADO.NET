@@ -38,4 +38,9 @@ public partial class StoredProcedures
 
         // Put your code here
     }
+
+    public static void Save_out(SqlString q, SqlString a1, SqlString a2, SqlString a3, SqlString a4)
+    {
+
+    }
 }
