@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MilionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Questios">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Questio" Type="nvarchar" MaxLength="255" />
+          <Property Name="Answer_1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Answer_2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Answer_3" Type="nvarchar" MaxLength="255" />
+          <Property Name="Answer_4" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Function Name="Delete_Questio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Questio" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Save" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="q" Type="nvarchar" Mode="In" />
+          <Parameter Name="a1" Type="nvarchar" Mode="In" />
+          <Parameter Name="a2" Type="nvarchar" Mode="In" />
+          <Parameter Name="a3" Type="nvarchar" Mode="In" />
+          <Parameter Name="a4" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Update_Questio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Questio_old" Type="nvarchar" Mode="In" />
+          <Parameter Name="Questio" Type="nvarchar" Mode="In" />
+          <Parameter Name="Answer_1" Type="nvarchar" Mode="In" />
+          <Parameter Name="Answer_2" Type="nvarchar" Mode="In" />
+          <Parameter Name="Answer_3" Type="nvarchar" Mode="In" />
+          <Parameter Name="Answer_4" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="MilionModelStoreContainer">
+          <EntitySet Name="Questios" EntityType="Self.Questios" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MilionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Questio">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Questio1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Answer_1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Answer_2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Answer_3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Answer_4" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="MilionEntities5" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Questios" EntityType="Self.Questio" />
+          <FunctionImport Name="Delete_Questio">
+            <Parameter Name="Questio" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Save">
+            <Parameter Name="q" Mode="In" Type="String" />
+            <Parameter Name="a1" Mode="In" Type="String" />
+            <Parameter Name="a2" Mode="In" Type="String" />
+            <Parameter Name="a3" Mode="In" Type="String" />
+            <Parameter Name="a4" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Update_Questio">
+            <Parameter Name="Questio_old" Mode="In" Type="String" />
+            <Parameter Name="Questio" Mode="In" Type="String" />
+            <Parameter Name="Answer_1" Mode="In" Type="String" />
+            <Parameter Name="Answer_2" Mode="In" Type="String" />
+            <Parameter Name="Answer_3" Mode="In" Type="String" />
+            <Parameter Name="Answer_4" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MilionModelStoreContainer" CdmEntityContainer="MilionEntities5">
+          <EntitySetMapping Name="Questios">
+            <EntityTypeMapping TypeName="MilionModel.Questio">
+              <MappingFragment StoreEntitySet="Questios">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Questio1" ColumnName="Questio" />
+                <ScalarProperty Name="Answer_1" ColumnName="Answer_1" />
+                <ScalarProperty Name="Answer_2" ColumnName="Answer_2" />
+                <ScalarProperty Name="Answer_3" ColumnName="Answer_3" />
+                <ScalarProperty Name="Answer_4" ColumnName="Answer_4" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Delete_Questio" FunctionName="MilionModel.Store.Delete_Questio" />
+          <FunctionImportMapping FunctionImportName="Save" FunctionName="MilionModel.Store.Save" />
+          <FunctionImportMapping FunctionImportName="Update_Questio" FunctionName="MilionModel.Store.Update_Questio" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
