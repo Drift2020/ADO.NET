@@ -34,8 +34,9 @@ namespace Milioners
 
             ///////////////////////////////database
             SQL myBag = new SQL();
-            myBag.Delete_Questio(c.Element(_view.Value - 1).Questio);
+            myBag.Delete_Questio_out(c.Element(_view.Value - 1).Questio);
             //////////////////////////////
+
 
             c.Remove(_view.Value-1);
             

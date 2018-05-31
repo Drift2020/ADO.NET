@@ -12,7 +12,13 @@ namespace Milioners
    
    public class SQL
     {
-        string strServer = "";
+        string strServer = "\\SQLVNEXT";
+        DataSet dataset = new DataSet();
+        
+        SqlDataAdapter adapter1 = null, adapter2 = null, adapter3 = null;
+        SqlCommandBuilder build1 = null, build2 = null, build3 = null;
+
+       
         public async void Delete_Questio(string Questio)
         {
             
@@ -96,6 +102,41 @@ namespace Milioners
                 if (command != null)
                     command.Dispose();
             }
+        }
+
+        public void Delete_Questio_out(string Questio)
+        {
+
+            try
+            {
+
+
+                SqlConnection connect = new SqlConnection(@"Initial Catalog=Milion;Data Source=(local)" + strServer + ";Integrated Security=SSPI"); // провайдер SQL
+                adapter1 = new SqlDataAdapter("select * from Questios", connect);
+                // SqlCommandBuilder автоматически генерирует однотабличные команды, которые позволяют согласовать изменения, вносимые в объект DataSet, с базой данных
+                build1 = new SqlCommandBuilder(adapter1); // команды INSERT, UPDATE, DELETE будут сгенерированы автоматически
+
+
+                // Удалим из таблицы запись с указанным номером
+                for (int i =0, len=dataset.Tables["Questios"].Rows[i].ToString().Length; i< len;i++)
+                    if(String.Compare(dataset.Tables["Questios"].Rows[i].ToString(), Questio)==0)
+                    {
+                        dataset.Tables["Questios"].Rows[i].Delete();
+                    }
+        
+
+                // Внесем изменения в источник данных
+                adapter1.Update(dataset, "Questios");
+              
+            }
+            catch (Exception ex)
+            {
+              
+            }
+        }
+        public  void Update_Questio_out(string Questio_old, string Questio, string Answer_1, string Answer_2, string Answer_3, string Answer_4)
+        {
+
         }
     }
 }
