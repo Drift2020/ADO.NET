@@ -53,7 +53,7 @@
           <Property Name="Answer_3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Answer_4" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="MilionEntities5" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="MilionEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Questios" EntityType="Self.Questio" />
           <FunctionImport Name="Delete_Questio">
             <Parameter Name="Questio" Mode="In" Type="String" />
@@ -79,7 +79,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MilionModelStoreContainer" CdmEntityContainer="MilionEntities5">
+        <EntityContainerMapping StorageEntityContainer="MilionModelStoreContainer" CdmEntityContainer="MilionEntities">
           <EntitySetMapping Name="Questios">
             <EntityTypeMapping TypeName="MilionModel.Questio">
               <MappingFragment StoreEntitySet="Questios">

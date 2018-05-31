@@ -57,7 +57,7 @@ namespace Milioners
 
         public void Save(ICollection<Question> collection)
         {
-
+            #region Save_db
             SqlConnection connect = new SqlConnection(@"Initial Catalog=Milion;Data Source=(local)"+ strServer + ";Integrated Security=SSPI"); // провайдер SQL
             SqlCommand command = new SqlCommand();
             try
@@ -68,13 +68,13 @@ namespace Milioners
                 List<string> listBox1 = new List<string>();
                 try
                 {
-                  
-                 
-                   
+
+
+
                     command.CommandText = "select  Questio, Answer_1, Answer_2, Answer_3, Answer_4 from Questios";
-                    SqlDataReader reader =  command.ExecuteReader();
+                    SqlDataReader reader = command.ExecuteReader();
                     int count = reader.FieldCount;
-                    while ( reader.Read())
+                    while (reader.Read())
                     {
                         string res = "", temp = "";
                         for (int i = 0; i < count; i++)
@@ -93,14 +93,14 @@ namespace Milioners
                 }
                 finally
                 {
-                    command.Dispose();                  
+                    command.Dispose();
                 }
 
 
                 for (int i = 0; i < collection.Count; i++)
-                try
-                {
-                      
+                    try
+                    {
+
 
                         bool worc = true;
 
@@ -108,9 +108,9 @@ namespace Milioners
                             if (listBox1[i1].Contains(collection.ToList()[i].Questio))
                             {
                                 worc = false;
-                               
+
                             }
-                        if(worc)
+                        if (worc)
                         {
                             //command.CommandText = "INSERT INTO Questios ( Questio, Answer_1, Answer_2, Answer_3, Answer_4)VALUES (\'" + collection.ToList()[i].Questio +
                             //   "\',\'" + collection.ToList()[i].Answer_1 +
@@ -147,18 +147,18 @@ namespace Milioners
                             param4.Value = collection.ToList()[i].Answer_4;
 
                             command.ExecuteNonQuery();
-                          
+
                         }
-                }
-                catch (Exception ex)
-                {
+                    }
+                    catch (Exception ex)
+                    {
                         command.Dispose();
                         connect.Close();
-                }
-                finally
-                {
-                    command.Dispose();
-                }
+                    }
+                    finally
+                    {
+                        command.Dispose();
+                    }
             }
             catch (Exception ex)
             {
@@ -170,7 +170,7 @@ namespace Milioners
                 connect.Close();
                 command.Dispose();
             }
-
+            #endregion Save_db
             //stream = new FileStream("../../list.xml", FileMode.Create);
             //serializer = new XmlSerializer(typeof(List<Question>));
             //serializer.Serialize(stream, collection);
@@ -217,7 +217,7 @@ namespace Milioners
                 connect.Close();
             }
 
-           
+
 
             return temp;
             #endregion outputDate

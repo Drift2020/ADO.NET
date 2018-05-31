@@ -15,10 +15,10 @@ namespace Milioners
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class MilionEntities5 : DbContext
+    public partial class MilionEntities : DbContext
     {
-        public MilionEntities5()
-            : base("name=MilionEntities5")
+        public MilionEntities()
+            : base("name=MilionEntities")
         {
         }
     

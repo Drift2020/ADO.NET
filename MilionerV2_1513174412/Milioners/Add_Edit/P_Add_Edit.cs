@@ -45,7 +45,21 @@ namespace Milioners
             {
                                            
                 _c.Add(new Question(_model.Questio, _model.Answer_1, _model.Answer_2, _model.Answer_3, _model.Answer_4));
-                _c.Save();
+
+               
+                //////////////////////////////data base out param
+
+                //////////////////////////////
+
+                //////////////////////////////data base linc param
+
+                //////////////////////////////
+
+                //////////////////////////////data base entiti param
+                Data_first.Save_d(_model.Questio,
+                    _model.Answer_1, _model.Answer_2, _model.Answer_3, _model.Answer_4);
+                //////////////////////////////
+                //_c.Save();
 
                 _view.Acsept_Add();
             }
@@ -54,10 +68,7 @@ namespace Milioners
                 _view.Dont_Add();
             }
 
-            // В данной форме этот вызов не нужен, однако в общем
-            // случае изменение части Модели может привести к изменениям
-            // в других ее частях. Поэтому необходимо синхронизировать
-            // Представление с новым текущим состоянием Модели.
+         
             UpdateView();
         }
         private void UpdateView()

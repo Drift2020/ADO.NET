@@ -67,11 +67,23 @@ namespace Milioners
                 _c.Element(_view.Value - 1).Answer_3 = _model.Answer_3;
                 _c.Element(_view.Value - 1).Answer_4 = _model.Answer_4;
 
-                ///////////////////////////////database
-                SQL myBag = new SQL();
-                myBag.Update_Questio(Questio_old, _model.Questio, _model.Answer_1, _model.Answer_2, _model.Answer_3, _model.Answer_4);
+                ///////////////////////////////data base in param
+                // SQL myBag = new SQL();
+                // myBag.Update_Questio(Questio_old, _model.Questio, _model.Answer_1, _model.Answer_2, _model.Answer_3, _model.Answer_4);
                 //////////////////////////////
 
+                //////////////////////////////data base out param
+
+                //////////////////////////////
+
+                //////////////////////////////data base linc param
+
+                //////////////////////////////
+
+                //////////////////////////////data base entiti param
+                Data_first.Update_Questio_d(Questio_old, _model.Questio,
+                    _model.Answer_1, _model.Answer_2, _model.Answer_3, _model.Answer_4);
+                //////////////////////////////
 
                 _c.Save();
                 _view.Acsept_Edit();
