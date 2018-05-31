@@ -33,13 +33,14 @@ namespace Milioners
             // В ответ на изменения в Представлении необходимо изменить Модель         
 
             ///////////////////////////////database in param
-           // SQL myBag = new SQL();
-           // myBag.Delete_Questio_out(c.Element(_view.Value - 1).Questio);
+            // SQL myBag = new SQL();
+            // myBag.Delete_Questio(c.Element(_view.Value - 1).Questio);
             //////////////////////////////
 
-         
-            //////////////////////////////data base out param
 
+            //////////////////////////////data base out param
+            SQL myBag = new SQL();
+            myBag.Delete_Questio_out(c.Element(_view.Value - 1).Questio);
             //////////////////////////////
 
             //////////////////////////////data base linc param
@@ -47,7 +48,7 @@ namespace Milioners
             //////////////////////////////
 
             //////////////////////////////data base entiti param
-            Data_first.Delete_Questio_d(c.Element(_view.Value - 1).Questio);
+            //Data_first.Delete_Questio_d(c.Element(_view.Value - 1).Questio);
             //////////////////////////////
 
             c.Remove(_view.Value-1);
