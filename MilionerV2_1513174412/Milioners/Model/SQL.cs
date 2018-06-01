@@ -15,8 +15,8 @@ namespace Milioners
         string strServer = "";//"\\SQLVNEXT";
         DataSet dataset = new DataSet();
         
-        SqlDataAdapter adapter1 = null, adapter2 = null, adapter3 = null;
-        SqlCommandBuilder build1 = null, build2 = null, build3 = null;
+    
+       
 
        
         public async void Delete_Questio(string Questio)
@@ -107,11 +107,12 @@ namespace Milioners
 
         public void Delete_Questio_out(string Questio)
         {
-
+            dataset.Dispose();
+            dataset = new DataSet();
             SqlConnection connect = new SqlConnection(@"Initial Catalog=Milion;Data Source=(local)" + strServer + ";Integrated Security=SSPI"); // провайдер SQL
-            adapter1 = new SqlDataAdapter("select * from Questios", connect);
+            SqlDataAdapter adapter1 = new SqlDataAdapter("select * from Questios", connect);
             // SqlCommandBuilder автоматически генерирует однотабличные команды, которые позволяют согласовать изменения, вносимые в объект DataSet, с базой данных
-            build1 = new SqlCommandBuilder(adapter1); // команды INSERT, UPDATE, DELETE будут сгенерированы автоматически
+            SqlCommandBuilder build1 = new SqlCommandBuilder(adapter1); // команды INSERT, UPDATE, DELETE будут сгенерированы автоматически
 
 
             DataTable customers = dataset.Tables.Add("Questios");
@@ -134,7 +135,7 @@ namespace Milioners
             adapter1.Fill(dataset, "Questios");
             // Удалим из таблицы запись с указанным номером
 
-            for (int i = 0, len = dataset.Tables["Questios"].Rows[i].ToString().Length; i < len; i++)
+            for (int i = 0, len = dataset.Tables["Questios"].Rows.Count; i < len; i++)
             {
                 string s = dataset.Tables["Questios"].Rows[i].ItemArray[1].ToString();
                 if (String.Compare(dataset.Tables["Questios"].Rows[i].ItemArray[1].ToString(), Questio) == 0)
@@ -148,10 +149,12 @@ namespace Milioners
         }
         public void Update_Questio_out(string Questio_old, string Questio, string Answer_1, string Answer_2, string Answer_3, string Answer_4)
         {
+            dataset.Dispose();
+            dataset = new DataSet();
             SqlConnection connect = new SqlConnection(@"Initial Catalog=Milion;Data Source=(local)" + strServer + ";Integrated Security=SSPI"); // провайдер SQL
-            adapter1 = new SqlDataAdapter("select * from Questios", connect);
+            SqlDataAdapter adapter1 = new SqlDataAdapter("select * from Questios", connect);
             // SqlCommandBuilder автоматически генерирует однотабличные команды, которые позволяют согласовать изменения, вносимые в объект DataSet, с базой данных
-            build1 = new SqlCommandBuilder(adapter1); // команды INSERT, UPDATE, DELETE будут сгенерированы автоматически
+            SqlCommandBuilder build1 = new SqlCommandBuilder(adapter1); // команды INSERT, UPDATE, DELETE будут сгенерированы автоматически
 
 
             DataTable customers = dataset.Tables.Add("Questios");
@@ -174,25 +177,61 @@ namespace Milioners
             adapter1.Fill(dataset, "Questios");
             // Удалим из таблицы запись с указанным номером
 
-            for (int i = 0, len = dataset.Tables["Questios"].Rows[i].ToString().Length; i < len; i++)
+            for (int i = 0, len = dataset.Tables["Questios"].Rows.Count; i < len; i++)
             {
-               
                 if (String.Compare(dataset.Tables["Questios"].Rows[i].ItemArray[1].ToString(), Questio_old) == 0)
                 {
-                    dataset.Tables["Questios"].Rows[i].ItemArray[1]=Questio;
-                    dataset.Tables["Questios"].Rows[i].ItemArray[2] = Answer_1;
-                    dataset.Tables["Questios"].Rows[i].ItemArray[3] = Answer_2;
-                    dataset.Tables["Questios"].Rows[i].ItemArray[4] = Answer_3;
-                    dataset.Tables["Questios"].Rows[i].ItemArray[5] = Answer_4;
+                    DataRow[] ar = dataset.Tables["Questios"].Select("id = " + dataset.Tables["Questios"].Rows[i].ItemArray[0].ToString());
+
+                    ar[0]["Questio"] = Questio;
+                    ar[0]["Answer_1"] = Answer_1;
+                    ar[0]["Answer_2"] = Answer_2;
+                    ar[0]["Answer_3"] = Answer_3;
+                    ar[0]["Answer_4"] = Answer_4;
+                    
                 }
             }
-
             // Внесем изменения в источник данных
             adapter1.Update(dataset, "Questios");
         }
         public void Add_Questio_out(string Questio, string Answer_1, string Answer_2, string Answer_3, string Answer_4)
         {
+            dataset.Dispose();
+            dataset = new DataSet();
+            SqlConnection connect = new SqlConnection(@"Initial Catalog=Milion;Data Source=(local)" + strServer + ";Integrated Security=SSPI"); // провайдер SQL
+            SqlDataAdapter adapter1 = new SqlDataAdapter("select * from Questios", connect);
+            // SqlCommandBuilder автоматически генерирует однотабличные команды, которые позволяют согласовать изменения, вносимые в объект DataSet, с базой данных
+            SqlCommandBuilder build1 = new SqlCommandBuilder(adapter1); // команды INSERT, UPDATE, DELETE будут сгенерированы автоматически
 
+
+            DataTable customers = dataset.Tables.Add("Questios");
+            //Добавляем столбцы в таблицу
+            customers.Columns.Add("ID", typeof(Int32));
+            customers.Columns.Add("Questio", typeof(String));
+            customers.Columns.Add("Answer_1", typeof(String));
+            customers.Columns.Add("Answer_2", typeof(String));
+            customers.Columns.Add("Answer_3", typeof(String));
+            customers.Columns.Add("Answer_4", typeof(String));
+
+            customers.Constraints.Add("PK_Questios", customers.Columns["ID"], true);
+            customers.Columns["ID"].AllowDBNull = false;
+            customers.Columns[0].AutoIncrement = true;
+            customers.Columns["Questio"].AllowDBNull = true;
+            customers.Columns["Answer_1"].AllowDBNull = true;
+            customers.Columns["Answer_2"].AllowDBNull = true;
+            customers.Columns["Answer_3"].AllowDBNull = true;
+            customers.Columns["Answer_4"].AllowDBNull = true;
+
+            adapter1.Fill(dataset, "Questios");
+
+            DataRow row = dataset.Tables["Questios"].NewRow();
+            row["Questio"] = Questio;
+            row["Answer_1"] = Answer_1;
+            row["Answer_2"] = Answer_2;
+            row["Answer_3"] = Answer_3;
+            row["Answer_4"] = Answer_4;
+            dataset.Tables["Questios"].Rows.Add(row);
+            adapter1.Update(dataset, "Questios");
         }
     }
 }
