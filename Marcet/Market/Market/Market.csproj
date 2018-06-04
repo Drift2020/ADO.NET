@@ -63,6 +63,10 @@
     <Compile Include="ViewModel\View_Model_Add_and_Edit_T.cs" />
     <Compile Include="ViewModel\View_Model_Base.cs" />
     <Compile Include="ViewModel\View_Model_Index.cs" />
+    <Compile Include="ViewModel\View_Model_Messege.cs" />
+    <Compile Include="Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
     <Page Include="Add_and_Edit_Firm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -93,6 +97,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Window1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

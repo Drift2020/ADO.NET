@@ -7,24 +7,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="521.519" Width="752.082">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="5"/>
-        </Grid.ColumnDefinitions>
-        
+
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="5"/>
-            <RowDefinition/>
-            <RowDefinition Height="50"/>
+
+            <RowDefinition Height="20"/>
+            <RowDefinition />
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
-        
-        <Grid Grid.Column="1" Grid.Row="1">
+
+        <Grid  Grid.Row="1">
             <TabControl Name="tabControl1" >
                 <TabItem Header="Product">
                     <Grid>
-                        <ListView Grid.Column="1"  Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Visible" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="104*"/>
+                            <ColumnDefinition Width="635*"/>
+                        </Grid.ColumnDefinitions>
+                        <ListView  Margin="5,5,5.333,4.667" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.ColumnSpan="2" >
                             <ListView.View>
 
                                 <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Employee Information" ScrollViewer.HorizontalScrollBarVisibility="Visible">
@@ -54,7 +54,7 @@
                 </TabItem>
                 <TabItem Header="categories">
                     <Grid>
-                        
+
                     </Grid>
                 </TabItem>
 
@@ -64,22 +64,27 @@
 
 
 
-          
+
 
         </Grid>
-        <Grid Grid.Column="1" Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" VerticalAlignment="Center" Margin="5,0,5,0">Созать товар</Button>
-            <Button Grid.Column="2" VerticalAlignment="Center" Margin="5,0,5,0">Удалить товар</Button>
-            <Button Command="{Binding Button_Add_K}" Grid.Column="3" VerticalAlignment="Center" Margin="5,0,5,0">Созать категорию</Button>
-            <Button Grid.Column="4" VerticalAlignment="Center" Margin="5,0,5,0">Удалить категорию</Button>
-        </Grid>
+
+        <Menu  VerticalAlignment="Top"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Height="19">
+            <MenuItem Header="Menu">
+
+                <MenuItem Header="Add Product..." Command="{Binding Button_Add_P}"></MenuItem>
+                <MenuItem Header="Edit Product..." Command="{Binding Button_Add_P}"></MenuItem>
+                <MenuItem Header="Delete Product" Command="{Binding Button_Add_P}"></MenuItem>
+                <Separator />
+                <MenuItem Header="Add categories..." Command="{Binding Button_Add_K}"></MenuItem>
+                <MenuItem Header="Edit categories..." Command="{Binding Button_Edit_K}"></MenuItem>
+                <MenuItem Header="Delete categories" Command="{Binding Button_Del_K}"></MenuItem>
+                <Separator />
+                <MenuItem Header="Add firm..." Command="{Binding Button_Add_F}"></MenuItem>
+                <MenuItem Header="Edit firm..." Command="{Binding Button_Edit_F}"></MenuItem>
+                <MenuItem Header="Delete firm" Command="{Binding Button_Del_F}"></MenuItem>
+            </MenuItem>
+        </Menu>
+
     </Grid>
 
 
