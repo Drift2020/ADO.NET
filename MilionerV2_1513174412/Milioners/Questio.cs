@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Milioners
+namespace Milioners.Model
 {
     using System;
     using System.Collections.Generic;
