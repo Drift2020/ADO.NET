@@ -54,6 +54,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Add_and_Edit_Firm.xaml.cs">
+      <DependentUpon>Add_and_Edit_Firm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Command\DelegateCommand.cs" />
+    <Compile Include="ViewModel\View_Model_Add_and_Edit_Firm.cs" />
+    <Compile Include="ViewModel\View_Model_Add_and_Edit_K.cs" />
+    <Compile Include="ViewModel\View_Model_Add_and_Edit_T.cs" />
+    <Compile Include="ViewModel\View_Model_Base.cs" />
+    <Compile Include="ViewModel\View_Model_Index.cs" />
+    <Page Include="Add_and_Edit_Firm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Add_and_Edit_K.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -110,7 +123,6 @@
   <ItemGroup>
     <Folder Include="Code\" />
     <Folder Include="Model\" />
-    <Folder Include="Veiw\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
