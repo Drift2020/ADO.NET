@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Market.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,22 @@ namespace Market
     /// </summary>
     public partial class App : Application
     {
+        private void OnStartup(object sender, StartupEventArgs e)
+        {
+
+
+
+
+
+            MainWindow view = new MainWindow();
+
+            View_Model_Index viewModel = new View_Model_Index();
+            view.DataContext = viewModel;
+
+           
+
+            view.ShowDialog();
+        
+        }
     }
 }

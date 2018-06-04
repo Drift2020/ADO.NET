@@ -21,23 +21,55 @@
         </Grid.RowDefinitions>
         
         <Grid Grid.Column="1" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+            <TabControl Name="tabControl1" >
+                <TabItem Header="Product">
+                    <Grid>
+                        <ListView Grid.Column="1"  Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Visible" >
+                            <ListView.View>
 
-            <ListView Grid.Column="0" Margin="5">
-                
-            </ListView>
+                                <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Employee Information" ScrollViewer.HorizontalScrollBarVisibility="Visible">
 
-            <ListView Grid.Column="1"  Margin="5">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=FirstName}" Header="Date" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=EmployeeNumber}" Header="FIO Person" Width="150"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=LastName}" Width="100">
+                                        <GridViewColumnHeader>Product
+                                            <GridViewColumnHeader.ContextMenu>
+                                                <ContextMenu Name="LastNameCM">
+                                                    <MenuItem Header="Ascending"/>
+                                                    <MenuItem Header="Descending"/>
+                                                </ContextMenu>
+                                            </GridViewColumnHeader.ContextMenu>
+                                        </GridViewColumnHeader>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=EmployeeNumber}" Header="Product categories" Width="150"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=EmployeeNumber}" Header="Life" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=EmployeeNumber}" Header="Count" Width="50"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=EmployeeNumber}" Header="Mark up" Width="50"/>
 
-            </ListView>
+                                </GridView>
+                            </ListView.View>
+
+                        </ListView>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="categories">
+                    <Grid>
+                        
+                    </Grid>
+                </TabItem>
+
+            </TabControl>
+
+
+
+
+
+          
 
         </Grid>
         <Grid Grid.Column="1" Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition />
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
