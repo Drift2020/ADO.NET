@@ -48,19 +48,20 @@ namespace Milioners
 
 
                 //////////////////////////////data base out param
-                
-                SQL myBag = new SQL();
-                myBag.Add_Questio_out(_model.Questio,
-                    _model.Answer_1, _model.Answer_2, _model.Answer_3, _model.Answer_4);
+
+                // SQL myBag = new SQL();
+                //   myBag.Add_Questio_out(_model.Questio,
+                //      _model.Answer_1, _model.Answer_2, _model.Answer_3, _model.Answer_4);
                 //////////////////////////////
 
                 //////////////////////////////data base linc param
-
+                LINQ.DataClasses1DataContext myQ = new LINQ.DataClasses1DataContext();
+                myQ.Save(_model.Questio, _model.Answer_1, _model.Answer_2, _model.Answer_3, _model.Answer_4);
                 //////////////////////////////
 
                 //////////////////////////////data base entiti param
-              //  Data_first.Save_d(_model.Questio,
-              //      _model.Answer_1, _model.Answer_2, _model.Answer_3, _model.Answer_4);
+                //  Data_first.Save_d(_model.Questio,
+                //      _model.Answer_1, _model.Answer_2, _model.Answer_3, _model.Answer_4);
                 //////////////////////////////
                 //_c.Save();
 

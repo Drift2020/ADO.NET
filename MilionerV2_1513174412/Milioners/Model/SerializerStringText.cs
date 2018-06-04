@@ -16,7 +16,7 @@ namespace Milioners
 
 
 
-        static string strServer = "";//"\\SQLVNEXT";
+        static string strServer = "\\SQLVNEXT";
         FileStream stream = null;
         XmlSerializer serializer = null;
 

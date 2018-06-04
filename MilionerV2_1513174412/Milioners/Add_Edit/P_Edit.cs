@@ -73,12 +73,13 @@ namespace Milioners
                 //////////////////////////////
 
                 //////////////////////////////data base out param
-                SQL myBag = new SQL();
-                myBag.Update_Questio_out(Questio_old, _model.Questio, _model.Answer_1, _model.Answer_2, _model.Answer_3, _model.Answer_4);
+                //SQL myBag = new SQL();
+                // myBag.Update_Questio_out(Questio_old, _model.Questio, _model.Answer_1, _model.Answer_2, _model.Answer_3, _model.Answer_4);
                 //////////////////////////////
 
                 //////////////////////////////data base linc param
-
+                LINQ.DataClasses1DataContext myLINQ =new LINQ.DataClasses1DataContext();
+                myLINQ.Update_Questio(Questio_old, _model.Questio, _model.Answer_1, _model.Answer_2, _model.Answer_3, _model.Answer_4);
                 //////////////////////////////
 
                 //////////////////////////////data base entiti param
