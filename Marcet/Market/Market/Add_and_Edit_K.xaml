@@ -5,8 +5,59 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Market"
         mc:Ignorable="d"
-        Title="Add_K" Height="300" Width="300">
+        Title="Add_K" Height="250" Width="308">
     <Grid>
-        
+
+        <TabControl Name="tabControl1" Margin="0,0,0.333,-30.333" >
+            <TabItem Header="Add">
+                <Grid>
+                   
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                        <TextBlock Margin="5" Text="Name"  HorizontalAlignment="Center"/>
+                        <TextBox Margin="4"></TextBox>
+                    </StackPanel>
+                  
+                    <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Right">
+                        <Button Margin="5" Content="Add" Width="100" HorizontalAlignment="Right"/>
+                        <Button Margin="5" Content="Cancel"  Width="100" HorizontalAlignment="Right"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Edit">
+                <Grid>
+
+                    <Grid>
+                       
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                            <TextBlock Margin="5" Text="Name"  HorizontalAlignment="Center"/>
+                            <TextBox Margin="4"></TextBox>
+                        </StackPanel>
+                      
+                        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Right">
+                            <Button Margin="5" Content="Edit" Width="100" HorizontalAlignment="Right"/>
+                            <Button Margin="5" Content="Cancel"  Width="100" HorizontalAlignment="Right"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                            <TextBox x:Name="txtNum" x:FieldModifier="private" Margin="5,5,0,5" Width="50" Text="0" TextChanged="txtNum_TextChanged" />
+                            <Button x:Name="cmdUp" x:FieldModifier="private" Margin="5,5,0,5" Content="˄" Width="20" Click="cmdUp_Click" />
+                            <Button x:Name="cmdDown" x:FieldModifier="private" Margin="0,5,0,5"  Content="˅" Width="20" Click="cmdDown_Click" />
+                        </StackPanel>
+
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
     </Grid>
 </Window>

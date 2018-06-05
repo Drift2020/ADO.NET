@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Market
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for Messege.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class Messege : Window
     {
-        public Window1()
+        public Messege()
         {
             InitializeComponent();
         }

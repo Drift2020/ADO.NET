@@ -52,7 +52,7 @@
                         </ListView>
                     </Grid>
                 </TabItem>
-                <TabItem Header="categories">
+                <TabItem Header="All">
                     <Grid>
 
                     </Grid>
@@ -71,16 +71,16 @@
         <Menu  VerticalAlignment="Top"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Height="19">
             <MenuItem Header="Menu">
 
-                <MenuItem Header="Add Product..." Command="{Binding Button_Add_P}"></MenuItem>
-                <MenuItem Header="Edit Product..." Command="{Binding Button_Add_P}"></MenuItem>
+              
+                <MenuItem Header="Editor Product..." Command="{Binding Button_Add_P}"></MenuItem>
                 <MenuItem Header="Delete Product" Command="{Binding Button_Add_P}"></MenuItem>
                 <Separator />
-                <MenuItem Header="Add categories..." Command="{Binding Button_Add_K}"></MenuItem>
-                <MenuItem Header="Edit categories..." Command="{Binding Button_Edit_K}"></MenuItem>
+               
+                <MenuItem Header="Editor categories..." Command="{Binding Button_Edit_K}"></MenuItem>
                 <MenuItem Header="Delete categories" Command="{Binding Button_Del_K}"></MenuItem>
                 <Separator />
-                <MenuItem Header="Add firm..." Command="{Binding Button_Add_F}"></MenuItem>
-                <MenuItem Header="Edit firm..." Command="{Binding Button_Edit_F}"></MenuItem>
+               
+                <MenuItem Header="Editor firm..." Command="{Binding Button_Edit_F}"></MenuItem>
                 <MenuItem Header="Delete firm" Command="{Binding Button_Del_F}"></MenuItem>
             </MenuItem>
         </Menu>
