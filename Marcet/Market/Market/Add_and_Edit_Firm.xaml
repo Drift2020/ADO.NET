@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Market"
         mc:Ignorable="d"
-        Title="Add_and_Edit_Firm" Height="398.25" Width="314.5">
+        Title="Add_and_Edit_Firm" Height="410.25" Width="341.5">
     <Grid>
-       
+
         <TabControl Name="tabControl_Start" >
             <TabItem Header="Add">
                 <Grid>
-                   
+
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition Height="40"/>
@@ -29,16 +29,16 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                
+
                                 <GroupBox Header="Phone" Grid.Row="1" Grid.ColumnSpan="2">
                                     <ListView >
-                                    
+
                                     </ListView>
                                 </GroupBox>
-                                
+
                                 <StackPanel Grid.Column="0" Grid.Row="0"  VerticalAlignment="Center">
                                     <TextBlock  Text="Name" HorizontalAlignment="Center"/>
-                                    
+
                                 </StackPanel>
                                 <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
                                     <TextBox Margin="4"></TextBox>
@@ -59,7 +59,7 @@
                         <TabItem Header="City">
                             <Grid>
                                 <Grid.RowDefinitions>
-                                 
+
                                     <RowDefinition/>
                                     <RowDefinition Height="70"/>
                                 </Grid.RowDefinitions>
@@ -75,7 +75,7 @@
                                     </ListView>
                                 </GroupBox>
 
-                               
+
                                 <StackPanel Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center">
                                     <TextBlock  Text="City" HorizontalAlignment="Center"/>
                                     <TextBox Margin="4"></TextBox>
@@ -122,7 +122,7 @@
 
                             </Grid>
                         </TabItem>
-                        <TabItem Header="Adressa">
+                        <TabItem Header="Adressaa">
                             <Grid>
                                 <Grid.RowDefinitions>
 
@@ -135,7 +135,7 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <GroupBox Header="Adressa" Grid.Row="0" Grid.ColumnSpan="2">
+                                <GroupBox Header="Adressaa" Grid.Row="0" Grid.ColumnSpan="2">
                                     <ListView >
 
                                     </ListView>
@@ -143,7 +143,7 @@
 
 
                                 <StackPanel Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center">
-                                    <TextBlock  Text="Adressa" HorizontalAlignment="Center"/>
+                                    <TextBlock  Text="Adressaa" HorizontalAlignment="Center"/>
                                     <TextBox Margin="4"></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="5" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
@@ -206,9 +206,10 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition/>
                         <RowDefinition Height="40"/>
-                        
+
                     </Grid.RowDefinitions>
 
+                   
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
                         <TextBox x:Name="txtNum" x:FieldModifier="private" Margin="5,5,0,5" Width="50" Text="0" TextChanged="txtNum_TextChanged" />
                         <Button x:Name="cmdUp" x:FieldModifier="private" Margin="5,5,0,5" Content="˄" Width="20" Click="cmdUp_Click" />
@@ -321,7 +322,7 @@
 
                             </Grid>
                         </TabItem>
-                        <TabItem Header="Adressa">
+                        <TabItem Header="Adressaa">
                             <Grid>
                                 <Grid.RowDefinitions>
 
@@ -334,7 +335,7 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <GroupBox Header="Adressa" Grid.Row="0" Grid.ColumnSpan="2">
+                                <GroupBox Header="Adressaa" Grid.Row="0" Grid.ColumnSpan="2">
                                     <ListView >
 
                                     </ListView>
@@ -342,7 +343,7 @@
 
 
                                 <StackPanel Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center">
-                                    <TextBlock  Text="Adressa" HorizontalAlignment="Center"/>
+                                    <TextBlock  Text="Adressaa" HorizontalAlignment="Center"/>
                                     <TextBox Margin="4"></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="5" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
@@ -393,13 +394,14 @@
 
                     </TabControl>
                     <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Right">
-                        <Button Margin="5" Content="Add" Width="100" HorizontalAlignment="Right"/>
+                        <Button Margin="5" Content="Delete" Width="100" HorizontalAlignment="Right"/>
+                        <Button Margin="5" Content="Edit" Width="100" HorizontalAlignment="Right"/>
                         <Button Margin="5" Content="Cancel"  Width="100" HorizontalAlignment="Right"/>
                     </StackPanel>
                 </Grid>
-             
+
             </TabItem>
-            
+
         </TabControl>
     </Grid>
 </Window>

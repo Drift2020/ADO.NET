@@ -10,41 +10,11 @@ namespace Market.ViewModel
 {
     class View_Model_Index : View_Model_Base
     {
-
+        Model1 _myDB = new Model1();
         #region Command_button
 
 
-        #region
-        private DelegateCommand _Command_Add_K;
-        public ICommand Button_Add_K
-        {
-            get
-            {
-                if (_Command_Add_K == null)
-                {
-                    _Command_Add_K = new DelegateCommand(Execute_Add_K, CanExecute_Add_K);
-                }
-                return _Command_Add_K;
-            }
-        }
-        private void Execute_Add_K(object o)
-        {
 
-            int n = 2;
-
-        }
-        private bool CanExecute_Add_K(object o)
-        {
-
-         
-                    return true;
-           
-
-            return false;
-
-
-        }
-        #endregion
 
         #region
         private DelegateCommand _Command_Del_K;
@@ -79,68 +49,37 @@ namespace Market.ViewModel
         #endregion
 
         #region
-        private DelegateCommand _Command_Edit_K;
-        public ICommand Button_Edit_K
+        private DelegateCommand _Command_Editor_K;
+        public ICommand Button_Editor_K
         {
             get
             {
-                if (_Command_Edit_K == null)
+                if (_Command_Editor_K == null)
                 {
-                    _Command_Edit_K = new DelegateCommand(Execute_Edit_K, CanExecute_Edit_K);
+                    _Command_Editor_K = new DelegateCommand(Execute_Editor_K, CanExecute_Editor_K);
                 }
-                return _Command_Edit_K;
+                return _Command_Editor_K;
             }
         }
-        private void Execute_Edit_K(object o)
+        private void Execute_Editor_K(object o)
         {
 
-            int n = 2;
-
+            View_Model_Add_and_Edit_K view_Model = new View_Model_Add_and_Edit_K();
+            Add_K view = new Add_K();
+            view.DataContext = view_Model;
+            view.ShowDialog();
         }
-        private bool CanExecute_Edit_K(object o)
+        private bool CanExecute_Editor_K(object o)
         {
-
 
             return true;
-
-
-            return false;
-
+       
 
         }
         #endregion
 
-        #region
-        private DelegateCommand _Command_Add_P;
-        public ICommand Button_Add_P
-        {
-            get
-            {
-                if (_Command_Add_P == null)
-                {
-                    _Command_Add_P = new DelegateCommand(Execute_Add_P, CanExecute_Add_P);
-                }
-                return _Command_Add_P;
-            }
-        }
-        private void Execute_Add_P(object o)
-        {
 
-            int n = 2;
-
-        }
-        private bool CanExecute_Add_P(object o)
-        {
-
-
-            return true;
-
-
-            return false;
-
-
-        }
-        #endregion
+    
 
         #region
         private DelegateCommand _Command_Del_P;
@@ -175,69 +114,37 @@ namespace Market.ViewModel
         #endregion
 
         #region
-        private DelegateCommand _Command_Edit_P;
-        public ICommand Button_Edit_P
+        private DelegateCommand _Command_Editor_P;
+        public ICommand Button_Editor_P
         {
             get
             {
-                if (_Command_Edit_P == null)
+                if (_Command_Editor_P == null)
                 {
-                    _Command_Edit_P = new DelegateCommand(Execute_Edit_P, CanExecute_Edit_P);
+                    _Command_Editor_P = new DelegateCommand(Execute_Editor_P, CanExecute_Editor_P);
                 }
-                return _Command_Edit_P;
+                return _Command_Editor_P;
             }
         }
-        private void Execute_Edit_P(object o)
+        private void Execute_Editor_P(object o)
         {
-
-            int n = 2;
+            View_Model_Add_and_Edit_T view_Model = new View_Model_Add_and_Edit_T();
+            Add_T view = new Add_T();
+            view.DataContext = view_Model;
+            view.ShowDialog();
 
         }
-        private bool CanExecute_Edit_P(object o)
+        private bool CanExecute_Editor_P(object o)
         {
 
 
             return true;
 
-
-            return false;
-
-
         }
         #endregion
 
 
-        #region
-        private DelegateCommand _Command_Add_F;
-        public ICommand Button_Add_F
-        {
-            get
-            {
-                if (_Command_Add_F == null)
-                {
-                    _Command_Add_F = new DelegateCommand(Execute_Add_F, CanExecute_Add_F);
-                }
-                return _Command_Add_F;
-            }
-        }
-        private void Execute_Add_F(object o)
-        {
-
-            int n = 2;
-
-        }
-        private bool CanExecute_Add_F(object o)
-        {
-
-
-            return true;
-
-
-            return false;
-
-
-        }
-        #endregion
+   
 
         #region
         private DelegateCommand _Command_Del_F;
@@ -272,36 +179,46 @@ namespace Market.ViewModel
         #endregion
 
         #region
-        private DelegateCommand _Command_Edit_F;
-        public ICommand Button_Edit_F
+        private DelegateCommand _Command_Editor_F;
+        public ICommand Button_Editor_F
         {
             get
             {
-                if (_Command_Edit_F == null)
+                if (_Command_Editor_F == null)
                 {
-                    _Command_Edit_F = new DelegateCommand(Execute_Edit_F, CanExecute_Edit_F);
+                    _Command_Editor_F = new DelegateCommand(Execute_Editor_F, CanExecute_Editor_F);
                 }
-                return _Command_Edit_F;
+                return _Command_Editor_F;
             }
         }
-        private void Execute_Edit_F(object o)
+        private void Execute_Editor_F(object o)
         {
 
-            int n = 2;
+            View_Model_Add_and_Edit_Firm view_Model = new View_Model_Add_and_Edit_Firm();
+            Add_and_Edit_Firm view = new Add_and_Edit_Firm();
+            view.DataContext = view_Model;
+            view.ShowDialog();
 
         }
-        private bool CanExecute_Edit_F(object o)
+        private bool CanExecute_Editor_F(object o)
         {
 
-
             return true;
-
-
-            return false;
-
 
         }
         #endregion
         #endregion Command_button
+
+
+        #region
+
+        public ICollection<Product> product
+        {
+            get => _myDB.Products.ToList();
+        }
+
+      
+
+        #endregion
     }
 }

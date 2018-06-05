@@ -31,8 +31,8 @@
 
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=FirstName}" Header="Date" Width="100"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=EmployeeNumber}" Header="FIO Person" Width="150"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=LastName}" Width="100">
-                                        <GridViewColumnHeader>Product
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=product}" Width="100">
+                                        <GridViewColumnHeader  >Product
                                             <GridViewColumnHeader.ContextMenu>
                                                 <ContextMenu Name="LastNameCM">
                                                     <MenuItem Header="Ascending"/>
@@ -52,7 +52,7 @@
                         </ListView>
                     </Grid>
                 </TabItem>
-                <TabItem Header="All">
+                <TabItem Header="All info">
                     <Grid>
 
                     </Grid>
@@ -72,16 +72,17 @@
             <MenuItem Header="Menu">
 
               
-                <MenuItem Header="Editor Product..." Command="{Binding Button_Add_P}"></MenuItem>
-                <MenuItem Header="Delete Product" Command="{Binding Button_Add_P}"></MenuItem>
+                <MenuItem Header="Editor Product..." Command="{Binding Button_Editor_P}"></MenuItem>
+              
+                
+
+                <MenuItem Header="Editor categories..." Command="{Binding Button_Editor_K}"></MenuItem>
+                
+                
+
+                <MenuItem Header="Editor firm..." Command="{Binding Button_Editor_F}"></MenuItem>
                 <Separator />
-               
-                <MenuItem Header="Editor categories..." Command="{Binding Button_Edit_K}"></MenuItem>
-                <MenuItem Header="Delete categories" Command="{Binding Button_Del_K}"></MenuItem>
-                <Separator />
-               
-                <MenuItem Header="Editor firm..." Command="{Binding Button_Edit_F}"></MenuItem>
-                <MenuItem Header="Delete firm" Command="{Binding Button_Del_F}"></MenuItem>
+                <MenuItem Header="Exit" Command="{Binding Button_Editor_F}"></MenuItem>
             </MenuItem>
         </Menu>
 

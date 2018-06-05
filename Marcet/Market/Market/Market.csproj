@@ -34,8 +34,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -61,6 +70,22 @@
     <Compile Include="Messege.xaml.cs">
       <DependentUpon>Messege.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Adressa.cs" />
+    <Compile Include="Model\Boss.cs" />
+    <Compile Include="Model\City.cs" />
+    <Compile Include="Model\Count.cs" />
+    <Compile Include="Model\Country.cs" />
+    <Compile Include="Model\Date_of_receipt.cs" />
+    <Compile Include="Model\FIO_Person.cs" />
+    <Compile Include="Model\Firm.cs" />
+    <Compile Include="Model\Mark_up.cs" />
+    <Compile Include="Model\Model1.cs" />
+    <Compile Include="Model\Phone.cs" />
+    <Compile Include="Model\Price.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\Product_category.cs" />
+    <Compile Include="Model\Product_life.cs" />
+    <Compile Include="Model\sysdiagram.cs" />
     <Compile Include="ViewModel\View_Model_Add_and_Edit_Firm.cs" />
     <Compile Include="ViewModel\View_Model_Add_and_Edit_K.cs" />
     <Compile Include="ViewModel\View_Model_Add_and_Edit_T.cs" />
@@ -120,6 +145,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -130,7 +156,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Code\" />
-    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
