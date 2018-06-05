@@ -24,9 +24,11 @@
                             <ColumnDefinition Width="104*"/>
                             <ColumnDefinition Width="635*"/>
                         </Grid.ColumnDefinitions>
-                        <ListView  Margin="5,5,5.333,4.667" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.ColumnSpan="2" >
-                            <ListView.View>
+                        <ListView   ItemsSource="{Binding product}"  Margin="5,5,5.333,4.667" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.ColumnSpan="2" >
 
+                          
+                            <ListView.View>
+<
                                 <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Employee Information" ScrollViewer.HorizontalScrollBarVisibility="Visible">
 
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=FirstName}" Header="Date" Width="100"/>
