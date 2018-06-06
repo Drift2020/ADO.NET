@@ -13,6 +13,12 @@ namespace Market.ViewModel
 
         public Model1 _myDB = new Model1();
         
+
+        public View_Model_Index()
+        {
+          
+        }
+
         #region Command_button
 
 

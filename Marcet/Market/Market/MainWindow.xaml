@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         
-        xmlns:local="clr-namespace:Market.ViewModel"
+        xmlns:local="clr-namespace:Market"
         
         mc:Ignorable="d"
         Title="MainWindow" Height="521.519" Width="752.082">
@@ -28,7 +28,7 @@
                             </DataGrid.DataContext>
                             
                         </DataGrid>-->
-                        <ListView Name="Global_List"   ItemsSource="{Binding Path =  fio_Person}"  Margin="5,5,5.333,4.667" 
+                        <ListView Name="Global_List"    Margin="5,5,5.333,4.667" 
                                     ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.ColumnSpan="2">
                             <ListView.View >
                                 <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Employee Information" ScrollViewer.HorizontalScrollBarVisibility="Visible">
@@ -50,12 +50,7 @@
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=mark_up}" Header="Mark up" Width="50"/>
                                 </GridView>
                             </ListView.View>
-                            <ListView.ItemTemplate>
-                                <DataTemplate >
-
-                                    <TextBlock Text="{Binding fio_Person}"/>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
+                            
                         </ListView>
                     </Grid>
                 </TabItem>
