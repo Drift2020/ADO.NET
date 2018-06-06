@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Market"
+        
+        xmlns:local="clr-namespace:Market.ViewModel"
+        
         mc:Ignorable="d"
         Title="MainWindow" Height="521.519" Width="752.082">
     <Grid>
@@ -20,19 +22,18 @@
             <TabControl Name="tabControl1" >
                 <TabItem Header="Product">
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="104*"/>
-                            <ColumnDefinition Width="635*"/>
-                        </Grid.ColumnDefinitions>
-                        <ListView   ItemsSource="{Binding product}"  Margin="5,5,5.333,4.667" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.ColumnSpan="2" >
-
-                          
-                            <ListView.View>
-<
+                        <!--<DataGrid  AutoGenerateColumns="True" ItemsSource="{Binding fio_Person}">
+                            <DataGrid.DataContext>
+                                <local:View_Model_Index/>
+                            </DataGrid.DataContext>
+                            
+                        </DataGrid>-->
+                        <ListView Name="Global_List"   ItemsSource="{Binding Path =  fio_Person}"  Margin="5,5,5.333,4.667" 
+                                    ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.ColumnSpan="2">
+                            <ListView.View >
                                 <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Employee Information" ScrollViewer.HorizontalScrollBarVisibility="Visible">
-
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=FirstName}" Header="Date" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=EmployeeNumber}" Header="FIO Person" Width="150"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=data_of_receipt}" Header="Date" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=fio_Person}" Header="FIO Person" Width="150"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=product}" Width="100">
                                         <GridViewColumnHeader  >Product
                                             <GridViewColumnHeader.ContextMenu>
@@ -43,14 +44,18 @@
                                             </GridViewColumnHeader.ContextMenu>
                                         </GridViewColumnHeader>
                                     </GridViewColumn>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=EmployeeNumber}" Header="Product categories" Width="150"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=EmployeeNumber}" Header="Life" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=EmployeeNumber}" Header="Count" Width="50"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=EmployeeNumber}" Header="Mark up" Width="50"/>
-
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=product_category}" Header="Product categories" Width="150"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=product_life}" Header="Life" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=count}" Header="Count" Width="50"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=mark_up}" Header="Mark up" Width="50"/>
                                 </GridView>
                             </ListView.View>
+                            <ListView.ItemTemplate>
+                                <DataTemplate >
 
+                                    <TextBlock Text="{Binding fio_Person}"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
                         </ListView>
                     </Grid>
                 </TabItem>

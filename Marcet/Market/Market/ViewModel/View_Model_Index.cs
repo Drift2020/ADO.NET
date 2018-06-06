@@ -8,9 +8,11 @@ using System.Windows.Input;
 
 namespace Market.ViewModel
 {
-    class View_Model_Index : View_Model_Base
+    public class View_Model_Index : View_Model_Base
     {
-        Model1 _myDB = new Model1();
+
+        public Model1 _myDB = new Model1();
+        
         #region Command_button
 
 
@@ -212,12 +214,44 @@ namespace Market.ViewModel
 
         #region
 
+       
+
         public ICollection<Product> product
         {
+            
             get => _myDB.Products.ToList();
         }
+        public ICollection<Date_of_receipt> data_of_receipt
+        {
 
-      
+            get => _myDB.Date_of_receipt.ToList();
+        }
+        public ICollection<FIO_Person> fio_Person
+        {
+
+            get => _myDB.FIO_Person.ToList();
+        }
+        public ICollection<Product_category> product_category
+        {
+
+            get => _myDB.Product_category.ToList();
+        }
+        public ICollection<Product_life> product_life
+        {
+
+            get => _myDB.Product_life.ToList();
+        }
+        public ICollection<Count> count
+        {
+
+            get => _myDB.Counts.ToList();
+        }
+        public ICollection<Mark_up> mark_up
+        {
+
+            get => _myDB.Mark_up.ToList();
+        }
+
 
         #endregion
     }

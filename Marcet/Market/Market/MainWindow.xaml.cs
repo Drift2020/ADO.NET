@@ -23,6 +23,7 @@ namespace Market
         public MainWindow()
         {
             InitializeComponent();
+            Global_List.View = View.Details;
         }
     }
 }
