@@ -23,8 +23,7 @@ namespace Market
         public MainWindow()
         {
             InitializeComponent();
-            Model1 _myDB = new Model1();
-            Global_List.ItemsSource = _myDB.Counts.ToList();
+          
         }
     }
 }

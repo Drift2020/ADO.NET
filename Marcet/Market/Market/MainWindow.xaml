@@ -29,25 +29,16 @@
                             
                         </DataGrid>-->
                         <ListView Name="Global_List"    Margin="5,5,5.333,4.667" 
-                                    ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.ColumnSpan="2">
+                                  ItemsSource="{Binding data_of_receipt}"  ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.ColumnSpan="2">
                             <ListView.View >
-                                <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Employee Information" ScrollViewer.HorizontalScrollBarVisibility="Visible">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=data_of_receipt}" Header="Date" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=fio_Person}" Header="FIO Person" Width="150"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=product}" Width="100">
-                                        <GridViewColumnHeader  >Product
-                                            <GridViewColumnHeader.ContextMenu>
-                                                <ContextMenu Name="LastNameCM">
-                                                    <MenuItem Header="Ascending"/>
-                                                    <MenuItem Header="Descending"/>
-                                                </ContextMenu>
-                                            </GridViewColumnHeader.ContextMenu>
-                                        </GridViewColumnHeader>
-                                    </GridViewColumn>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=product_category}" Header="Product categories" Width="150"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=product_life}" Header="Life" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=count}" Header="Count" Width="50"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=mark_up}" Header="Mark up" Width="50"/>
+                                <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Employee Information" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Date" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=fio_Person }" Header="FIO Person" Width="150"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=product }" Header="Product" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=product_category }" Header="Product categories" Width="150"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=product_life }" Header="Life" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=count }" Header="Count" Width="50"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=mark_up }" Header="Mark up" Width="50"/>
                                 </GridView>
                             </ListView.View>
                             

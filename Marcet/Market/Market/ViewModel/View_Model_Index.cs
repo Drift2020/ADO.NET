@@ -11,12 +11,13 @@ namespace Market.ViewModel
     public class View_Model_Index : View_Model_Base
     {
 
-        public Model1 _myDB = new Model1();
+        public Model1 _myDB;
         
 
         public View_Model_Index()
         {
-          
+            _myDB = new Model1();
+            
         }
 
         #region Command_button
@@ -232,6 +233,7 @@ namespace Market.ViewModel
 
             get => _myDB.Date_of_receipt.ToList();
         }
+        
         public ICollection<FIO_Person> fio_Person
         {
 
