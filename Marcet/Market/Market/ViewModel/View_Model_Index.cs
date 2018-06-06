@@ -221,19 +221,52 @@ namespace Market.ViewModel
 
         #region
 
-       
 
-        public ICollection<Product> product
+
+        public ICollection<View_Firm_List> firm
         {
-            
-            get => _myDB.Products.ToList();
+            set
+            {
+                OnPropertyChanged(nameof(data_of_receipt));
+            }
+            get
+            {
+                List<View_Firm_List> help = new List<View_Firm_List>();
+                foreach (var i in _myDB.Firms)
+                    help.Add(new View_Firm_List(i));
+
+
+
+                return help;
+            }
+
+        }
+        public ICollection<View_Index_List> product
+        {
+            set
+            {
+                OnPropertyChanged(nameof(data_of_receipt));
+            }
+            get
+            {
+                List<View_Index_List> help = new List<View_Index_List>();
+                foreach (var i in _myDB.Products)
+                    help.Add(new View_Index_List(i));
+
+
+
+                return help;
+            }
+          
         }
         public ICollection<Date_of_receipt> data_of_receipt
         {
-
-            get => _myDB.Date_of_receipt.ToList();
+             get => _myDB.Date_of_receipt.ToList();
         }
         
+
+
+
         public ICollection<FIO_Person> fio_Person
         {
 
@@ -261,6 +294,11 @@ namespace Market.ViewModel
         }
 
 
+        #endregion
+
+
+        #region
+   
         #endregion
     }
 }
