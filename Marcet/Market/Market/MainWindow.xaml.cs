@@ -25,5 +25,10 @@ namespace Market
             InitializeComponent();
           
         }
+
+        private void Global_List_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

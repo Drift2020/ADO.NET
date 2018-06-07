@@ -66,6 +66,7 @@
     <Compile Include="Add_and_Edit_Firm.xaml.cs">
       <DependentUpon>Add_and_Edit_Firm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CODES\BindingErrorTraceListener.cs" />
     <Compile Include="Command\DelegateCommand.cs" />
     <Compile Include="Messege.xaml.cs">
       <DependentUpon>Messege.xaml</DependentUpon>

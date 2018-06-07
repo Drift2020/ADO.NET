@@ -11,22 +11,17 @@ namespace Market
 
     public class View_Index_List : View_Model_Base//, ICloneable
     {
-        //public object Clone()
-        //{
-        //    string[] t = new string[List_ingridient.Count];
-        //    List_ingridient.CopyTo(t, 0);
-
-
-        //    return new FoodViewModel(Name_food, Image_path, Info_food, new ObservableCollection<string>(t));
-        //}
+        
 
         public View_Index_List(Model1 _my)
         {
 
         }
 
-        public Product _product;
+        public Product _product { get; set; }
        
+
+
 
         public View_Index_List( Product product)
         {
@@ -35,8 +30,95 @@ namespace Market
         }
 
 
+        #region FIRM
+        public string NameFirm
+        {
+            get { return _product.Firm.Name; }
+            set
+            {
+                _product.Firm.Name = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+        /*
+       
 
-      
+        public string Country
+        {
+            get
+            {
+
+                foreach (var i in _product.Firm.Countries)
+                    return i.Name;
+
+                return "none";
+
+            }
+            set
+            {
+               
+                OnPropertyChanged(nameof(Country));
+            }
+
+        }
+        public string City
+        {
+            get
+            {
+
+                foreach (var i in _product.Firm.Cities)
+                    return i.Name;
+
+                return "none";
+
+            }
+
+        }
+        public string Adress
+        {
+            get
+            {
+
+                foreach (var i in _product.Firm.Adressas)
+                    return i.Name;
+
+                return "none";
+
+            }
+
+        }
+
+        public string Phone
+        {
+            get
+            {
+
+                foreach (var i in _product.Firm.Phones)
+                    return i.Number;
+
+                return "none";
+
+            }
+
+        }
+
+        public string Boss
+        {
+            get
+            {
+
+                foreach (var i in _product.Firm.Bosses)
+                    return i.Surname + " " + i.Name;
+
+                return "none";
+
+            }
+
+        }*/
+        #endregion FIRM
+
+
+        #region Product
         public string Name
         {
             get { return _product.Name; }
@@ -46,8 +128,6 @@ namespace Market
                 OnPropertyChanged(nameof(Name));
             }
         }
-
-
         public decimal Price
         {
             get {  
@@ -69,7 +149,6 @@ namespace Market
             }
 
         }
-
         public DateTime Date
         {
             get
@@ -81,7 +160,6 @@ namespace Market
             }
 
         }
-
         public string Product_category
         {
             get
@@ -93,7 +171,6 @@ namespace Market
             }
 
         }
-
         public DateTime Product_life
         {
             get
@@ -105,7 +182,6 @@ namespace Market
             }
 
         }
-
         public int Сount
         {
             get
@@ -117,7 +193,6 @@ namespace Market
             }
 
         }
-
         public decimal Mark_up
         {
             get
@@ -129,8 +204,7 @@ namespace Market
             }
 
         }
-
-
+        #endregion Product
 
 
     }

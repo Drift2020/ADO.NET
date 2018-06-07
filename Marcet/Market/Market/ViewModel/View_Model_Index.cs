@@ -231,13 +231,14 @@ namespace Market.ViewModel
             }
             get
             {
-                List<View_Firm_List> help = new List<View_Firm_List>();
+                List<View_Firm_List> new_list = new List<View_Firm_List>();
                 foreach (var i in _myDB.Firms)
-                    help.Add(new View_Firm_List(i));
+                    if(select_Item_Index!=null && select_Item_Index._product.Firm.ID==i.ID)
+                        new_list.Add(new View_Firm_List(i));
 
 
 
-                return help;
+                return new_list;
             }
 
         }
@@ -259,14 +260,37 @@ namespace Market.ViewModel
             }
           
         }
+
+        /// <summary>
+        /// refreh
+        /// </summary>
+        View_Index_List select_Item_Index;
+        public View_Index_List Select_Item_Index
+        {
+            set
+            {
+                select_Item_Index = value;
+                OnPropertyChanged(nameof(Select_Item_Index));
+                
+            }
+            get
+            {
+              
+                return select_Item_Index;
+            }
+
+        }
+
+
+
         public ICollection<Date_of_receipt> data_of_receipt
         {
              get => _myDB.Date_of_receipt.ToList();
         }
-        
 
 
 
+        #region
         public ICollection<FIO_Person> fio_Person
         {
 
@@ -292,13 +316,12 @@ namespace Market.ViewModel
 
             get => _myDB.Mark_up.ToList();
         }
-
+        #endregion
 
         #endregion
 
 
-        #region
-   
-        #endregion
+
+
     }
 }
