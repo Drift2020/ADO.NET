@@ -39,13 +39,13 @@ namespace Milioners
 
 
             //////////////////////////////data base out param
-            // SQL myBag = new SQL();
-            // myBag.Delete_Questio_out(c.Element(_view.Value - 1).Questio);
+             SQL myBag = new SQL();
+             myBag.Delete_Questio_out(c.Element(_view.Value - 1).Questio);
             //////////////////////////////
 
             //////////////////////////////data base linc param
-            LINQ.DataClasses1DataContext myLINQ = new LINQ.DataClasses1DataContext();
-            myLINQ.Delete_Questio(c.Element(_view.Value - 1).Questio);
+          //  LINQ.DataClasses1DataContext myLINQ = new LINQ.DataClasses1DataContext();
+           // myLINQ.Delete_Questio(c.Element(_view.Value - 1).Questio);
             //////////////////////////////
 
             //////////////////////////////data base entiti param
