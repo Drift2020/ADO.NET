@@ -20,6 +20,7 @@ namespace Market.ViewModel
             List_Price = _myDB.Prices.ToList();
             List_Count = _myDB.Counts.ToList();
             List_Mark_up = _myDB.Mark_up.ToList();
+            List_date_of_receipt = _myDB.Date_of_receipt.ToList();
         }
 
 
@@ -363,17 +364,22 @@ namespace Market.ViewModel
         private void Execute_New_Date_of_receipt(object o)
         {
 
-            int n = 2;
+
+            Date_of_receipt new_date_of_receipt = new Date_of_receipt();
+            new_date_of_receipt.Date = Convert.ToDateTime(date_of_receipt);
+            List_date_of_receipt.Add(new_date_of_receipt);
+            OnPropertyChanged(nameof(List_date_of_receipt));
 
         }
         private bool CanExecute_New_Date_of_receipt(object o)
         {
 
 
-            return true;
+            if (Date_of_receipt != null && Date_of_receipt.Length > 0 && !Date_of_receipt.Contains(" "))
+                return true;
+            else
+                return false;
 
-
-            return false;
 
 
         }
@@ -394,17 +400,22 @@ namespace Market.ViewModel
         private void Execute_Delete_Date_of_receipt(object o)
         {
 
-            int n = 2;
+            list_date_of_receipt.Remove(select_item_date_of_receipt);
+
+            OnPropertyChanged(nameof(List_date_of_receipt));
+            Select_item_date_of_receipt = null;
+            date_of_receipt = null;
+
 
         }
         private bool CanExecute_Delete_Date_of_receipt(object o)
         {
 
 
-            return true;
-
-
-            return false;
+            if (select_item_date_of_receipt != null)
+                return true;
+            else
+                return false;
 
 
         }
@@ -1030,31 +1041,31 @@ namespace Market.ViewModel
 
         }
 
-        Mark_up select_item_mark_up;
-        public Mark_up Select_item_mark_up
+        Date_of_receipt select_item_date_of_receipt;
+        public Date_of_receipt Select_item_date_of_receipt
         {
             set
             {
-                select_item_mark_up = value;
-                OnPropertyChanged(nameof(Select_item_mark_up));
-                Set_mark_up();
+                select_item_date_of_receipt = value;
+                OnPropertyChanged(nameof(Select_item_date_of_receipt));
+                Set_date_of_receipt();
             }
             get
             {
 
 
-                if (select_item_mark_up != null)
-                    return select_item_mark_up;
+                if (select_item_date_of_receipt != null)
+                    return select_item_date_of_receipt;
                 else
-                    return (new Mark_up());
+                    return (new Date_of_receipt());
             }
 
         }
 
-        void Set_mark_up()
+        void Set_date_of_receipt()
         {
-            if (select_item_mark_up != null)
-                Mark_up = select_item_mark_up.Count.ToString();
+            if (select_item_date_of_receipt != null)
+                Date_of_receipt = select_item_date_of_receipt.Date.ToString();
         }
 
         #endregion Date of receipt list
