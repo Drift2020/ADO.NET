@@ -160,20 +160,28 @@
                                 </Grid.ColumnDefinitions>
 
                                 <GroupBox Header="List Date" Grid.Row="0" Grid.ColumnSpan="2">
-                                    <ListView >
+                                    <ListView  ItemsSource="{Binding List_date_of_receipt,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                               SelectedItem="{Binding Select_item_date_of_receipt}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate >
 
+                                                <TextBlock Text="{Binding Date,IsAsync=True,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+
+
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
                                     </ListView>
                                 </GroupBox>
 
 
                                 <StackPanel Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center">
                                     <TextBlock  Text="Date of receipt" HorizontalAlignment="Center"/>
-                                    <TextBox Margin="4"></TextBox>
+                                    <TextBox Text="{Binding Date_of_receipt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="4"></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="5" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
-                                    <Button Content="New date"/>
-                                    <Button Content="Delete date"/>
-                                    <Button Content="Edit date"/>
+                                    <Button Command="{Binding Button_New_Date_of_receipt}" Content="New date"/>
+                                    <Button Command="{Binding Button_Delete_Date_of_receipt}" Content="Delete date"/>
+                                    <Button Command="{Binding Button_Edit_Date_of_receipt}" Content="Edit date"/>
                                 </StackPanel>
 
 
@@ -193,20 +201,28 @@
                                 </Grid.ColumnDefinitions>
 
                                 <GroupBox Header="List product life" Grid.Row="0" Grid.ColumnSpan="2">
-                                    <ListView >
+                                    <ListView  ItemsSource="{Binding List_product_life,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                               SelectedItem="{Binding Select_item_product_life}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate >
 
+                                                <TextBlock Text="{Binding Date,IsAsync=True,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+
+
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
                                     </ListView>
                                 </GroupBox>
 
 
                                 <StackPanel Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center">
                                     <TextBlock  Text="Product life" HorizontalAlignment="Center"/>
-                                    <TextBox Margin="4"></TextBox>
+                                    <TextBox Text="{Binding Product_life, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="4"></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="5" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
-                                    <Button Content="New product life"/>
-                                    <Button Content="Delete product life"/>
-                                    <Button Content="Edit product life"/>
+                                    <Button Command="{Binding Button_New_Product_life}" Content="New product life"/>
+                                    <Button Command="{Binding Button_Delete_Product_life}" Content="Delete product life"/>
+                                    <Button Command="{Binding Button_Edit_Product_life}" Content="Edit product life"/>
                                 </StackPanel>
 
 
@@ -226,7 +242,17 @@
                                 </Grid.ColumnDefinitions>
 
                                 <GroupBox Header="Acceptor" Grid.Row="0" Grid.ColumnSpan="2">
-                                    <ListView >
+                                    <ListView x:Name="Global_List"    SelectedItem="{Binding Select_item_acceptor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                   ItemsSource="{Binding List_acceptor ,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.ColumnSpan="2">
+                                        <ListView.View >
+                                            <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Employee Information" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                                <GridViewColumn DisplayMemberBinding="{Binding Name , UpdateSourceTrigger=PropertyChanged}" Header="Name" Width="100"/>
+                                                <GridViewColumn DisplayMemberBinding="{Binding Surname , UpdateSourceTrigger=PropertyChanged}"  Header="Surname" Width="100"/>
+                                               
+
+                                            </GridView>
+                                        </ListView.View>
+
 
                                     </ListView>
                                 </GroupBox>
@@ -234,14 +260,14 @@
 
                                 <StackPanel Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center">
                                     <TextBlock  Text="Name" HorizontalAlignment="Center"/>
-                                    <TextBox Margin="4,0,4,0"></TextBox>
+                                    <TextBox Text="{Binding Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="4,0,4,0"></TextBox>
                                     <TextBlock  Text="Surname" HorizontalAlignment="Center"/>
-                                    <TextBox  Margin="4,0,4,0"></TextBox>
+                                    <TextBox Text="{Binding Surname, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="4,0,4,0"></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="5" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
-                                    <Button Content="New acceptor"/>
-                                    <Button Content="Delete acceptor"/>
-                                    <Button Content="Edit acceptor"/>
+                                    <Button Command="{Binding Button_New_Acceptor}" Content="New acceptor"/>
+                                    <Button Command="{Binding Button_Delete_Acceptor}" Content="Delete acceptor"/>
+                                    <Button Command="{Binding Button_Edit_Acceptor}" Content="Edit acceptor"/>
                                 </StackPanel>
 
 
@@ -261,15 +287,36 @@
                                 </Grid.ColumnDefinitions>
 
                                 <GroupBox Header="List firm" Grid.Row="0" Grid.ColumnSpan="2 " Grid.RowSpan="2">
-                                    <ListView >
+                                    <ListView   SelectedItem="{Binding Select_item_firm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                   ItemsSource="{Binding List_firm ,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.ColumnSpan="2">
+                                        <ListView.View >
+                                            <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Employee Information" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                                
+                                                <GridViewColumn DisplayMemberBinding="{Binding Name , UpdateSourceTrigger=PropertyChanged}" Header="Name" Width="100"/>
+                                                
+                                                <GridViewColumn  Header="City" Width="100">
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <ListView  ItemsSource="{Binding Cities}">
+                                                                <ListView.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <TextBlock Text="{Binding Name}" />
+                                                                    </DataTemplate>
+                                                                </ListView.ItemTemplate>
+                                                            </ListView>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+
+
+                                            </GridView>
+                                        </ListView.View>
+
 
                                     </ListView>
+                                    
                                 </GroupBox>
-
-
-                                
-
-
+                                   
                             </Grid>
                         </TabItem>
 

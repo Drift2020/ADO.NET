@@ -87,6 +87,9 @@
     <Compile Include="Model\Product_category.cs" />
     <Compile Include="Model\Product_life.cs" />
     <Compile Include="Model\sysdiagram.cs" />
+    <Compile Include="ViewModel\firm\View_adressa.cs" />
+    <Compile Include="ViewModel\firm\View_City.cs" />
+    <Compile Include="ViewModel\firm\View_Firm.cs" />
     <Compile Include="ViewModel\View_Firm_List.cs" />
     <Compile Include="ViewModel\View_Index_List.cs" />
     <Compile Include="ViewModel\View_Model_Add_and_Edit_Firm.cs" />

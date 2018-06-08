@@ -21,6 +21,9 @@ namespace Market.ViewModel
             List_Count = _myDB.Counts.ToList();
             List_Mark_up = _myDB.Mark_up.ToList();
             List_date_of_receipt = _myDB.Date_of_receipt.ToList();
+            List_acceptor = _myDB.FIO_Person.ToList();
+            List_product_life = _myDB.Product_life.ToList();
+            List_firm = _myDB.Firms.ToList();
         }
 
 
@@ -228,8 +231,6 @@ namespace Market.ViewModel
         private bool CanExecute_Edit_Count(object o)
         {
 
-
-
             if (select_item_count != null && (Count != "" && Count != null && !Count.Contains(" ")))
                 return true;
             else
@@ -375,7 +376,7 @@ namespace Market.ViewModel
         {
 
 
-            if (Date_of_receipt != null && Date_of_receipt.Length > 0 && !Date_of_receipt.Contains(" "))
+            if (Date_of_receipt != null && Date_of_receipt.Length > 0)
                 return true;
             else
                 return false;
@@ -404,7 +405,7 @@ namespace Market.ViewModel
 
             OnPropertyChanged(nameof(List_date_of_receipt));
             Select_item_date_of_receipt = null;
-            date_of_receipt = null;
+            Date_of_receipt = null;
 
 
         }
@@ -436,119 +437,23 @@ namespace Market.ViewModel
         private void Execute_Edit_Date_of_receipt(object o)
         {
 
-            int n = 2;
+            Select_item_date_of_receipt.Date = Convert.ToDateTime(Date_of_receipt);
+            OnPropertyChanged(nameof(List_date_of_receipt));
 
         }
         private bool CanExecute_Edit_Date_of_receipt(object o)
         {
 
 
-            return true;
-
-
-            return false;
+            if (Select_item_date_of_receipt != null && (Date_of_receipt != "" && Date_of_receipt != null))
+                return true;
+            else
+                return false;
 
 
         }
         #endregion
         #endregion Date_of_receipt
-
-
-        #region Firm
-        #region 
-        private DelegateCommand _Command_New_Firm;
-        public ICommand Button_New_Firm
-        {
-            get
-            {
-                if (_Command_New_Firm == null)
-                {
-                    _Command_New_Firm = new DelegateCommand(Execute_New_Firm, CanExecute_New_Firm);
-                }
-                return _Command_New_Firm;
-            }
-        }
-        private void Execute_New_Firm(object o)
-        {
-
-            int n = 2;
-
-        }
-        private bool CanExecute_New_Firm(object o)
-        {
-
-
-            return true;
-
-
-            return false;
-
-
-        }
-        #endregion
-        #region 
-        private DelegateCommand _Command_Delete_Firm;
-        public ICommand Button_Delete_Firm
-        {
-            get
-            {
-                if (_Command_Delete_Firm == null)
-                {
-                    _Command_Delete_Firm = new DelegateCommand(Execute_Delete_Firm, CanExecute_Delete_Firm);
-                }
-                return _Command_Delete_Firm;
-            }
-        }
-        private void Execute_Delete_Firm(object o)
-        {
-
-            int n = 2;
-
-        }
-        private bool CanExecute_Delete_Firm(object o)
-        {
-
-
-            return true;
-
-
-            return false;
-
-
-        }
-        #endregion
-        #region 
-        private DelegateCommand _Command_Edit_Firm;
-        public ICommand Button_Edit_Firm
-        {
-            get
-            {
-                if (_Command_Edit_Firm == null)
-                {
-                    _Command_Edit_Firm = new DelegateCommand(Execute_Edit_Firm, CanExecute_Edit_Firm);
-                }
-                return _Command_Edit_Firm;
-            }
-        }
-        private void Execute_Edit_Firm(object o)
-        {
-
-            int n = 2;
-
-        }
-        private bool CanExecute_Edit_Firm(object o)
-        {
-
-
-            return true;
-
-
-            return false;
-
-
-        }
-        #endregion
-        #endregion Firm
 
         #region Acceptor
         #region 
@@ -567,17 +472,24 @@ namespace Market.ViewModel
         private void Execute_New_Acceptor(object o)
         {
 
-            int n = 2;
+            FIO_Person new_fio_person = new FIO_Person();
+            new_fio_person.Name = Convert.ToString(name);
+            new_fio_person.Surname = Convert.ToString(surname);
+
+            List_acceptor.Add(new_fio_person);
+            OnPropertyChanged(nameof(List_acceptor));
 
         }
         private bool CanExecute_New_Acceptor(object o)
         {
 
 
-            return true;
 
-
-            return false;
+            if (Name != null && Name.Length > 0 &&
+                Surname != null && Surname.Length > 0)
+                return true;
+            else
+                return false;
 
 
         }
@@ -598,17 +510,21 @@ namespace Market.ViewModel
         private void Execute_Delete_Acceptor(object o)
         {
 
-            int n = 2;
+            list_acceptor.Remove(select_item_acceptor);
+
+            OnPropertyChanged(nameof(List_acceptor));
+            Select_item_acceptor = null;
+            Name = null;
+            Surname = null;
 
         }
         private bool CanExecute_Delete_Acceptor(object o)
         {
 
-
-            return true;
-
-
-            return false;
+            if (select_item_acceptor != null)
+                return true;
+            else
+                return false;
 
 
         }
@@ -621,30 +537,29 @@ namespace Market.ViewModel
             {
                 if (_Command_Edit_Acceptor == null)
                 {
-                    _Command_Edit_Acceptor = new DelegateCommand(Execute_Edit_Firm, CanExecute_Edit_Firm);
+                    _Command_Edit_Acceptor = new DelegateCommand(Execute_Edit_Acceptor, CanExecute_Edit_Acceptor);
                 }
                 return _Command_Edit_Acceptor;
             }
         }
         private void Execute_Edit_Acceptor(object o)
         {
-
-            int n = 2;
+            Select_item_acceptor.Name = Convert.ToString(Name);
+            Select_item_acceptor.Surname = Convert.ToString(Surname);
+            OnPropertyChanged(nameof(List_acceptor));
 
         }
         private bool CanExecute_Edit_Acceptor(object o)
         {
 
-
-            return true;
-
-
-            return false;
-
-
+            if (select_item_acceptor != null && Name != "" && Name != null
+                && Surname != "" && Surname != null)
+                return true;
+            else
+                return false;
         }
         #endregion
-        #endregion Firm
+        #endregion Acceptor
 
         #region Product_life
         #region 
@@ -662,19 +577,21 @@ namespace Market.ViewModel
         }
         private void Execute_New_Product_life(object o)
         {
+            Product_life new_product_life = new Product_life();
+            new_product_life.Date = Convert.ToDateTime(product_life);
 
-            int n = 2;
 
+            List_product_life.Add(new_product_life);
+            OnPropertyChanged(nameof(List_product_life));
         }
         private bool CanExecute_New_Product_life(object o)
         {
 
 
-            return true;
-
-
-            return false;
-
+            if (Product_life != null && Product_life.Length > 0)
+                return true;
+            else
+                return false;
 
         }
         #endregion
@@ -694,18 +611,18 @@ namespace Market.ViewModel
         private void Execute_Delete_Product_life(object o)
         {
 
-            int n = 2;
-
+            list_product_life.Remove(select_item_product_life);
+            OnPropertyChanged(nameof(List_product_life));
+            Select_item_product_life = null;
+            product_life = null;
+          
         }
         private bool CanExecute_Delete_Product_life(object o)
         {
-
-
-            return true;
-
-
-            return false;
-
+            if (select_item_product_life != null)
+                return true;
+            else
+                return false;
 
         }
         #endregion
@@ -717,7 +634,7 @@ namespace Market.ViewModel
             {
                 if (_Command_Edit_Product_life == null)
                 {
-                    _Command_Edit_Product_life = new DelegateCommand(Execute_Edit_Firm, CanExecute_Edit_Firm);
+                    _Command_Edit_Product_life = new DelegateCommand(Execute_Edit_Product_life, CanExecute_Edit_Product_life);
                 }
                 return _Command_Edit_Product_life;
             }
@@ -725,22 +642,19 @@ namespace Market.ViewModel
         private void Execute_Edit_Product_life(object o)
         {
 
-            int n = 2;
+            Select_item_product_life.Date = Convert.ToDateTime(product_life);
+            OnPropertyChanged(nameof(List_product_life));
 
         }
         private bool CanExecute_Edit_Product_life(object o)
         {
-
-
-            return true;
-
-
-            return false;
-
-
+            if (select_item_product_life != null && Product_life != "" && Product_life != null)
+                return true;
+            else
+                return false;
         }
         #endregion
-        #endregion Firm
+        #endregion Product_life
         #endregion Command button
 
 
@@ -865,6 +779,21 @@ namespace Market.ViewModel
             }
         }
         #endregion product_life
+        #region Name Firm
+        string firm;
+        public string Firm
+        {
+            get
+            {
+                return firm;
+            }
+            set
+            {
+                firm = value;
+                OnPropertyChanged(nameof(Firm));
+            }
+        }
+        #endregion Name Firm
 
         #endregion pole
 
@@ -1069,7 +998,165 @@ namespace Market.ViewModel
         }
 
         #endregion Date of receipt list
+        #region Acceptor list
 
+        List<FIO_Person> list_acceptor = new List<FIO_Person>();
+        public ICollection<FIO_Person> List_acceptor
+        {
+            set
+            {
+                list_acceptor = value.ToList();
+                OnPropertyChanged(nameof(List_acceptor));
+            }
+            get
+            {
+
+
+                if (list_acceptor != null)
+                    return list_acceptor;
+                else
+                    return (new List<FIO_Person>());
+            }
+
+        }
+
+        FIO_Person select_item_acceptor;
+        public FIO_Person Select_item_acceptor
+        {
+            set
+            {
+                select_item_acceptor = value;
+                OnPropertyChanged(nameof(Select_item_acceptor));
+                Set_acceptor();
+            }
+            get
+            {
+
+
+                if (select_item_acceptor != null)
+                    return select_item_acceptor;
+                else
+                    return (new FIO_Person());
+            }
+
+        }
+
+        void Set_acceptor()
+        {
+            if (select_item_acceptor != null)
+            {
+                Name = select_item_acceptor.Name.ToString();
+                Surname = select_item_acceptor.Surname.ToString();
+            }
+        }
+
+        #endregion Product life list
+        #region Product life list
+
+        List<Product_life> list_product_life = new List<Product_life>();
+        public ICollection<Product_life> List_product_life
+        {
+            set
+            {
+                list_product_life = value.ToList();
+                OnPropertyChanged(nameof(List_product_life));
+            }
+            get
+            {
+
+
+                if (list_product_life != null)
+                    return list_product_life;
+                else
+                    return (new List<Product_life>());
+            }
+
+        }
+
+        Product_life select_item_product_life;
+        public Product_life Select_item_product_life
+        {
+            set
+            {
+                select_item_product_life = value;
+                OnPropertyChanged(nameof(Select_item_product_life));
+                Set_product_life();
+            }
+            get
+            {
+
+
+                if (select_item_product_life != null)
+                    return select_item_product_life;
+                else
+                    return (new Product_life());
+            }
+
+        }
+
+        void Set_product_life()
+        {
+            if (select_item_product_life != null)
+            {
+                Product_life = select_item_product_life.Date.ToString();
+              
+            }
+        }
+
+        #endregion Product life list
+        #region Firm list
+
+        List<Firm> list_firm = new List<Firm>();
+        public ICollection<Firm> List_firm
+        {
+            set
+            {
+                list_firm = value.ToList();
+                OnPropertyChanged(nameof(List_firm));
+            }
+            get
+            {
+
+
+                if (list_firm != null)
+                    return list_firm;
+                else
+                    return (new List<Firm>());
+            }
+
+        }
+
+        Firm select_item_firm;
+        public Firm Select_item_firm
+        {
+            set
+            {
+                select_item_firm = value;
+                OnPropertyChanged(nameof(Select_item_firm));
+                Set_firm();
+            }
+            get
+            {
+
+
+                if (select_item_firm != null)
+                    return select_item_firm;
+                else
+                    return (new Firm());
+            }
+
+        }
+
+        void Set_firm()
+        {
+            if (select_item_firm != null)
+            {
+                Firm = select_item_firm.Name.ToString();
+
+            }
+        }
+
+        #endregion Firm list
         #endregion List
     }
 }

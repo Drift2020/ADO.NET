@@ -31,90 +31,19 @@ namespace Market
 
 
         #region FIRM
-        public string NameFirm
+        public Firm Firm
         {
-            get { return _product.Firm.Name; }
+            get { return _product.Firm; }
             set
             {
-                _product.Firm.Name = value;
-                OnPropertyChanged(nameof(Name));
+                _product.Firm = value;
+                OnPropertyChanged(nameof(Firm));
             }
         }
 
 
 
-        //public string Country
-        //{
-        //    get
-        //    {
-
-        //        foreach (var i in _product.Firm.Countries)
-        //            return i.Name;
-
-        //        return "none";
-
-        //    }
-        //    set
-        //    {
-
-        //        OnPropertyChanged(nameof(Country));
-        //    }
-
-        //}
-        //public string City
-        //{
-        //    get
-        //    {
-
-        //        foreach (var i in _product.Firm.Cities)
-        //            return i.Name;
-
-        //        return "none";
-
-        //    }
-
-        //}
-        //public string Adress
-        //{
-        //    get
-        //    {
-
-        //        foreach (var i in _product.Firm.Adressas)
-        //            return i.Name;
-
-        //        return "none";
-
-        //    }
-
-        //}
-
-        //public string Phone
-        //{
-        //    get
-        //    {
-
-        //        foreach (var i in _product.Firm.Phones)
-        //            return i.Number;
-
-        //        return "none";
-
-        //    }
-
-        //}
-
-        //public string Boss
-        //{
-        //    get
-        //    {
-
-        //        foreach (var i in _product.Firm.Bosses)
-        //            return i.Surname + " " + i.Name;
-
-        //        return "none";
-
-        //    }
-
-        //}
+     
         #endregion FIRM
 
 

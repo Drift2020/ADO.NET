@@ -79,14 +79,14 @@
 
 
                         <Grid Grid.Row="1" >
-                            <ListView x:Name="Country_list"   ItemsSource="{Binding firm,IsAsync=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                            <ListView x:Name="Country_list"   ItemsSource="{Binding product/_product/Firm,IsAsync=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                   ScrollViewer.HorizontalScrollBarVisibility="Visible" 
                                   >
                                 <ListView.View >
                                     <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Employee Information" ScrollViewer.HorizontalScrollBarVisibility="Visible">
-                                        <GridViewColumn DisplayMemberBinding="{Binding  Country , UpdateSourceTrigger=PropertyChanged}" Header="Country" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding  City , UpdateSourceTrigger=PropertyChanged}" Header="City" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding  Adress , UpdateSourceTrigger=PropertyChanged}" Header="Adress" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding  Countries , UpdateSourceTrigger=PropertyChanged}" Header="Country" Width="100"/>
+                                        <!--<GridViewColumn DisplayMemberBinding="{Binding  City , UpdateSourceTrigger=PropertyChanged}" Header="City" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding  Adress , UpdateSourceTrigger=PropertyChanged}" Header="Adress" Width="100"/>-->
                                     </GridView>
                                 </ListView.View>
                              
