@@ -60,5 +60,10 @@ namespace Market
                 txtNum.Text = _numValue.ToString();
         }
         #endregion
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

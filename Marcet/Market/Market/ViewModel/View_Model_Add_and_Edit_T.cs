@@ -15,7 +15,11 @@ namespace Market.ViewModel
 
         public View_Model_Add_and_Edit_T()
         {
+            _myDB = new Model1();
 
+            List_Price = _myDB.Prices.ToList();
+            List_Count = _myDB.Counts.ToList();
+            List_Mark_up = _myDB.Mark_up.ToList();
         }
 
 
@@ -38,17 +42,20 @@ namespace Market.ViewModel
         private void Execute_New_Price(object o)
         {
 
-            int n = 2;
+            Price new_price = new Price();
+            new_price.Price1 = Convert.ToDecimal(price);
+            list_price.Add(new_price);
+            OnPropertyChanged(nameof(List_Price));
 
         }
         private bool CanExecute_New_Price(object o)
         {
 
 
-            return true;
-
-
-            return false;
+            if (price != null && price.Length>0)
+                return true;
+            else
+                return false;
 
 
         }
@@ -69,17 +76,22 @@ namespace Market.ViewModel
         private void Execute_Delete_Price(object o)
         {
 
-            int n = 2;
+            list_price.Remove(select_item_price);
+
+            OnPropertyChanged(nameof(List_Price));
+            Select_item_price = null;
+            Price = null;
+
 
         }
         private bool CanExecute_Delete_Price(object o)
         {
 
 
-            return true;
-
-
-            return false;
+            if (select_item_price != null)
+                return true;
+            else
+                return false;
 
 
         }
@@ -100,16 +112,18 @@ namespace Market.ViewModel
         private void Execute_Edit_price(object o)
         {
 
-            int n = 2;
+            Select_item_price.Price1 = Convert.ToDecimal(Price);
+            OnPropertyChanged(nameof(List_Price));
+          
 
         }
+
         private bool CanExecute_Edit_price(object o)
         {
 
-
+            if(select_item_price!=null&& (Price!="" && Price!=null && !Price.Contains(" ")))
             return true;
-
-
+            else
             return false;
 
 
@@ -134,18 +148,21 @@ namespace Market.ViewModel
         private void Execute_New_Count(object o)
         {
 
-            int n = 2;
+            Count new_count = new Count();
+            new_count.Count1 = Convert.ToInt32(count);
+            List_Count.Add(new_count);
+            OnPropertyChanged(nameof(List_Count));
 
         }
         private bool CanExecute_New_Count(object o)
         {
 
 
-            return true;
 
-
-            return false;
-
+            if (count != null && count.Length>0 && !count.Contains(" "))
+                return true;
+            else
+                return false;
 
         }
         #endregion
@@ -165,17 +182,24 @@ namespace Market.ViewModel
         private void Execute_Delete_Count(object o)
         {
 
-            int n = 2;
+
+            list_count.Remove(select_item_count);
+
+            OnPropertyChanged(nameof(List_Count));
+            Select_item_count = null;
+            Count = null;
+
 
         }
         private bool CanExecute_Delete_Count(object o)
         {
 
 
-            return true;
 
-
-            return false;
+            if (select_item_count != null)
+                return true;
+            else
+                return false;
 
 
         }
@@ -196,18 +220,19 @@ namespace Market.ViewModel
         private void Execute_Edit_Count(object o)
         {
 
-            int n = 2;
+            Select_item_count.Count1 = Convert.ToInt32(Count);
+            OnPropertyChanged(nameof(List_Count));
 
         }
         private bool CanExecute_Edit_Count(object o)
         {
 
 
-            return true;
 
-
-            return false;
-
+            if (select_item_count != null && (Count != "" && Count != null && !Count.Contains(" ")))
+                return true;
+            else
+                return false;
 
         }
         #endregion
@@ -230,18 +255,21 @@ namespace Market.ViewModel
         private void Execute_New_Mark_up(object o)
         {
 
-            int n = 2;
+
+            Mark_up new_mark_up = new Mark_up();
+            new_mark_up.Count = Convert.ToInt32(mark_up);
+            List_Mark_up.Add(new_mark_up);
+            OnPropertyChanged(nameof(List_Mark_up));
 
         }
         private bool CanExecute_New_Mark_up(object o)
         {
 
 
-            return true;
-
-
-            return false;
-
+            if (Mark_up != null && Mark_up.Length > 0 && !Mark_up.Contains(" "))
+                return true;
+            else
+                return false;
 
         }
         #endregion
@@ -261,17 +289,24 @@ namespace Market.ViewModel
         private void Execute_Delete_Mark_up(object o)
         {
 
-            int n = 2;
+
+            list_mark_up.Remove(select_item_mark_up);
+
+            OnPropertyChanged(nameof(List_Mark_up));
+            Select_item_mark_up = null;
+            Mark_up = null;
+
 
         }
         private bool CanExecute_Delete_Mark_up(object o)
         {
 
 
-            return true;
 
-
-            return false;
+            if (select_item_mark_up != null)
+                return true;
+            else
+                return false;
 
 
         }
@@ -292,17 +327,19 @@ namespace Market.ViewModel
         private void Execute_Edit_Mark_up(object o)
         {
 
-            int n = 2;
+            Select_item_mark_up.Count = Convert.ToInt32(Mark_up);
+            OnPropertyChanged(nameof(List_Mark_up));
 
         }
         private bool CanExecute_Edit_Mark_up(object o)
         {
 
 
-            return true;
 
-
-            return false;
+            if (select_item_mark_up != null && (mark_up != "" && mark_up != null && !mark_up.Contains(" ")))
+                return true;
+            else
+                return false;
 
 
         }
@@ -772,8 +809,256 @@ namespace Market.ViewModel
             }
         }
         #endregion Accrptor
+        #region Name
+        string name_t;
+        public string Name_t
+        {
+            get
+            {
+                return name_t;
+            }
+            set
+            {
+                name_t = value;
+                OnPropertyChanged(nameof(Name_t));
+            }
+        }
+        #endregion Accrptor
+        #region price
+        string price;
+        public string Price
+        {
+            get
+            {
+                return price;
+            }
+            set
+            {
+                price = value;
+                OnPropertyChanged(nameof(Price));
+            }
+        }
+        #endregion price
+        #region Product life
+        string product_life;
+        public string Product_life
+        {
+            get
+            {
+                return product_life;
+            }
+            set
+            {
+                product_life = value;
+                OnPropertyChanged(nameof(Product_life));
+            }
+        }
+        #endregion product_life
 
         #endregion pole
 
+        #region List
+        #region Price list
+
+        List<Price> list_price=new List<Market.Price>();
+        public ICollection<Price> List_Price
+        {
+            set
+            {
+                list_price = value.ToList();
+                OnPropertyChanged(nameof(List_Price));
+            }
+            get
+            {
+
+
+                if (list_price != null)
+                    return list_price;
+                else
+                    return (new List<Price>());
+            }
+
+        }
+
+        Price select_item_price;
+        public Price Select_item_price
+        {
+            set
+            {
+                select_item_price = value;
+                OnPropertyChanged(nameof(Select_item_price));
+                Set_price();
+            }
+            get
+            {
+
+
+                if (select_item_price != null)
+                    return select_item_price;
+                else
+                    return (new Price());
+            }
+
+        }
+
+        void Set_price()
+        {
+            if(select_item_price!=null)
+            Price = select_item_price.Price1.ToString();
+        }
+
+        #endregion Price list
+        #region Count list
+
+        List<Count> list_count = new List<Count>();
+        public ICollection<Count> List_Count
+        {
+            set
+            {
+                list_count = value.ToList();
+                OnPropertyChanged(nameof(List_Count));
+            }
+            get
+            {
+
+
+                if (list_count != null)
+                    return list_count;
+                else
+                    return (new List<Count>());
+            }
+
+        }
+
+        Count select_item_count;
+        public Count Select_item_count
+        {
+            set
+            {
+                select_item_count = value;
+                OnPropertyChanged(nameof(Select_item_count));
+                Set_count();
+            }
+            get
+            {
+
+
+                if (select_item_count != null)
+                    return select_item_count;
+                else
+                    return (new Count());
+            }
+
+        }
+
+        void Set_count()
+        {
+            if (select_item_count != null)
+                Count = select_item_count.Count1.ToString();
+        }
+
+        #endregion Count list
+        #region Mark_up list
+
+        List<Mark_up> list_mark_up = new List<Mark_up>();
+        public ICollection<Mark_up> List_Mark_up
+        {
+            set
+            {
+                list_mark_up = value.ToList();
+                OnPropertyChanged(nameof(List_Mark_up));
+            }
+            get
+            {
+
+
+                if (list_mark_up != null)
+                    return list_mark_up;
+                else
+                    return (new List<Mark_up>());
+            }
+
+        }
+
+        Mark_up select_item_mark_up;
+        public Mark_up Select_item_mark_up
+        {
+            set
+            {
+                select_item_mark_up = value;
+                OnPropertyChanged(nameof(Select_item_mark_up));
+                Set_mark_up();
+            }
+            get
+            {
+
+
+                if (select_item_mark_up != null)
+                    return select_item_mark_up;
+                else
+                    return (new Mark_up());
+            }
+
+        }
+
+        void Set_mark_up()
+        {
+            if (select_item_mark_up != null)
+                Mark_up = select_item_mark_up.Count.ToString();
+        }
+
+        #endregion Count list
+        #region Date of receipt list
+
+        List<Date_of_receipt> list_date_of_receipt = new List<Date_of_receipt>();
+        public ICollection<Date_of_receipt> List_date_of_receipt
+        {
+            set
+            {
+                list_date_of_receipt = value.ToList();
+                OnPropertyChanged(nameof(List_date_of_receipt));
+            }
+            get
+            {
+
+
+                if (list_date_of_receipt != null)
+                    return list_date_of_receipt;
+                else
+                    return (new List<Date_of_receipt>());
+            }
+
+        }
+
+        Mark_up select_item_mark_up;
+        public Mark_up Select_item_mark_up
+        {
+            set
+            {
+                select_item_mark_up = value;
+                OnPropertyChanged(nameof(Select_item_mark_up));
+                Set_mark_up();
+            }
+            get
+            {
+
+
+                if (select_item_mark_up != null)
+                    return select_item_mark_up;
+                else
+                    return (new Mark_up());
+            }
+
+        }
+
+        void Set_mark_up()
+        {
+            if (select_item_mark_up != null)
+                Mark_up = select_item_mark_up.Count.ToString();
+        }
+
+        #endregion Date of receipt list
+
+        #endregion List
     }
 }

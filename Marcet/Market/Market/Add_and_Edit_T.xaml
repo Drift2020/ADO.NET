@@ -31,8 +31,16 @@
                                 </Grid.ColumnDefinitions>
 
                                 <GroupBox Header="Price" Grid.Row="1" Grid.ColumnSpan="2">
-                                    <ListView >
+                                    <ListView  ItemsSource="{Binding List_Price,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                               SelectedItem="{Binding Select_item_price}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate >
 
+                                                <TextBlock Text="{Binding Price1,IsAsync=True,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+                                                   
+                                              
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
                                     </ListView>
                                 </GroupBox>
 
@@ -41,16 +49,16 @@
 
                                 </StackPanel>
                                 <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
-                                    <TextBox Margin="4"></TextBox>
+                                    <TextBox Text="{Binding Name_t , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="4"></TextBox>
                                 </StackPanel>
                                 <StackPanel Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center">
                                     <TextBlock  Text="Price" HorizontalAlignment="Center"/>
-                                    <TextBox Margin="4"></TextBox>
+                                    <TextBox Text="{Binding Price , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="4"></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="5" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
-                                    <Button Content="New price"/>
-                                    <Button Content="Delete price"/>
-                                    <Button Content="Edit price"/>
+                                    <Button Command="{Binding Button_New_Price}" Content="New price"/>
+                                    <Button Command="{Binding Button_Delete_Price}" Content="Delete price"/>
+                                    <Button Command="{Binding Button_Edit_price}" Content="Edit price"/>
                                 </StackPanel>
 
 
@@ -70,20 +78,28 @@
                                 </Grid.ColumnDefinitions>
 
                                 <GroupBox Header="List count" Grid.Row="0" Grid.ColumnSpan="2">
-                                    <ListView >
+                                    <ListView  ItemsSource="{Binding List_Count,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                               SelectedItem="{Binding Select_item_count}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate >
 
+                                                <TextBlock Text="{Binding Count1,IsAsync=True,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+
+
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
                                     </ListView>
                                 </GroupBox>
 
 
                                 <StackPanel Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center">
                                     <TextBlock  Text="Count" HorizontalAlignment="Center"/>
-                                    <TextBox Margin="4"></TextBox>
+                                    <TextBox Text="{Binding Count, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}" Margin="4"></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="5" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
-                                    <Button Content="New count"/>
-                                    <Button Content="Delete count"/>
-                                    <Button Content="Edit count"/>
+                                    <Button Command="{Binding Button_New_Count}" Content="New count"/>
+                                    <Button Command="{Binding Button_Delete_Count}" Content="Delete count"/>
+                                    <Button Command="{Binding Button_Edit_Count}" Content="Edit count"/>
                                 </StackPanel>
 
 
@@ -103,20 +119,28 @@
                                 </Grid.ColumnDefinitions>
 
                                 <GroupBox Header="List mark up" Grid.Row="0" Grid.ColumnSpan="2">
-                                    <ListView >
+                                    <ListView  ItemsSource="{Binding List_Mark_up,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                               SelectedItem="{Binding Select_item_mark_up}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate >
 
+                                                <TextBlock Text="{Binding Count,IsAsync=True,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+
+
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
                                     </ListView>
                                 </GroupBox>
 
 
                                 <StackPanel Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center">
                                     <TextBlock  Text="Mark up" HorizontalAlignment="Center"/>
-                                    <TextBox Margin="4"></TextBox>
+                                    <TextBox Text="{Binding Mark_up,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="4"></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="5" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
-                                    <Button Content="New mark up"/>
-                                    <Button Content="Delete mark up"/>
-                                    <Button Content="Edit mark up"/>
+                                    <Button Command="{Binding Button_New_Mark_up}" Content="New mark up"/>
+                                    <Button Command="{Binding Button_Delete_Mark_up}" Content="Delete mark up"/>
+                                    <Button Command="{Binding Button_Edit_Mark_up}" Content="Edit mark up"/>
                                 </StackPanel>
 
 
