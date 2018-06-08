@@ -12,12 +12,23 @@ namespace Market.ViewModel
     {
 
         public Model1 _myDB;
-        
+        List<View_Index_List> List_product;
+        List<View_Firm_List> new_list_firm;
 
         public View_Model_Index()
         {
             _myDB = new Model1();
-            
+
+            List_product = new List<View_Index_List>();
+            foreach (var i in _myDB.Products)
+                List_product.Add(new View_Index_List(i));
+
+
+            new_list_firm = new List<View_Firm_List>();
+            //foreach (var i in _myDB.Firms)
+            //    if (select_Item_Index != null && select_Item_Index._product.Firm.ID == i.ID)
+            //        new_list_firm.Add(new View_Firm_List(i));
+
         }
 
         #region Command_button
@@ -227,18 +238,17 @@ namespace Market.ViewModel
         {
             set
             {
-                OnPropertyChanged(nameof(data_of_receipt));
+                new_list_firm = value.ToList();
+                OnPropertyChanged(nameof(firm));
             }
             get
             {
-                List<View_Firm_List> new_list = new List<View_Firm_List>();
-                foreach (var i in _myDB.Firms)
-                    if(select_Item_Index!=null && select_Item_Index._product.Firm.ID==i.ID)
-                        new_list.Add(new View_Firm_List(i));
 
 
-
-                return new_list;
+                if (new_list_firm != null)
+                    return new_list_firm;
+                else
+                    return (new List<View_Firm_List>());
             }
 
         }
@@ -246,17 +256,19 @@ namespace Market.ViewModel
         {
             set
             {
-                OnPropertyChanged(nameof(data_of_receipt));
+                List_product = value.ToList();
+                OnPropertyChanged(nameof(product));
             }
             get
             {
-                List<View_Index_List> help = new List<View_Index_List>();
-                foreach (var i in _myDB.Products)
-                    help.Add(new View_Index_List(i));
 
 
 
-                return help;
+                if (List_product != null)
+                    return List_product;
+                else
+                    return (new List<View_Index_List>());
+                
             }
           
         }
@@ -269,9 +281,16 @@ namespace Market.ViewModel
         {
             set
             {
-                select_Item_Index = value;
+
+
+                select_Item_Index = value;         
                 OnPropertyChanged(nameof(Select_Item_Index));
-                
+
+                new_list_firm.Clear();
+                foreach (var i in _myDB.Firms)
+                    if (select_Item_Index != null && select_Item_Index._product.Firm.ID == i.ID)
+                        new_list_firm.Add(new View_Firm_List(i));
+                OnPropertyChanged(nameof(firm));
             }
             get
             {

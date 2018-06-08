@@ -30,20 +30,20 @@
                             </DataGrid.DataContext>
                             
                         </DataGrid>-->
-                        <ListView x:Name="Global_List" Selected="Global_List_Selected"     SelectedItem="{Binding Select_Item_Index, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        <ListView x:Name="Global_List"    SelectedItem="{Binding Select_Item_Index, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                    ItemsSource="{Binding product}"  ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.ColumnSpan="2">
                             <ListView.View >
                                 <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Employee Information" ScrollViewer.HorizontalScrollBarVisibility="Visible">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Product" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Date}"  Header="Date" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Product_life}" Header="Life" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding fio_Person}" Header="FIO Person" Width="150"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Name , UpdateSourceTrigger=PropertyChanged}" Header="Product" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Date , UpdateSourceTrigger=PropertyChanged}"  Header="Date" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Product_life , UpdateSourceTrigger=PropertyChanged}" Header="Life" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding fio_Person , UpdateSourceTrigger=PropertyChanged}" Header="FIO Person" Width="150"/>
 
-                                    <GridViewColumn DisplayMemberBinding="{Binding Price}" Header="Prices" Width="50"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Mark_up}" Header="Mark up" Width="50"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Product_category}" Header="Product categories" Width="150"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Price , UpdateSourceTrigger=PropertyChanged}" Header="Prices" Width="50"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Mark_up , UpdateSourceTrigger=PropertyChanged}" Header="Mark up" Width="50"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Product_category , UpdateSourceTrigger=PropertyChanged}" Header="Product categories" Width="150"/>
 
-                                    <GridViewColumn DisplayMemberBinding="{Binding Сount}" Header="Count" Width="50"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Сount , UpdateSourceTrigger=PropertyChanged}" Header="Count" Width="50"/>
 
                                 </GridView>
                             </ListView.View>
@@ -79,19 +79,17 @@
 
 
                         <Grid Grid.Row="1" >
-                            <ListView x:Name="Country_list"   ItemsSource="{Binding firm, IsAsync=True}" 
+                            <ListView x:Name="Country_list"   ItemsSource="{Binding firm,IsAsync=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                   ScrollViewer.HorizontalScrollBarVisibility="Visible" 
                                   >
                                 <ListView.View >
                                     <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Employee Information" ScrollViewer.HorizontalScrollBarVisibility="Visible">
-                                        <GridViewColumn DisplayMemberBinding="{Binding Path = Country}" Header="Country" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Path = City }" Header="City" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Path = Adress}" Header="Adress" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding  Country , UpdateSourceTrigger=PropertyChanged}" Header="Country" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding  City , UpdateSourceTrigger=PropertyChanged}" Header="City" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding  Adress , UpdateSourceTrigger=PropertyChanged}" Header="Adress" Width="100"/>
                                     </GridView>
                                 </ListView.View>
-                                <ListView.DataContext>
-                                    <ViewModel:View_Model_Index/>
-                                </ListView.DataContext>
+                             
                             </ListView>
                         </Grid>
                         <Grid Grid.Row="1" Grid.Column="1" >
@@ -101,22 +99,23 @@
                             </Grid.RowDefinitions>
 
 
-                            <ListView x:Name="Phone_list"   ItemsSource="{Binding firm}" 
+                            <ListView x:Name="Phone_list"   ItemsSource="{Binding firm,IsAsync=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                   ScrollViewer.HorizontalScrollBarVisibility="Visible" 
                                   >
                                 <ListView.View >
                                     <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Employee Information" ScrollViewer.HorizontalScrollBarVisibility="Visible">
-                                        <GridViewColumn DisplayMemberBinding="{Binding Phone}" Header="Phone" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Phone , UpdateSourceTrigger=PropertyChanged}" Header="Phone" Width="100"/>
 
                                     </GridView>
                                 </ListView.View>
                             </ListView>
-                            <ListView x:Name="Boss_list"   ItemsSource="{Binding firm}" 
+                            
+                            <ListView x:Name="Boss_list"   ItemsSource="{Binding firm,IsAsync=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                   ScrollViewer.HorizontalScrollBarVisibility="Visible" 
                                   Grid.Row="1">
                                 <ListView.View >
                                     <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Employee Information" ScrollViewer.HorizontalScrollBarVisibility="Visible">
-                                        <GridViewColumn DisplayMemberBinding="{Binding Boss}" Header="Boss" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Boss , UpdateSourceTrigger=PropertyChanged}" Header="Boss" Width="100"/>
 
                                     </GridView>
                                 </ListView.View>

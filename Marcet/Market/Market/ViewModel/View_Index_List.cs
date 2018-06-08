@@ -40,81 +40,81 @@ namespace Market
                 OnPropertyChanged(nameof(Name));
             }
         }
-        /*
-       
 
-        public string Country
-        {
-            get
-            {
 
-                foreach (var i in _product.Firm.Countries)
-                    return i.Name;
 
-                return "none";
+        //public string Country
+        //{
+        //    get
+        //    {
 
-            }
-            set
-            {
-               
-                OnPropertyChanged(nameof(Country));
-            }
+        //        foreach (var i in _product.Firm.Countries)
+        //            return i.Name;
 
-        }
-        public string City
-        {
-            get
-            {
+        //        return "none";
 
-                foreach (var i in _product.Firm.Cities)
-                    return i.Name;
+        //    }
+        //    set
+        //    {
 
-                return "none";
+        //        OnPropertyChanged(nameof(Country));
+        //    }
 
-            }
+        //}
+        //public string City
+        //{
+        //    get
+        //    {
 
-        }
-        public string Adress
-        {
-            get
-            {
+        //        foreach (var i in _product.Firm.Cities)
+        //            return i.Name;
 
-                foreach (var i in _product.Firm.Adressas)
-                    return i.Name;
+        //        return "none";
 
-                return "none";
+        //    }
 
-            }
+        //}
+        //public string Adress
+        //{
+        //    get
+        //    {
 
-        }
+        //        foreach (var i in _product.Firm.Adressas)
+        //            return i.Name;
 
-        public string Phone
-        {
-            get
-            {
+        //        return "none";
 
-                foreach (var i in _product.Firm.Phones)
-                    return i.Number;
+        //    }
 
-                return "none";
+        //}
 
-            }
+        //public string Phone
+        //{
+        //    get
+        //    {
 
-        }
+        //        foreach (var i in _product.Firm.Phones)
+        //            return i.Number;
 
-        public string Boss
-        {
-            get
-            {
+        //        return "none";
 
-                foreach (var i in _product.Firm.Bosses)
-                    return i.Surname + " " + i.Name;
+        //    }
 
-                return "none";
+        //}
 
-            }
+        //public string Boss
+        //{
+        //    get
+        //    {
 
-        }*/
+        //        foreach (var i in _product.Firm.Bosses)
+        //            return i.Surname + " " + i.Name;
+
+        //        return "none";
+
+        //    }
+
+        //}
         #endregion FIRM
 
 
