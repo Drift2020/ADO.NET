@@ -26,7 +26,7 @@ namespace Market.ViewModel
             List_firm = _myDB.Firms.ToList();
         }
 
-
+        #region Add
         #region Command button
 
         #region Price
@@ -1158,5 +1158,1141 @@ namespace Market.ViewModel
 
         #endregion Firm list
         #endregion List
+        #endregion Add
+
+        #region Add
+        #region Command button
+
+        #region Price
+        #region 
+        private DelegateCommand _Command_New_Price_edit;
+        public ICommand Button_New_Price_edit
+        {
+            get
+            {
+                if (_Command_New_Price_edit == null)
+                {
+                    _Command_New_Price_edit = new DelegateCommand(Execute_New_Price_edit, CanExecute_New_Price_edit);
+                }
+                return _Command_New_Price_edit;
+            }
+        }
+        private void Execute_New_Price_edit(object o)
+        {
+
+            Price new_price = new Price();
+            new_price.Price1 = Convert.ToDecimal(price_edit);
+            list_price_edit.Add(new_price);
+            OnPropertyChanged(nameof(List_Price_edit));
+
+        }
+        private bool CanExecute_New_Price_edit(object o)
+        {
+
+
+            if (price_edit != null && price_edit.Length > 0)
+                return true;
+            else
+                return false;
+
+
+        }
+        #endregion
+        #region 
+        private DelegateCommand _Command_Delete_Price_edit;
+        public ICommand Button_Delete_Price_edit
+        {
+            get
+            {
+                if (_Command_Delete_Price_edit == null)
+                {
+                    _Command_Delete_Price_edit = new DelegateCommand(Execute_Delete_Price_edit, CanExecute_Delete_Price_edit);
+                }
+                return _Command_Delete_Price_edit;
+            }
+        }
+        private void Execute_Delete_Price_edit(object o)
+        {
+
+            list_price_edit.Remove(select_item_price_edit);
+
+            OnPropertyChanged(nameof(List_Price_edit));
+            Select_item_price_edit = null;
+            Price_edit = null;
+
+
+        }
+        private bool CanExecute_Delete_Price_edit(object o)
+        {
+
+
+            if (select_item_price_edit != null)
+                return true;
+            else
+                return false;
+
+
+        }
+        #endregion
+        #region 
+        private DelegateCommand _Command_Edit_price_edit;
+        public ICommand Button_Edit_price_edit
+        {
+            get
+            {
+                if (_Command_Edit_price_edit == null)
+                {
+                    _Command_Edit_price_edit = new DelegateCommand(Execute_Edit_price_edit, CanExecute_Edit_price_edit);
+                }
+                return _Command_Edit_price_edit;
+            }
+        }
+        private void Execute_Edit_price_edit(object o)
+        {
+
+            Select_item_price_edit.Price1 = Convert.ToDecimal(Price_edit);
+            OnPropertyChanged(nameof(List_Price_edit));
+
+
+        }
+
+        private bool CanExecute_Edit_price_edit(object o)
+        {
+
+            if (select_item_price_edit != null && (Price_edit != "" && Price_edit != null && !Price_edit.Contains(" ")))
+                return true;
+            else
+                return false;
+
+
+        }
+        #endregion
+        #endregion Price
+
+        #region Count
+        #region 
+        private DelegateCommand _Command_New_Count_edit;
+        public ICommand Button_New_Count_edit
+        {
+            get
+            {
+                if (_Command_New_Count_edit == null)
+                {
+                    _Command_New_Count_edit = new DelegateCommand(Execute_New_Count_edit, CanExecute_New_Count_edit);
+                }
+                return _Command_New_Count_edit;
+            }
+        }
+        private void Execute_New_Count_edit(object o)
+        {
+
+            Count new_count = new Count();
+            new_count.Count1 = Convert.ToInt32(count_edit);
+            List_Count_edit.Add(new_count);
+            OnPropertyChanged(nameof(List_Count_edit));
+
+        }
+        private bool CanExecute_New_Count_edit(object o)
+        {
+
+
+
+            if (count_edit != null && count_edit.Length > 0 && !count_edit.Contains(" "))
+                return true;
+            else
+                return false;
+
+        }
+        #endregion
+        #region 
+        private DelegateCommand _Command_Delete_Count_edit;
+        public ICommand Button_Delete_Count_edit
+        {
+            get
+            {
+                if (_Command_Delete_Count_edit == null)
+                {
+                    _Command_Delete_Count_edit = new DelegateCommand(Execute_Delete_Count_edit, CanExecute_Delete_Count_edit);
+                }
+                return _Command_Delete_Count_edit;
+            }
+        }
+        private void Execute_Delete_Count_edit(object o)
+        {
+
+
+            list_count_edit.Remove(select_item_count_edit);
+
+            OnPropertyChanged(nameof(List_Count_edit));
+            Select_item_count_edit = null;
+            Count_edit = null;
+
+
+        }
+        private bool CanExecute_Delete_Count_edit(object o)
+        {
+
+
+
+            if (select_item_count_edit != null)
+                return true;
+            else
+                return false;
+
+
+        }
+        #endregion
+        #region 
+        private DelegateCommand _Command_Edit_Count_edit;
+        public ICommand Button_Edit_Count_edit
+        {
+            get
+            {
+                if (_Command_Edit_Count_edit == null)
+                {
+                    _Command_Edit_Count_edit = new DelegateCommand(Execute_Edit_Count_edit, CanExecute_Edit_Count_edit);
+                }
+                return _Command_Edit_Count_edit;
+            }
+        }
+        private void Execute_Edit_Count_edit(object o)
+        {
+
+            Select_item_count_edit.Count1 = Convert.ToInt32(Count_edit);
+            OnPropertyChanged(nameof(List_Count_edit));
+
+        }
+        private bool CanExecute_Edit_Count_edit(object o)
+        {
+
+            if (select_item_count_edit != null && (Count_edit != "" && Count_edit != null && !Count_edit.Contains(" ")))
+                return true;
+            else
+                return false;
+
+        }
+        #endregion
+        #endregion Count
+
+        #region Mark_up
+        #region 
+        private DelegateCommand _Command_New_Mark_up_edit;
+        public ICommand Button_New_Mark_up_edit
+        {
+            get
+            {
+                if (_Command_New_Mark_up_edit == null)
+                {
+                    _Command_New_Mark_up_edit = new DelegateCommand(Execute_New_Mark_up_edit, CanExecute_New_Mark_up_edit);
+                }
+                return _Command_New_Mark_up_edit;
+            }
+        }
+        private void Execute_New_Mark_up_edit(object o)
+        {
+
+
+            Mark_up new_mark_up = new Mark_up();
+            new_mark_up.Count = Convert.ToInt32(mark_up_edit);
+            List_Mark_up_edit.Add(new_mark_up);
+            OnPropertyChanged(nameof(List_Mark_up_edit));
+
+        }
+        private bool CanExecute_New_Mark_up_edit(object o)
+        {
+
+
+            if (Mark_up_edit != null && Mark_up_edit.Length > 0 && !Mark_up_edit.Contains(" "))
+                return true;
+            else
+                return false;
+
+        }
+        #endregion
+        #region 
+        private DelegateCommand _Command_Delete_Mark_up_edit;
+        public ICommand Button_Delete_Mark_up_edit
+        {
+            get
+            {
+                if (_Command_Delete_Mark_up_edit == null)
+                {
+                    _Command_Delete_Mark_up_edit = new DelegateCommand(Execute_Delete_Mark_up_edit, CanExecute_Delete_Mark_up_edit);
+                }
+                return _Command_Delete_Mark_up_edit;
+            }
+        }
+        private void Execute_Delete_Mark_up_edit(object o)
+        {
+
+
+            list_mark_up_edit.Remove(select_item_mark_up_edit);
+
+            OnPropertyChanged(nameof(List_Mark_up_edit));
+            Select_item_mark_up_edit = null;
+            Mark_up_edit = null;
+
+
+        }
+        private bool CanExecute_Delete_Mark_up_edit(object o)
+        {
+
+
+
+            if (select_item_mark_up_edit != null)
+                return true;
+            else
+                return false;
+
+
+        }
+        #endregion
+        #region 
+        private DelegateCommand _Command_Edit_Mark_up_edit;
+        public ICommand Button_Edit_Mark_up_edit
+        {
+            get
+            {
+                if (_Command_Edit_Mark_up_edit == null)
+                {
+                    _Command_Edit_Mark_up_edit = new DelegateCommand(Execute_Edit_Mark_up_edit, CanExecute_Edit_Mark_up_edit);
+                }
+                return _Command_Edit_Mark_up_edit;
+            }
+        }
+        private void Execute_Edit_Mark_up_edit(object o)
+        {
+
+            Select_item_mark_up_edit.Count = Convert.ToInt32(Mark_up_edit);
+            OnPropertyChanged(nameof(List_Mark_up_edit));
+
+        }
+        private bool CanExecute_Edit_Mark_up_edit(object o)
+        {
+
+
+
+            if (select_item_mark_up_edit != null && (mark_up_edit != "" && mark_up_edit != null && !mark_up_edit.Contains(" ")))
+                return true;
+            else
+                return false;
+
+
+        }
+        #endregion
+        #endregion Mark_up
+
+        #region Date_of_receipt
+        #region 
+        private DelegateCommand _Command_New_Date_of_receipt_edit;
+        public ICommand Button_New_Date_of_receipt_edit
+        {
+            get
+            {
+                if (_Command_New_Date_of_receipt_edit == null)
+                {
+                    _Command_New_Date_of_receipt_edit = new DelegateCommand(Execute_New_Date_of_receipt_edit, CanExecute_New_Date_of_receipt_edit);
+                }
+                return _Command_New_Date_of_receipt_edit;
+            }
+        }
+        private void Execute_New_Date_of_receipt_edit(object o)
+        {
+
+
+            Date_of_receipt new_date_of_receipt = new Date_of_receipt();
+            new_date_of_receipt.Date = Convert.ToDateTime(date_of_receipt_edit);
+            List_date_of_receipt_edit.Add(new_date_of_receipt);
+            OnPropertyChanged(nameof(List_date_of_receipt_edit));
+
+        }
+        private bool CanExecute_New_Date_of_receipt_edit(object o)
+        {
+
+
+            if (Date_of_receipt_edit != null && Date_of_receipt_edit.Length > 0)
+                return true;
+            else
+                return false;
+
+
+
+        }
+        #endregion
+        #region 
+        private DelegateCommand _Command_Delete_Date_of_receipt_edit;
+        public ICommand Button_Delete_Date_of_receipt_edit
+        {
+            get
+            {
+                if (_Command_Delete_Date_of_receipt_edit == null)
+                {
+                    _Command_Delete_Date_of_receipt_edit = new DelegateCommand(Execute_Delete_Date_of_receipt_edit, CanExecute_Delete_Date_of_receipt_edit);
+                }
+                return _Command_Delete_Date_of_receipt_edit;
+            }
+        }
+        private void Execute_Delete_Date_of_receipt_edit(object o)
+        {
+
+            list_date_of_receipt_edit.Remove(select_item_date_of_receipt_edit);
+
+            OnPropertyChanged(nameof(List_date_of_receipt_edit));
+            Select_item_date_of_receipt_edit = null;
+            Date_of_receipt_edit = null;
+
+
+        }
+        private bool CanExecute_Delete_Date_of_receipt_edit(object o)
+        {
+
+
+            if (select_item_date_of_receipt_edit != null)
+                return true;
+            else
+                return false;
+
+
+        }
+        #endregion
+        #region 
+        private DelegateCommand _Command_Edit_Date_of_receipt_edit;
+        public ICommand Button_Edit_Date_of_receipt_edit
+        {
+            get
+            {
+                if (_Command_Edit_Date_of_receipt_edit == null)
+                {
+                    _Command_Edit_Date_of_receipt_edit = new DelegateCommand(Execute_Edit_Date_of_receipt_edit, CanExecute_Edit_Date_of_receipt_edit);
+                }
+                return _Command_Edit_Date_of_receipt_edit;
+            }
+        }
+        private void Execute_Edit_Date_of_receipt_edit(object o)
+        {
+
+            Select_item_date_of_receipt_edit.Date = Convert.ToDateTime(Date_of_receipt_edit);
+            OnPropertyChanged(nameof(List_date_of_receipt_edit));
+
+        }
+        private bool CanExecute_Edit_Date_of_receipt_edit(object o)
+        {
+
+
+            if (Select_item_date_of_receipt_edit != null && (Date_of_receipt_edit != "" && Date_of_receipt_edit != null))
+                return true;
+            else
+                return false;
+
+
+        }
+        #endregion
+        #endregion Date_of_receipt
+
+        #region Acceptor
+        #region 
+        private DelegateCommand _Command_New_Acceptor_edit;
+        public ICommand Button_New_Acceptor_edit
+        {
+            get
+            {
+                if (_Command_New_Acceptor_edit == null)
+                {
+                    _Command_New_Acceptor_edit = new DelegateCommand(Execute_New_Acceptor_edit, CanExecute_New_Acceptor_edit);
+                }
+                return _Command_New_Acceptor_edit;
+            }
+        }
+        private void Execute_New_Acceptor_edit(object o)
+        {
+
+            FIO_Person new_fio_person = new FIO_Person();
+            new_fio_person.Name = Convert.ToString(name_edit);
+            new_fio_person.Surname = Convert.ToString(surname_edit);
+
+            List_acceptor_edit.Add(new_fio_person);
+            OnPropertyChanged(nameof(List_acceptor_edit));
+
+        }
+        private bool CanExecute_New_Acceptor_edit(object o)
+        {
+
+
+
+            if (Name_edit != null && Name_edit.Length > 0 &&
+                Surname_edit != null && Surname_edit.Length > 0)
+                return true;
+            else
+                return false;
+
+
+        }
+        #endregion
+        #region 
+        private DelegateCommand _Command_Delete_Acceptor_edit;
+        public ICommand Button_Delete_Acceptor_edit
+        {
+            get
+            {
+                if (_Command_Delete_Acceptor_edit == null)
+                {
+                    _Command_Delete_Acceptor_edit = new DelegateCommand(Execute_Delete_Acceptor_edit, CanExecute_Delete_Acceptor_edit);
+                }
+                return _Command_Delete_Acceptor_edit;
+            }
+        }
+        private void Execute_Delete_Acceptor_edit(object o)
+        {
+
+            list_acceptor_edit.Remove(select_item_acceptor_edit);
+
+            OnPropertyChanged(nameof(List_acceptor_edit));
+            Select_item_acceptor_edit = null;
+            Name_edit = null;
+            Surname_edit = null;
+
+        }
+        private bool CanExecute_Delete_Acceptor_edit(object o)
+        {
+
+            if (select_item_acceptor_edit != null)
+                return true;
+            else
+                return false;
+
+
+        }
+        #endregion
+        #region 
+        private DelegateCommand _Command_Edit_Acceptor_edit;
+        public ICommand Button_Edit_Acceptor_edit
+        {
+            get
+            {
+                if (_Command_Edit_Acceptor_edit == null)
+                {
+                    _Command_Edit_Acceptor_edit = new DelegateCommand(Execute_Edit_Acceptor_edit, CanExecute_Edit_Acceptor_edit);
+                }
+                return _Command_Edit_Acceptor_edit;
+            }
+        }
+        private void Execute_Edit_Acceptor_edit(object o)
+        {
+            Select_item_acceptor_edit.Name = Convert.ToString(Name_edit);
+            Select_item_acceptor_edit.Surname = Convert.ToString(Surname_edit);
+            OnPropertyChanged(nameof(List_acceptor_edit));
+
+        }
+        private bool CanExecute_Edit_Acceptor_edit(object o)
+        {
+
+            if (select_item_acceptor_edit != null && Name_edit != "" && Name_edit != null
+                && Surname_edit != "" && Surname_edit != null)
+                return true;
+            else
+                return false;
+        }
+        #endregion
+        #endregion Acceptor
+
+        #region Product_life
+        #region 
+        private DelegateCommand _Command_New_Product_life_edit;
+        public ICommand Button_New_Product_life_edit
+        {
+            get
+            {
+                if (_Command_New_Product_life_edit == null)
+                {
+                    _Command_New_Product_life_edit = new DelegateCommand(Execute_New_Product_life_edit, CanExecute_New_Product_life_edit);
+                }
+                return _Command_New_Product_life_edit;
+            }
+        }
+        private void Execute_New_Product_life_edit(object o)
+        {
+            Product_life new_product_life_edit = new Product_life();
+            new_product_life_edit.Date = Convert.ToDateTime(product_life_edit);
+
+
+            List_product_life_edit.Add(new_product_life_edit);
+            OnPropertyChanged(nameof(List_product_life_edit));
+        }
+        private bool CanExecute_New_Product_life_edit(object o)
+        {
+
+
+            if (Product_life_edit != null && Product_life_edit.Length > 0)
+                return true;
+            else
+                return false;
+
+        }
+        #endregion
+        #region 
+        private DelegateCommand _Command_Delete_Product_life_edit;
+        public ICommand Button_Delete_Product_life_edit
+        {
+            get
+            {
+                if (_Command_Delete_Product_life_edit == null)
+                {
+                    _Command_Delete_Product_life_edit = new DelegateCommand(Execute_Delete_Product_life_edit, CanExecute_Delete_Product_life_edit);
+                }
+                return _Command_Delete_Product_life_edit;
+            }
+        }
+        private void Execute_Delete_Product_life_edit(object o)
+        {
+
+            list_product_life.Remove(select_item_product_life_edit);
+            OnPropertyChanged(nameof(List_product_life_edit));
+            Select_item_product_life_edit = null;
+            product_life_edit = null;
+
+        }
+        private bool CanExecute_Delete_Product_life_edit(object o)
+        {
+            if (select_item_product_life_edit != null)
+                return true;
+            else
+                return false;
+
+        }
+        #endregion
+        #region 
+        private DelegateCommand _Command_Edit_Product_life_edit;
+        public ICommand Button_Edit_Product_life_edit
+        {
+            get
+            {
+                if (_Command_Edit_Product_life_edit == null)
+                {
+                    _Command_Edit_Product_life_edit = new DelegateCommand(Execute_Edit_Product_life_edit, CanExecute_Edit_Product_life_edit);
+                }
+                return _Command_Edit_Product_life_edit;
+            }
+        }
+        private void Execute_Edit_Product_life_edit(object o)
+        {
+
+            Select_item_product_life_edit.Date = Convert.ToDateTime(product_life_edit);
+            OnPropertyChanged(nameof(List_product_life_edit));
+
+        }
+        private bool CanExecute_Edit_Product_life_edit(object o)
+        {
+            if (select_item_product_life_edit != null && Product_life_edit != "" && Product_life_edit != null)
+                return true;
+            else
+                return false;
+        }
+        #endregion
+        #endregion Product_life
+        #endregion Command button
+
+
+        #region pole
+
+        #region mark_up
+        string mark_up_edit;
+        public string Mark_up_edit
+        {
+            get
+            {
+                return mark_up_edit;
+            }
+            set
+            {
+                mark_up_edit = value;
+                OnPropertyChanged(nameof(Mark_up_edit));
+            }
+        }
+        #endregion mark_up
+        #region date_of_receipt
+        string date_of_receipt_edit;
+        public string Date_of_receipt_edit
+        {
+            get
+            {
+                return date_of_receipt_edit;
+            }
+            set
+            {
+                date_of_receipt_edit = value;
+                OnPropertyChanged(nameof(Date_of_receipt_edit));
+            }
+        }
+        #endregion date_of_receipt
+        #region count
+        string count_edit;
+        public string Count_edit
+        {
+            get
+            {
+                return count_edit;
+            }
+            set
+            {
+                count_edit = value;
+                OnPropertyChanged(nameof(Count_edit));
+            }
+        }
+        #endregion count
+        #region Accrptor
+        string name_edit;
+        public string Name_edit
+        {
+            get
+            {
+                return name_edit;
+            }
+            set
+            {
+                name_edit = value;
+                OnPropertyChanged(nameof(Name_edit));
+            }
+        }
+
+        string surname_edit;
+        public string Surname_edit
+        {
+            get
+            {
+                return surname_edit;
+            }
+            set
+            {
+                surname_edit = value;
+                OnPropertyChanged(nameof(Surname_edit));
+            }
+        }
+        #endregion Accrptor
+        #region Name
+        string name_t_edit;
+        public string Name_t_edit
+        {
+            get
+            {
+                return name_t_edit;
+            }
+            set
+            {
+                name_t_edit = value;
+                OnPropertyChanged(nameof(Name_t_edit));
+            }
+        }
+        #endregion Accrptor
+        #region price
+        string price_edit;
+        public string Price_edit
+        {
+            get
+            {
+                return price_edit;
+            }
+            set
+            {
+                price_edit = value;
+                OnPropertyChanged(nameof(Price_edit));
+            }
+        }
+        #endregion price
+        #region Product life
+        string product_life_edit;
+        public string Product_life_edit
+        {
+            get
+            {
+                return product_life_edit;
+            }
+            set
+            {
+                product_life_edit = value;
+                OnPropertyChanged(nameof(Product_life_edit));
+            }
+        }
+        #endregion product_life
+        #region Name Firm
+        string firm_edit;
+        public string Firm_edit
+        {
+            get
+            {
+                return firm_edit;
+            }
+            set
+            {
+                firm_edit = value;
+                OnPropertyChanged(nameof(Firm_edit));
+            }
+        }
+        #endregion Name Firm
+
+        #endregion pole
+
+        #region List
+        #region Price list
+
+        List<Price> list_price_edit = new List<Market.Price>();
+        public ICollection<Price> List_Price_edit
+        {
+            set
+            {
+                list_price_edit = value.ToList();
+                OnPropertyChanged(nameof(List_Price_edit));
+            }
+            get
+            {
+
+
+                if (list_price_edit != null)
+                    return list_price_edit;
+                else
+                    return (new List<Price>());
+            }
+
+        }
+
+        Price select_item_price_edit;
+        public Price Select_item_price_edit
+        {
+            set
+            {
+                select_item_price_edit = value;
+                OnPropertyChanged(nameof(Select_item_price_edit));
+                Set_price_edit();
+            }
+            get
+            {
+
+
+                if (select_item_price_edit != null)
+                    return select_item_price_edit;
+                else
+                    return (new Price());
+            }
+
+        }
+
+        void Set_price_edit()
+        {
+            if (select_item_price_edit != null)
+                Price_edit = select_item_price_edit.Price1.ToString();
+        }
+
+        #endregion Price list
+        #region Count list
+
+        List<Count> list_count_edit = new List<Count>();
+        public ICollection<Count> List_Count_edit
+        {
+            set
+            {
+                list_count_edit = value.ToList();
+                OnPropertyChanged(nameof(List_Count_edit));
+            }
+            get
+            {
+
+
+                if (list_count_edit != null)
+                    return list_count_edit;
+                else
+                    return (new List<Count>());
+            }
+
+        }
+
+        Count select_item_count_edit;
+        public Count Select_item_count_edit
+        {
+            set
+            {
+                select_item_count_edit = value;
+                OnPropertyChanged(nameof(Select_item_count_edit));
+                Set_count_edit();
+            }
+            get
+            {
+
+
+                if (select_item_count_edit != null)
+                    return select_item_count_edit;
+                else
+                    return (new Count());
+            }
+
+        }
+
+        void Set_count_edit()
+        {
+            if (select_item_count_edit != null)
+                Count_edit = select_item_count_edit.Count1.ToString();
+        }
+
+        #endregion Count list
+        #region Mark_up list
+
+        List<Mark_up> list_mark_up_edit = new List<Mark_up>();
+        public ICollection<Mark_up> List_Mark_up_edit
+        {
+            set
+            {
+                list_mark_up_edit = value.ToList();
+                OnPropertyChanged(nameof(List_Mark_up_edit));
+            }
+            get
+            {
+
+
+                if (list_mark_up_edit != null)
+                    return list_mark_up_edit;
+                else
+                    return (new List<Mark_up>());
+            }
+
+        }
+
+        Mark_up select_item_mark_up_edit;
+        public Mark_up Select_item_mark_up_edit
+        {
+            set
+            {
+                select_item_mark_up_edit = value;
+                OnPropertyChanged(nameof(Select_item_mark_up_edit));
+                Set_mark_up_edit();
+            }
+            get
+            {
+
+
+                if (select_item_mark_up_edit != null)
+                    return select_item_mark_up_edit;
+                else
+                    return (new Mark_up());
+            }
+
+        }
+
+        void Set_mark_up_edit()
+        {
+            if (select_item_mark_up_edit != null)
+                Mark_up_edit = select_item_mark_up_edit.Count.ToString();
+        }
+
+        #endregion Count list
+        #region Date of receipt list
+
+        List<Date_of_receipt> list_date_of_receipt_edit = new List<Date_of_receipt>();
+        public ICollection<Date_of_receipt> List_date_of_receipt_edit
+        {
+            set
+            {
+                list_date_of_receipt_edit = value.ToList();
+                OnPropertyChanged(nameof(List_date_of_receipt_edit));
+            }
+            get
+            {
+
+
+                if (list_date_of_receipt_edit != null)
+                    return list_date_of_receipt_edit;
+                else
+                    return (new List<Date_of_receipt>());
+            }
+
+        }
+
+        Date_of_receipt select_item_date_of_receipt_edit;
+        public Date_of_receipt Select_item_date_of_receipt_edit
+        {
+            set
+            {
+                select_item_date_of_receipt_edit = value;
+                OnPropertyChanged(nameof(Select_item_date_of_receipt_edit));
+                Set_date_of_receipt_edit();
+            }
+            get
+            {
+
+
+                if (select_item_date_of_receipt_edit != null)
+                    return select_item_date_of_receipt_edit;
+                else
+                    return (new Date_of_receipt());
+            }
+
+        }
+
+        void Set_date_of_receipt_edit()
+        {
+            if (select_item_date_of_receipt_edit != null)
+                Date_of_receipt_edit = select_item_date_of_receipt_edit.Date.ToString();
+        }
+
+        #endregion Date of receipt list
+        #region Acceptor list
+
+        List<FIO_Person> list_acceptor_edit = new List<FIO_Person>();
+        public ICollection<FIO_Person> List_acceptor_edit
+        {
+            set
+            {
+                list_acceptor_edit = value.ToList();
+                OnPropertyChanged(nameof(List_acceptor_edit));
+            }
+            get
+            {
+
+
+                if (list_acceptor_edit != null)
+                    return list_acceptor_edit;
+                else
+                    return (new List<FIO_Person>());
+            }
+
+        }
+
+        FIO_Person select_item_acceptor_edit;
+        public FIO_Person Select_item_acceptor_edit
+        {
+            set
+            {
+                select_item_acceptor_edit = value;
+                OnPropertyChanged(nameof(Select_item_acceptor_edit));
+                Set_acceptor_edit();
+            }
+            get
+            {
+
+
+                if (select_item_acceptor_edit != null)
+                    return select_item_acceptor_edit;
+                else
+                    return (new FIO_Person());
+            }
+
+        }
+
+        void Set_acceptor_edit()
+        {
+            if (select_item_acceptor_edit != null)
+            {
+                Name_edit = select_item_acceptor_edit.Name.ToString();
+                Surname_edit = select_item_acceptor_edit.Surname.ToString();
+            }
+        }
+
+        #endregion Product life list
+        #region Product life list
+
+        List<Product_life> list_product_life_edit = new List<Product_life>();
+        public ICollection<Product_life> List_product_life_edit
+        {
+            set
+            {
+                list_product_life_edit = value.ToList();
+                OnPropertyChanged(nameof(List_product_life_edit));
+            }
+            get
+            {
+
+
+                if (list_product_life_edit != null)
+                    return list_product_life_edit;
+                else
+                    return (new List<Product_life>());
+            }
+
+        }
+
+        Product_life select_item_product_life_edit;
+        public Product_life Select_item_product_life_edit
+        {
+            set
+            {
+                select_item_product_life_edit = value;
+                OnPropertyChanged(nameof(Select_item_product_life_edit));
+                Set_product_life_edit();
+            }
+            get
+            {
+
+
+                if (select_item_product_life_edit != null)
+                    return select_item_product_life_edit;
+                else
+                    return (new Product_life());
+            }
+
+        }
+
+        void Set_product_life_edit()
+        {
+            if (select_item_product_life_edit != null)
+            {
+                Product_life_edit = select_item_product_life_edit.Date.ToString();
+
+            }
+        }
+
+        #endregion Product life list
+        #region Firm list
+
+        List<Firm> list_firm_edit = new List<Firm>();
+        public ICollection<Firm> List_firm_edit
+        {
+            set
+            {
+                list_firm_edit = value.ToList();
+                OnPropertyChanged(nameof(List_firm_edit));
+            }
+            get
+            {
+
+
+                if (list_firm_edit != null)
+                    return list_firm_edit;
+                else
+                    return (new List<Firm>());
+            }
+
+        }
+
+        Firm select_item_firm_edit;
+        public Firm Select_item_firm_edit
+        {
+            set
+            {
+                select_item_firm_edit = value;
+                OnPropertyChanged(nameof(Select_item_firm_edit));
+                Set_firm_edit();
+            }
+            get
+            {
+
+
+                if (select_item_firm_edit != null)
+                    return select_item_firm_edit;
+                else
+                    return (new Firm());
+            }
+
+        }
+
+        void Set_firm_edit()
+        {
+            if (select_item_firm_edit != null)
+            {
+                Firm_edit = select_item_firm_edit.Name.ToString();
+
+            }
+        }
+
+        #endregion Firm list
+        #endregion List
+        #endregion Edit
+
     }
 }

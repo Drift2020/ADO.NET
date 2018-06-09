@@ -294,6 +294,20 @@
                                                 
                                                 <GridViewColumn DisplayMemberBinding="{Binding Name , UpdateSourceTrigger=PropertyChanged}" Header="Name" Width="100"/>
                                                 
+                                                <GridViewColumn  Header="Country" Width="100">
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <ListView  ItemsSource="{Binding Countries}">
+                                                                <ListView.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <TextBlock Text="{Binding Name}" />
+                                                                    </DataTemplate>
+                                                                </ListView.ItemTemplate>
+                                                            </ListView>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+
                                                 <GridViewColumn  Header="City" Width="100">
                                                     <GridViewColumn.CellTemplate>
                                                         <DataTemplate>
@@ -308,6 +322,19 @@
                                                     </GridViewColumn.CellTemplate>
                                                 </GridViewColumn>
 
+                                                <GridViewColumn  Header="Adressa" Width="100">
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <ListView  ItemsSource="{Binding Adressas}">
+                                                                <ListView.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <TextBlock Text="{Binding Name}" />
+                                                                    </DataTemplate>
+                                                                </ListView.ItemTemplate>
+                                                            </ListView>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
 
                                             </GridView>
                                         </ListView.View>
@@ -372,7 +399,7 @@
                                 </StackPanel>
                                 <StackPanel Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center">
                                     <TextBlock  Text="Price" HorizontalAlignment="Center"/>
-                                    <TextBox Margin="4"></TextBox>
+                                    <TextBox  Margin="4"></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="5" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
                                     <Button Content="New price"/>
