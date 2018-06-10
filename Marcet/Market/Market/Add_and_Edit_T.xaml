@@ -531,11 +531,11 @@
 
                                 <StackPanel Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center">
                                     <TextBlock  Text="Date of receipt" HorizontalAlignment="Center"/>
-                                    <TextBox  Margin="4"></TextBox>
+                                    <TextBox Text="{Binding Date_of_receipt_edit, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="4"></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="5" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
-                                    <Button Content="New date"/>
-                                    <Button Content="Delete date"/>
+                                    <Button Command="{Binding Button_New_Mark_up_edit}" Content="New date"/>
+                                    <Button Command="{Binding Button_Delete_Mark_up_edit}" Content="Delete date"/>
                                     <Button Content="Edit date"/>
                                 </StackPanel>
 
