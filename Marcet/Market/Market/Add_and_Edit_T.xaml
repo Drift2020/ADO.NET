@@ -534,9 +534,9 @@
                                     <TextBox Text="{Binding Date_of_receipt_edit, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="4"></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="5" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
-                                    <Button Command="{Binding Button_New_Mark_up_edit}" Content="New date"/>
-                                    <Button Command="{Binding Button_Delete_Mark_up_edit}" Content="Delete date"/>
-                                    <Button Content="Edit date"/>
+                                    <Button Command="{Binding Button_New_Date_of_receipt_edit}" Content="New date" />
+                                    <Button Command="{Binding Button_Delete_Date_of_receipt_edit}" Content="Delete date"/>
+                                    <Button Command="{Binding Button_Edit_Date_of_receipt_edit}" Content="Edit date"/>
                                 </StackPanel>
 
 
@@ -556,20 +556,28 @@
                                 </Grid.ColumnDefinitions>
 
                                 <GroupBox Header="List product life" Grid.Row="0" Grid.ColumnSpan="2">
-                                    <ListView >
+                                    <ListView  ItemsSource="{Binding List_product_life_edit,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                               SelectedItem="{Binding Select_item_product_life_edit}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate >
 
+                                                <TextBlock Text="{Binding Date,IsAsync=True,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+
+
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
                                     </ListView>
                                 </GroupBox>
 
 
                                 <StackPanel Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center">
                                     <TextBlock  Text="Product life" HorizontalAlignment="Center"/>
-                                    <TextBox Margin="4"></TextBox>
+                                    <TextBox Text="{Binding Product_life_edit,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="4"></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="5" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
-                                    <Button Content="New product life"/>
-                                    <Button Content="Delete product life"/>
-                                    <Button Content="Edit product life"/>
+                                    <Button Command="{Binding Button_New_Product_life_edit}" Content="New product life"/>
+                                    <Button Command="{Binding Button_Delete_Product_life_edit}" Content="Delete product life"/>
+                                    <Button Command="{Binding Button_Edit_Product_life_edit}" Content="Edit product life"/>
                                 </StackPanel>
 
 
@@ -589,7 +597,17 @@
                                 </Grid.ColumnDefinitions>
 
                                 <GroupBox Header="Acceptor" Grid.Row="0" Grid.ColumnSpan="2">
-                                    <ListView >
+                                    <ListView   SelectedItem="{Binding Select_item_acceptor_edit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                   ItemsSource="{Binding List_acceptor_edit ,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.ColumnSpan="2">
+                                        <ListView.View >
+                                            <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Employee Information" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                                <GridViewColumn DisplayMemberBinding="{Binding Name , UpdateSourceTrigger=PropertyChanged}" Header="Name" Width="100"/>
+                                                <GridViewColumn DisplayMemberBinding="{Binding Surname , UpdateSourceTrigger=PropertyChanged}"  Header="Surname" Width="100"/>
+
+
+                                            </GridView>
+                                        </ListView.View>
+
 
                                     </ListView>
                                 </GroupBox>
@@ -597,14 +615,14 @@
 
                                 <StackPanel Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center">
                                     <TextBlock  Text="Name" HorizontalAlignment="Center"/>
-                                    <TextBox Margin="4,0,4,0"></TextBox>
+                                    <TextBox Text="{Binding Name_edit}" Margin="4,0,4,0"></TextBox>
                                     <TextBlock  Text="Surname" HorizontalAlignment="Center"/>
-                                    <TextBox  Margin="4,0,4,0"></TextBox>
+                                    <TextBox  Text="{Binding Surname_edit}" Margin="4,0,4,0"></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="5" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
-                                    <Button Content="New acceptor"/>
-                                    <Button Content="Delete acceptor"/>
-                                    <Button Content="Edit acceptor"/>
+                                    <Button Command="{Binding Button_New_Acceptor_edit}" Content="New acceptor"/>
+                                    <Button Command="{Binding Button_Delete_Acceptor_edit}" Content="Delete acceptor"/>
+                                    <Button Command="{Binding Button_Edit_Acceptor_edit}" Content="Edit acceptor"/>
                                 </StackPanel>
 
 
