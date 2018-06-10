@@ -304,7 +304,7 @@ namespace Market.ViewModel
 
         public ICollection<Date_of_receipt> data_of_receipt
         {
-             get => _myDB.Date_of_receipt.ToList();
+             get { return _myDB.Date_of_receipt.ToList(); }
         }
 
 
@@ -313,27 +313,42 @@ namespace Market.ViewModel
         public ICollection<FIO_Person> fio_Person
         {
 
-            get => _myDB.FIO_Person.ToList();
+            get
+            {
+                return _myDB.FIO_Person.ToList();
+            }
         }
         public ICollection<Product_category> product_category
         {
 
-            get => _myDB.Product_category.ToList();
+            get
+            {
+                return _myDB.Product_category.ToList();
+            }
         }
         public ICollection<Product_life> product_life
         {
 
-            get => _myDB.Product_life.ToList();
+            get
+            {
+                return _myDB.Product_life.ToList();
+            }
         }
         public ICollection<Count> count
         {
 
-            get => _myDB.Counts.ToList();
+            get
+            {
+                return _myDB.Counts.ToList();
+            }
         }
         public ICollection<Mark_up> mark_up
         {
 
-            get => _myDB.Mark_up.ToList();
+            get
+            {
+                return _myDB.Mark_up.ToList();
+            }
         }
         #endregion
 

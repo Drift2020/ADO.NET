@@ -1160,7 +1160,7 @@ namespace Market.ViewModel
         #endregion List
         #endregion Add
 
-        #region Add
+        #region Edit
         #region Command button
 
         #region Price
