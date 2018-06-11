@@ -125,23 +125,23 @@ namespace Market.ViewModel
 
         #region City
         #region 
-        private DelegateCommand _Command_New_Phone;
-        public ICommand Button_New_Phone
+        private DelegateCommand _Command_New_City;
+        public ICommand Button_New_City
         {
             get
             {
-                if (_Command_New_Phone == null)
+                if (_Command_New_City == null)
                 {
-                    _Command_New_Phone = new DelegateCommand(Execute_New_Phone, CanExecute_New_Phone);
+                    _Command_New_City = new DelegateCommand(Execute_New_City, CanExecute_New_City);
                 }
-                return _Command_New_Phone;
+                return _Command_New_City;
             }
         }
-        private void Execute_New_Phone(object o)
+        private void Execute_New_City(object o)
         {
 
-            Phone temp = new Phone();
-            temp.Number = Convert.ToString(phone);
+            City temp = new City();
+            temp.Name = Convert.ToString(city);
             list_phone.Add(temp);
             OnPropertyChanged(nameof(List_phone));
 
@@ -269,6 +269,23 @@ namespace Market.ViewModel
 
         #endregion Phone 
 
+        #region City
+
+        string city;
+        public string City
+        {
+            set
+            {
+                city = value;
+                OnPropertyChanged(nameof(City));
+            }
+            get
+            {
+                return city;
+            }
+        }
+
+        #endregion City
 
         #endregion Pole
 
@@ -315,6 +332,47 @@ namespace Market.ViewModel
                 Phone = select_item_phone.Number.ToString();
         }
         #endregion Phone
+
+
+        #region City
+        List<City> list_city = new List<Market.City>();
+        public ICollection<City> List_city
+        {
+            set
+            {
+                list_city = value.ToList();
+                OnPropertyChanged(nameof(List_city));
+            }
+            get
+            {
+                return list_city.ToList();
+            }
+        }
+
+
+        City select_item_city = new City();
+        public City  Select_item_city
+        {
+            set
+            {
+                select_item_city = value;
+                OnPropertyChanged(nameof(Select_item_city));
+                Set_city();
+            }
+            get
+            {
+                return select_item_city;
+            }
+        }
+
+
+        void Set_city()
+        {
+            if (select_item_city != null)
+                City = select_item_city.Name.ToString();
+        }
+        #endregion Phone
+
 
         #endregion List and select
 
