@@ -27,7 +27,55 @@ namespace Market.ViewModel
         }
 
         #region Add
+
+
+
+
         #region Command button
+        #region Add button
+        private DelegateCommand _Command_Add_Product;
+        public ICommand Button_Add_Product
+        {
+            get
+            {
+                if (_Command_Add_Product == null)
+                {
+                    _Command_Add_Product = new DelegateCommand(Execute_Add_Product, CanExecute_Add_Product);
+                }
+                return _Command_Add_Product;
+            }
+        }
+        private void Execute_Add_Product(object o)
+        {
+            //_myDB.Products.Add().Product_category
+          //  _myDB.SaveChanges();
+            OnPropertyChanged(nameof(List_Price));
+
+        }
+        private bool CanExecute_Add_Product(object o)
+        {
+
+
+            if (Name_t.Length>0 &&
+                Select_item_price!=null &&
+                Select_item_count != null &&
+                Select_item_mark_up != null &&
+                Select_item_date_of_receipt != null &&
+                Select_item_product_life != null &&
+                Select_item_acceptor != null &&
+                Select_item_firm != null)
+                return true;
+            else
+                return false;
+
+
+        }
+        #endregion
+
+
+      
+
+
 
         #region Price
         #region 
@@ -794,6 +842,21 @@ namespace Market.ViewModel
             }
         }
         #endregion Name Firm
+        #region category
+        string category;
+        public string Category
+        {
+            get
+            {
+                return category;
+            }
+            set
+            {
+                category = value;
+                OnPropertyChanged(nameof(Category));
+            }
+        }
+        #endregion category
 
         #endregion pole
 
@@ -836,7 +899,8 @@ namespace Market.ViewModel
                 if (select_item_price != null)
                     return select_item_price;
                 else
-                    return (new Price());
+                    //  return (new Price());
+                    return null;
             }
 
         }
@@ -1147,6 +1211,11 @@ namespace Market.ViewModel
 
         }
 
+
+
+
+
+
         void Set_firm()
         {
             if (select_item_firm != null)
@@ -1157,7 +1226,61 @@ namespace Market.ViewModel
         }
 
         #endregion Firm list
+        #region Category list
+
+        List<Price> list_category = new List<Market.Price>();
+        public ICollection<Price> List_Category
+        {
+            set
+            {
+                list_category = value.ToList();
+                OnPropertyChanged(nameof(List_Category));
+            }
+            get
+            {
+
+
+                if (list_category != null)
+                    return list_category;
+                else
+                    return null;
+            }
+
+        }
+
+        Product_category select_item_category;
+        public Product_category Select_item_category
+        {
+            set
+            {
+                select_item_category = value;
+                OnPropertyChanged(nameof(Select_item_category));
+                Set_category();
+            }
+            get
+            {
+
+
+                if (select_item_category != null)
+                    return select_item_category;
+                else
+                    //  return (new Price());
+                    return null;
+            }
+
+        }
+
+        void Set_category()
+        {
+            if (select_item_category != null)
+                Category = select_item_category.Сategory.ToString();
+        }
+
+        #endregion Price list
         #endregion List
+
+
+
         #endregion Add
 
         #region Edit

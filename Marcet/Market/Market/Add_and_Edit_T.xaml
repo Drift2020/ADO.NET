@@ -64,6 +64,39 @@
 
                             </Grid>
                         </TabItem>
+                        <TabItem Header="Category">
+                            <Grid>
+                                <Grid.RowDefinitions>
+
+                                    <RowDefinition/>
+                                    <RowDefinition Height="70"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <GroupBox Header="List category" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                                    <ListView  ItemsSource="{Binding List_Category,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                               SelectedItem="{Binding Select_item_category}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate >
+
+                                                <TextBlock Text="{Binding Сategory,IsAsync=True,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+
+
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </GroupBox>
+
+
+                               
+
+
+                            </Grid>
+                        </TabItem>
                         <TabItem Header="Count">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -642,7 +675,58 @@
                                 </Grid.ColumnDefinitions>
 
                                 <GroupBox Header="List firm" Grid.Row="0" Grid.ColumnSpan="2 " Grid.RowSpan="2">
-                                    <ListView >
+                                    <ListView   SelectedItem="{Binding Select_item_firm_edit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                   ItemsSource="{Binding List_firm_edit ,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.ColumnSpan="2">
+                                        <ListView.View >
+                                            <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Employee Information" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+
+                                                <GridViewColumn DisplayMemberBinding="{Binding Name , UpdateSourceTrigger=PropertyChanged}" Header="Name" Width="100"/>
+
+                                                <GridViewColumn  Header="Country" Width="100">
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <ListView  ItemsSource="{Binding Countries}">
+                                                                <ListView.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <TextBlock Text="{Binding Name}" />
+                                                                    </DataTemplate>
+                                                                </ListView.ItemTemplate>
+                                                            </ListView>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+
+                                                <GridViewColumn  Header="City" Width="100">
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <ListView  ItemsSource="{Binding Cities}">
+                                                                <ListView.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <TextBlock Text="{Binding Name}" />
+                                                                    </DataTemplate>
+                                                                </ListView.ItemTemplate>
+                                                            </ListView>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+
+                                                <GridViewColumn  Header="Adressa" Width="100">
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <ListView  ItemsSource="{Binding Adressas}">
+                                                                <ListView.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <TextBlock Text="{Binding Name}" />
+                                                                    </DataTemplate>
+                                                                </ListView.ItemTemplate>
+                                                            </ListView>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+
+                                            </GridView>
+                                        </ListView.View>
+
 
                                     </ListView>
                                 </GroupBox>
