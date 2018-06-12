@@ -60,5 +60,7 @@ namespace Market
                 txtNum.Text = _numValue.ToString();
         }
         #endregion
+
+       
     }
 }

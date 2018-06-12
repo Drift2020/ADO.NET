@@ -40,14 +40,14 @@
 
                         <StackPanel Grid.Row="1" VerticalAlignment="Center">
                             <TextBlock Margin="5" Text="Name"  HorizontalAlignment="Center"/>
-                            <TextBox Margin="4"></TextBox>
+                            <TextBox Text="{Binding Name_edit}" Margin="4"></TextBox>
                         </StackPanel>
                       
                         
                         <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Right">
-                            <Button Margin="5" Content="Delete" Width="100" HorizontalAlignment="Right"/>
-                            <Button Margin="5" Content="Edit" Width="100" HorizontalAlignment="Right"/>
-                            <Button Margin="5" Content="Cancel"  Width="100" HorizontalAlignment="Right"/>
+                            <Button Command="{Binding Button_delete_category}" Margin="5" Content="Delete" Width="100" HorizontalAlignment="Right"/>
+                            <Button Command="{Binding Button_edit_category}" Margin="5" Content="Edit" Width="100" HorizontalAlignment="Right"/>
+                            <Button Command="{Binding Button_cancel_category}" Margin="5" Content="Cancel"  Width="100" HorizontalAlignment="Right"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">

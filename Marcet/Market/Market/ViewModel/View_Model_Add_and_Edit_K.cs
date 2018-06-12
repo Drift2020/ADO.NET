@@ -56,7 +56,7 @@ namespace Market.ViewModel
 
         #region Edit button
         private DelegateCommand _Command_Edit_category;
-        public ICommand Button_Edit_category
+        public ICommand Button_edit_category
         {
             get
             {
@@ -78,7 +78,7 @@ namespace Market.ViewModel
         {
 
 
-            if (Name.Length > 0)
+            if (Name_edit.Length > 0)
                 return true;
             else
                 return false;
@@ -86,5 +86,108 @@ namespace Market.ViewModel
 
         }
         #endregion Edit button
+
+        #region Add button
+        private DelegateCommand _Command_add_category;
+        public ICommand Button_add_category
+        {
+            get
+            {
+                if (_Command_add_category == null)
+                {
+                    _Command_add_category = new DelegateCommand(Execute_add_category, CanExecute_add_category);
+                }
+                return _Command_add_category;
+            }
+        }
+        private void Execute_add_category(object o)
+        {
+            Product_category temp = new Product_category();
+            temp.Сategory = name;
+            Name = "";
+
+            myBD.Product_category.Add(temp);
+            myBD.SaveChanges();
+
+
+        }
+        private bool CanExecute_add_category(object o)
+        {
+
+
+            if (Name.Length > 0)
+                return true;
+            else
+                return false;
+
+
+        }
+        #endregion Add button
+
+
+        #region Delete button
+        private DelegateCommand _Command_delete_category;
+        public ICommand Button_delete_category
+        {
+            get
+            {
+                if (_Command_delete_category == null)
+                {
+                    _Command_delete_category = new DelegateCommand(Execute_delete_category, CanExecute_delete_category);
+                }
+                return _Command_delete_category;
+            }
+        }
+        private void Execute_delete_category(object o)
+        {
+            //_myDB.Products.Add().Product_category
+            //  _myDB.SaveChanges();
+
+
+        }
+        private bool CanExecute_delete_category(object o)
+        {
+
+
+            if (Name.Length > 0)
+                return true;
+            else
+                return false;
+
+
+        }
+        #endregion Delete button
+
+        #region Cancel button
+        private DelegateCommand _Command_cancel_category;
+        public ICommand Button_cancel_category
+        {
+            get
+            {
+                if (_Command_cancel_category == null)
+                {
+                    _Command_cancel_category = new DelegateCommand(Execute_cancel_category, CanExecute_cancel_category);
+                }
+                return _Command_cancel_category;
+            }
+        }
+        private void Execute_cancel_category(object o)
+        {
+            //_myDB.Products.Add().Product_category
+            //  _myDB.SaveChanges();
+
+
+        }
+        private bool CanExecute_cancel_category(object o)
+        {
+
+
+          
+                return true;
+           
+
+
+        }
+        #endregion Cancel button
     }
 }
