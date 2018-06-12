@@ -80,7 +80,36 @@ namespace Market.ViewModel
 
 
         }
-        #endregion
+        #endregion Add button
+
+        #region Cancel button
+        private DelegateCommand _Command_Cancel_Product;
+        public ICommand Button_Cancel_Product
+        {
+            get
+            {
+                if (_Command_Cancel_Product == null)
+                {
+                    _Command_Cancel_Product = new DelegateCommand(Execute_Cancel_Product, CanExecute_Cancel_Product);
+                }
+                return _Command_Cancel_Product;
+            }
+        }
+        private void Execute_Cancel_Product(object o)
+        {
+        
+
+        }
+        private bool CanExecute_Cancel_Product(object o)
+        {
+          
+                return true;
+            
+
+
+        }
+        #endregion Add button
+
 
         #region Price
         #region 
@@ -788,7 +817,7 @@ namespace Market.ViewModel
         }
         #endregion Accrptor
         #region Name
-        string name_t;
+        string name_t="";
         public string Name_t
         {
             get
@@ -1275,23 +1304,98 @@ namespace Market.ViewModel
 
         #region number q
 
-        string number="1";
+        int number=1;
         public string Number
         {
             set
             {
-                number = value;
+                number = Convert.ToInt32(value);
                 OnPropertyChanged(nameof(Number));
             }
             get
             {
-                return number;
+                return number.ToString();
             }
         }
 
         #endregion number q 
 
         #region Command button
+
+        #region Edit button
+        private DelegateCommand _Command_Edit_Product;
+        public ICommand Button_Edit_Product
+        {
+            get
+            {
+                if (_Command_Edit_Product == null)
+                {
+                    _Command_Edit_Product = new DelegateCommand(Execute_Edit_Product, CanExecute_Edit_Product);
+                }
+                return _Command_Edit_Product;
+            }
+        }
+        private void Execute_Edit_Product(object o)
+        {
+            //_myDB.Products.Add().Product_category
+            //  _myDB.SaveChanges();
+         
+
+        }
+        private bool CanExecute_Edit_Product(object o)
+        {
+
+
+            if (Name_t.Length > 0 &&
+                Select_item_price != null &&
+                Select_item_count != null &&
+                Select_item_mark_up != null &&
+                Select_item_date_of_receipt != null &&
+                Select_item_product_life != null &&
+                Select_item_acceptor != null &&
+                Select_item_firm != null)
+                return true;
+            else
+                return false;
+
+
+        }
+        #endregion Edit button
+
+
+        #region Delete button
+        private DelegateCommand _Command_Delete_Product;
+        public ICommand Button_Delete_Product
+        {
+            get
+            {
+                if (_Command_Delete_Product == null)
+                {
+                    _Command_Delete_Product = new DelegateCommand(Execute_Delete_Product, CanExecute_Delete_Product);
+                }
+                return _Command_Delete_Product;
+            }
+        }
+        private void Execute_Delete_Product(object o)
+        {
+            //_myDB.Products.Add().Product_category
+            //  _myDB.SaveChanges();
+
+
+        }
+        private bool CanExecute_Delete_Product(object o)
+        {
+
+
+            if (number!=0)
+                return true;
+            else
+                return false;
+
+
+        }
+        #endregion Delete button
+
 
         #region Price
         #region 

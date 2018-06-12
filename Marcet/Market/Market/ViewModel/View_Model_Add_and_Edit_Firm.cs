@@ -926,7 +926,7 @@ namespace Market.ViewModel
             OnPropertyChanged(nameof(List_phone_edit));
 
         }
-        private bool CanExecute_New_Phone(object o)
+        private bool CanExecute_New_Phone_edit(object o)
         {
 
 
@@ -939,34 +939,34 @@ namespace Market.ViewModel
         }
         #endregion
         #region 
-        private DelegateCommand _Command_Delete_Phone;
-        public ICommand Button_Delete_Phone
+        private DelegateCommand _Command_Delete_Phone_edit;
+        public ICommand Button_Delete_Phone_edit
         {
             get
             {
-                if (_Command_Delete_Phone == null)
+                if (_Command_Delete_Phone_edit == null)
                 {
-                    _Command_Delete_Phone = new DelegateCommand(Execute_Delete_Phone, CanExecute_Delete_Phone);
+                    _Command_Delete_Phone_edit = new DelegateCommand(Execute_Delete_Phone_edit, CanExecute_Delete_Phone_edit);
                 }
-                return _Command_Delete_Phone;
+                return _Command_Delete_Phone_edit;
             }
         }
-        private void Execute_Delete_Phone(object o)
+        private void Execute_Delete_Phone_edit(object o)
         {
 
-            list_phone.Remove(select_item_phone);
+            list_phone_edit.Remove(select_item_phone_edit);
 
-            OnPropertyChanged(nameof(List_phone));
-            Select_item_phone = null;
-            Phone = null;
+            OnPropertyChanged(nameof(List_phone_edit));
+            Select_item_phone_edit = null;
+            Phone_edit = null;
 
 
         }
-        private bool CanExecute_Delete_Phone(object o)
+        private bool CanExecute_Delete_Phone_edit(object o)
         {
 
 
-            if (select_item_phone != null)
+            if (select_item_phone_edit != null)
                 return true;
             else
                 return false;
@@ -975,31 +975,30 @@ namespace Market.ViewModel
         }
         #endregion
         #region 
-        private DelegateCommand _Command_Edit_phone;
-        public ICommand Button_Edit_Phone
+        private DelegateCommand _Command_Edit_phone_edit;
+        public ICommand Button_Edit_Phone_edit
         {
             get
             {
-                if (_Command_Edit_phone == null)
+                if (_Command_Edit_phone_edit == null)
                 {
-                    _Command_Edit_phone = new DelegateCommand(Execute_Edit_phone, CanExecute_Edit_phone);
+                    _Command_Edit_phone_edit = new DelegateCommand(Execute_Edit_phone_edit, CanExecute_Edit_phone_edit);
                 }
-                return _Command_Edit_phone;
+                return _Command_Edit_phone_edit;
             }
         }
-        private void Execute_Edit_phone(object o)
+        private void Execute_Edit_phone_edit(object o)
         {
 
-            Select_item_phone.Number = Phone;
-            OnPropertyChanged(nameof(List_phone));
+            Select_item_phone_edit.Number = Phone_edit;
+            OnPropertyChanged(nameof(List_phone_edit));
 
 
         }
-
-        private bool CanExecute_Edit_phone(object o)
+        private bool CanExecute_Edit_phone_edit(object o)
         {
 
-            if (select_item_phone != null && Phone.Length > 0)
+            if (select_item_phone_edit != null && Phone_edit.Length > 0)
                 return true;
             else
                 return false;
@@ -1011,32 +1010,32 @@ namespace Market.ViewModel
 
         #region City
         #region 
-        private DelegateCommand _Command_New_City;
-        public ICommand Button_New_City
+        private DelegateCommand _Command_New_City_edit;
+        public ICommand Button_New_City_edit
         {
             get
             {
-                if (_Command_New_City == null)
+                if (_Command_New_City_edit == null)
                 {
-                    _Command_New_City = new DelegateCommand(Execute_New_City, CanExecute_New_City);
+                    _Command_New_City_edit = new DelegateCommand(Execute_New_City_edit, CanExecute_New_City_edit);
                 }
-                return _Command_New_City;
+                return _Command_New_City_edit;
             }
         }
-        private void Execute_New_City(object o)
+        private void Execute_New_City_edit(object o)
         {
 
             City temp = new City();
-            temp.Name = Convert.ToString(city);
-            list_city.Add(temp);
-            OnPropertyChanged(nameof(List_city));
+            temp.Name = Convert.ToString(city_edit);
+            list_city_edit.Add(temp);
+            OnPropertyChanged(nameof(List_city_edit));
 
         }
-        private bool CanExecute_New_City(object o)
+        private bool CanExecute_New_City_edit(object o)
         {
 
 
-            if (city != null && city.Length > 0)
+            if (city_edit != null && city_edit.Length > 0)
                 return true;
             else
                 return false;
@@ -1045,34 +1044,34 @@ namespace Market.ViewModel
         }
         #endregion
         #region 
-        private DelegateCommand _Command_Delete_City;
-        public ICommand Button_Delete_City
+        private DelegateCommand _Command_Delete_City_edit;
+        public ICommand Button_Delete_City_edit
         {
             get
             {
-                if (_Command_Delete_City == null)
+                if (_Command_Delete_City_edit == null)
                 {
-                    _Command_Delete_City = new DelegateCommand(Execute_Delete_City, CanExecute_Delete_City);
+                    _Command_Delete_City_edit = new DelegateCommand(Execute_Delete_City_edit, CanExecute_Delete_City_edit);
                 }
-                return _Command_Delete_City;
+                return _Command_Delete_City_edit;
             }
         }
-        private void Execute_Delete_City(object o)
+        private void Execute_Delete_City_edit(object o)
         {
 
-            list_city.Remove(select_item_city);
+            list_city_edit.Remove(select_item_city_edit);
 
-            OnPropertyChanged(nameof(List_city));
-            Select_item_city = null;
-            Phone = null;
+            OnPropertyChanged(nameof(List_city_edit));
+            Select_item_city_edit = null;
+            Phone_edit = null;
 
 
         }
-        private bool CanExecute_Delete_City(object o)
+        private bool CanExecute_Delete_City_edit(object o)
         {
 
 
-            if (select_item_city != null)
+            if (select_item_city_edit != null)
                 return true;
             else
                 return false;
@@ -1081,30 +1080,30 @@ namespace Market.ViewModel
         }
         #endregion
         #region 
-        private DelegateCommand _Command_Edit_city;
-        public ICommand Button_Edit_City
+        private DelegateCommand _Command_Edit_city_edit;
+        public ICommand Button_Edit_City_edit
         {
             get
             {
-                if (_Command_Edit_city == null)
+                if (_Command_Edit_city_edit == null)
                 {
-                    _Command_Edit_city = new DelegateCommand(Execute_Edit_city, CanExecute_Edit_city);
+                    _Command_Edit_city_edit = new DelegateCommand(Execute_Edit_city_edit, CanExecute_Edit_city_edit);
                 }
-                return _Command_Edit_city;
+                return _Command_Edit_city_edit;
             }
         }
-        private void Execute_Edit_city(object o)
+        private void Execute_Edit_city_edit(object o)
         {
 
-            Select_item_city.Name = City;
-            OnPropertyChanged(nameof(List_city));
+            Select_item_city_edit.Name = City_edit;
+            OnPropertyChanged(nameof(List_city_edit));
 
 
         }
-        private bool CanExecute_Edit_city(object o)
+        private bool CanExecute_Edit_city_edit(object o)
         {
 
-            if (select_item_city != null && City.Length > 0)
+            if (select_item_city_edit != null && City_edit.Length > 0)
                 return true;
             else
                 return false;
@@ -1116,32 +1115,32 @@ namespace Market.ViewModel
 
         #region Country
         #region 
-        private DelegateCommand _Command_New_country;
-        public ICommand Button_New_country
+        private DelegateCommand _Command_New_country_edit;
+        public ICommand Button_New_country_edit
         {
             get
             {
-                if (_Command_New_country == null)
+                if (_Command_New_country_edit == null)
                 {
-                    _Command_New_country = new DelegateCommand(Execute_New_country, CanExecute_New_country);
+                    _Command_New_country_edit = new DelegateCommand(Execute_New_country_edit, CanExecute_New_country_edit);
                 }
-                return _Command_New_country;
+                return _Command_New_country_edit;
             }
         }
-        private void Execute_New_country(object o)
+        private void Execute_New_country_edit(object o)
         {
 
             Country temp = new Country();
-            temp.Name = Convert.ToString(country);
-            list_country.Add(temp);
-            OnPropertyChanged(nameof(List_country));
+            temp.Name = Convert.ToString(country_edit);
+            list_country_edit.Add(temp);
+            OnPropertyChanged(nameof(List_country_edit));
 
         }
-        private bool CanExecute_New_country(object o)
+        private bool CanExecute_New_country_edit(object o)
         {
 
 
-            if (country != null && country.Length > 0)
+            if (country_edit != null && country_edit.Length > 0)
                 return true;
             else
                 return false;
@@ -1150,34 +1149,34 @@ namespace Market.ViewModel
         }
         #endregion
         #region 
-        private DelegateCommand _Command_Delete_country;
-        public ICommand Button_Delete_country
+        private DelegateCommand _Command_Delete_country_edit;
+        public ICommand Button_Delete_country_edit
         {
             get
             {
-                if (_Command_Delete_country == null)
+                if (_Command_Delete_country_edit == null)
                 {
-                    _Command_Delete_country = new DelegateCommand(Execute_Delete_country, CanExecute_Delete_country);
+                    _Command_Delete_country_edit = new DelegateCommand(Execute_Delete_country_edit, CanExecute_Delete_country_edit);
                 }
-                return _Command_Delete_country;
+                return _Command_Delete_country_edit;
             }
         }
-        private void Execute_Delete_country(object o)
+        private void Execute_Delete_country_edit(object o)
         {
 
-            list_country.Remove(select_item_country);
+            list_country_edit.Remove(select_item_country_edit);
 
-            OnPropertyChanged(nameof(List_country));
-            Select_item_country = null;
-            Country = null;
+            OnPropertyChanged(nameof(List_country_edit));
+            Select_item_country_edit = null;
+            Country_edit = null;
 
 
         }
-        private bool CanExecute_Delete_country(object o)
+        private bool CanExecute_Delete_country_edit(object o)
         {
 
 
-            if (select_item_country != null)
+            if (select_item_country_edit != null)
                 return true;
             else
                 return false;
@@ -1186,30 +1185,30 @@ namespace Market.ViewModel
         }
         #endregion
         #region 
-        private DelegateCommand _Command_Edit_country;
-        public ICommand Button_Edit_country
+        private DelegateCommand _Command_Edit_country_edit;
+        public ICommand Button_Edit_country_edit
         {
             get
             {
-                if (_Command_Edit_country == null)
+                if (_Command_Edit_country_edit == null)
                 {
-                    _Command_Edit_country = new DelegateCommand(Execute_Edit_country, CanExecute_Edit_country);
+                    _Command_Edit_country_edit = new DelegateCommand(Execute_Edit_country_edit, CanExecute_Edit_country_edit);
                 }
-                return _Command_Edit_country;
+                return _Command_Edit_country_edit;
             }
         }
-        private void Execute_Edit_country(object o)
+        private void Execute_Edit_country_edit(object o)
         {
 
-            Select_item_country.Name = City;
-            OnPropertyChanged(nameof(List_country));
+            Select_item_country_edit.Name = City_edit;
+            OnPropertyChanged(nameof(List_country_edit));
 
 
         }
-        private bool CanExecute_Edit_country(object o)
+        private bool CanExecute_Edit_country_edit(object o)
         {
 
-            if (select_item_country != null && country.Length > 0)
+            if (select_item_country_edit != null && country_edit.Length > 0)
                 return true;
             else
                 return false;
@@ -1221,32 +1220,32 @@ namespace Market.ViewModel
 
         #region Adressa
         #region 
-        private DelegateCommand _Command_New_adressa;
-        public ICommand Button_New_adressa
+        private DelegateCommand _Command_New_adressa_edit;
+        public ICommand Button_New_adressa_edit
         {
             get
             {
-                if (_Command_New_adressa == null)
+                if (_Command_New_adressa_edit == null)
                 {
-                    _Command_New_adressa = new DelegateCommand(Execute_New_adressa, CanExecute_New_adressa);
+                    _Command_New_adressa_edit = new DelegateCommand(Execute_New_adressa_edit, CanExecute_New_adressa_edit);
                 }
-                return _Command_New_adressa;
+                return _Command_New_adressa_edit;
             }
         }
-        private void Execute_New_adressa(object o)
+        private void Execute_New_adressa_edit(object o)
         {
 
             Adressa temp = new Market.Adressa();
-            temp.Name = Convert.ToString(adressa);
-            list_adressa.Add(temp);
-            OnPropertyChanged(nameof(List_adressa));
+            temp.Name = Convert.ToString(adressa_edit);
+            list_adressa_edit.Add(temp);
+            OnPropertyChanged(nameof(List_adressa_edit));
 
         }
-        private bool CanExecute_New_adressa(object o)
+        private bool CanExecute_New_adressa_edit(object o)
         {
 
 
-            if (adressa != null && adressa.Length > 0)
+            if (adressa_edit != null && adressa_edit.Length > 0)
                 return true;
             else
                 return false;
@@ -1255,34 +1254,34 @@ namespace Market.ViewModel
         }
         #endregion
         #region 
-        private DelegateCommand _Command_Delete_adressa;
-        public ICommand Button_Delete_adressa
+        private DelegateCommand _Command_Delete_adressa_edit;
+        public ICommand Button_Delete_adressa_edit
         {
             get
             {
-                if (_Command_Delete_adressa == null)
+                if (_Command_Delete_adressa_edit == null)
                 {
-                    _Command_Delete_adressa = new DelegateCommand(Execute_Delete_adressa, CanExecute_Delete_adressa);
+                    _Command_Delete_adressa_edit = new DelegateCommand(Execute_Delete_adressa_edit, CanExecute_Delete_adressa_edit);
                 }
-                return _Command_Delete_adressa;
+                return _Command_Delete_adressa_edit;
             }
         }
-        private void Execute_Delete_adressa(object o)
+        private void Execute_Delete_adressa_edit(object o)
         {
 
-            list_adressa.Remove(select_item_adressa);
+            list_adressa_edit.Remove(select_item_adressa_edit);
 
-            OnPropertyChanged(nameof(List_adressa));
-            Select_item_adressa = null;
-            Adressa = null;
+            OnPropertyChanged(nameof(List_adressa_edit));
+            Select_item_adressa_edit = null;
+            Adressa_edit = null;
 
 
         }
-        private bool CanExecute_Delete_adressa(object o)
+        private bool CanExecute_Delete_adressa_edit(object o)
         {
 
 
-            if (select_item_adressa != null)
+            if (select_item_adressa_edit != null)
                 return true;
             else
                 return false;
@@ -1291,30 +1290,30 @@ namespace Market.ViewModel
         }
         #endregion
         #region 
-        private DelegateCommand _Command_Edit_adressa;
-        public ICommand Button_Edit_adressa
+        private DelegateCommand _Command_Edit_adressa_edit;
+        public ICommand Button_Edit_adressa_edit
         {
             get
             {
-                if (_Command_Edit_adressa == null)
+                if (_Command_Edit_adressa_edit == null)
                 {
-                    _Command_Edit_adressa = new DelegateCommand(Execute_Edit_adressa, CanExecute_Edit_adressa);
+                    _Command_Edit_adressa_edit = new DelegateCommand(Execute_Edit_adressa_edit, CanExecute_Edit_adressa_edit);
                 }
-                return _Command_Edit_adressa;
+                return _Command_Edit_adressa_edit;
             }
         }
-        private void Execute_Edit_adressa(object o)
+        private void Execute_Edit_adressa_edit(object o)
         {
 
-            Select_item_adressa.Name = Adressa;
-            OnPropertyChanged(nameof(List_adressa));
+            Select_item_adressa_edit.Name = Adressa_edit;
+            OnPropertyChanged(nameof(List_adressa_edit));
 
 
         }
-        private bool CanExecute_Edit_adressa(object o)
+        private bool CanExecute_Edit_adressa_edit(object o)
         {
 
-            if (select_item_adressa != null && adressa.Length > 0)
+            if (select_item_adressa_edit != null && adressa_edit.Length > 0)
                 return true;
             else
                 return false;
@@ -1326,34 +1325,34 @@ namespace Market.ViewModel
 
         #region boss
         #region 
-        private DelegateCommand _Command_New_boss;
-        public ICommand Button_New_boss
+        private DelegateCommand _Command_New_boss_edit;
+        public ICommand Button_New_boss_edit
         {
             get
             {
-                if (_Command_New_boss == null)
+                if (_Command_New_boss_edit == null)
                 {
-                    _Command_New_boss = new DelegateCommand(Execute_New_boss, CanExecute_New_boss);
+                    _Command_New_boss_edit = new DelegateCommand(Execute_New_boss_edit, CanExecute_New_boss_edit);
                 }
-                return _Command_New_boss;
+                return _Command_New_boss_edit;
             }
         }
-        private void Execute_New_boss(object o)
+        private void Execute_New_boss_edit(object o)
         {
 
             Boss temp = new Market.Boss();
-            temp.Name = Convert.ToString(name_boss);
-            temp.Surname = Convert.ToString(surname_boss);
-            list_boss.Add(temp);
-            OnPropertyChanged(nameof(List_boss));
+            temp.Name = Convert.ToString(name_boss_edit);
+            temp.Surname = Convert.ToString(surname_boss_edit);
+            list_boss_edit.Add(temp);
+            OnPropertyChanged(nameof(List_boss_edit));
 
         }
-        private bool CanExecute_New_boss(object o)
+        private bool CanExecute_New_boss_edit(object o)
         {
 
 
-            if (name_boss != null && name_boss.Length > 0
-                && surname_boss != null && surname_boss.Length > 0)
+            if (name_boss_edit != null && name_boss_edit.Length > 0
+                && surname_boss_edit != null && surname_boss_edit.Length > 0)
                 return true;
             else
                 return false;
@@ -1362,35 +1361,35 @@ namespace Market.ViewModel
         }
         #endregion
         #region 
-        private DelegateCommand _Command_Delete_boss;
-        public ICommand Button_Delete_boss
+        private DelegateCommand _Command_Delete_boss_edit;
+        public ICommand Button_Delete_boss_edit
         {
             get
             {
-                if (_Command_Delete_boss == null)
+                if (_Command_Delete_boss_edit == null)
                 {
-                    _Command_Delete_boss = new DelegateCommand(Execute_Delete_boss, CanExecute_Delete_boss);
+                    _Command_Delete_boss_edit = new DelegateCommand(Execute_Delete_boss_edit, CanExecute_Delete_boss_edit);
                 }
-                return _Command_Delete_boss;
+                return _Command_Delete_boss_edit;
             }
         }
-        private void Execute_Delete_boss(object o)
+        private void Execute_Delete_boss_edit(object o)
         {
 
-            list_boss.Remove(select_item_boss);
+            list_boss_edit.Remove(select_item_boss_edit);
 
-            OnPropertyChanged(nameof(List_boss));
-            Select_item_boss = null;
-            Name_boss = null;
-            Surname_boss = null;
+            OnPropertyChanged(nameof(List_boss_edit));
+            Select_item_boss_edit = null;
+            Name_boss_edit = null;
+            Surname_boss_edit = null;
 
 
         }
-        private bool CanExecute_Delete_boss(object o)
+        private bool CanExecute_Delete_boss_edit(object o)
         {
 
 
-            if (select_item_boss != null)
+            if (select_item_boss_edit != null)
                 return true;
             else
                 return false;
@@ -1399,31 +1398,31 @@ namespace Market.ViewModel
         }
         #endregion
         #region 
-        private DelegateCommand _Command_Edit_boss;
-        public ICommand Button_Edit_boss
+        private DelegateCommand _Command_Edit_boss_edit;
+        public ICommand Button_Edit_boss_edit
         {
             get
             {
-                if (_Command_Edit_boss == null)
+                if (_Command_Edit_boss_edit == null)
                 {
-                    _Command_Edit_boss = new DelegateCommand(Execute_Edit_boss, CanExecute_Edit_boss);
+                    _Command_Edit_boss_edit = new DelegateCommand(Execute_Edit_boss_edit, CanExecute_Edit_boss_edit);
                 }
-                return _Command_Edit_boss;
+                return _Command_Edit_boss_edit;
             }
         }
-        private void Execute_Edit_boss(object o)
+        private void Execute_Edit_boss_edit(object o)
         {
 
-            Select_item_boss.Name = Name_boss;
-            Select_item_boss.Surname = Surname_boss;
-            OnPropertyChanged(nameof(List_boss));
+            Select_item_boss_edit.Name = Name_boss_edit;
+            Select_item_boss_edit.Surname = Surname_boss_edit;
+            OnPropertyChanged(nameof(List_boss_edit));
 
 
         }
-        private bool CanExecute_Edit_boss(object o)
+        private bool CanExecute_Edit_boss_edit(object o)
         {
 
-            if (select_item_boss != null && name_boss.Length > 0 && surname_boss.Length > 0)
+            if (select_item_boss_edit != null && name_boss_edit.Length > 0 && surname_boss_edit.Length > 0)
                 return true;
             else
                 return false;
