@@ -26,6 +26,9 @@ namespace Market.ViewModel
             List_firm = _myDB.Firms.ToList();
             List_Category = _myDB.Product_category.ToList();
 
+
+
+
             List_Price_edit = _myDB.Prices.ToList();
             List_Count_edit = _myDB.Counts.ToList();
             List_Mark_up_edit = _myDB.Mark_up.ToList();
@@ -1304,19 +1307,136 @@ namespace Market.ViewModel
 
         #region number q
 
-        int number=1;
-        public string Number
+       
+
+
+
+        #region UpDown
+        private int _numValue = 0;
+
+        public string NumValue
         {
+            get { return _numValue.ToString(); }
             set
             {
-                number = Convert.ToInt32(value);
-                OnPropertyChanged(nameof(Number));
-            }
-            get
-            {
-                return number.ToString();
+
+
+                _numValue = Convert.ToInt32(value);
+                OnPropertyChanged(nameof(NumValue));
+
             }
         }
+
+
+        #region UP
+
+        private DelegateCommand _Command_up_product;
+        public ICommand Button_up_product
+        {
+            get
+            {
+                if (_Command_up_product == null)
+                {
+                    _Command_up_product = new DelegateCommand(Execute_up_product, CanExecute_up_product);
+                }
+                return _Command_up_product;
+            }
+        }
+        private void Execute_up_product(object o)
+        {
+            _numValue += 1;
+            Set_seting();
+        }
+        private bool CanExecute_up_product(object o)
+        {
+            if (_numValue < list_product_edit.Count - 1)
+                return true;
+            else
+                return false;
+
+        }
+
+        #endregion
+
+        #region DOWN
+
+        private DelegateCommand _Command_down_product;
+        public ICommand Button_down_product
+        {
+            get
+            {
+                if (_Command_down_product == null)
+                {
+                    _Command_down_product  = new DelegateCommand(Execute_down_product, CanExecute_down_product);
+                }
+                return _Command_down_product;
+            }
+        }
+        private void Execute_down_product(object o)
+        {
+            _numValue -= 1;
+            Set_seting();
+        }
+        private bool CanExecute_down_product(object o)
+        {
+            if (_numValue > 0)
+                return true;
+            else
+                return false;
+
+        }
+
+        #endregion
+
+        #region text
+
+        void Set_seting()
+        {
+            list_product_edit = _myDB.Products.ToList();
+
+            if (list_product_edit.Count == 0)
+            {
+                _numValue = 0;
+              
+                NumValue = _numValue.ToString();
+            }
+            else if (_numValue > list_category.Count - 1)
+            {
+
+                _numValue -= 1;
+               
+                NumValue = _numValue.ToString();
+            }
+            else
+            {
+                
+                NumValue = _numValue.ToString();
+            }
+        }
+
+        #endregion text 
+
+        //private void cmdUp_Click(object sender, RoutedEventArgs e)
+        //{
+        //    NumValue++;
+        //}
+
+        //private void cmdDown_Click(object sender, RoutedEventArgs e)
+        //{
+        //    NumValue--;
+        //}
+
+        //private void txtNum_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    if (txtNum == null)
+        //    {
+        //        return;
+        //    }
+
+        //    if (!int.TryParse(txtNum.Text, out _numValue))
+        //        txtNum.Text = _numValue.ToString();
+        //}
+        #endregion
 
         #endregion number q 
 
@@ -1387,7 +1507,7 @@ namespace Market.ViewModel
         {
 
 
-            if (number!=0)
+            if (_numValue != 0)
                 return true;
             else
                 return false;
@@ -2575,7 +2695,38 @@ namespace Market.ViewModel
 
         #endregion Price list
 
+        #region Product list
+
+        List<Product> list_product_edit = new List<Market.Product>();
+        public ICollection<Product> List_product_edit
+        {
+            set
+            {
+                list_product_edit = value.ToList();
+                OnPropertyChanged(nameof(List_product_edit));
+            }
+            get
+            {
+
+
+                if (list_product_edit != null)
+                    return list_product_edit;
+                else
+                    return null;
+            }
+
+        }
+
+        
+
+
+        #endregion Price list
+
         #endregion List
+
+
+
+
         #endregion Edit
 
     }

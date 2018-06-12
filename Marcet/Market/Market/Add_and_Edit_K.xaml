@@ -53,7 +53,7 @@
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
                             <TextBox Text="{Binding NumValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5,5,0,5" Width="50"   />
                             <Button Command="{Binding Button_up_category}"  Margin="5,5,0,5" Content="˄" Width="20"  />
-                            <Button  Margin="0,5,0,5"  Content="˅" Width="20"  />
+                            <Button Command="{Binding Button_down_category}" Margin="0,5,0,5"  Content="˅" Width="20"  />
                         </StackPanel>
                         <!--<StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
                             <TextBox x:Name="txtNum" x:FieldModifier="private" Margin="5,5,0,5" Width="50" Text="0" TextChanged="txtNum_TextChanged" />

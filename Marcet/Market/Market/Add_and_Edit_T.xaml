@@ -398,9 +398,9 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
-                        <TextBox x:Name="txtNum" x:FieldModifier="private" Margin="5,5,0,5" Width="50" TextChanged="txtNum_TextChanged" Text="{Binding Number}" />
-                        <Button x:Name="cmdUp" x:FieldModifier="private" Margin="5,5,0,5" Content="˄" Width="20" Click="cmdUp_Click" />
-                        <Button x:Name="cmdDown" x:FieldModifier="private" Margin="0,5,0,5"  Content="˅" Width="20" Click="cmdDown_Click" />
+                        <TextBox x:Name="txtNum" x:FieldModifier="private" Margin="5,5,0,5" Width="50" TextChanged="txtNum_TextChanged" Text="{Binding NumValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                        <Button Command="{Binding Button_up_category}" x:Name="cmdUp" x:FieldModifier="private" Margin="5,5,0,5" Content="˄" Width="20" Click="cmdUp_Click" />
+                        <Button Command="{Binding Button_down_category}" x:Name="cmdDown" x:FieldModifier="private" Margin="0,5,0,5"  Content="˅" Width="20" Click="cmdDown_Click" />
                     </StackPanel>
 
                     <TabControl Grid.Row="1" Name="tabControl_Edit" >

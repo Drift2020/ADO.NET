@@ -17,6 +17,8 @@ namespace Market.ViewModel
             myBD = new Model1();
             list_category = myBD.Product_category.ToList();
 
+            Name_edit = list_category[_numValue].Сategory;
+            NumValue = _numValue.ToString();
         }
 
         List<Product_category> list_category;
@@ -69,10 +71,14 @@ namespace Market.ViewModel
         }
         private void Execute_Edit_category(object o)
         {
-            //_myDB.Products.Add().Product_category
-            //  _myDB.SaveChanges();
 
+            var query = (from b in myBD.Product_category
+                         where b.Сategory == list_category[_numValue].Сategory.ToString()
+                         select b).Single();
+            query.Сategory = name_edit;
 
+            myBD.SaveChanges();
+            Set_seting();
         }
         private bool CanExecute_Edit_category(object o)
         {
@@ -108,7 +114,7 @@ namespace Market.ViewModel
 
             myBD.Product_category.Add(temp);
             myBD.SaveChanges();
-
+            Set_seting();
 
         }
         private bool CanExecute_add_category(object o)
@@ -140,16 +146,16 @@ namespace Market.ViewModel
         }
         private void Execute_delete_category(object o)
         {
-            //_myDB.Products.Add().Product_category
-            //  _myDB.SaveChanges();
-
+            myBD.Product_category.Remove(list_category[_numValue]);
+            myBD.SaveChanges();
+            Set_seting();
 
         }
         private bool CanExecute_delete_category(object o)
         {
 
 
-            if (Name.Length > 0)
+            if (list_category.Count > 0)
                 return true;
             else
                 return false;
@@ -200,7 +206,8 @@ namespace Market.ViewModel
             get { return _numValue.ToString(); }
             set
             {
-                
+
+
                 _numValue = Convert.ToInt32(value);
                 OnPropertyChanged(nameof(NumValue));
              
@@ -224,13 +231,12 @@ namespace Market.ViewModel
         }
         private void Execute_up_category(object o)
         {
-            Name_edit = list_category[_numValue].Сategory;
             _numValue += 1;
-            NumValue = _numValue.ToString();
+            Set_seting();
         }
         private bool CanExecute_up_category(object o)
         {
-            if (_numValue < list_category.Count)
+            if (_numValue < list_category.Count-1)
                 return true;
             else
                 return false;
@@ -238,6 +244,65 @@ namespace Market.ViewModel
         }
 
         #endregion
+
+        #region DOWN
+
+        private DelegateCommand _Command_down_category;
+        public ICommand Button_down_category
+        {
+            get
+            {
+                if (_Command_down_category == null)
+                {
+                    _Command_down_category = new DelegateCommand(Execute_down_category, CanExecute_down_category);
+                }
+                return _Command_down_category;
+            }
+        }
+        private void Execute_down_category(object o)
+        {
+            _numValue -= 1;
+            Set_seting();
+        }
+        private bool CanExecute_down_category(object o)
+        {
+            if (_numValue > 0)
+                return true;
+            else
+                return false;
+
+        }
+
+        #endregion
+
+        #region text
+
+        void Set_seting()
+        {
+            list_category = myBD.Product_category.ToList();
+
+            if (list_category.Count == 0)
+            {
+                _numValue = 0;
+                Name_edit = "None";
+                NumValue = _numValue.ToString();
+            }
+            else if (_numValue > list_category.Count - 1)
+            {
+
+                _numValue -= 1;
+                Name_edit = list_category[_numValue].Сategory;
+                NumValue = _numValue.ToString();
+            }
+            else
+            {
+                Name_edit = list_category[_numValue].Сategory;
+                NumValue = _numValue.ToString();
+            }
+        }
+
+        #endregion text 
+
         //private void cmdUp_Click(object sender, RoutedEventArgs e)
         //{
         //    NumValue++;
