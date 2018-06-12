@@ -189,5 +189,75 @@ namespace Market.ViewModel
 
         }
         #endregion Cancel button
+
+
+
+       #region UpDown
+        private int _numValue = 0;
+
+        public string NumValue
+        {
+            get { return _numValue.ToString(); }
+            set
+            {
+                
+                _numValue = Convert.ToInt32(value);
+                OnPropertyChanged(nameof(NumValue));
+             
+            }
+        }
+
+
+        #region UP
+
+        private DelegateCommand _Command_up_category;
+        public ICommand Button_up_category
+        {
+            get
+            {
+                if (_Command_up_category == null)
+                {
+                    _Command_up_category = new DelegateCommand(Execute_up_category, CanExecute_up_category);
+                }
+                return _Command_up_category;
+            }
+        }
+        private void Execute_up_category(object o)
+        {
+            Name_edit = list_category[_numValue].Сategory;
+            _numValue += 1;
+            NumValue = _numValue.ToString();
+        }
+        private bool CanExecute_up_category(object o)
+        {
+            if (_numValue < list_category.Count)
+                return true;
+            else
+                return false;
+
+        }
+
+        #endregion
+        //private void cmdUp_Click(object sender, RoutedEventArgs e)
+        //{
+        //    NumValue++;
+        //}
+
+        //private void cmdDown_Click(object sender, RoutedEventArgs e)
+        //{
+        //    NumValue--;
+        //}
+
+        //private void txtNum_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    if (txtNum == null)
+        //    {
+        //        return;
+        //    }
+
+        //    if (!int.TryParse(txtNum.Text, out _numValue))
+        //        txtNum.Text = _numValue.ToString();
+        //}
+        #endregion
     }
 }

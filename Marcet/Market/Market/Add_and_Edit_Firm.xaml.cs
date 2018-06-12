@@ -22,7 +22,7 @@ namespace Market
         public Add_and_Edit_Firm()
         {
             InitializeComponent();
-            txtNum.Text = _numValue.ToString();
+          //  txtNum.Text = _numValue.ToString();
         }
 
 
@@ -39,7 +39,7 @@ namespace Market
             }
         }
 
-      
+
 
         private void cmdUp_Click(object sender, RoutedEventArgs e)
         {

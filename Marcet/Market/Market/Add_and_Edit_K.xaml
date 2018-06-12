@@ -27,7 +27,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="Edit">
+            <TabItem Header="Edit" Height="22" VerticalAlignment="Bottom">
                 <Grid>
 
                     <Grid>
@@ -51,11 +51,15 @@
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                            <TextBox Text="{Binding NumValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5,5,0,5" Width="50"   />
+                            <Button Command="{Binding Button_up_category}"  Margin="5,5,0,5" Content="˄" Width="20"  />
+                            <Button  Margin="0,5,0,5"  Content="˅" Width="20"  />
+                        </StackPanel>
+                        <!--<StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
                             <TextBox x:Name="txtNum" x:FieldModifier="private" Margin="5,5,0,5" Width="50" Text="0" TextChanged="txtNum_TextChanged" />
                             <Button x:Name="cmdUp" x:FieldModifier="private" Margin="5,5,0,5" Content="˄" Width="20" Click="cmdUp_Click" />
                             <Button x:Name="cmdDown" x:FieldModifier="private" Margin="0,5,0,5"  Content="˅" Width="20" Click="cmdDown_Click" />
-                        </StackPanel>
-
+                        </StackPanel>-->
                     </Grid>
                 </Grid>
             </TabItem>
