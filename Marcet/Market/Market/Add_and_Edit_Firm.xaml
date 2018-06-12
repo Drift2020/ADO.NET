@@ -78,12 +78,12 @@
                                 </Grid.ColumnDefinitions>
 
                                 <GroupBox Header="City" Grid.Row="0" Grid.ColumnSpan="2">
-                                    <ListView  ItemsSource="{Binding List_phone,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                               SelectedItem="{Binding Select_item_phone}">
+                                    <ListView  ItemsSource="{Binding List_city,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                               SelectedItem="{Binding Select_item_city}">
                                         <ListView.ItemTemplate>
                                             <DataTemplate >
 
-                                                <TextBlock Text="{Binding Number,IsAsync=True,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="{Binding Name,IsAsync=True,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
 
 
                                             </DataTemplate>
@@ -94,12 +94,12 @@
 
                                 <StackPanel Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center">
                                     <TextBlock  Text="City" HorizontalAlignment="Center"/>
-                                    <TextBox Margin="4"></TextBox>
+                                    <TextBox Text="{Binding City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="4"></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="5" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
-                                    <Button Content="New city"/>
-                                    <Button Content="Delete city"/>
-                                    <Button Content="Edit city"/>
+                                    <Button Command="{Binding Button_New_City}" Content="New city"/>
+                                    <Button Command="{Binding Button_Delete_City}" Content="Delete city"/>
+                                    <Button Command="{Binding Button_Edit_City}" Content="Edit city"/>
                                 </StackPanel>
 
 
@@ -119,26 +119,34 @@
                                 </Grid.ColumnDefinitions>
 
                                 <GroupBox Header="Country" Grid.Row="0" Grid.ColumnSpan="2">
-                                    <ListView >
+                                    <ListView  ItemsSource="{Binding List_country,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                               SelectedItem="{Binding Select_item_country}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate >
 
+                                                <TextBlock Text="{Binding Name,IsAsync=True,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+
+
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
                                     </ListView>
                                 </GroupBox>
 
 
                                 <StackPanel Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center">
                                     <TextBlock  Text="Country" HorizontalAlignment="Center"/>
-                                    <TextBox Margin="4"></TextBox>
+                                    <TextBox Text="{Binding Country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="4"></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="5" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
-                                    <Button Content="New country"/>
-                                    <Button Content="Delete country"/>
-                                    <Button Content="Edit country"/>
+                                    <Button Command="{Binding Button_New_country}" Content="New country"/>
+                                    <Button Command="{Binding Button_Delete_country}" Content="Delete country"/>
+                                    <Button Command="{Binding Button_Edit_country}" Content="Edit country"/>
                                 </StackPanel>
 
 
                             </Grid>
                         </TabItem>
-                        <TabItem Header="Adressaa">
+                        <TabItem Header="Adressa">
                             <Grid>
                                 <Grid.RowDefinitions>
 
@@ -151,21 +159,29 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <GroupBox Header="Adressaa" Grid.Row="0" Grid.ColumnSpan="2">
-                                    <ListView >
+                                <GroupBox Header="Adressa" Grid.Row="0" Grid.ColumnSpan="2">
+                                    <ListView  ItemsSource="{Binding List_adressa,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                               SelectedItem="{Binding Select_item_adressa}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate >
 
+                                                <TextBlock Text="{Binding Name,IsAsync=True,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+
+
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
                                     </ListView>
                                 </GroupBox>
 
 
                                 <StackPanel Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center">
-                                    <TextBlock  Text="Adressaa" HorizontalAlignment="Center"/>
-                                    <TextBox Margin="4"></TextBox>
+                                    <TextBlock  Text="Adressa" HorizontalAlignment="Center"/>
+                                    <TextBox Text="{Binding Adressa, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="4"></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="5" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
-                                    <Button Content="New adressa"/>
-                                    <Button Content="Delete adressa"/>
-                                    <Button Content="Edit adressa"/>
+                                    <Button Command="{Binding Button_New_adressa}" Content="New adressa"/>
+                                    <Button Command="{Binding Button_Delete_adressa}" Content="Delete adressa"/>
+                                    <Button Command="{Binding Button_Edit_adressa}" Content="Edit adressa"/>
                                 </StackPanel>
 
 
