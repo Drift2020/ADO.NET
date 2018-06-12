@@ -201,7 +201,17 @@
                                 </Grid.ColumnDefinitions>
 
                                 <GroupBox Header="Boss" Grid.Row="0" Grid.ColumnSpan="2">
-                                    <ListView >
+                                    <ListView x:Name="Global_List"    SelectedItem="{Binding Select_item_boss, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                   ItemsSource="{Binding List_boss ,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.ColumnSpan="2">
+                                        <ListView.View >
+                                            <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Employee Information" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                                <GridViewColumn DisplayMemberBinding="{Binding Name , UpdateSourceTrigger=PropertyChanged}" Header="Name" Width="100"/>
+                                                <GridViewColumn DisplayMemberBinding="{Binding Surname , UpdateSourceTrigger=PropertyChanged}"  Header="Surname" Width="100"/>
+
+
+                                            </GridView>
+                                        </ListView.View>
+
 
                                     </ListView>
                                 </GroupBox>
@@ -209,14 +219,14 @@
 
                                 <StackPanel Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center">
                                     <TextBlock  Text="Name" HorizontalAlignment="Center"/>
-                                    <TextBox Margin="4,0,4,0"></TextBox>
+                                    <TextBox Text="{Binding Name_boss , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="4,0,4,0"></TextBox>
                                     <TextBlock  Text="Surname" HorizontalAlignment="Center"/>
-                                    <TextBox  Margin="4,0,4,0"></TextBox>
+                                    <TextBox Text="{Binding Surname_boss, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="4,0,4,0"></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="5" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
-                                    <Button Content="New boss"/>
-                                    <Button Content="Delete boss"/>
-                                    <Button Content="Edit boss"/>
+                                    <Button Command="{Binding Button_New_boss}" Content="New boss"/>
+                                    <Button Command="{Binding Button_Delete_boss}" Content="Delete boss"/>
+                                    <Button Command="{Binding Button_Edit_boss}" Content="Edit boss"/>
                                 </StackPanel>
 
 
