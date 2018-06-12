@@ -25,7 +25,7 @@ namespace Market
         }
 
         #region UpDown
-        private int _numValue = 0;
+        private int _numValue = 1;
 
         public int NumValue
         {
@@ -46,6 +46,7 @@ namespace Market
 
         private void cmdDown_Click(object sender, RoutedEventArgs e)
         {
+            if(NumValue>1)
             NumValue--;
         }
 

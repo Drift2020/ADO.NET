@@ -24,6 +24,16 @@ namespace Market.ViewModel
             List_acceptor = _myDB.FIO_Person.ToList();
             List_product_life = _myDB.Product_life.ToList();
             List_firm = _myDB.Firms.ToList();
+            List_Category = _myDB.Product_category.ToList();
+
+            List_Price_edit = _myDB.Prices.ToList();
+            List_Count_edit = _myDB.Counts.ToList();
+            List_Mark_up_edit = _myDB.Mark_up.ToList();
+            List_date_of_receipt_edit = _myDB.Date_of_receipt.ToList();
+            List_acceptor_edit = _myDB.FIO_Person.ToList();
+            List_product_life_edit = _myDB.Product_life.ToList();
+            List_firm_edit = _myDB.Firms.ToList();
+            List_category_edit = _myDB.Product_category.ToList();
         }
 
         #region Add
@@ -71,11 +81,6 @@ namespace Market.ViewModel
 
         }
         #endregion
-
-
-      
-
-
 
         #region Price
         #region 
@@ -842,21 +847,7 @@ namespace Market.ViewModel
             }
         }
         #endregion Name Firm
-        #region category
-        string category;
-        public string Category
-        {
-            get
-            {
-                return category;
-            }
-            set
-            {
-                category = value;
-                OnPropertyChanged(nameof(Category));
-            }
-        }
-        #endregion category
+      
 
         #endregion pole
 
@@ -1228,8 +1219,8 @@ namespace Market.ViewModel
         #endregion Firm list
         #region Category list
 
-        List<Price> list_category = new List<Market.Price>();
-        public ICollection<Price> List_Category
+        List<Product_category> list_category = new List<Market.Product_category>();
+        public ICollection<Product_category> List_Category
         {
             set
             {
@@ -1255,7 +1246,7 @@ namespace Market.ViewModel
             {
                 select_item_category = value;
                 OnPropertyChanged(nameof(Select_item_category));
-                Set_category();
+               
             }
             get
             {
@@ -1270,11 +1261,7 @@ namespace Market.ViewModel
 
         }
 
-        void Set_category()
-        {
-            if (select_item_category != null)
-                Category = select_item_category.Сategory.ToString();
-        }
+       
 
         #endregion Price list
         #endregion List
@@ -1284,6 +1271,26 @@ namespace Market.ViewModel
         #endregion Add
 
         #region Edit
+
+
+        #region number q
+
+        string number="1";
+        public string Number
+        {
+            set
+            {
+                number = value;
+                OnPropertyChanged(nameof(Number));
+            }
+            get
+            {
+                return number;
+            }
+        }
+
+        #endregion number q 
+
         #region Command button
 
         #region Price
@@ -1912,6 +1919,8 @@ namespace Market.ViewModel
         }
         #endregion
         #endregion Product_life
+
+
         #endregion Command button
 
 
@@ -2051,6 +2060,7 @@ namespace Market.ViewModel
             }
         }
         #endregion Name Firm
+    
 
         #endregion pole
 
@@ -2414,6 +2424,53 @@ namespace Market.ViewModel
         }
 
         #endregion Firm list
+        #region Category list
+
+        List<Product_category> list_category_edit = new List<Market.Product_category>();
+        public ICollection<Product_category> List_category_edit
+        {
+            set
+            {
+                list_category_edit = value.ToList();
+                OnPropertyChanged(nameof(List_category_edit));
+            }
+            get
+            {
+
+
+                if (list_category_edit != null)
+                    return list_category_edit;
+                else
+                    return null;
+            }
+
+        }
+
+        Product_category select_item_category_edit;
+        public Product_category Select_item_category_edit
+        {
+            set
+            {
+                select_item_category_edit = value;
+                OnPropertyChanged(nameof(Select_item_category_edit));
+              
+            }
+            get
+            {
+
+
+                if (select_item_category_edit != null)
+                    return select_item_category_edit;
+                else
+                    //  return (new Price());
+                    return null;
+            }
+
+        }
+
+
+        #endregion Price list
+
         #endregion List
         #endregion Edit
 

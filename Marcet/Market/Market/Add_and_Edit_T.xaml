@@ -8,8 +8,8 @@
         Title="Add_T" Height="480" Width="342">
     <Grid>
 
-        <TabControl Name="tabControl_Start" >
-            <TabItem Header="Add">
+        <TabControl Name="tabControl_Start"  >
+            <TabItem Header="Add" >
                 <Grid>
 
                     <Grid.RowDefinitions>
@@ -398,7 +398,7 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
-                        <TextBox x:Name="txtNum" x:FieldModifier="private" Margin="5,5,0,5" Width="50" Text="0" TextChanged="txtNum_TextChanged" />
+                        <TextBox x:Name="txtNum" x:FieldModifier="private" Margin="5,5,0,5" Width="50" TextChanged="txtNum_TextChanged" Text="{Binding Number}" />
                         <Button x:Name="cmdUp" x:FieldModifier="private" Margin="5,5,0,5" Content="˄" Width="20" Click="cmdUp_Click" />
                         <Button x:Name="cmdDown" x:FieldModifier="private" Margin="0,5,0,5"  Content="˅" Width="20" Click="cmdDown_Click" />
                     </StackPanel>
@@ -447,6 +447,39 @@
                                     <Button Command="{Binding Button_Delete_Price_edit}" Content="Delete price"/>
                                     <Button Command="{Binding Button_New_Price_edit}" Content="Edit price"/>
                                 </StackPanel>
+
+
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Category">
+                            <Grid>
+                                <Grid.RowDefinitions>
+
+                                    <RowDefinition/>
+                                    <RowDefinition Height="70"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <GroupBox Header="List category" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                                    <ListView  ItemsSource="{Binding List_category_edit,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                               SelectedItem="{Binding Select_item_category_edit}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate >
+
+                                                <TextBlock Text="{Binding Сategory,IsAsync=True,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+
+
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </GroupBox>
+
+
+
 
 
                             </Grid>
