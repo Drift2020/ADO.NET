@@ -16,4 +16,49 @@ where Product.FirmID = Firm.ID and
 group by  Product.Name
 
 
+go
 
+alter table  Adressa_link
+ADD CONSTRAINT fk_adress
+FOREIGN KEY (AdressaID)
+REFERENCES Adressa (ID)
+ON DELETE CASCADE;
+
+alter table  Adressa_link
+ADD CONSTRAINT fk_firm
+FOREIGN KEY (FirmID)
+REFERENCES Firm (ID)
+ON DELETE CASCADE;
+
+
+
+go
+
+alter table  Product_category_link
+ADD CONSTRAINT fk_category
+FOREIGN KEY (CategoryID)
+REFERENCES Product_category (ID)
+ON DELETE CASCADE;
+
+
+alter table  Product_category_link
+ADD CONSTRAINT fk_Product
+FOREIGN KEY (ProductID)
+REFERENCES Product (ID)
+ON DELETE CASCADE;
+go
+
+
+alter table  Fio_link
+ADD CONSTRAINT fk_category
+FOREIGN KEY (CategoryID)
+REFERENCES Product_category (ID)
+ON DELETE CASCADE;
+
+
+alter table  Product_category_link
+ADD CONSTRAINT fk_category
+FOREIGN KEY (ProductID)
+REFERENCES Product (ID)
+ON DELETE CASCADE;
+go
