@@ -122,9 +122,9 @@ namespace Market.ViewModel
 
 
             
-            var mySTR = Select_item_phone.Number;
+            var mySTR = Select_item_phone.ID;
             var query = (from b in myBD.Phones
-                         where b.Number == mySTR
+                         where b.ID == mySTR
                          select b).Single();
             query.Number = phone;
             myBD.SaveChanges();
@@ -241,10 +241,10 @@ namespace Market.ViewModel
         private void Execute_Edit_city(object o)
         {
 
-            var mySTR = Select_item_city.Name;
+            var mySTR = Select_item_city.ID;
 
             var query = (from b in myBD.Cities
-                         where b.Name == mySTR
+                         where b.ID == mySTR
                          select b).Single();
             query.Name  = city;
             myBD.SaveChanges();
@@ -363,10 +363,10 @@ namespace Market.ViewModel
         private void Execute_Edit_country(object o)
         {
 
-            var mySTR = Select_item_country.Name;
+            var mySTR = Select_item_country.ID;
 
             var query = (from b in myBD.Countries
-                         where b.Name == mySTR
+                         where b.ID == mySTR
                          select b).Single();
             query.Name = country;
             myBD.SaveChanges();
@@ -481,10 +481,10 @@ namespace Market.ViewModel
         private void Execute_Edit_adressa(object o)
         {
 
-            var mySTR = select_item_adressa.Name;
+            var mySTR = select_item_adressa.ID;
 
             var query = (from b in myBD.Adressas
-                         where b.Name == mySTR
+                         where b.ID == mySTR
                          select b).Single();
             query.Name = adressa;
             myBD.SaveChanges();
