@@ -24,43 +24,43 @@ namespace Market
             InitializeComponent();
         }
 
-        #region UpDown
-        private int _numValue = 1;
+        //#region UpDown
+        //private int _numValue = 1;
 
-        public int NumValue
-        {
-            get { return _numValue; }
-            set
-            {
-                _numValue = value;
-                txtNum.Text = value.ToString();
-            }
-        }
+        //public int NumValue
+        //{
+        //    get { return _numValue; }
+        //    set
+        //    {
+        //        _numValue = value;
+        //        txtNum.Text = value.ToString();
+        //    }
+        //}
 
 
 
-        private void cmdUp_Click(object sender, RoutedEventArgs e)
-        {
-            NumValue++;
-        }
+        //private void cmdUp_Click(object sender, RoutedEventArgs e)
+        //{
+        //    NumValue++;
+        //}
 
-        private void cmdDown_Click(object sender, RoutedEventArgs e)
-        {
-            if(NumValue>1)
-            NumValue--;
-        }
+        //private void cmdDown_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if(NumValue>1)
+        //    NumValue--;
+        //}
 
-        private void txtNum_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (txtNum == null)
-            {
-                return;
-            }
+        //private void txtNum_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    if (txtNum == null)
+        //    {
+        //        return;
+        //    }
 
-            if (!int.TryParse(txtNum.Text, out _numValue))
-                txtNum.Text = _numValue.ToString();
-        }
-        #endregion
+        //    if (!int.TryParse(txtNum.Text, out _numValue))
+        //        txtNum.Text = _numValue.ToString();
+        //}
+        //#endregion
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

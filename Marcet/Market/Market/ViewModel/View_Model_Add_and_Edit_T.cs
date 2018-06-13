@@ -1379,7 +1379,7 @@ namespace Market.ViewModel
         }
         private bool CanExecute_down_product(object o)
         {
-            if (_numValue > 0)
+            if (_numValue >= 0)
                 return true;
             else
                 return false;
