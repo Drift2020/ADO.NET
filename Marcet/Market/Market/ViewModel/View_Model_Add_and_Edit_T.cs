@@ -1379,7 +1379,7 @@ namespace Market.ViewModel
         }
         private bool CanExecute_down_product(object o)
         {
-            if (_numValue >= 0)
+            if (_numValue > 0)
                 return true;
             else
                 return false;
@@ -1400,7 +1400,7 @@ namespace Market.ViewModel
               
                 NumValue = _numValue.ToString();
             }
-            else if (_numValue > list_category.Count - 1)
+            else if (_numValue > list_product_edit.Count - 1)
             {
 
                 _numValue -= 1;

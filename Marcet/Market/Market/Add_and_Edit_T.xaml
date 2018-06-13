@@ -398,9 +398,9 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
-                        <TextBox x:Name="txtNum" x:FieldModifier="private" Margin="5,5,0,5" Width="50" Text="{Binding NumValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                        <Button Command="{Binding Button_up_product}" x:Name="cmdUp" x:FieldModifier="private" Margin="5,5,0,5" Content="˄" Width="20"  />
-                        <Button Command="{Binding Button_down_product}" x:Name="cmdDown" x:FieldModifier="private" Margin="0,5,0,5"  Content="˅" Width="20"  />
+                        <TextBox x:Name="txtNum" Margin="5,5,0,5" Width="50" Text="{Binding NumValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                        <Button Command="{Binding Button_up_product}"  Margin="5,5,0,5" Content="˄" Width="20"  />
+                        <Button Command="{Binding Button_down_product}"  Margin="0,5,0,5"  Content="˅" Width="20"  />
                     </StackPanel>
                     <!--<StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
                         <TextBox x:Name="txtNum" x:FieldModifier="private" Margin="5,5,0,5" Width="50" TextChanged="txtNum_TextChanged" Text="{Binding NumValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />

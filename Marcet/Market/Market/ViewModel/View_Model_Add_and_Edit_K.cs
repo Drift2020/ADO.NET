@@ -71,9 +71,9 @@ namespace Market.ViewModel
         }
         private void Execute_Edit_category(object o)
         {
-
+            var mySTR =  list_category[_numValue].Сategory.ToString();
             var query = (from b in myBD.Product_category
-                         where b.Сategory == list_category[_numValue].Сategory.ToString()
+                         where b.Сategory == mySTR
                          select b).Single();
             query.Сategory = name_edit;
 
