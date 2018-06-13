@@ -120,8 +120,17 @@ namespace Market.ViewModel
         private void Execute_Edit_phone(object o)
         {
 
-            Select_item_phone.Number = Phone;
-            OnPropertyChanged(nameof(List_phone));
+
+            
+            var mySTR = Select_item_phone.Number;
+            var query = (from b in myBD.Phones
+                         where b.Number == mySTR
+                         select b).Single();
+            query.Number = phone;
+            myBD.SaveChanges();
+            Select_item_phone.Number = phone;
+
+            OnPropertyChanged(nameof (List_phone));
 
 
         }
@@ -159,6 +168,9 @@ namespace Market.ViewModel
             City temp = new City();
             temp.Name = Convert.ToString(city);
             list_city.Add(temp);
+            myBD.Cities.Add(temp);
+            myBD.SaveChanges();
+
             OnPropertyChanged(nameof(List_city));
 
         }
@@ -191,6 +203,9 @@ namespace Market.ViewModel
         {
 
             list_city.Remove(select_item_city);
+
+            myBD.Cities.Remove(select_item_city);
+            myBD.SaveChanges();
 
             OnPropertyChanged(nameof(List_city));
             Select_item_city = null;
@@ -226,7 +241,15 @@ namespace Market.ViewModel
         private void Execute_Edit_city(object o)
         {
 
-            Select_item_city.Name = City;
+            var mySTR = Select_item_city.Name;
+
+            var query = (from b in myBD.Cities
+                         where b.Name == mySTR
+                         select b).Single();
+            query.Name  = city;
+            myBD.SaveChanges();
+
+            Select_item_city.Name = city;
             OnPropertyChanged(nameof(List_city));
 
 
@@ -264,6 +287,11 @@ namespace Market.ViewModel
             Country temp = new Country();
             temp.Name = Convert.ToString(country);
             list_country.Add(temp);
+
+            myBD.Countries.Add(temp);
+            myBD.SaveChanges();
+
+
             OnPropertyChanged(nameof(List_country));
 
         }
@@ -296,6 +324,10 @@ namespace Market.ViewModel
         {
 
             list_country.Remove(select_item_country);
+
+            myBD.Countries.Remove(select_item_country);
+            myBD.SaveChanges();
+
 
             OnPropertyChanged(nameof(List_country));
             Select_item_country = null;
@@ -331,7 +363,15 @@ namespace Market.ViewModel
         private void Execute_Edit_country(object o)
         {
 
-            Select_item_country.Name = City;
+            var mySTR = Select_item_country.Name;
+
+            var query = (from b in myBD.Countries
+                         where b.Name == mySTR
+                         select b).Single();
+            query.Name = country;
+            myBD.SaveChanges();
+
+            Select_item_country.Name = country;
             OnPropertyChanged(nameof(List_country));
 
 
@@ -369,6 +409,9 @@ namespace Market.ViewModel
             Adressa temp = new Market.Adressa();
             temp.Name = Convert.ToString(adressa);
             list_adressa.Add(temp);
+            myBD.Adressas.Add(temp);
+            myBD.SaveChanges();
+
             OnPropertyChanged(nameof(List_adressa));
 
         }
@@ -401,6 +444,8 @@ namespace Market.ViewModel
         {
 
             list_adressa.Remove(select_item_adressa);
+            myBD.Adressas.Remove(select_item_adressa);
+            myBD.SaveChanges();
 
             OnPropertyChanged(nameof(List_adressa));
             Select_item_adressa = null;
@@ -436,7 +481,17 @@ namespace Market.ViewModel
         private void Execute_Edit_adressa(object o)
         {
 
-            Select_item_adressa.Name = Adressa;
+            var mySTR = select_item_adressa.Name;
+
+            var query = (from b in myBD.Adressas
+                         where b.Name == mySTR
+                         select b).Single();
+            query.Name = adressa;
+            myBD.SaveChanges();
+
+
+
+            Select_item_adressa.Name = adressa;
             OnPropertyChanged(nameof(List_adressa));
 
 
@@ -474,6 +529,10 @@ namespace Market.ViewModel
             Boss temp = new Market.Boss();
             temp.Name = Convert.ToString(name_boss);
             temp.Surname = Convert.ToString(surname_boss);
+
+            myBD.Bosses.Add(temp);
+            myBD.SaveChanges();
+
             list_boss.Add(temp);
             OnPropertyChanged(nameof(List_boss));
 
@@ -508,6 +567,8 @@ namespace Market.ViewModel
         {
 
             list_boss.Remove(select_item_boss);
+            myBD.Bosses.Remove(select_item_boss);
+            myBD.SaveChanges();
 
             OnPropertyChanged(nameof(List_boss));
             Select_item_boss = null;
@@ -543,6 +604,16 @@ namespace Market.ViewModel
         }
         private void Execute_Edit_boss(object o)
         {
+            var mySTR = Select_item_boss.ID;
+
+            var query = (from b in myBD.Bosses
+                         where b.ID == mySTR
+                         select b).Single();
+            query.Name = name_boss;
+            query.Surname = surname_boss;
+
+            myBD.SaveChanges();
+
 
             Select_item_boss.Name = Name_boss;
             Select_item_boss.Surname = Surname_boss;
@@ -941,6 +1012,10 @@ namespace Market.ViewModel
             Phone temp = new Phone();
             temp.Number = Convert.ToString(phone_edit);
             list_phone_edit.Add(temp);
+
+            myBD.Phones.Add(temp);
+            myBD.SaveChanges();
+
             OnPropertyChanged(nameof(List_phone_edit));
 
         }
@@ -973,6 +1048,9 @@ namespace Market.ViewModel
         {
 
             list_phone_edit.Remove(select_item_phone_edit);
+            myBD.Phones.Remove(select_item_phone_edit);
+            myBD.SaveChanges();
+
 
             OnPropertyChanged(nameof(List_phone_edit));
             Select_item_phone_edit = null;
@@ -1008,7 +1086,15 @@ namespace Market.ViewModel
         private void Execute_Edit_phone_edit(object o)
         {
 
-            Select_item_phone_edit.Number = Phone_edit;
+
+            var mySTR = Select_item_phone_edit.ID;
+            var query = (from b in myBD.Phones
+                         where b.ID == mySTR
+                         select b).Single();
+            query.Number = phone_edit;
+            myBD.SaveChanges();
+
+            Select_item_phone_edit.Number = phone_edit;
             OnPropertyChanged(nameof(List_phone_edit));
 
 
@@ -1045,6 +1131,10 @@ namespace Market.ViewModel
 
             City temp = new City();
             temp.Name = Convert.ToString(city_edit);
+
+            myBD.Cities.Add(temp);
+            myBD.SaveChanges();
+            
             list_city_edit.Add(temp);
             OnPropertyChanged(nameof(List_city_edit));
 
@@ -1078,6 +1168,9 @@ namespace Market.ViewModel
         {
 
             list_city_edit.Remove(select_item_city_edit);
+
+            myBD.Cities.Remove(select_item_city_edit);
+            myBD.SaveChanges();
 
             OnPropertyChanged(nameof(List_city_edit));
             Select_item_city_edit = null;
@@ -1113,7 +1206,14 @@ namespace Market.ViewModel
         private void Execute_Edit_city_edit(object o)
         {
 
-            Select_item_city_edit.Name = City_edit;
+            var mySTR = Select_item_city_edit.ID;
+            var query = (from b in myBD.Cities
+                         where b.ID == mySTR
+                         select b).Single();
+            query.Name = city_edit;
+            myBD.SaveChanges();
+
+            Select_item_city_edit.Name = city_edit;
             OnPropertyChanged(nameof(List_city_edit));
 
 
@@ -1151,6 +1251,10 @@ namespace Market.ViewModel
             Country temp = new Country();
             temp.Name = Convert.ToString(country_edit);
             list_country_edit.Add(temp);
+
+            myBD.Countries.Add(temp);
+            myBD.SaveChanges();
+
             OnPropertyChanged(nameof(List_country_edit));
 
         }
@@ -1183,7 +1287,8 @@ namespace Market.ViewModel
         {
 
             list_country_edit.Remove(select_item_country_edit);
-
+            myBD.Countries.Remove(select_item_country_edit);
+            myBD.SaveChanges();
             OnPropertyChanged(nameof(List_country_edit));
             Select_item_country_edit = null;
             Country_edit = null;
@@ -1218,7 +1323,14 @@ namespace Market.ViewModel
         private void Execute_Edit_country_edit(object o)
         {
 
-            Select_item_country_edit.Name = City_edit;
+            var mySTR = select_item_country_edit.ID;
+            var query = (from b in myBD.Countries
+                         where b.ID == mySTR
+                         select b).Single();
+            query.Name = country_edit;
+            myBD.SaveChanges();
+
+            Select_item_country_edit.Name = country_edit;
             OnPropertyChanged(nameof(List_country_edit));
 
 
@@ -1255,7 +1367,11 @@ namespace Market.ViewModel
 
             Adressa temp = new Market.Adressa();
             temp.Name = Convert.ToString(adressa_edit);
+
             list_adressa_edit.Add(temp);
+            myBD.Adressas.Add(temp);
+            myBD.SaveChanges();
+
             OnPropertyChanged(nameof(List_adressa_edit));
 
         }
@@ -1288,6 +1404,9 @@ namespace Market.ViewModel
         {
 
             list_adressa_edit.Remove(select_item_adressa_edit);
+
+            myBD.Adressas.Remove(select_item_adressa_edit);
+            myBD.SaveChanges();
 
             OnPropertyChanged(nameof(List_adressa_edit));
             Select_item_adressa_edit = null;
@@ -1322,8 +1441,14 @@ namespace Market.ViewModel
         }
         private void Execute_Edit_adressa_edit(object o)
         {
+            var mySTR = select_item_adressa_edit.ID;
+            var query = (from b in myBD.Adressas
+                         where b.ID == mySTR
+                         select b).Single();
+            query.Name = adressa_edit;
+            myBD.SaveChanges();
 
-            Select_item_adressa_edit.Name = Adressa_edit;
+            Select_item_adressa_edit.Name = adressa_edit;
             OnPropertyChanged(nameof(List_adressa_edit));
 
 
@@ -1362,6 +1487,8 @@ namespace Market.ViewModel
             temp.Name = Convert.ToString(name_boss_edit);
             temp.Surname = Convert.ToString(surname_boss_edit);
             list_boss_edit.Add(temp);
+            myBD.Bosses.Add(temp);
+            myBD.SaveChanges();
             OnPropertyChanged(nameof(List_boss_edit));
 
         }
@@ -1395,6 +1522,8 @@ namespace Market.ViewModel
         {
 
             list_boss_edit.Remove(select_item_boss_edit);
+            myBD.Bosses.Remove(select_item_boss_edit);
+            myBD.SaveChanges();
 
             OnPropertyChanged(nameof(List_boss_edit));
             Select_item_boss_edit = null;
@@ -1431,8 +1560,17 @@ namespace Market.ViewModel
         private void Execute_Edit_boss_edit(object o)
         {
 
-            Select_item_boss_edit.Name = Name_boss_edit;
-            Select_item_boss_edit.Surname = Surname_boss_edit;
+            var mySTR = select_item_boss_edit.ID;
+            var query = (from b in myBD.Bosses
+                         where b.ID == mySTR
+                         select b).Single();
+            query.Name = name_boss_edit;
+            query.Surname = surname_boss_edit;
+            myBD.SaveChanges();
+
+
+            Select_item_boss_edit.Name = name_boss_edit;
+            Select_item_boss_edit.Surname = surname_boss_edit;
             OnPropertyChanged(nameof(List_boss_edit));
 
 
