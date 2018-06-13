@@ -47,6 +47,10 @@ namespace Market.ViewModel
             Phone temp = new Phone();
             temp.Number = Convert.ToString(phone);
             list_phone.Add(temp);
+            myBD.Phones.Add(temp);
+          
+            myBD.SaveChanges();
+           
             OnPropertyChanged(nameof(List_phone));
 
         }
@@ -79,6 +83,8 @@ namespace Market.ViewModel
         {
 
             list_phone.Remove(select_item_phone);
+            myBD.Phones.Remove(select_item_phone);
+            myBD.SaveChanges();
 
             OnPropertyChanged(nameof(List_phone));
             Select_item_phone = null;
@@ -559,9 +565,6 @@ namespace Market.ViewModel
 
         #endregion Command button
 
-
-
-
         #region Pole
 
 
@@ -703,6 +706,7 @@ namespace Market.ViewModel
             }
             get
             {
+
                 return list_phone.ToList();
             }
         }
@@ -728,6 +732,8 @@ namespace Market.ViewModel
         {
             if (select_item_phone != null)
                 Phone = select_item_phone.Number.ToString();
+            else
+                Phone = "";
         }
         #endregion Phone
 
@@ -768,6 +774,8 @@ namespace Market.ViewModel
         {
             if (select_item_city != null)
                 City = select_item_city.Name.ToString();
+            else
+                City = "";
         }
         #endregion Phone
 
@@ -808,6 +816,8 @@ namespace Market.ViewModel
         {
             if (select_item_country != null)
                 Country = select_item_country.Name.ToString();
+            else
+                Country = "";
         }
         #endregion Country
 
@@ -839,7 +849,10 @@ namespace Market.ViewModel
             }
             get
             {
-                return select_item_adressa;
+                if (select_item_adressa != null)
+                    return select_item_adressa;
+                else
+                    return new Adressa();
             }
         }
 
@@ -848,6 +861,8 @@ namespace Market.ViewModel
         {
             if (select_item_adressa != null)
                 Adressa = select_item_adressa.Name.ToString();
+            else
+                Adressa = "";
         }
         #endregion Adressa
 
@@ -890,6 +905,9 @@ namespace Market.ViewModel
                 Name_boss = select_item_boss.Name.ToString();
                 Surname_boss = select_item_boss.Surname.ToString();
             }
+            else
+                Name_boss = "";
+                Surname_boss = "";
         }
         #endregion Boss
 
@@ -1604,6 +1622,8 @@ namespace Market.ViewModel
         {
             if (select_item_phone_edit != null)
                 Phone_edit = select_item_phone_edit.Number.ToString();
+            else
+                Phone_edit = "";
         }
         #endregion Phone
 
@@ -1644,6 +1664,8 @@ namespace Market.ViewModel
         {
             if (select_item_city_edit != null)
                 City_edit = select_item_city_edit.Name.ToString();
+            else
+                City_edit = "";
         }
         #endregion Phone
 
@@ -1684,6 +1706,8 @@ namespace Market.ViewModel
         {
             if (select_item_country_edit != null)
                 Country_edit = select_item_country_edit.Name.ToString();
+            else
+                Country_edit = "";
         }
         #endregion Country
 
@@ -1724,6 +1748,8 @@ namespace Market.ViewModel
         {
             if (select_item_adressa_edit != null)
                 Adressa_edit = select_item_adressa_edit.Name.ToString();
+            else
+                Adressa_edit = "";
         }
         #endregion Adressa
 
@@ -1766,6 +1792,11 @@ namespace Market.ViewModel
                 Name_boss_edit = select_item_boss_edit.Name.ToString();
                 Surname_boss_edit = select_item_boss_edit.Surname.ToString();
             }
+            else
+            {
+                Name_boss_edit ="";
+                Surname_boss_edit ="";
+            }
         }
         #endregion Boss
 
@@ -1773,5 +1804,169 @@ namespace Market.ViewModel
 
         #endregion Add
 
+
+
+        //#region Edit button
+        //private DelegateCommand _Command_Edit_category;
+        //public ICommand Button_edit_category
+        //{
+        //    get
+        //    {
+        //        if (_Command_Edit_category == null)
+        //        {
+        //            _Command_Edit_category = new DelegateCommand(Execute_Edit_category, CanExecute_Edit_category);
+        //        }
+        //        return _Command_Edit_category;
+        //    }
+        //}
+        //private void Execute_Edit_category(object o)
+        //{
+        //    var mySTR = list_category[_numValue].Сategory.ToString();
+        //    var query = (from b in myBD.Product_category
+        //                 where b.Сategory == mySTR
+        //                 select b).Single();
+        //    query.Сategory = name_edit;
+
+        //    myBD.SaveChanges();
+        //    Set_seting();
+        //}
+        //private bool CanExecute_Edit_category(object o)
+        //{
+
+
+        //    if (Name_edit.Length > 0)
+        //        return true;
+        //    else
+        //        return false;
+
+
+        //}
+        //#endregion Edit button
+
+        #region Add button
+        private DelegateCommand _Command_add_firm;
+        public ICommand Button_add_firm
+        {
+            get
+            {
+                if (_Command_add_firm == null)
+                {
+                    _Command_add_firm = new DelegateCommand(Execute_add_firm, CanExecute_add_firm);
+                }
+                return _Command_add_firm;
+            }
+        }
+        private void Execute_add_firm(object o)
+        {
+            Firm temp = new Firm();
+            temp.Name = name_firm;
+            Name_firm = "";
+
+            temp.Adressas.Add(select_item_adressa);
+            Select_item_adressa = null;
+
+            temp.Bosses.Add(select_item_boss);
+            Select_item_boss = null;
+
+            temp.Cities.Add(select_item_city);
+            Select_item_city = null;
+
+            temp.Countries.Add(select_item_country);
+            Select_item_country = null;
+
+            temp.Phones.Add(select_item_phone);
+            Select_item_phone = null;
+
+          
+
+
+            myBD.Firms.Add(temp);
+            myBD.SaveChanges();
+           
+
+        }
+        private bool CanExecute_add_firm(object o)
+        {
+
+
+            if (select_item_adressa!=null &&
+                select_item_boss != null &&
+                select_item_city != null &&
+                select_item_country != null &&
+                select_item_phone_edit!= null&&
+                name_firm.Length>0 )
+                return true;
+            else
+                return false;
+
+
+        }
+        #endregion Add button
+
+
+        //#region Delete button
+        //private DelegateCommand _Command_delete_category;
+        //public ICommand Button_delete_category
+        //{
+        //    get
+        //    {
+        //        if (_Command_delete_category == null)
+        //        {
+        //            _Command_delete_category = new DelegateCommand(Execute_delete_category, CanExecute_delete_category);
+        //        }
+        //        return _Command_delete_category;
+        //    }
+        //}
+        //private void Execute_delete_category(object o)
+        //{
+        //    myBD.Product_category.Remove(list_category[_numValue]);
+        //    myBD.SaveChanges();
+        //    Set_seting();
+
+        //}
+        //private bool CanExecute_delete_category(object o)
+        //{
+
+
+        //    if (list_category.Count > 0)
+        //        return true;
+        //    else
+        //        return false;
+
+
+        //}
+        //#endregion Delete button
+
+        //#region Cancel button
+        //private DelegateCommand _Command_cancel_category;
+        //public ICommand Button_cancel_category
+        //{
+        //    get
+        //    {
+        //        if (_Command_cancel_category == null)
+        //        {
+        //            _Command_cancel_category = new DelegateCommand(Execute_cancel_category, CanExecute_cancel_category);
+        //        }
+        //        return _Command_cancel_category;
+        //    }
+        //}
+        //private void Execute_cancel_category(object o)
+        //{
+        //    //_myDB.Products.Add().Product_category
+        //    //  _myDB.SaveChanges();
+
+
+        //}
+        //private bool CanExecute_cancel_category(object o)
+        //{
+
+
+
+        //    return true;
+
+
+
+        //}
+        //#endregion Cancel button
     }
 }
