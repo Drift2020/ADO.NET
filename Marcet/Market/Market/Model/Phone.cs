@@ -17,6 +17,6 @@ namespace Market
         [StringLength(255)]
         public string Number { get; set; }
 
-        public virtual Firm? Firm { get; set; }
+        public virtual Firm Firm { get; set; }
     }
 }
