@@ -32,7 +32,8 @@
                                 </Grid.ColumnDefinitions>
 
                                 <!--<GroupBox Header="Phone" Grid.Row="1" Grid.ColumnSpan="2">
-                                    --><!--<ListView  ItemsSource="{Binding List_phone,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                    -->
+                                <!--<ListView  ItemsSource="{Binding List_phone,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                                SelectedItem="{Binding Select_item_phone}">
                                         <ListView.ItemTemplate>
                                             <DataTemplate >
@@ -42,7 +43,8 @@
 
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
-                                    </ListView>--><!--
+                                    </ListView>-->
+                                <!--
                                 </GroupBox>-->
 
                                 <StackPanel Grid.Column="0" Grid.Row="0"  VerticalAlignment="Center">
@@ -281,8 +283,8 @@
 
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
                         <TextBox   Margin="5,5,0,5" Width="50" Text="{Binding NumValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  />
-                        <Button  Margin="5,5,0,5" Content="˄" Width="20"  />
-                        <Button  Margin="0,5,0,5"  Content="˅" Width="20"  />
+                        <Button Command="{Binding Button_up_firm}" Margin="5,5,0,5" Content="˄" Width="20"  />
+                        <Button  Command="{Binding Button_down_firm}" Margin="0,5,0,5"  Content="˅" Width="20"  />
                     </StackPanel>
                     <!--<StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
                         <TextBox x:Name="txtNum" x:FieldModifier="private" Margin="5,5,0,5" Width="50" Text="0" TextChanged="txtNum_TextChanged" />
@@ -296,16 +298,17 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition  Height="30"/>
                                     <RowDefinition/>
-                                    <RowDefinition Height="70"/>
+                                    <RowDefinition Height="90"/>
                                 </Grid.RowDefinitions>
 
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="61*"/>
+                                    <ColumnDefinition Width="100*"/>
+                                    <ColumnDefinition Width="161*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <GroupBox Header="Phone" Grid.Row="1" Grid.ColumnSpan="2">
-                                    <ListView  ItemsSource="{Binding List_phone_edit,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                <GroupBox Header="Phone" Grid.Row="1" Grid.ColumnSpan="3">
+                                    <ListView  ItemsSource="{Binding List_phone_edit ,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                                SelectedItem="{Binding Select_item_phone_edit}">
                                         <ListView.ItemTemplate>
                                             <DataTemplate >
@@ -318,18 +321,18 @@
                                     </ListView>
                                 </GroupBox>
 
-                                <StackPanel Grid.Column="0" Grid.Row="0"  VerticalAlignment="Center">
+                                <StackPanel Grid.Column="0" Grid.Row="0"  VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,7">
                                     <TextBlock  Text="Name" HorizontalAlignment="Center"/>
 
                                 </StackPanel>
-                                <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+                                <StackPanel Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Margin="0,2">
                                     <TextBox Text="{Binding Name_firm_edit, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="4"></TextBox>
                                 </StackPanel>
-                                <StackPanel Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center">
+                                <StackPanel Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,14">
                                     <TextBlock  Text="Phone" HorizontalAlignment="Center"/>
                                     <TextBox Text="{Binding Phone_edit,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="4"></TextBox>
                                 </StackPanel>
-                                <StackPanel Margin="5" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
+                                <StackPanel Margin="5,15" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center">
                                     <Button Command="{Binding Button_New_Phone_edit}" Content="New phone"/>
                                     <Button Command="{Binding Button_Delete_Phone_edit}" Content="Delete phone"/>
                                     <Button Command="{Binding Button_Edit_Phone_edit}" Content="Edit phone"/>
@@ -510,9 +513,9 @@
 
                     </TabControl>
                     <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Right">
-                        <Button Margin="5" Content="Delete" Width="100" HorizontalAlignment="Right"/>
-                        <Button Margin="5" Content="Edit" Width="100" HorizontalAlignment="Right"/>
-                        <Button Margin="5" Content="Cancel"  Width="100" HorizontalAlignment="Right"/>
+                        <Button Command="{Binding }"  Margin="5" Content="Delete" Width="100" HorizontalAlignment="Right"/>
+                        <Button Command="{Binding Button_edit_firm}"  Margin="5" Content="Edit" Width="100" HorizontalAlignment="Right"/>
+                        <Button Command="{Binding }"  Margin="5" Content="Cancel"  Width="100" HorizontalAlignment="Right"/>
                     </StackPanel>
                 </Grid>
 
