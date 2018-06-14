@@ -20,7 +20,16 @@ namespace Market.ViewModel
             List_boss = myBD.Bosses.ToList();
             List_city = myBD.Cities.ToList();
             List_country = myBD.Countries.ToList();
-            List_phone = myBD.Phones.ToList();
+
+
+            list_firm_edit = myBD.Firms.ToList();
+
+            List_adressa_edit = myBD.Adressas.ToList();
+            List_boss_edit = myBD.Bosses.ToList();
+            List_city_edit = myBD.Cities.ToList();
+            List_country_edit = myBD.Countries.ToList();
+
+            //List_phone = myBD.Phones.ToList();
         }
 
         #region Add
@@ -28,124 +37,124 @@ namespace Market.ViewModel
         #region Command button 
 
         #region Base
-        #region 
-        private DelegateCommand _Command_New_Phone;
-        public ICommand Button_New_Phone
-        {
-            get
-            {
-                if (_Command_New_Phone == null)
-                {
-                    _Command_New_Phone = new DelegateCommand(Execute_New_Phone, CanExecute_New_Phone);
-                }
-                return _Command_New_Phone;
-            }
-        }
-        private void Execute_New_Phone(object o)
-        {
+        //#region 
+        //private DelegateCommand _Command_New_Phone;
+        //public ICommand Button_New_Phone
+        //{
+        //    get
+        //    {
+        //        if (_Command_New_Phone == null)
+        //        {
+        //            _Command_New_Phone = new DelegateCommand(Execute_New_Phone, CanExecute_New_Phone);
+        //        }
+        //        return _Command_New_Phone;
+        //    }
+        //}
+        //private void Execute_New_Phone(object o)
+        //{
 
-            Phone temp = new Phone();
-            temp.Number = Convert.ToString(phone);
-            list_phone.Add(temp);
-            myBD.Phones.Add(temp);
+        //    Phone temp = new Phone();
+        //    temp.Number = Convert.ToString(phone);
+        //    list_phone.Add(temp);
+        //    myBD.Phones.Add(temp);
           
-            myBD.SaveChanges();
+        //    myBD.SaveChanges();
            
-            OnPropertyChanged(nameof(List_phone));
+        //    OnPropertyChanged(nameof(List_phone));
 
-        }
-        private bool CanExecute_New_Phone(object o)
-        {
-
-
-            if (phone != null && phone.Length > 0)
-                return true;
-            else
-                return false;
+        //}
+        //private bool CanExecute_New_Phone(object o)
+        //{
 
 
-        }
-        #endregion
-        #region 
-        private DelegateCommand _Command_Delete_Phone;
-        public ICommand Button_Delete_Phone
-        {
-            get
-            {
-                if (_Command_Delete_Phone == null)
-                {
-                    _Command_Delete_Phone = new DelegateCommand(Execute_Delete_Phone, CanExecute_Delete_Phone);
-                }
-                return _Command_Delete_Phone;
-            }
-        }
-        private void Execute_Delete_Phone(object o)
-        {
-
-            list_phone.Remove(select_item_phone);
-            myBD.Phones.Remove(select_item_phone);
-            myBD.SaveChanges();
-
-            OnPropertyChanged(nameof(List_phone));
-            Select_item_phone = null;
-            Phone = null;
+        //    if (phone != null && phone.Length > 0)
+        //        return true;
+        //    else
+        //        return false;
 
 
-        }
-        private bool CanExecute_Delete_Phone(object o)
-        {
+        //}
+        //#endregion
+        //#region 
+        //private DelegateCommand _Command_Delete_Phone;
+        //public ICommand Button_Delete_Phone
+        //{
+        //    get
+        //    {
+        //        if (_Command_Delete_Phone == null)
+        //        {
+        //            _Command_Delete_Phone = new DelegateCommand(Execute_Delete_Phone, CanExecute_Delete_Phone);
+        //        }
+        //        return _Command_Delete_Phone;
+        //    }
+        //}
+        //private void Execute_Delete_Phone(object o)
+        //{
+
+        //    list_phone.Remove(select_item_phone);
+        //    myBD.Phones.Remove(select_item_phone);
+        //    myBD.SaveChanges();
+
+        //    OnPropertyChanged(nameof(List_phone));
+        //    Select_item_phone = null;
+        //    Phone = null;
 
 
-            if (select_item_phone != null)
-                return true;
-            else
-                return false;
+        //}
+        //private bool CanExecute_Delete_Phone(object o)
+        //{
 
 
-        }
-        #endregion
-        #region 
-        private DelegateCommand _Command_Edit_phone;
-        public ICommand Button_Edit_Phone
-        {
-            get
-            {
-                if (_Command_Edit_phone == null)
-                {
-                    _Command_Edit_phone = new DelegateCommand(Execute_Edit_phone, CanExecute_Edit_phone);
-                }
-                return _Command_Edit_phone;
-            }
-        }
-        private void Execute_Edit_phone(object o)
-        {
+        //    if (select_item_phone != null)
+        //        return true;
+        //    else
+        //        return false;
+
+
+        //}
+        //#endregion
+        //#region 
+        //private DelegateCommand _Command_Edit_phone;
+        //public ICommand Button_Edit_Phone
+        //{
+        //    get
+        //    {
+        //        if (_Command_Edit_phone == null)
+        //        {
+        //            _Command_Edit_phone = new DelegateCommand(Execute_Edit_phone, CanExecute_Edit_phone);
+        //        }
+        //        return _Command_Edit_phone;
+        //    }
+        //}
+        //private void Execute_Edit_phone(object o)
+        //{
 
 
             
-            var mySTR = Select_item_phone.ID;
-            var query = (from b in myBD.Phones
-                         where b.ID == mySTR
-                         select b).Single();
-            query.Number = phone;
-            myBD.SaveChanges();
-            Select_item_phone.Number = phone;
+        //    var mySTR = Select_item_phone.ID;
+        //    var query = (from b in myBD.Phones
+        //                 where b.ID == mySTR
+        //                 select b).Single();
+        //    query.Number = phone;
+        //    myBD.SaveChanges();
+        //    Select_item_phone.Number = phone;
 
-            OnPropertyChanged(nameof (List_phone));
-
-
-        }
-
-        private bool CanExecute_Edit_phone(object o)
-        {
-
-            if (select_item_phone != null && Phone.Length>0)
-                return true;
-            else
-                return false;
+        //    OnPropertyChanged(nameof (List_phone));
 
 
-        }
-        #endregion
+        //}
+
+        //private bool CanExecute_Edit_phone(object o)
+        //{
+
+        //    if (select_item_phone != null && Phone.Length>0)
+        //        return true;
+        //    else
+        //        return false;
+
+
+        //}
+        //#endregion
         #endregion Base
 
         #region City
@@ -766,47 +775,47 @@ namespace Market.ViewModel
         #region List and select
 
 
-        #region Phone
-        List<Phone> list_phone= new List<Market.Phone>();
-        public ICollection<Phone> List_phone
-        {
-            set
-            {
-                list_phone = value.ToList();
-                OnPropertyChanged(nameof(List_phone));
-            }
-            get
-            {
+        //#region Phone
+        //List<Phone> list_phone= new List<Market.Phone>();
+        //public ICollection<Phone> List_phone
+        //{
+        //    set
+        //    {
+        //        list_phone = value.ToList();
+        //        OnPropertyChanged(nameof(List_phone));
+        //    }
+        //    get
+        //    {
 
-                return list_phone.ToList();
-            }
-        }
-
-
-        Phone select_item_phone= new Phone();
-        public Phone Select_item_phone
-        {
-            set
-            {
-                select_item_phone = value;
-                OnPropertyChanged(nameof(Select_item_phone));
-                Set_phone();
-            }
-            get
-            {
-                return select_item_phone;
-            }
-        }
+        //        return list_phone.ToList();
+        //    }
+        //}
 
 
-        void Set_phone()
-        {
-            if (select_item_phone != null)
-                Phone = select_item_phone.Number.ToString();
-            else
-                Phone = "";
-        }
-        #endregion Phone
+        //Phone select_item_phone= new Phone();
+        //public Phone Select_item_phone
+        //{
+        //    set
+        //    {
+        //        select_item_phone = value;
+        //        OnPropertyChanged(nameof(Select_item_phone));
+        //        Set_phone();
+        //    }
+        //    get
+        //    {
+        //        return select_item_phone;
+        //    }
+        //}
+
+
+        //void Set_phone()
+        //{
+        //    if (select_item_phone != null)
+        //        Phone = select_item_phone.Number.ToString();
+        //    else
+        //        Phone = "";
+        //}
+        //#endregion Phone
 
 
         #region City
@@ -1588,6 +1597,130 @@ namespace Market.ViewModel
         #endregion
         #endregion Adressa
 
+
+        #region UpDown
+        private int _numValue = 0;
+
+        public string NumValue
+        {
+            get { return _numValue.ToString(); }
+            set
+            {
+
+
+                _numValue = Convert.ToInt32(value);
+                OnPropertyChanged(nameof(NumValue));
+
+            }
+        }
+
+
+        #region UP
+
+        private DelegateCommand _Command_up_firm;
+        public ICommand Button_up_firm
+        {
+            get
+            {
+                if (_Command_up_firm == null)
+                {
+                    _Command_up_firm = new DelegateCommand(Execute_up_firm, CanExecute_up_firm);
+                }
+                return _Command_up_firm;
+            }
+        }
+        private void Execute_up_firm(object o)
+        {
+            _numValue += 1;
+            Set_seting();
+        }
+        private bool CanExecute_up_firm(object o)
+        {
+            if (_numValue < list_firm_edit.Count - 1)
+                return true;
+            else
+                return false;
+
+        }
+
+        #endregion
+
+        #region DOWN
+
+        private DelegateCommand _Command_down_firm;
+        public ICommand Button_down_firm
+        {
+            get
+            {
+                if (_Command_down_firm == null)
+                {
+                    _Command_down_firm = new DelegateCommand(Execute_down_firm, CanExecute_down_firm);
+                }
+                return _Command_down_firm;
+            }
+        }
+        private void Execute_down_firm(object o)
+        {
+            _numValue -= 1;
+            Set_seting();
+        }
+        private bool CanExecute_down_firm(object o)
+        {
+            if (_numValue > 0)
+                return true;
+            else
+                return false;
+
+        }
+
+        #endregion
+
+        #region text
+
+        void Set_seting()
+        {
+            list_firm_edit = myBD.Firms.ToList();
+
+            if (list_firm_edit.Count == 0)
+            {
+                _numValue = 0;
+                Set_select();
+                NumValue = _numValue.ToString();
+            }
+            else if (_numValue > list_firm_edit.Count - 1)
+            {
+
+                _numValue -= 1;
+                Set_select();
+                NumValue = _numValue.ToString();
+            }
+            else
+            {
+
+                NumValue = _numValue.ToString();
+            }
+        }
+
+        void Set_select()
+        {
+            if(list_firm_edit[_numValue].Adressas.ToList().Count>0)
+            foreach(var i in list_adressa_edit)
+            {
+                if(i.ID == list_firm_edit[_numValue].Adressas.ToList()[0].ID)
+                {
+                        Select_item_adressa_edit = i;
+                }
+            }
+
+         
+        }
+
+
+        #endregion text 
+
+     
+        #endregion
+
         #endregion Command button
 
 
@@ -1938,9 +2071,36 @@ namespace Market.ViewModel
         }
         #endregion Boss
 
+        #region Firm list
+
+        List<Firm> list_firm_edit = new List<Market.Firm>();
+        public ICollection<Firm> List_firm_edit
+        {
+            set
+            {
+                list_firm_edit = value.ToList();
+                OnPropertyChanged(nameof(List_firm_edit));
+            }
+            get
+            {
+
+
+                if (list_firm_edit != null)
+                    return list_firm_edit;
+                else
+                    return null;
+            }
+
+        }
+
+
+
+
+        #endregion Price list
+
         #endregion List and select
 
-        #endregion Add
+        #endregion Edit
 
 
 
@@ -2000,6 +2160,14 @@ namespace Market.ViewModel
             temp.Name = name_firm;
             Name_firm = "";
 
+
+            Phone temp_p = new Phone();
+            temp_p.Number = Convert.ToString(phone);
+            temp_p.Firm = temp;
+            temp_p.FirmID = temp.ID;
+
+            myBD.Phones.Add(temp_p);
+
             temp.Adressas.Add(select_item_adressa);
             Select_item_adressa = null;
 
@@ -2012,8 +2180,8 @@ namespace Market.ViewModel
             temp.Countries.Add(select_item_country);
             Select_item_country = null;
 
-            temp.Phones.Add(select_item_phone);
-            Select_item_phone = null;
+            //temp.Phones.Add(select_item_phone);
+            //Select_item_phone = null;
 
           
 
@@ -2031,7 +2199,8 @@ namespace Market.ViewModel
                 select_item_boss != null &&
                 select_item_city != null &&
                 select_item_country != null &&
-                select_item_phone_edit!= null&&
+                //select_item_phone!= null&&
+                phone.Length>0&&
                 name_firm.Length>0 )
                 return true;
             else

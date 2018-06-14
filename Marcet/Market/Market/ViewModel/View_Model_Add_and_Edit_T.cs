@@ -17,7 +17,7 @@ namespace Market.ViewModel
         {
             _myDB = new Model1();
 
-            List_Price = _myDB.Prices.ToList();
+            //List_Price = _myDB.Prices.ToList();
             List_Count = _myDB.Counts.ToList();
             List_Mark_up = _myDB.Mark_up.ToList();
             List_date_of_receipt = _myDB.Date_of_receipt.ToList();
@@ -28,15 +28,19 @@ namespace Market.ViewModel
 
 
 
+            List_product_edit = _myDB.Products.ToList();
 
-            List_Price_edit = _myDB.Prices.ToList();
-            List_Count_edit = _myDB.Counts.ToList();
-            List_Mark_up_edit = _myDB.Mark_up.ToList();
-            List_date_of_receipt_edit = _myDB.Date_of_receipt.ToList();
-            List_acceptor_edit = _myDB.FIO_Person.ToList();
-            List_product_life_edit = _myDB.Product_life.ToList();
-            List_firm_edit = _myDB.Firms.ToList();
-            List_category_edit = _myDB.Product_category.ToList();
+            
+
+                List_Price_edit = _myDB.Prices.ToList();
+                List_Count_edit = _myDB.Counts.ToList();
+                List_Mark_up_edit = _myDB.Mark_up.ToList();
+                List_date_of_receipt_edit = _myDB.Date_of_receipt.ToList();
+                List_acceptor_edit = _myDB.FIO_Person.ToList();
+                List_product_life_edit = _myDB.Product_life.ToList();
+                List_firm_edit = _myDB.Firms.ToList();
+                List_category_edit = _myDB.Product_category.ToList();
+            
         }
 
         #region Add
@@ -62,7 +66,7 @@ namespace Market.ViewModel
         {
             //_myDB.Products.Add().Product_category
           //  _myDB.SaveChanges();
-            OnPropertyChanged(nameof(List_Price));
+         //   OnPropertyChanged(nameof(List_Price));
 
         }
         private bool CanExecute_Add_Product(object o)
@@ -70,7 +74,8 @@ namespace Market.ViewModel
 
 
             if (Name_t.Length>0 &&
-                Select_item_price!=null &&
+                price.Length>0&&
+               // Select_item_price!=null &&
                 Select_item_count != null &&
                 Select_item_mark_up != null &&
                 Select_item_date_of_receipt != null &&
@@ -115,121 +120,121 @@ namespace Market.ViewModel
 
 
         #region Price
-        #region 
-        private DelegateCommand _Command_New_Price;
-        public ICommand Button_New_Price
-        {
-            get
-            {
-                if (_Command_New_Price == null)
-                {
-                    _Command_New_Price = new DelegateCommand(Execute_New_Price, CanExecute_New_Price);
-                }
-                return _Command_New_Price;
-            }
-        }
-        private void Execute_New_Price(object o)
-        {
+        //#region 
+        //private DelegateCommand _Command_New_Price;
+        //public ICommand Button_New_Price
+        //{
+        //    get
+        //    {
+        //        if (_Command_New_Price == null)
+        //        {
+        //            _Command_New_Price = new DelegateCommand(Execute_New_Price, CanExecute_New_Price);
+        //        }
+        //        return _Command_New_Price;
+        //    }
+        //}
+        //private void Execute_New_Price(object o)
+        //{
 
-            Price new_price = new Price();
-            new_price.Price1 = Convert.ToDecimal(price);
-            list_price.Add(new_price);
-            _myDB.Prices.Add(new_price);
-            _myDB.SaveChanges();
-
-
-            OnPropertyChanged(nameof(List_Price));
-
-        }
-        private bool CanExecute_New_Price(object o)
-        {
+        //    Price new_price = new Price();
+        //    new_price.Price1 = Convert.ToDecimal(price);
+        //    list_price.Add(new_price);
+        //    _myDB.Prices.Add(new_price);
+        //    _myDB.SaveChanges();
 
 
-            if (price != null && price.Length>0)
-                return true;
-            else
-                return false;
+        //    OnPropertyChanged(nameof(List_Price));
+
+        //}
+        //private bool CanExecute_New_Price(object o)
+        //{
 
 
-        }
-        #endregion
-        #region 
-        private DelegateCommand _Command_Delete_Price;
-        public ICommand Button_Delete_Price
-        {
-            get
-            {
-                if (_Command_Delete_Price == null)
-                {
-                    _Command_Delete_Price = new DelegateCommand(Execute_Delete_Price, CanExecute_Delete_Price);
-                }
-                return _Command_Delete_Price;
-            }
-        }
-        private void Execute_Delete_Price(object o)
-        {
-
-            list_price.Remove(select_item_price);
-            _myDB.Prices.Remove(select_item_price);
-            _myDB.SaveChanges();
-
-            OnPropertyChanged(nameof(List_Price));
-            Select_item_price = null;
-            Price = null;
+        //    if (price != null && price.Length>0)
+        //        return true;
+        //    else
+        //        return false;
 
 
-        }
-        private bool CanExecute_Delete_Price(object o)
-        {
+        //}
+        //#endregion
+        //#region 
+        //private DelegateCommand _Command_Delete_Price;
+        //public ICommand Button_Delete_Price
+        //{
+        //    get
+        //    {
+        //        if (_Command_Delete_Price == null)
+        //        {
+        //            _Command_Delete_Price = new DelegateCommand(Execute_Delete_Price, CanExecute_Delete_Price);
+        //        }
+        //        return _Command_Delete_Price;
+        //    }
+        //}
+        //private void Execute_Delete_Price(object o)
+        //{
+
+        //    list_price.Remove(select_item_price);
+        //    _myDB.Prices.Remove(select_item_price);
+        //    _myDB.SaveChanges();
+
+        //    OnPropertyChanged(nameof(List_Price));
+        //    Select_item_price = null;
+        //    Price = null;
 
 
-            if (select_item_price != null)
-                return true;
-            else
-                return false;
+        //}
+        //private bool CanExecute_Delete_Price(object o)
+        //{
 
 
-        }
-        #endregion
-        #region 
-        private DelegateCommand _Command_Edit_price;
-        public ICommand Button_Edit_price
-        {
-            get
-            {
-                if (_Command_Edit_price == null)
-                {
-                    _Command_Edit_price = new DelegateCommand(Execute_Edit_price, CanExecute_Edit_price);
-                }
-                return _Command_Edit_price;
-            }
-        }
-        private void Execute_Edit_price(object o)
-        {
-            var mySTR = select_item_price.ID;
-            var query = (from b in _myDB.Prices
-                         where b.ID == mySTR
-                         select b).Single();
-            query.Price1 = Convert.ToDecimal(price);
-            _myDB.SaveChanges();
+        //    if (select_item_price != null)
+        //        return true;
+        //    else
+        //        return false;
 
-            Select_item_price.Price1 = Convert.ToDecimal(price);
-            OnPropertyChanged(nameof(List_Price));
+
+        //}
+        //#endregion
+        //#region 
+        //private DelegateCommand _Command_Edit_price;
+        //public ICommand Button_Edit_price
+        //{
+        //    get
+        //    {
+        //        if (_Command_Edit_price == null)
+        //        {
+        //            _Command_Edit_price = new DelegateCommand(Execute_Edit_price, CanExecute_Edit_price);
+        //        }
+        //        return _Command_Edit_price;
+        //    }
+        //}
+        //private void Execute_Edit_price(object o)
+        //{
+        //    var mySTR = select_item_price.ID;
+        //    var query = (from b in _myDB.Prices
+        //                 where b.ID == mySTR
+        //                 select b).Single();
+        //    query.Price1 = Convert.ToDecimal(price);
+        //    _myDB.SaveChanges();
+
+        //    Select_item_price.Price1 = Convert.ToDecimal(price);
+        //    OnPropertyChanged(nameof(List_Price));
           
 
-        }
+        //}
 
-        private bool CanExecute_Edit_price(object o)
-        {
+        //private bool CanExecute_Edit_price(object o)
+        //{
 
-            if(select_item_price!=null&& (Price!="" && Price!=null && !Price.Contains(" ")))
-            return true;
-            else
-            return false;
+        //    if(select_item_price!=null&& (Price!="" && Price!=null && !Price.Contains(" ")))
+        //    return true;
+        //    else
+        //    return false;
 
 
-        }
-        #endregion
+        //}
+        //#endregion
         #endregion Price
 
         #region Count
@@ -958,57 +963,57 @@ namespace Market.ViewModel
         #endregion pole
 
         #region List
-        #region Price list
+        //#region Price list
 
-        List<Price> list_price=new List<Market.Price>();
-        public ICollection<Price> List_Price
-        {
-            set
-            {
-                list_price = value.ToList();
-                OnPropertyChanged(nameof(List_Price));
-            }
-            get
-            {
-
-
-                if (list_price != null)
-                    return list_price;
-                else
-                    return (new List<Price>());
-            }
-
-        }
-
-        Price select_item_price;
-        public Price Select_item_price
-        {
-            set
-            {
-                select_item_price = value;
-                OnPropertyChanged(nameof(Select_item_price));
-                Set_price();
-            }
-            get
-            {
+        //List<Price> list_price=new List<Market.Price>();
+        //public ICollection<Price> List_Price
+        //{
+        //    set
+        //    {
+        //        list_price = value.ToList();
+        //        OnPropertyChanged(nameof(List_Price));
+        //    }
+        //    get
+        //    {
 
 
-                if (select_item_price != null)
-                    return select_item_price;
-                else
-                    //  return (new Price());
-                    return null;
-            }
+        //        if (list_price != null)
+        //            return list_price;
+        //        else
+        //            return (new List<Price>());
+        //    }
 
-        }
+        //}
 
-        void Set_price()
-        {
-            if(select_item_price!=null)
-            Price = select_item_price.Price1.ToString();
-        }
+        //Price select_item_price;
+        //public Price Select_item_price
+        //{
+        //    set
+        //    {
+        //        select_item_price = value;
+        //        OnPropertyChanged(nameof(Select_item_price));
+        //        Set_price();
+        //    }
+        //    get
+        //    {
 
-        #endregion Price list
+
+        //        if (select_item_price != null)
+        //            return select_item_price;
+        //        else
+        //            //  return (new Price());
+        //            return null;
+        //    }
+
+        //}
+
+        //void Set_price()
+        //{
+        //    if(select_item_price!=null)
+        //    Price = select_item_price.Price1.ToString();
+        //}
+
+        //#endregion Price list
         #region Count list
 
         List<Count> list_count = new List<Count>();
@@ -1540,14 +1545,15 @@ namespace Market.ViewModel
         {
 
 
-            if (Name_t.Length > 0 &&
-                Select_item_price != null &&
-                Select_item_count != null &&
-                Select_item_mark_up != null &&
-                Select_item_date_of_receipt != null &&
-                Select_item_product_life != null &&
-                Select_item_acceptor != null &&
-                Select_item_firm != null)
+            if (Name_t_edit.Length > 0 &&
+                price_edit.Length>0&&
+                //Select_item_price != null &&
+                Select_item_count_edit != null &&
+                Select_item_mark_up_edit != null &&
+                Select_item_date_of_receipt_edit != null &&
+                Select_item_product_life_edit != null &&
+                Select_item_acceptor_edit != null &&
+                Select_item_firm_edit != null)
                 return true;
             else
                 return false;
@@ -2217,6 +2223,7 @@ namespace Market.ViewModel
         }
         #endregion
         #endregion Product_life
+
 
 
         #endregion Command button
