@@ -134,6 +134,10 @@ namespace Market.ViewModel
             Price new_price = new Price();
             new_price.Price1 = Convert.ToDecimal(price);
             list_price.Add(new_price);
+            _myDB.Prices.Add(new_price);
+            _myDB.SaveChanges();
+
+
             OnPropertyChanged(nameof(List_Price));
 
         }
@@ -166,6 +170,8 @@ namespace Market.ViewModel
         {
 
             list_price.Remove(select_item_price);
+            _myDB.Prices.Remove(select_item_price);
+            _myDB.SaveChanges();
 
             OnPropertyChanged(nameof(List_Price));
             Select_item_price = null;
@@ -200,8 +206,14 @@ namespace Market.ViewModel
         }
         private void Execute_Edit_price(object o)
         {
+            var mySTR = select_item_price.ID;
+            var query = (from b in _myDB.Prices
+                         where b.ID == mySTR
+                         select b).Single();
+            query.Price1 = Convert.ToDecimal(price);
+            _myDB.SaveChanges();
 
-            Select_item_price.Price1 = Convert.ToDecimal(Price);
+            Select_item_price.Price1 = Convert.ToDecimal(price);
             OnPropertyChanged(nameof(List_Price));
           
 
@@ -240,6 +252,9 @@ namespace Market.ViewModel
             Count new_count = new Count();
             new_count.Count1 = Convert.ToInt32(count);
             List_Count.Add(new_count);
+            _myDB.Counts.Add(new_count);
+            _myDB.SaveChanges();
+
             OnPropertyChanged(nameof(List_Count));
 
         }
@@ -273,6 +288,8 @@ namespace Market.ViewModel
 
 
             list_count.Remove(select_item_count);
+            _myDB.Counts.Remove(select_item_count);
+            _myDB.SaveChanges();
 
             OnPropertyChanged(nameof(List_Count));
             Select_item_count = null;
@@ -309,7 +326,14 @@ namespace Market.ViewModel
         private void Execute_Edit_Count(object o)
         {
 
-            Select_item_count.Count1 = Convert.ToInt32(Count);
+            var mySTR = select_item_count.ID;
+            var query = (from b in _myDB.Counts
+                         where b.ID == mySTR
+                         select b).Single();
+            query.Count1 = Convert.ToInt32(count);
+            _myDB.SaveChanges();
+
+            Select_item_count.Count1 = Convert.ToInt32(count);
             OnPropertyChanged(nameof(List_Count));
 
         }
@@ -346,6 +370,9 @@ namespace Market.ViewModel
             Mark_up new_mark_up = new Mark_up();
             new_mark_up.Count = Convert.ToInt32(mark_up);
             List_Mark_up.Add(new_mark_up);
+            _myDB.Mark_up.Add(new_mark_up);
+            _myDB.SaveChanges();
+
             OnPropertyChanged(nameof(List_Mark_up));
 
         }
@@ -378,6 +405,8 @@ namespace Market.ViewModel
 
 
             list_mark_up.Remove(select_item_mark_up);
+            _myDB.Mark_up.Remove(select_item_mark_up);
+            _myDB.SaveChanges();
 
             OnPropertyChanged(nameof(List_Mark_up));
             Select_item_mark_up = null;
@@ -413,6 +442,13 @@ namespace Market.ViewModel
         }
         private void Execute_Edit_Mark_up(object o)
         {
+
+            var mySTR = select_item_mark_up.ID;
+            var query = (from b in _myDB.Mark_up
+                         where b.ID == mySTR
+                         select b).Single();
+            query.Count = Convert.ToDecimal(count);
+            _myDB.SaveChanges();
 
             Select_item_mark_up.Count = Convert.ToInt32(Mark_up);
             OnPropertyChanged(nameof(List_Mark_up));
@@ -454,6 +490,9 @@ namespace Market.ViewModel
             Date_of_receipt new_date_of_receipt = new Date_of_receipt();
             new_date_of_receipt.Date = Convert.ToDateTime(date_of_receipt);
             List_date_of_receipt.Add(new_date_of_receipt);
+            _myDB.Date_of_receipt.Add(new_date_of_receipt);
+            _myDB.SaveChanges();
+
             OnPropertyChanged(nameof(List_date_of_receipt));
 
         }
@@ -487,6 +526,8 @@ namespace Market.ViewModel
         {
 
             list_date_of_receipt.Remove(select_item_date_of_receipt);
+            _myDB.Date_of_receipt.Remove(select_item_date_of_receipt);
+            _myDB.SaveChanges();
 
             OnPropertyChanged(nameof(List_date_of_receipt));
             Select_item_date_of_receipt = null;
@@ -521,6 +562,12 @@ namespace Market.ViewModel
         }
         private void Execute_Edit_Date_of_receipt(object o)
         {
+            var mySTR = select_item_date_of_receipt.ID;
+            var query = (from b in _myDB.Date_of_receipt
+                         where b.ID == mySTR
+                         select b).Single();
+            query.Date = Convert.ToDateTime(date_of_receipt);
+            _myDB.SaveChanges();
 
             Select_item_date_of_receipt.Date = Convert.ToDateTime(Date_of_receipt);
             OnPropertyChanged(nameof(List_date_of_receipt));
@@ -561,6 +608,9 @@ namespace Market.ViewModel
             new_fio_person.Name = Convert.ToString(name);
             new_fio_person.Surname = Convert.ToString(surname);
 
+            _myDB.FIO_Person.Add(new_fio_person);
+            _myDB.SaveChanges();
+
             List_acceptor.Add(new_fio_person);
             OnPropertyChanged(nameof(List_acceptor));
 
@@ -596,6 +646,8 @@ namespace Market.ViewModel
         {
 
             list_acceptor.Remove(select_item_acceptor);
+            _myDB.FIO_Person.Remove(select_item_acceptor);
+            _myDB.SaveChanges();
 
             OnPropertyChanged(nameof(List_acceptor));
             Select_item_acceptor = null;
@@ -629,6 +681,16 @@ namespace Market.ViewModel
         }
         private void Execute_Edit_Acceptor(object o)
         {
+            var mySTR = select_item_acceptor.ID;
+            var query = (from b in _myDB.FIO_Person
+                         where b.ID == mySTR
+                         select b).Single();
+            query.Name = Convert.ToString(name);
+            query.Surname = Convert.ToString(surname);
+
+            _myDB.SaveChanges();
+
+
             Select_item_acceptor.Name = Convert.ToString(Name);
             Select_item_acceptor.Surname = Convert.ToString(Surname);
             OnPropertyChanged(nameof(List_acceptor));
@@ -664,7 +726,8 @@ namespace Market.ViewModel
         {
             Product_life new_product_life = new Product_life();
             new_product_life.Date = Convert.ToDateTime(product_life);
-
+            _myDB.Product_life.Add(new_product_life);
+            _myDB.SaveChanges();
 
             List_product_life.Add(new_product_life);
             OnPropertyChanged(nameof(List_product_life));
@@ -697,6 +760,9 @@ namespace Market.ViewModel
         {
 
             list_product_life.Remove(select_item_product_life);
+            _myDB.Product_life.Remove(select_item_product_life);
+            _myDB.SaveChanges();
+
             OnPropertyChanged(nameof(List_product_life));
             Select_item_product_life = null;
             product_life = null;
@@ -727,6 +793,13 @@ namespace Market.ViewModel
         private void Execute_Edit_Product_life(object o)
         {
 
+            var mySTR = select_item_product_life.ID;
+            var query = (from b in _myDB.Product_life
+                         where b.ID == mySTR
+                         select b).Single();
+            query.Date = Convert.ToDateTime(product_life);
+            _myDB.SaveChanges();
+
             Select_item_product_life.Date = Convert.ToDateTime(product_life);
             OnPropertyChanged(nameof(List_product_life));
 
@@ -740,6 +813,7 @@ namespace Market.ViewModel
         }
         #endregion
         #endregion Product_life
+
         #endregion Command button
 
 
