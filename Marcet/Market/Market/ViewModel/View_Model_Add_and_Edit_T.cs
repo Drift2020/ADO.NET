@@ -90,16 +90,52 @@ namespace Market.ViewModel
         }
         private void Execute_Add_Product(object o)
         {
-            //_myDB.Products.Add().Product_category
-          //  _myDB.SaveChanges();
-         //   OnPropertyChanged(nameof(List_Price));
+            Product temp = new Product();
+            temp.Name = name_t;
+            Name_t = "";
+
+
+            Price temp_p = new Price();
+            temp_p.Price1 = Convert.ToInt32(price);
+            temp_p.Product = temp;
+            temp_p.ProductID = temp.ID;
+
+            _myDB.Prices.Add(temp_p);
+
+            temp.Product_category.Add(select_item_category);
+            Select_item_category = null;
+
+            temp.Counts.Add(select_item_count);
+            Select_item_count = null;
+
+            temp.Mark_up.Add(select_item_mark_up);
+            Select_item_mark_up = null;
+
+            temp.Date_of_receipt.Add(select_item_date_of_receipt);
+            Select_item_date_of_receipt = null;
+
+
+            temp.Product_life.Add(select_item_product_life);
+            Select_item_product_life = null;
+
+            temp.FIO_Person.Add(select_item_acceptor);
+            Select_item_acceptor = null;
+
+            temp.Firm=(select_item_firm);
+            select_item_firm = null;
+
+
+            _myDB.Products.Add(temp);
+            _myDB.SaveChanges();
 
         }
         private bool CanExecute_Add_Product(object o)
         {
 
 
-            if (Name_t.Length>0 &&
+            if (Name_t!=null&&
+                Name_t.Length>0 &&
+                price!=null &&
                 price.Length>0&&
                // Select_item_price!=null &&
                 Select_item_count != null &&
@@ -1688,9 +1724,14 @@ namespace Market.ViewModel
         }
         private void Execute_Delete_Product(object o)
         {
-            //_myDB.Products.Add().Product_category
-            //  _myDB.SaveChanges();
-
+            _myDB.Products.Remove(list_product_edit[_numValue]);
+            _myDB.SaveChanges();
+            list_product_edit.Remove(list_product_edit[_numValue]);
+         
+            Set_list();
+            OnPropertyChanged(nameof(List_Price_edit));
+            Select_item_price_edit = null;
+            Price_edit = null;
 
         }
         private bool CanExecute_Delete_Product(object o)

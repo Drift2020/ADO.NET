@@ -792,7 +792,7 @@
 
                     </TabControl>
                     <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Right">
-                        <Button Command="{Binding Button_Cancel_Product}" Margin="5" Content="Delete" Width="100" HorizontalAlignment="Right"/>
+                        <Button Command="{Binding Button_Delete_Product}" Margin="5" Content="Delete" Width="100" HorizontalAlignment="Right" />
                         <Button Command="{Binding Button_Edit_Product}" Margin="5" Content="Edit" Width="100" HorizontalAlignment="Right"/>
                         <!--<Button Command="{Binding Button_Cancel_Product}" Margin="5" Content="Cancel"  Width="100" HorizontalAlignment="Right"/>-->
                     </StackPanel>
