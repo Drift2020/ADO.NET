@@ -45,10 +45,21 @@
                 <Label  Grid.Column="1" HorizontalAlignment="Center"></Label>
             </StackPanel>
             <Grid  DockPanel.Dock="Top">
-                <ListView>
-                    
+                <ListView SelectedItem="{Binding Select_item_final, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                   ItemsSource="{Binding Link_final ,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
+                              ScrollViewer.HorizontalScrollBarVisibility="Visible" 
+                                Grid.Row="1"  SelectionMode="Single">
+                    <ListView.View >
+                        <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Employee Information" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                            <GridViewColumn DisplayMemberBinding="{Binding Product ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Имя" Width="150"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding FIO ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Папка" Width="300"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Date ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Размер" Width="100"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Type , UpdateSourceTrigger=PropertyChanged}" Header="Дата модификации" Width="150"/>
+                        </GridView>
+                    </ListView.View>
                 </ListView>
             </Grid>
+            
         </DockPanel>
     </Grid>
 </Window>
