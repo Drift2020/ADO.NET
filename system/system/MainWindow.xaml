@@ -1,0 +1,54 @@
+﻿<Window x:Class="system.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:system"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="407.333" Width="781.333">
+    <Grid>
+        <DockPanel>
+            <Grid  DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="2.3*"/>
+                    <ColumnDefinition  Width="1.2*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" HorizontalAlignment="Center">Файл</Label>
+                <Label  Grid.Column="1" HorizontalAlignment="Center">Слово или фраза в файле</Label>
+                <Label  Grid.Column="2" HorizontalAlignment="Center">Диск</Label>
+            </Grid>
+            <Grid  DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="2.3*"/>
+                    <ColumnDefinition  Width="1.2*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Margin="2" VerticalAlignment="Center" Grid.Column="0"/>
+                <TextBox Margin="2"  VerticalAlignment="Center" Grid.Column="1"/>
+                <ComboBox Margin="2"  VerticalAlignment="Center" Grid.Column="2"/>
+                <Button Margin="2" Content="Найти" VerticalAlignment="Center" Grid.Column="3"/>
+                <Button Margin="2" Content="Остановить" VerticalAlignment="Center" Grid.Column="4"/>
+                <CheckBox Margin="2" Content="Подкаталоги" VerticalAlignment="Center" Grid.Column="5"/>
+            </Grid>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Top">
+              
+                <Label Grid.Column="2" HorizontalAlignment="Center">Результаты поиска: количество найденых файлов - </Label>
+                <Label  Grid.Column="1" HorizontalAlignment="Center"></Label>
+            </StackPanel>
+            <Grid  DockPanel.Dock="Top">
+                <ListView>
+                    
+                </ListView>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Window>
