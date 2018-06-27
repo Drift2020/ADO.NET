@@ -32,12 +32,12 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <TextBox Margin="2" VerticalAlignment="Center" Grid.Column="0"/>
-                <TextBox Margin="2"  VerticalAlignment="Center" Grid.Column="1"/>
+                <TextBox Text="{Binding Name_file,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2" VerticalAlignment="Center" Grid.Column="0"/>
+                <TextBox Text="{Binding Str_in_file ,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2"  VerticalAlignment="Center" Grid.Column="1"/>
                 <ComboBox Margin="2"  VerticalAlignment="Center" Grid.Column="2"/>
-                <Button Margin="2" Content="Найти" VerticalAlignment="Center" Grid.Column="3"/>
-                <Button Margin="2" Content="Остановить" VerticalAlignment="Center" Grid.Column="4"/>
-                <CheckBox Margin="2" Content="Подкаталоги" VerticalAlignment="Center" Grid.Column="5"/>
+                <Button Command="{Binding GetButton_search}" Margin="2" Content="Найти" VerticalAlignment="Center" Grid.Column="3"/>
+                <Button Command="{Binding GetButton_stop}" Margin="2" Content="Остановить" VerticalAlignment="Center" Grid.Column="4"/>
+                <CheckBox IsChecked="{Binding Chec_box,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2" Content="Подкаталоги" VerticalAlignment="Center" Grid.Column="5"/>
             </Grid>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Top">
               
