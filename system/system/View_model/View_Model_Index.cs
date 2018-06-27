@@ -1,6 +1,8 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +13,7 @@ namespace system.View_model
     class View_Model_Index: View_Model_Base
     {
         #region Code
+
         public View_Model_Index()
         {
 
@@ -138,5 +141,26 @@ namespace system.View_model
         #endregion stop
 
         #endregion command
+
+
+        #region list
+
+        ObservableCollection<FileInfo> list_file;
+        public ObservableCollection<FileInfo> List_file
+        {
+            set
+            {
+                list_file = value;
+                OnPropertyChanged(nameof(List_file));
+            }
+            get
+            {
+                return list_file;
+            }
+        }
+
+      
+
+        #endregion list
     }
 }

@@ -15,6 +15,7 @@ namespace Conductor
         //  private readonly 
         public P_Global(I_Global viwe)
         {
+            
             model = new Histori();
             _viwe = viwe;
             _viwe.Close_Program += new EventHandler<EventArgs>(Close_Program);

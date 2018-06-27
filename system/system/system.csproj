@@ -54,8 +54,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Code\FileSearch.cs" />
+    <Compile Include="Code\FileSearchThread.cs" />
     <Compile Include="Code\InfoFolder.cs" />
+    <Compile Include="View_model\DelegateCommand.cs" />
+    <Compile Include="View_model\View_Model_Base.cs" />
     <Compile Include="View_model\View_Model_Index.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
