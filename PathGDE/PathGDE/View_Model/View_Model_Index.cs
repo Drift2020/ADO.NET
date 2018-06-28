@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using PathGDE.Code;
@@ -17,6 +18,16 @@ namespace PathGDE.View_model
         public View_Model_Index()
         {
             list_disc = Directory.GetLogicalDrives();
+        }
+
+        public static void ThreadParam(object obj)
+        {
+           // View_Model_Index delay = (View_Model_Index)obj;
+            FileSearchThread.SearchFile(((View_Model_Index)obj).list_file, ((View_Model_Index)obj).select_item_disc, 
+                ((View_Model_Index)obj).name_file, ((View_Model_Index)obj).str_in_file, ((View_Model_Index)obj).Chec_box);
+            ((View_Model_Index)obj).End();
+
+            ((View_Model_Index)obj).OnPropertyChanged(nameof(List_file));
         }
         #endregion Code
 
@@ -80,11 +91,19 @@ namespace PathGDE.View_model
 
         #endregion Pole
 
+        #region action
+
+       public Action End { get; set; }
+
+        #endregion action
+
 
 
         #region command
 
         #region search
+
+
 
         private DelegateCommand _Command_search;
         public ICommand Button_clik_search
@@ -101,7 +120,13 @@ namespace PathGDE.View_model
         private void Execute_search(object o)
         {
             list_file.Clear();
-            FileSearchThread.SearchFile(List_file, select_item_disc, name_file,str_in_file, Chec_box);
+
+            Thread th1 = new Thread(new ParameterizedThreadStart(ThreadParam));
+            th1.IsBackground = true;
+            th1.Name = "второй";
+            th1.Start(this);
+            
+
 
         }
         private bool CanExecute_search(object o)

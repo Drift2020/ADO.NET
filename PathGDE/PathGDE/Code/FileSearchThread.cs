@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PathGDE.Code
 {
@@ -31,28 +32,30 @@ namespace PathGDE.Code
             }
             else
             {
-                try
-                {
-                    string[] path_Directories = Directory.GetDirectories(name);
+
+                    try
+                    {
+                        string[] path_Directories = Directory.GetDirectories(name);
 
 
                     foreach(var y in path_Directories)
                     {
                         if(path_Directories!=null)
                         SearchFile(list_file, y, path, str, recur);
+                        
+                            string[] path_file = Directory.GetFiles(y, path);
 
-                        string[] path_file = Directory.GetFiles(y, path);
 
-
-
-                        foreach (var i in path_file)
+                            foreach (var i in path_file)
                             list_file.Add(new FileInfo(i));
+                       
                     }
-                }catch(Exception s)
-                {
-
+                    }
+                    catch (Exception s)
+                    {
+                        MessageBox.Show(s.Message);
+                    }
                 }
-            }
           
         }
     }

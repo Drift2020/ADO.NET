@@ -24,5 +24,10 @@ namespace PathGDE
         {
             InitializeComponent();
         }
+
+        public void End()
+        {
+            MessageBox.Show("Поиск закончен");
+        }
     }
 }
