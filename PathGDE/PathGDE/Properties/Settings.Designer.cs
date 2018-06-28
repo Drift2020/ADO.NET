@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace system.Properties
+namespace PathGDE.Properties
 {
 
 

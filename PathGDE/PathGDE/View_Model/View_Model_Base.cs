@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace system.View_model
+namespace PathGDE.View_model
 {
     public abstract class View_Model_Base : INotifyPropertyChanged
     {

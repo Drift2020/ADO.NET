@@ -8,7 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace Conductor
+namespace PathGDE
 {
     class Win32
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace system.View_model
+namespace PathGDE.View_model
 {
     internal class DelegateCommand : ICommand
     {

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{29110F24-D24A-4C17-B719-B9A2F50C65CA}</ProjectGuid>
+    <ProjectGuid>{17FEEFBD-4EB0-453E-A9D3-8AA4DCD04A6A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>system</RootNamespace>
-    <AssemblyName>system</AssemblyName>
+    <RootNamespace>PathGDE</RootNamespace>
+    <AssemblyName>PathGDE</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -54,11 +54,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Code\FileSearchThread.cs" />
-    <Compile Include="Code\InfoFolder.cs" />
-    <Compile Include="View_model\DelegateCommand.cs" />
-    <Compile Include="View_model\View_Model_Base.cs" />
-    <Compile Include="View_model\View_Model_Index.cs" />
+    <Compile Include="Command\DelegateCommand.cs" />
+    <Compile Include="View_Model\View_Model_Base.cs" />
+    <Compile Include="View_Model\View_Model_Index.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,6 +65,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Code\FileSearchThread.cs" />
+    <Compile Include="Code\InfoFolder.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -7,8 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using PathGDE.Code;
 
-namespace system.View_model
+namespace PathGDE.View_model
 {
     class View_Model_Index: View_Model_Base
     {
@@ -88,7 +88,7 @@ namespace system.View_model
 
         private DelegateCommand _Command_search;
 
-        public ICommand GetButton_search()
+        public ICommand Get_Button_search()
         {
             if (_Command_search == null)
             {
@@ -98,13 +98,13 @@ namespace system.View_model
         }
         private void Execute_search(object o)
         {
-          
 
+            FileSearchThread.ReferenceEquals("C://", name_file);
         }
         private bool CanExecute_search(object o)
         {
         
-                return true;
+                return false;
            
         }
 
