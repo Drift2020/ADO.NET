@@ -9,7 +9,7 @@ using System.Windows.Input;
 using PathGDE.Code;
 
 namespace PathGDE.View_model
-{
+{   
     class View_Model_Index: View_Model_Base
     {
         #region Code
@@ -86,28 +86,41 @@ namespace PathGDE.View_model
 
         #region search
 
-        private DelegateCommand _Command_search;
-
-        public ICommand Get_Button_search()
+        private DelegateCommand _Command_add;
+        public ICommand Button_clik_add
         {
-            if (_Command_search == null)
+            get
             {
-                _Command_search = new DelegateCommand(Execute_search, CanExecute_search);
+                if (_Command_add == null)
+                {
+                    _Command_add = new DelegateCommand(Execute_add, CanExecute_add);
+                }
+                return _Command_add;
             }
-            return _Command_search;
         }
-        private void Execute_search(object o)
+        private void Execute_add(object o)
         {
 
-            FileSearchThread.ReferenceEquals("C://", name_file);
-        }
-        private bool CanExecute_search(object o)
-        {
-        
-                return false;
-           
-        }
+            Add_Article my_add = new Add_Article();
 
+            View_Model_Add_Article my_model_add = new View_Model_Add_Article(my_profile);
+            my_model_add.Button_ok = "Add";
+
+            if (my_model_add.Add == null)
+                my_model_add.Add = new Action(my_add.Close);
+
+            my_add.DataContext = my_model_add;
+
+
+
+            my_add.ShowDialog();
+            Set_new_items();
+
+        }
+        private bool CanExecute_add(object o)
+        {
+            return true;
+        }
 
 
         #endregion search
