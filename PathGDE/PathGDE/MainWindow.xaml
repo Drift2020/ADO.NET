@@ -34,9 +34,11 @@
 
                 <TextBox Text="{Binding Name_file,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2" VerticalAlignment="Center" Grid.Column="0"/>
                 <TextBox Text="{Binding Str_in_file ,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2"  VerticalAlignment="Center" Grid.Column="1"/>
-                <ComboBox Margin="2"  VerticalAlignment="Center" Grid.Column="2"/>
-                <Button Command="{Binding Button_clik_add}" Margin="2" Content="Найти" VerticalAlignment="Center" Grid.Column="3"/>
-                <Button Command="{Binding GetButton_stop}" Margin="2" Content="Остановить" VerticalAlignment="Center" Grid.Column="4"/>
+                <ComboBox ItemsSource="{Binding List_disc,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                          SelectedItem="{Binding Select_item_disc,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                          Margin="2"  VerticalAlignment="Center" Grid.Column="2"/>
+                <Button Command="{Binding Button_clik_search}" Margin="2" Content="Найти" VerticalAlignment="Center" Grid.Column="3"/>
+                <Button Command="{Binding Button_clik_stop}" Margin="2" Content="Остановить" VerticalAlignment="Center" Grid.Column="4"/>
                 <CheckBox IsChecked="{Binding Chec_box,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2" Content="Подкаталоги" VerticalAlignment="Center" Grid.Column="5"/>
             </Grid>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Top">
@@ -45,16 +47,16 @@
                 <Label  Grid.Column="1" HorizontalAlignment="Center"></Label>
             </StackPanel>
             <Grid  DockPanel.Dock="Top">
-                <ListView SelectedItem="{Binding Select_item_final, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                   ItemsSource="{Binding Link_final ,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
+                <ListView
+                                   ItemsSource="{Binding List_file ,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
                               ScrollViewer.HorizontalScrollBarVisibility="Visible" 
                                 Grid.Row="1"  SelectionMode="Single">
                     <ListView.View >
                         <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Employee Information" ScrollViewer.HorizontalScrollBarVisibility="Auto">
-                            <GridViewColumn DisplayMemberBinding="{Binding Product ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Имя" Width="150"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding FIO ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Папка" Width="300"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Date ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Размер" Width="100"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Type , UpdateSourceTrigger=PropertyChanged}" Header="Дата модификации" Width="150"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Name }" Header="Имя" Width="150"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding FullName }" Header="Папка" Width="300"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Length }" Header="Размер" Width="100"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding LastWriteTime }" Header="Дата модификации" Width="150"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

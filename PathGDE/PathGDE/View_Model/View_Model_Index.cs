@@ -16,7 +16,7 @@ namespace PathGDE.View_model
 
         public View_Model_Index()
         {
-
+            list_disc = Directory.GetLogicalDrives();
         }
         #endregion Code
 
@@ -86,38 +86,25 @@ namespace PathGDE.View_model
 
         #region search
 
-        private DelegateCommand _Command_add;
-        public ICommand Button_clik_add
+        private DelegateCommand _Command_search;
+        public ICommand Button_clik_search
         {
             get
             {
-                if (_Command_add == null)
+                if (_Command_search == null)
                 {
-                    _Command_add = new DelegateCommand(Execute_add, CanExecute_add);
+                    _Command_search = new DelegateCommand(Execute_search, CanExecute_search);
                 }
-                return _Command_add;
+                return _Command_search;
             }
         }
-        private void Execute_add(object o)
+        private void Execute_search(object o)
         {
-
-            Add_Article my_add = new Add_Article();
-
-            View_Model_Add_Article my_model_add = new View_Model_Add_Article(my_profile);
-            my_model_add.Button_ok = "Add";
-
-            if (my_model_add.Add == null)
-                my_model_add.Add = new Action(my_add.Close);
-
-            my_add.DataContext = my_model_add;
-
-
-
-            my_add.ShowDialog();
-            Set_new_items();
+            list_file.Clear();
+            FileSearchThread.SearchFile(List_file, select_item_disc, name_file,str_in_file, Chec_box);
 
         }
-        private bool CanExecute_add(object o)
+        private bool CanExecute_search(object o)
         {
             return true;
         }
@@ -129,13 +116,16 @@ namespace PathGDE.View_model
 
         private DelegateCommand _Command_stop;
 
-        public ICommand GetButton_stop()
+        public ICommand Button_clik_stop
         {
-            if (_Command_stop == null)
+            get
             {
-                _Command_stop = new DelegateCommand(Execute_stop, CanExecute_stop);
+                if (_Command_stop == null)
+                {
+                    _Command_stop = new DelegateCommand(Execute_stop, CanExecute_stop);
+                }
+                return _Command_stop;
             }
-            return _Command_stop;
         }
         private void Execute_stop(object o)
         {
@@ -158,7 +148,8 @@ namespace PathGDE.View_model
 
         #region list
 
-        ObservableCollection<FileInfo> list_file;
+        #region list file
+        ObservableCollection<FileInfo> list_file=new ObservableCollection<FileInfo>();
         public ObservableCollection<FileInfo> List_file
         {
             set
@@ -171,8 +162,38 @@ namespace PathGDE.View_model
                 return list_file;
             }
         }
+        #endregion list file
 
-      
+        #region list disc
+        string [] list_disc;
+        public List<string> List_disc
+        {
+            set
+            {
+              
+                OnPropertyChanged(nameof(List_disc));
+            }
+            get
+            {
+                return list_disc.ToList();
+            }
+        }
+        public string select_item_disc=null;
+        public string Select_item_disc
+        {
+            set
+            {
+                select_item_disc = value;
+                OnPropertyChanged(nameof(Select_item_disc));
+            }
+            get
+            {
+                return select_item_disc;
+            }
+        }
+        #endregion list disc
+
+
 
         #endregion list
     }
