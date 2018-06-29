@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Code\DispatchService.cs" />
     <Compile Include="Command\DelegateCommand.cs" />
     <Compile Include="View_Model\View_Model_Base.cs" />
     <Compile Include="View_Model\View_Model_Index.cs" />

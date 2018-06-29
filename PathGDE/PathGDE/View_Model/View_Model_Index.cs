@@ -8,28 +8,131 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using PathGDE.Code;
+using System.Windows;
 
 namespace PathGDE.View_model
-{   
-    class View_Model_Index: View_Model_Base
+{
+    class View_Model_Index : View_Model_Base
     {
         #region Code
 
         public View_Model_Index()
         {
             list_disc = Directory.GetLogicalDrives();
+            Lists_set += (new ConsolDelegate(Sets));
         }
+
+
+
+        #region event
+
+        public delegate void ConsolDelegate(object obj);
+        List<ConsolDelegate> list = new List<ConsolDelegate>();
+        public event ConsolDelegate Lists_set
+        {
+            // Используем аксессоры событий
+            add
+            {
+                list.Add(value);
+            }
+
+            remove
+            {
+                list.Remove(value);
+            }
+        }
+
+        public void PrintList()
+        {
+            if (list.Count != 0)
+                foreach (ConsolDelegate i in list)
+                {
+                    i(this);
+                }
+        }
+
+
+        #endregion event 
+
+
 
         public static void ThreadParam(object obj)
         {
-           // View_Model_Index delay = (View_Model_Index)obj;
-            FileSearchThread.SearchFile(((View_Model_Index)obj).list_file, ((View_Model_Index)obj).select_item_disc, 
-                ((View_Model_Index)obj).name_file, ((View_Model_Index)obj).str_in_file, ((View_Model_Index)obj).Chec_box);
+            // View_Model_Index delay = (View_Model_Index)obj;
+            SearchFile(((View_Model_Index)obj).list_file2, ((View_Model_Index)obj).select_item_disc,
+                ((View_Model_Index)obj).name_file, ((View_Model_Index)obj).str_in_file, ((View_Model_Index)obj).Chec_box, ((View_Model_Index)obj));
             ((View_Model_Index)obj).End();
+
+            //   ((View_Model_Index)obj).sets(((View_Model_Index)obj).list_file2);
 
             ((View_Model_Index)obj).OnPropertyChanged(nameof(List_file));
         }
+
+        private static void Sets(object obj)
+        {
+           ( (View_Model_Index)obj).list_file = ((View_Model_Index)obj).list_file2;
+            ((View_Model_Index)obj).OnPropertyChanged(nameof(List_file));
+        }
+
+
+        public static void SearchFile(ObservableCollection<FileInfo> list_file, string name, string path, string str, bool recur, View_Model_Index t)
+        {
+            if (list_file != null)
+
+                if (!recur)
+                    try
+                    {
+                        string[] path_file = Directory.GetFiles(name, path);
+
+
+
+                        foreach (var i in path_file)
+                        {
+                            list_file.Add(new FileInfo(i));
+                            t.PrintList();
+                        }
+
+                    }
+                    catch (Exception s)
+                    {
+
+                    }
+                else
+                {
+
+                    try
+                    {
+                        string[] path_Directories = Directory.GetDirectories(name);
+
+
+                        foreach (var y in path_Directories)
+                        {
+                            if (path_Directories != null)
+                                SearchFile(list_file, y, path, str, recur, t);
+
+                            string[] path_file = Directory.GetFiles(y, path);
+
+
+                            foreach (var i in path_file)
+                            {
+                                list_file.Add(new FileInfo(i));
+                                  t.PrintList();
+                            }
+
+                        }
+                    }
+                    catch (Exception s)
+                    {
+                        MessageBox.Show(s.Message);
+                    }
+                }
+
+        }
+
         #endregion Code
+
+
+
 
         #region Pole
 
@@ -88,13 +191,14 @@ namespace PathGDE.View_model
         }
 
         #endregion chec box
+        Thread th1;
 
         #endregion Pole
 
         #region action
 
        public Action End { get; set; }
-
+        public Action Stop { get; set; }
         #endregion action
 
 
@@ -121,7 +225,16 @@ namespace PathGDE.View_model
         {
             list_file.Clear();
 
-            Thread th1 = new Thread(new ParameterizedThreadStart(ThreadParam));
+            if (th1 == null || !th1.IsAlive)
+                th1 = new Thread(new ParameterizedThreadStart(ThreadParam));
+            else
+            {
+                th1.Abort();
+                th1 = new Thread(new ParameterizedThreadStart(ThreadParam));
+            }
+
+         
+        
             th1.IsBackground = true;
             th1.Name = "второй";
             th1.Start(this);
@@ -154,6 +267,12 @@ namespace PathGDE.View_model
         }
         private void Execute_stop(object o)
         {
+            if (th1.IsAlive)
+            {
+                th1.Abort();
+                Stop();
+            }
+          
 
 
         }
@@ -174,6 +293,9 @@ namespace PathGDE.View_model
         #region list
 
         #region list file
+        ObservableCollection<FileInfo> list_file2 = new ObservableCollection<FileInfo>();
+
+
         ObservableCollection<FileInfo> list_file=new ObservableCollection<FileInfo>();
         public ObservableCollection<FileInfo> List_file
         {
@@ -184,7 +306,8 @@ namespace PathGDE.View_model
             }
             get
             {
-                return list_file;
+                 return list_file;
+               // return new ObservableCollection<FileInfo>();
             }
         }
         #endregion list file
@@ -221,5 +344,8 @@ namespace PathGDE.View_model
 
 
         #endregion list
+
+
+    
     }
 }
