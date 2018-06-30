@@ -26,6 +26,7 @@ namespace PathGDE
         {
             InitializeComponent();
             uiContext = SynchronizationContext.Current;
+            
         }
 
         public void End()
