@@ -12,7 +12,7 @@ namespace PathGDE.Code
 {
    public class FileSearchThread : View_Model_Base
     {
-        public static void SearchFile(ObservableCollection<FileInfo> list_file,string name,string path,string str,bool recur)
+        public void SearchFile(ObservableCollection<FileInfo> list_file,string name,string path,string str,bool recur)
         {
             if(list_file!=null)
            
@@ -28,8 +28,8 @@ namespace PathGDE.Code
 
             }catch(Exception s)
             {
-
-            }
+                        MessageBox.Show(s.Message);
+                    }
             else
             {
 
@@ -58,5 +58,30 @@ namespace PathGDE.Code
                 }
           
         }
+
+        //public delegate void ConsolDelegate(object obj_snake);
+        //List<ConsolDelegate> print_list = new List<ConsolDelegate>();
+        //public event ConsolDelegate Print_list_deligete
+        //{
+        //    // Используем аксессоры событий
+        //    add
+        //    {
+        //        print_list.Add(value);
+        //    }
+
+        //    remove
+        //    {
+        //        print_list.Remove(value);
+        //    }
+        //}
+
+        //public void Print_list()
+        //{
+        //    if (print_list.Count != 0)
+        //        foreach (ConsolDelegate i in print_list)
+        //        {
+        //            i(this);
+        //        }
+        //}
     }
 }

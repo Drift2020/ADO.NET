@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PathGDE.Code;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,8 @@ namespace PathGDE
         {
             InitializeComponent();
             uiContext = SynchronizationContext.Current;
-            
+
+          
         }
 
         public void End()

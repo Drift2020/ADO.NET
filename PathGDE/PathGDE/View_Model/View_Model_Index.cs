@@ -11,8 +11,10 @@ using PathGDE.Code;
 using System.Windows;
 using System.Windows.Threading;
 
+
 namespace PathGDE.View_model
 {
+    public delegate void MyThreadDelegate(string name, string path, string str, bool recur);
     class View_Model_Index : View_Model_Base
     {
         #region Code
@@ -22,33 +24,32 @@ namespace PathGDE.View_model
             list_disc = Directory.GetLogicalDrives();
             _dispatcher = Dispatcher.CurrentDispatcher;
 
-          
-        }
+            
+            
 
-        public static void ThreadParam(object obj)
+
+            ser = new FileSearchThread();
+            //ser.Print_list_deligete += (new FileSearchThread.ConsolDelegate(Sets));
+           
+        }
+        #region Thread
+        public void ThreadParam(object obj)
         {
             View_Model_Index temp = ((View_Model_Index)obj);
-          
-            SearchFile(temp.list_file2, temp.select_item_disc,
-                temp.name_file, temp.str_in_file, temp.Chec_box, temp);
+
+
+            SearchFile(temp.select_item_disc,
+                temp.name_file, temp.str_in_file, temp.Chec_box);
             temp.End();
 
             //   ((View_Model_Index)obj).sets(((View_Model_Index)obj).list_file2);
 
             temp.OnPropertyChanged(nameof(List_file));
         }
-
-        private static void Sets(object obj)
+        public void SearchFile(string name, string path, string str, bool recur)
         {
-            View_Model_Index temp = ((View_Model_Index)obj);
-            temp.list_file = temp.list_file2;
-            temp.OnPropertyChanged(nameof(List_file));
-        }
 
-
-        public static void SearchFile(ObservableCollection<FileInfo> list_file, string name, string path, string str, bool recur, View_Model_Index t)
-        {
-            string[] path_file=null;
+            string[] path_file = null;
             if (list_file != null)
 
                 if (!recur)
@@ -65,8 +66,38 @@ namespace PathGDE.View_model
                     }
                     foreach (var i in path_file)
                     {
-                        list_file.Add(new FileInfo(i));
-                       
+
+                        DispatchService.Invoke(() =>
+                        {
+                            if (str != null)
+                            {
+                                if (i.Contains(".txt"))
+                                {
+                                    using (StreamReader objReader = new StreamReader(i))
+                                    {
+                                        string sLine = "";
+                                        while (sLine != null)
+                                        {
+                                            sLine = objReader.ReadLine();
+                                            if (sLine != null && sLine.Contains(str))
+                                            {
+                                                this.list_file.Add(new FileInfo(i));
+                                                this.OnPropertyChanged(nameof(List_file));
+                                                break;
+                                            }
+
+                                        }
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                this.list_file.Add(new FileInfo(i));
+                                this.OnPropertyChanged(nameof(List_file));
+                            }
+
+                        });
                     }
                 }
 
@@ -81,15 +112,45 @@ namespace PathGDE.View_model
                         foreach (var y in path_Directories)
                         {
                             if (path_Directories != null)
-                                SearchFile(list_file, y, path, str, recur, t);
+                                SearchFile(y, path, str, recur);
 
-                                 path_file = Directory.GetFiles(y, path);
+                            path_file = Directory.GetFiles(y, path);
 
 
                             foreach (var i in path_file)
                             {
-                                list_file.Add(new FileInfo(i));
-                              
+
+                                DispatchService.Invoke(() =>
+                                {
+                                    if (str != null)
+                                    {
+                                        if (i.Contains(".txt"))
+                                        {
+                                            using (StreamReader objReader = new StreamReader(i))
+                                            {
+                                                string sLine = "";
+                                                while (sLine != null)
+                                                {
+                                                    sLine = objReader.ReadLine();
+                                                    if (sLine != null && sLine.Contains(str))
+                                                    {
+                                                        this.list_file.Add(new FileInfo(i));
+                                                        this.OnPropertyChanged(nameof(List_file));
+                                                        break;
+                                                    }
+
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        this.list_file.Add(new FileInfo(i));
+                                        this.OnPropertyChanged(nameof(List_file));
+                                    }
+                                });
+
                             }
 
                         }
@@ -101,6 +162,275 @@ namespace PathGDE.View_model
                 }
 
         }
+        private static void Sets(object obj)
+        {
+            View_Model_Index temp = ((View_Model_Index)obj);
+            temp.list_file = temp.list_file2;
+            temp.OnPropertyChanged(nameof(temp.List_file));
+        }
+        #endregion Thread
+
+        #region asin
+
+
+        MyThreadDelegate d1 ;
+        IAsyncResult ar1;
+        public  void MyThread(string name, string path, string str, bool recur)
+        {
+            string[] path_file = null;
+         
+
+                if (!recur)
+                {
+                    try
+                    {
+                        path_file = Directory.GetFiles(name, path);
+
+
+                    }
+                    catch (Exception s)
+                    {
+
+                    }
+                    foreach (var i in path_file)
+                    {
+
+                        DispatchService.Invoke(() =>
+                        {
+                            if (str != null)
+                            {
+                                if (i.Contains(".txt"))
+                                {
+                                    using (StreamReader objReader = new StreamReader(i))
+                                    {
+                                        string sLine = "";
+                                        while (sLine != null)
+                                        {
+                                            sLine = objReader.ReadLine();
+                                            if (sLine != null && sLine.Contains(str))
+                                            {
+                                                this.list_file.Add(new FileInfo(i));
+                                                this.OnPropertyChanged(nameof(List_file));
+                                                break;
+                                            }
+
+                                        }
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                this.list_file.Add(new FileInfo(i));
+                                this.OnPropertyChanged(nameof(List_file));
+                            }
+
+                        });
+                    }
+                }
+
+                else
+                {
+
+                    try
+                    {
+                        string[] path_Directories = Directory.GetDirectories(name);
+
+
+                        foreach (var y in path_Directories)
+                        {
+                            if (path_Directories != null)
+                                SearchFile(y, path, str, recur);
+
+                            path_file = Directory.GetFiles(y, path);
+
+
+                            foreach (var i in path_file)
+                            {
+
+                                DispatchService.Invoke(() =>
+                                {
+                                    if (str != null)
+                                    {
+                                        if (i.Contains(".txt"))
+                                        {
+                                            using (StreamReader objReader = new StreamReader(i))
+                                            {
+                                                string sLine = "";
+                                                while (sLine != null)
+                                                {
+                                                    sLine = objReader.ReadLine();
+                                                    if (sLine != null && sLine.Contains(str))
+                                                    {
+                                                        this.list_file.Add(new FileInfo(i));
+                                                        this.OnPropertyChanged(nameof(List_file));
+                                                        break;
+                                                    }
+
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        this.list_file.Add(new FileInfo(i));
+                                        this.OnPropertyChanged(nameof(List_file));
+                                    }
+                                });
+
+                            }
+
+                        }
+                    }
+                    catch (Exception s)
+                    {
+                        MessageBox.Show(s.Message);
+                    }
+                }
+            End();
+        }
+
+        #endregion asin
+
+
+        #region task
+
+        public void SearchFile2(CancellationToken cancellationToken,string name, string path, string str, bool recur)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            string[] path_file = null;
+            if (list_file != null)
+
+                if (!recur)
+                {
+                    try
+                    {
+                        path_file = Directory.GetFiles(name, path);
+
+
+                    }
+                    catch (Exception s)
+                    {
+
+                    }
+                    foreach (var i in path_file)
+                    {
+
+                        DispatchService.Invoke(() =>
+                        {
+                            if (str != null)
+                            {
+                                if (i.Contains(".txt"))
+                                {
+                                    using (StreamReader objReader = new StreamReader(i))
+                                    {
+                                        string sLine = "";
+                                        while (sLine != null)
+                                        {
+                                            cancellationToken.ThrowIfCancellationRequested();
+                                            sLine = objReader.ReadLine();
+                                            if (sLine != null && sLine.Contains(str))
+                                            {
+                                                this.list_file.Add(new FileInfo(i));
+                                                this.OnPropertyChanged(nameof(List_file));
+                                                break;
+                                            }
+
+                                        }
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                cancellationToken.ThrowIfCancellationRequested();
+                                this.list_file.Add(new FileInfo(i));
+                                this.OnPropertyChanged(nameof(List_file));
+                            }
+
+                        });
+                    }
+                }
+
+                else
+                {
+
+                    try
+                    {
+                        string[] path_Directories = Directory.GetDirectories(name);
+
+
+                        foreach (var y in path_Directories)
+                        {
+                            cancellationToken.ThrowIfCancellationRequested();
+                            if (path_Directories != null)
+                                SearchFile(y, path, str, recur);
+
+                            path_file = Directory.GetFiles(y, path);
+
+
+                            foreach (var i in path_file)
+                            {
+                                cancellationToken.ThrowIfCancellationRequested();
+                                DispatchService.Invoke(() =>
+                                {
+                                    if (str != null)
+                                    {
+                                        if (i.Contains(".txt"))
+                                        {
+                                            using (StreamReader objReader = new StreamReader(i))
+                                            {
+                                                string sLine = "";
+                                                while (sLine != null)
+                                                {
+                                                    cancellationToken.ThrowIfCancellationRequested();
+                                                    sLine = objReader.ReadLine();
+                                                    if (sLine != null && sLine.Contains(str))
+                                                    {
+                                                        this.list_file.Add(new FileInfo(i));
+                                                        this.OnPropertyChanged(nameof(List_file));
+                                                        break;
+                                                    }
+
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        cancellationToken.ThrowIfCancellationRequested();
+                                        this.list_file.Add(new FileInfo(i));
+                                        this.OnPropertyChanged(nameof(List_file));
+                                    }
+                                });
+
+                            }
+
+                        }
+                    }
+                    catch (Exception s)
+                    {
+                        MessageBox.Show(s.Message);
+                    }
+                }
+
+        }
+
+        #endregion task
+
+        #region task
+
+
+        void Task1(object obj)
+        {
+            View_Model_Index temp = ((View_Model_Index)obj);
+            SearchFile(temp.select_item_disc, temp.name_file, temp.str_in_file, temp.Chec_box);
+            End();
+        }
+
+        #endregion task
 
         #endregion Code
 
@@ -164,6 +494,8 @@ namespace PathGDE.View_model
         }
 
         #endregion chec box
+        CancellationTokenSource cts;
+        FileSearchThread ser ;
         Thread th1;
         readonly Dispatcher _dispatcher;
         #endregion Pole
@@ -178,6 +510,9 @@ namespace PathGDE.View_model
         #region command
 
         #region search
+
+        Task tsk2;
+    
 
 
 
@@ -196,22 +531,43 @@ namespace PathGDE.View_model
         private void Execute_search(object o)
         {
             list_file.Clear();
+            cts = new CancellationTokenSource();
+            #region Thread
+            //if (th1 == null || !th1.IsAlive)
+            //    th1 = new Thread(new ParameterizedThreadStart(ThreadParam));
+            //else
+            //{
+            //    th1.Abort();
+            //    th1 = new Thread(new ParameterizedThreadStart(ThreadParam));
+            //}
 
-            if (th1 == null || !th1.IsAlive)
-                th1 = new Thread(new ParameterizedThreadStart(ThreadParam));
-            else
-            {
-                th1.Abort();
-                th1 = new Thread(new ParameterizedThreadStart(ThreadParam));
-            }
 
-         
-        
-            th1.IsBackground = true;
-            th1.Name = "второй";
-            th1.Start(this);
-            
 
+            //th1.IsBackground = true;
+            //th1.Name = "второй";
+            //th1.Start(this);
+            #endregion Thread
+
+
+            #region ansi
+            //if (d1 != null && ar1 != null&& !ar1.IsCompleted)
+            //{
+            //    d1.EndInvoke(ar1);
+
+            //}
+
+            //d1 = MyThread;
+            //ar1 = d1.BeginInvoke(select_item_disc, name_file, str_in_file, Chec_box, null, null);
+            #endregion ansi
+
+
+            #region task
+
+
+            var task = Task.Run(() => SearchFile2(cts.Token, select_item_disc, name_file, str_in_file, Chec_box), cts.Token);
+
+
+            #endregion task
 
         }
         private bool CanExecute_search(object o)
@@ -239,14 +595,35 @@ namespace PathGDE.View_model
         }
         private void Execute_stop(object o)
         {
-            if (th1.IsAlive)
-            {
-                th1.Abort();
-                Stop();
-            }
-          
+
+            #region Thread
+            //try
+            //{
+            //    if (th1.IsAlive)
+            //    {
+
+            //        th1.Abort();
+            //       // Stop();
+            //    }
+            //}
+            //catch(Exception e)
+            //{
+            //    MessageBox.Show(e.Message);
+            //}
+            #endregion Thread
+
+            #region ansi
+            //if (d1 != null && ar1 != null && !ar1.IsCompleted)
+            //{
+            //    d1.EndInvoke(ar1);
+
+            //}
+            #endregion ansi
 
 
+            #region task
+            cts.Cancel();
+            #endregion task 
         }
         private bool CanExecute_stop(object o)
         {
@@ -265,6 +642,10 @@ namespace PathGDE.View_model
         #region list
 
         #region list file
+       
+
+
+
         ObservableCollection<FileInfo> list_file2 = new ObservableCollection<FileInfo>();
 
 
@@ -316,37 +697,6 @@ namespace PathGDE.View_model
 
 
         #endregion list
-
-
-
-
-
-
-
-
-        public delegate void UpdateTextCallback(string message);
-
-        private void TestThread()
-        {
-            for (int i = 0; i <= 1000000000; i++)
-            {
-                Thread.Sleep(1000);
-                richTextBox1.Dispatcher.Invoke(
-                    new UpdateTextCallback(this.UpdateText),
-                    new object[] { i.ToString() }
-                );
-            }
-        }
-        private void UpdateText(string message)
-        {
-            richTextBox1.AppendText(message + "\n");
-        }
-
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            Thread test = new Thread(new ThreadStart(TestThread));
-            test.Start();
-        }
 
     }
 }

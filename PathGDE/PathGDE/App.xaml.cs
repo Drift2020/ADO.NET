@@ -25,6 +25,7 @@ namespace PathGDE
 
             View_Model_Index viewModel = new View_Model_Index();
             viewModel.End = new Action(view.End);
+            viewModel.Stop = new Action(view.Stop);
             view.DataContext = viewModel;
 
 
