@@ -10,7 +10,12 @@ namespace Work4.ViewModel
 {
     class View_Model_Main : View_Model_Base
     {
-
+        public View_Model_Main()
+        {
+            list_product_edit.Add("non");
+            list_product_edit.Add("non");
+            list_product_edit.Add("non");
+        }
         #region
         List<string> list_product_edit = new List<string>();
         public ICollection<string> List_product_edit
@@ -112,6 +117,35 @@ namespace Work4.ViewModel
 
         #endregion
 
+        #region text
+
+        void Set_seting()
+        {
+           
+
+            if (list_product_edit.Count == 0)
+            {
+                _numValue = 0;
+
+                NumValue = _numValue.ToString();
+            }
+            else if (_numValue > list_product_edit.Count - 1)
+            {
+
+                _numValue -= 1;
+
+                NumValue = _numValue.ToString();
+            }
+            else
+            {
+
+                NumValue = _numValue.ToString();
+            }
+          
+        }
+
+     
+        #endregion text 
 
         #endregion
 
