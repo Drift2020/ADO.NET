@@ -153,6 +153,13 @@ namespace Market.ViewModel
             view.DataContext = view_Model;
             view.ShowDialog();
 
+
+            List_product = new List<View_Index_List>();
+            foreach (var i in _myDB.Products)
+                List_product.Add(new View_Index_List(i));
+
+            OnPropertyChanged(nameof(product));
+
         }
         private bool CanExecute_Editor_P(object o)
         {
