@@ -54,6 +54,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CODES\BindingErrorTraceListener.cs" />
+    <Compile Include="CODES\DelegateCommand.cs" />
+    <Compile Include="Model\List.cs" />
+    <Compile Include="ViewModel\View_Model_Base.cs" />
+    <Compile Include="ViewModel\View_Model_Main.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
