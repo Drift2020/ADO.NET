@@ -159,7 +159,7 @@ namespace Work4.ViewModel
             {
                 if (_Command_button_creature == null)
                 {
-                    _Command_button_creature = new DelegateCommand(Execute_up_product, CanExecute_up_product);
+                    _Command_button_creature = new DelegateCommand(Execute_button_creature, CanExecute_button_creature);
                 }
                 return _Command_button_creature;
             }

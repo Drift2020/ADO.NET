@@ -13,9 +13,9 @@
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
-        <ListBox Margin="2">
+        <ListView Margin="2">
             
-        </ListBox>
+        </ListView>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition/>
