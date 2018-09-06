@@ -22,13 +22,18 @@ namespace Server
         void Print()
         {
             Console.Clear();
+            Console.WriteLine("-----------------------------");
             switch (my_state)
             {
                 case state.menu:
-                    Console.Write("-----------------------------\n1.Config\n2.New Connect\n3.Exit\nChose:");
+                    Console.Write("1.Config\n2.New Connect\n3.Exit\nChose:");
                     break;
                 case state.config:
-
+                    Console.WriteLine("My IP:" + my_box.IP);
+                    Console.WriteLine("My Host:" + my_box.Host);
+                    Console.WriteLine("My Port:" + my_box.Port);
+                    Console.WriteLine("4.End menu");
+                    Console.Write("Chose:");
                     break;
                 case state.connect:
 

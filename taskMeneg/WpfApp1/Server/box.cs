@@ -11,13 +11,14 @@ namespace Server
 {
    public class box
     {
+        int port= 49152;
         string host;
         System.Net.IPAddress ip;
         SynchronizationContext uiContext;
 
         public string Host { get { return host; } }
-        public string IP { get { return IP.ToString(); } }
-
+        public string IP { get { return ip.ToString(); } }
+        public string Port { get { return port.ToString(); } }
         public box()
         {
             host = System.Net.Dns.GetHostName();
@@ -25,6 +26,7 @@ namespace Server
             uiContext = SynchronizationContext.Current;
         }
 
+        
 
          void ThreadForReceive(object param)
         {
@@ -90,7 +92,7 @@ namespace Server
                 // уникальный адрес для обслуживания TCP/IP определяется комбинацией IP-адреса хоста с номером порта обслуживания
                 IPEndPoint ipEndPoint = new IPEndPoint(
                     IPAddress.Any /* Предоставляет IP-адрес, указывающий, что сервер должен контролировать действия клиентов на всех сетевых интерфейсах.*/,
-                    49152 /* порт */);
+                    port /* порт */);
 
                 // создаем потоковый сокет
                 Socket sListener = new Socket(AddressFamily.InterNetwork /*схема адресации*/, SocketType.Stream /*тип сокета*/, ProtocolType.Tcp /*протокол*/ );
