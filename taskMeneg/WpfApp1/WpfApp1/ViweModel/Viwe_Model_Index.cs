@@ -9,6 +9,20 @@ namespace WpfApp1.ViweModel
 {
     class Viwe_Model_Index: View_Model_Base
     {
+
+
+        #region Text
+
+        string connect;
+        public string Connect
+        {
+            get{ return connect;  }
+            set { connect = value; }
+        }
+        #endregion Text
+
+
+
         #region Button Connect
 
         private DelegateCommand _Command_button_Connect;
@@ -29,6 +43,7 @@ namespace WpfApp1.ViweModel
         }
         private bool CanExecute_button_Connect(object o)
         {
+            
             return true;
         }
 
