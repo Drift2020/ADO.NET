@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace WpfApp1
 {
     /// <summary>
-    /// Interaction logic for Messege_box.xaml
+    /// Interaction logic for Messege.xaml
     /// </summary>
-    public partial class Messege_box : Window
+    public partial class Messege : Window
     {
-        public Messege_box()
+        public Messege()
         {
             InitializeComponent();
         }

@@ -110,7 +110,9 @@ namespace WpfApp1.ViweModel
         }
         private void Execute_button_update(object o)
         {
-
+            Thread thread = new Thread(new ThreadStart(Connect));
+            thread.IsBackground = true;
+            thread.Start();
         }
         private bool CanExecute_button_update(object o)
         {
@@ -173,12 +175,20 @@ namespace WpfApp1.ViweModel
 
         void messeges(string s)
         {
-            Messege_box mes = new Messege_box();
-            View_Model_Messege_box view_mes = new View_Model_Messege_box(System.Windows.Visibility.Visible, System.Windows.Visibility.Hidden, System.Windows.Visibility.Hidden);
-            view_mes._OK = mes.Close;
-            view_mes.Messege = s;
-            mes.DataContext = view_mes;
-            mes.ShowDialog();
+            try
+            {
+                
+                Messege mes = new Messege();
+                View_Model_Messege_box view_mes = new View_Model_Messege_box(System.Windows.Visibility.Visible, System.Windows.Visibility.Hidden, System.Windows.Visibility.Hidden);
+                view_mes._OK = mes.Close;
+                view_mes.Messege = s;
+                mes.DataContext = view_mes;
+                mes.ShowDialog();
+            }
+            catch(Exception e)
+            {
+               string j =  e.Message;
+            }
         }
 
         private void Connect()
@@ -204,18 +214,41 @@ namespace WpfApp1.ViweModel
                 sock.Connect(ipEndPoint);
                 byte[] msg = Encoding.Default.GetBytes(Dns.GetHostName() /* имя узла локального компьютера */);// конвертируем строку, содержащую имя хоста, в массив байтов
                 int bytesSent = sock.Send(msg); // отправляем серверу сообщение через сокет
-
-                messeges("Клиент " + Dns.GetHostName() + " установил соединение с " + sock.RemoteEndPoint.ToString());
+                
+                //messeges("Клиент " + Dns.GetHostName() + " установил соединение с " + sock.RemoteEndPoint.ToString());
             //    MessageBox.Show("Клиент " + Dns.GetHostName() + " установил соединение с " + sock.RemoteEndPoint.ToString());
             }
             catch (Exception ex)
             {
-                messeges("Клиент: " + ex.Message);
+             //   messeges("Клиент: " + ex.Message);
                 //   MessageBox.Show("Клиент: " + ex.Message);
             }
         }
 
-       
+        private void Update()
+        {
+            try
+            {
+                // получим текст сообщения, введенный в текстовое поле
+                byte[] msg = Encoding.Default.GetBytes("update"); // конвертируем строку, содержащую сообщение, в массив байтов
+                int bytesSent = sock.Send(msg); // отправляем серверу сообщение через сокет
+                if (path.IndexOf("<end>") > -1) // если клиент отправил эту команду, то принимаем сообщение от сервера
+                {
+                    byte[] bytes = new byte[1024];
+                    int bytesRec = sock.Receive(bytes); // принимаем данные, переданные сервером. Если данных нет, поток блокируется
+                                                        //   messeges("Сервер (" + sock.RemoteEndPoint.ToString() + ") ответил: " + Encoding.Default.GetString(bytes, 0, bytesRec) /*конвертируем массив байтов в строку*/);
+                    Encoding.Default.(bytes, 0, bytesRec)
+                    // MessageBox.Show("Сервер (" + sock.RemoteEndPoint.ToString() + ") ответил: " + Encoding.Default.GetString(bytes, 0, bytesRec) /*конвертируем массив байтов в строку*/);
+
+                    sock.Shutdown(SocketShutdown.Both); // Блокируем передачу и получение данных для объекта Socket.
+                    sock.Close(); // закрываем сокет
+                }
+            }
+            catch (Exception ex)
+            {
+                // messeges("Клиент: " + ex.Message);
+            }
+        }
 
         private void Exchange()
         {
@@ -228,7 +261,7 @@ namespace WpfApp1.ViweModel
                 {
                     byte[] bytes = new byte[1024];
                     int bytesRec = sock.Receive(bytes); // принимаем данные, переданные сервером. Если данных нет, поток блокируется
-                    messeges("Сервер (" + sock.RemoteEndPoint.ToString() + ") ответил: " + Encoding.Default.GetString(bytes, 0, bytesRec) /*конвертируем массив байтов в строку*/);
+                 //   messeges("Сервер (" + sock.RemoteEndPoint.ToString() + ") ответил: " + Encoding.Default.GetString(bytes, 0, bytesRec) /*конвертируем массив байтов в строку*/);
 
                    // MessageBox.Show("Сервер (" + sock.RemoteEndPoint.ToString() + ") ответил: " + Encoding.Default.GetString(bytes, 0, bytesRec) /*конвертируем массив байтов в строку*/);
 
@@ -238,7 +271,7 @@ namespace WpfApp1.ViweModel
             }
             catch (Exception ex)
             {
-                messeges("Клиент: " + ex.Message);
+               // messeges("Клиент: " + ex.Message);
             }
         }
 

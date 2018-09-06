@@ -57,9 +57,7 @@
     <Compile Include="Code\BindingErrorTraceListener.cs" />
     <Compile Include="Code\DelegateCommand.cs" />
     <Compile Include="Code\View_Model_Base.cs" />
-    <Compile Include="Messege_box.xaml.cs">
-      <DependentUpon>Messege_box.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Messege.xaml.cs" />
     <Compile Include="ViweModel\View_Model_Messege.cs" />
     <Compile Include="ViweModel\Viwe_Model_Index.cs" />
     <Page Include="MainWindow.xaml">
@@ -74,9 +72,9 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Messege_box.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Messege.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

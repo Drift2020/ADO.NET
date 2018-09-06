@@ -6,15 +6,16 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
+using MyProcess;
 namespace Server
 {
    public class box
     {
+        My_Process[] my_proc;
         int port= 49152;
         string host;
         System.Net.IPAddress ip;
-        SynchronizationContext uiContext;
+       
 
         public string Host { get { return host; } }
         public string IP { get { return ip.ToString(); } }
@@ -23,7 +24,7 @@ namespace Server
         {
             host = System.Net.Dns.GetHostName();
             ip = System.Net.Dns.GetHostByName(host).AddressList[0];
-            uiContext = SynchronizationContext.Current;
+            my_proc =new 
         }
 
         
@@ -33,7 +34,7 @@ namespace Server
             Socket handler = (Socket)param;
             try
             {
-
+                
                 string client = null;
                 string data = null;
                 byte[] bytes = new byte[1024];
