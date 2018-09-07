@@ -1,12 +1,16 @@
-﻿using System;
+﻿using MyProcess;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace WpfApp1.ViweModel
 {
@@ -55,8 +59,21 @@ namespace WpfApp1.ViweModel
         {
 
             Thread thread = new Thread(new ThreadStart(Connect));
+           // thread.SetApartmentState(ApartmentState.STA);
             thread.IsBackground = true;
             thread.Start();
+
+            //try
+            //{
+            //    thread.TrySetApartmentState(ApartmentState.STA);
+            //}
+            //catch (ThreadStateException)
+            //{
+            //    Console.WriteLine("ThreadStateException occurs " +
+            //        "if apartment state is set after starting thread.");
+            //}
+
+            //thread.Join();
 
         }
         private bool CanExecute_button_Connect(object o)
@@ -110,9 +127,23 @@ namespace WpfApp1.ViweModel
         }
         private void Execute_button_update(object o)
         {
-            Thread thread = new Thread(new ThreadStart(Connect));
+            Thread thread = new Thread(new ThreadStart(Update));
+           // thread.SetApartmentState(ApartmentState.STA);
+
             thread.IsBackground = true;
             thread.Start();
+
+            //try
+            //{
+            //    thread.TrySetApartmentState(ApartmentState.STA);
+            //}
+            //catch (ThreadStateException)
+            //{
+            //    Console.WriteLine("ThreadStateException occurs " +
+            //        "if apartment state is set after starting thread.");
+            //}
+
+            //thread.Join();
         }
         private bool CanExecute_button_update(object o)
         {
@@ -173,6 +204,9 @@ namespace WpfApp1.ViweModel
 
         #endregion Button create_task
 
+
+
+
         void messeges(string s)
         {
             try
@@ -190,9 +224,10 @@ namespace WpfApp1.ViweModel
                string j =  e.Message;
             }
         }
-
+        
         private void Connect()
         {
+            
             // соединяемся с удаленным устройством
             try
             {
@@ -214,14 +249,15 @@ namespace WpfApp1.ViweModel
                 sock.Connect(ipEndPoint);
                 byte[] msg = Encoding.Default.GetBytes(Dns.GetHostName() /* имя узла локального компьютера */);// конвертируем строку, содержащую имя хоста, в массив байтов
                 int bytesSent = sock.Send(msg); // отправляем серверу сообщение через сокет
-                
-                //messeges("Клиент " + Dns.GetHostName() + " установил соединение с " + sock.RemoteEndPoint.ToString());
-            //    MessageBox.Show("Клиент " + Dns.GetHostName() + " установил соединение с " + sock.RemoteEndPoint.ToString());
+
+              
+
+               // messeges("Клиент " + Dns.GetHostName() + " установил соединение с " + sock.RemoteEndPoint.ToString());
             }
             catch (Exception ex)
             {
-             //   messeges("Клиент: " + ex.Message);
-                //   MessageBox.Show("Клиент: " + ex.Message);
+               // messeges("Клиент: " + ex.Message);
+               
             }
         }
 
@@ -230,22 +266,30 @@ namespace WpfApp1.ViweModel
             try
             {
                 // получим текст сообщения, введенный в текстовое поле
-                byte[] msg = Encoding.Default.GetBytes("update"); // конвертируем строку, содержащую сообщение, в массив байтов
+                byte[] msg = Encoding.UTF8.GetBytes("update"); // конвертируем строку, содержащую сообщение, в массив байтов
                 int bytesSent = sock.Send(msg); // отправляем серверу сообщение через сокет
-                if (path.IndexOf("<end>") > -1) // если клиент отправил эту команду, то принимаем сообщение от сервера
-                {
+                
                     byte[] bytes = new byte[1024];
                     int bytesRec = sock.Receive(bytes); // принимаем данные, переданные сервером. Если данных нет, поток блокируется
-                                                        //   messeges("Сервер (" + sock.RemoteEndPoint.ToString() + ") ответил: " + Encoding.Default.GetString(bytes, 0, bytesRec) /*конвертируем массив байтов в строку*/);
-                    Encoding.Default.(bytes, 0, bytesRec)
-                    // MessageBox.Show("Сервер (" + sock.RemoteEndPoint.ToString() + ") ответил: " + Encoding.Default.GetString(bytes, 0, bytesRec) /*конвертируем массив байтов в строку*/);
 
-                    sock.Shutdown(SocketShutdown.Both); // Блокируем передачу и получение данных для объекта Socket.
-                    sock.Close(); // закрываем сокет
-                }
+                    string str_ = Encoding.UTF8.GetString(bytes, 0, bytesRec);
+
+                    int size = Convert.ToInt32(str_);
+                    bytes =  new byte[size];
+                    bytesRec = sock.Receive(bytes);
+                    MemoryStream stream = new MemoryStream(bytesRec);
+                    BinaryFormatter bin = new BinaryFormatter();
+                    My_Process receiveProcess = (My_Process)bin.Deserialize(stream);
+
+          //      messeges("Сервер (" + sock.RemoteEndPoint.ToString() + ") ответил: " + Encoding.Default.GetString(bytes, 0, bytesRec) /*конвертируем массив байтов в строку*/);
+
+                  //  sock.Shutdown(SocketShutdown.Both); // Блокируем передачу и получение данных для объекта Socket.
+                  //  sock.Close(); // закрываем сокет
+                
             }
             catch (Exception ex)
             {
+           //   messeges("Клиент: " + ex.Message);
                 // messeges("Клиент: " + ex.Message);
             }
         }
@@ -263,7 +307,7 @@ namespace WpfApp1.ViweModel
                     int bytesRec = sock.Receive(bytes); // принимаем данные, переданные сервером. Если данных нет, поток блокируется
                  //   messeges("Сервер (" + sock.RemoteEndPoint.ToString() + ") ответил: " + Encoding.Default.GetString(bytes, 0, bytesRec) /*конвертируем массив байтов в строку*/);
 
-                   // MessageBox.Show("Сервер (" + sock.RemoteEndPoint.ToString() + ") ответил: " + Encoding.Default.GetString(bytes, 0, bytesRec) /*конвертируем массив байтов в строку*/);
+                   
 
                     sock.Shutdown(SocketShutdown.Both); // Блокируем передачу и получение данных для объекта Socket.
                     sock.Close(); // закрываем сокет
@@ -271,7 +315,7 @@ namespace WpfApp1.ViweModel
             }
             catch (Exception ex)
             {
-               // messeges("Клиент: " + ex.Message);
+              //  messeges("Клиент: " + ex.Message);
             }
         }
 

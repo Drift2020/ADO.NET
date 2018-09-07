@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,14 +27,43 @@ namespace Server
         {
             host = System.Net.Dns.GetHostName();
             ip = System.Net.Dns.GetHostByName(host).AddressList[0];
-            my_proc =new 
+           
         }
+        public static byte[] Serialize(object Obj)
+        {
+            BinaryFormatter bin = new BinaryFormatter();
+            MemoryStream mem = new MemoryStream();
+            bin.Serialize(mem, Obj);
+            return mem.GetBuffer();
+        }
+        void Update(Socket handler)
+        {
+            Process [] temp_proc = Process.GetProcesses();
+            my_proc = new  My_Process[temp_proc.Length];
 
-        
+            for (int i = 0; i < temp_proc.Length; i++)
+                my_proc[i] = new My_Process(temp_proc[i]);
+
+            byte[] msg = Serialize(my_proc);
+            //размер MailBox
+            int MyProcSize = msg.Length;
+
+          
+
+            //Отправляем размер
+            byte[] msgSize = Encoding.UTF8.GetBytes(Convert.ToByte(cmdSize));
+            handler.Send(msgSize);
+
+            //Отправляем Почт ящик
+            handler.Send(msg);
+
+          
+        }
 
          void ThreadForReceive(object param)
         {
             Socket handler = (Socket)param;
+            
             try
             {
                 
@@ -67,6 +99,8 @@ namespace Server
 
                     if (data.IndexOf("<end>") > -1) // если клиент отправил эту команду, то заканчиваем обработку сообщений
                         break;
+                    else if(data.IndexOf("update") > -1)
+                        Update(handler);
                 }
                 string theReply = "Я завершаю обработку сообщений";
                 byte[] msg = Encoding.Default.GetBytes(theReply); // конвертируем строку в массив байтов
