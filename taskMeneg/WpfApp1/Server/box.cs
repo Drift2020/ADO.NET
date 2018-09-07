@@ -47,11 +47,11 @@ namespace Server
             byte[] msg = Serialize(my_proc);
             //размер MailBox
             int MyProcSize = msg.Length;
-
-          
+           
+           
 
             //Отправляем размер
-            byte[] msgSize = Encoding.UTF8.GetBytes(Convert.ToByte(cmdSize));
+            byte[] msgSize = BitConverter.GetBytes(MyProcSize);
             handler.Send(msgSize);
 
             //Отправляем Почт ящик

@@ -271,13 +271,11 @@ namespace WpfApp1.ViweModel
                 
                     byte[] bytes = new byte[1024];
                     int bytesRec = sock.Receive(bytes); // принимаем данные, переданные сервером. Если данных нет, поток блокируется
-
-                    string str_ = Encoding.UTF8.GetString(bytes, 0, bytesRec);
-
-                    int size = Convert.ToInt32(str_);
+                    int size = BitConverter.ToInt32(bytes, 0);
+                                
                     bytes =  new byte[size];
                     bytesRec = sock.Receive(bytes);
-                    MemoryStream stream = new MemoryStream(bytesRec);
+                    MemoryStream stream = new MemoryStream(bytes);
                     BinaryFormatter bin = new BinaryFormatter();
                     My_Process receiveProcess = (My_Process)bin.Deserialize(stream);
 
