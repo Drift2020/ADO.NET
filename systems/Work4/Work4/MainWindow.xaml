@@ -52,7 +52,7 @@
             </StackPanel>
         </WrapPanel>
 
-        <Button Grid.Row="2" Grid.Column="2">STREAM ERSTELLEN!!!</Button>
+        <Button Grid.Row="2" Grid.Column="2" Command="{Binding Button_creature}">STREAM ERSTELLEN!!!</Button>
         
     </Grid>
 </Window>

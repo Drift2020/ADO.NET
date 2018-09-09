@@ -166,7 +166,7 @@ namespace Work4.ViewModel
         }
         private void Execute_button_creature(object o)
         {
-            _numValue += 1;
+           
         }
         private bool CanExecute_button_creature(object o)
         {          
