@@ -277,7 +277,7 @@ namespace WpfApp1.ViweModel
                     bytesRec = sock.Receive(bytes);
                     MemoryStream stream = new MemoryStream(bytes);
                     BinaryFormatter bin = new BinaryFormatter();
-                    My_Process receiveProcess = (My_Process)bin.Deserialize(stream);
+                    My_Process [] receiveProcess = (My_Process[])bin.Deserialize(stream);
 
           //      messeges("Сервер (" + sock.RemoteEndPoint.ToString() + ") ответил: " + Encoding.Default.GetString(bytes, 0, bytesRec) /*конвертируем массив байтов в строку*/);
 

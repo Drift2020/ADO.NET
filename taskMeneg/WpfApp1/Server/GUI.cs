@@ -10,7 +10,7 @@ namespace Server
     {
        
         bool work=true;
-        enum state { menu,config,connect,exit,none};
+        enum state { menu,config,connect,exit, edit,none };
         state my_state = state.menu;
         readonly box my_box;
         string my_lime;
@@ -31,8 +31,9 @@ namespace Server
                 case state.config:
                     Console.WriteLine("My IP:" + my_box.IP);
                     Console.WriteLine("My Host:" + my_box.Host);
-                    Console.WriteLine("My Port:" + my_box.Port);
+                    Console.WriteLine("My Port:" + my_box.Port);                    
                     Console.WriteLine("4.End menu");
+                    Console.WriteLine("5.Edit port");
                     Console.Write("Chose:");
                     break;
                 case state.connect:
@@ -40,6 +41,9 @@ namespace Server
                     break;
                 case state.exit:
 
+                    break;
+                case state.edit:
+                    Console.Write("Old port:{0}\nNew port:",my_box.Port);
                     break;
             }
 
@@ -61,6 +65,11 @@ namespace Server
             else if (c == "4")
             {
                 my_state = state.menu;
+
+            }
+            else if (c == "5")
+            {
+                my_state = state.edit;
             }
             else
             {
@@ -70,6 +79,7 @@ namespace Server
 
         void Logic()
         {
+
             switch (my_state)
             {
                 case state.menu:
@@ -80,9 +90,14 @@ namespace Server
                     break;
                 case state.connect:
                     my_box.New_connect();
+                    my_state = state.menu;
                     break;
                 case state.exit:
                     work = false;
+                    break;
+                case state.edit:
+                    my_box.Port= Console.ReadLine();
+                    my_state = state.menu;
                     break;
             }
         }
@@ -92,10 +107,13 @@ namespace Server
         {
             do
             {
+
+                Print();
+                Logic();
                 Print();
                 string my_lime = Console.ReadLine();
                 Chose(my_lime);
-                Logic();
+                
             } while (work);
         }
     }

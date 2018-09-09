@@ -20,9 +20,9 @@ namespace Server
         System.Net.IPAddress ip;
        
 
-        public string Host { get { return host; } }
+        public string Host { get { return host; }  }
         public string IP { get { return ip.ToString(); } }
-        public string Port { get { return port.ToString(); } }
+        public string Port { get { return port.ToString(); } set { port = Convert.ToInt32(value); } }
         public box()
         {
             host = System.Net.Dns.GetHostName();
@@ -52,6 +52,9 @@ namespace Server
 
             //Отправляем размер
             byte[] msgSize = BitConverter.GetBytes(MyProcSize);
+
+         
+
             handler.Send(msgSize);
 
             //Отправляем Почт ящик
@@ -123,6 +126,7 @@ namespace Server
         {
             try
             {
+           
                 // установим для сокета адрес локальной конечной точки
                 // уникальный адрес для обслуживания TCP/IP определяется комбинацией IP-адреса хоста с номером порта обслуживания
                 IPEndPoint ipEndPoint = new IPEndPoint(
@@ -136,7 +140,7 @@ namespace Server
                    без сохранения границ данных. Объект Socket этого типа взаимодействует с одним узлом и требует предварительного установления подключения 
                    к удаленному узлу перед началом обмена данными. Тип Stream использует протокол Tcp и схему адресации AddressFamily.
                  */
-
+              
                 // Чтобы сокет клиента мог идентифицировать потоковый сокет TCP, сервер должен дать своему сокету имя
                 sListener.Bind(ipEndPoint); // Свяжем объект Socket с локальной конечной точкой.
 
