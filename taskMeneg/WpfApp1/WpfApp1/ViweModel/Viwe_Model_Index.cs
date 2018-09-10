@@ -38,6 +38,29 @@ namespace WpfApp1.ViweModel
         #region Pole
 
         Socket sock;
+
+        My_Process[] receiveProcess;
+ 
+        public ICollection<My_Process> ReceiveProcess
+        {
+            set
+            {
+                receiveProcess = value.ToArray();
+                OnPropertyChanged(nameof(ReceiveProcess));
+            }
+            get
+            {
+
+
+
+                if (ReceiveProcess != null)
+                    return ReceiveProcess.ToList();
+                else
+                    return (new List<My_Process>());
+
+            }
+
+        }
         #endregion Pole
 
 
@@ -277,7 +300,7 @@ namespace WpfApp1.ViweModel
                     bytesRec = sock.Receive(bytes);
                     MemoryStream stream = new MemoryStream(bytes);
                     BinaryFormatter bin = new BinaryFormatter();
-                    My_Process [] receiveProcess = (My_Process[])bin.Deserialize(stream);
+                   receiveProcess = (My_Process[])bin.Deserialize(stream);
 
           //      messeges("Сервер (" + sock.RemoteEndPoint.ToString() + ") ответил: " + Encoding.Default.GetString(bytes, 0, bytesRec) /*конвертируем массив байтов в строку*/);
 
