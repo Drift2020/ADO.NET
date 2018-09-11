@@ -10,20 +10,19 @@ namespace MyProcess
     public class My_Process
     {
 
-        public My_Process(Process _my)
+        public My_Process(string _fileName,int _id )
         {
-            workingDirectory = _my.StartInfo.WorkingDirectory;
-            fileName = _my.StartInfo.FileName;
+            id = _id;
+            fileName = _fileName;
         }
         public My_Process()
         {
-            workingDirectory = null;
+          //  workingDirectory = null;
             fileName = null;
         }
 
-        string workingDirectory;
-        public string WorkingDirectory { get { return workingDirectory; } set { workingDirectory = value; } }
-
+        int id;
+        public int ID { get { return id; } set { id = value; } }
         string fileName;
         public string FileName { get { return fileName; } set { fileName = value; } }
 

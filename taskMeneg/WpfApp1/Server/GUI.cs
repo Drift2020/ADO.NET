@@ -31,7 +31,9 @@ namespace Server
                 case state.config:
                     Console.WriteLine("My IP:" + my_box.IP);
                     Console.WriteLine("My Host:" + my_box.Host);
-                    Console.WriteLine("My Port:" + my_box.Port);                    
+                    Console.WriteLine("My Port:" + my_box.Port);
+                    Console.WriteLine("Socet:" + my_box.isNewSocet);
+                    Console.WriteLine("Connect client:" + my_box.isConect);
                     Console.WriteLine("4.End menu");
                     Console.WriteLine("5.Edit port");
                     Console.Write("Chose:");

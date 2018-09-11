@@ -17,7 +17,10 @@ namespace WpfApp1.ViweModel
     class Viwe_Model_Index: View_Model_Base
     {
 
-
+        public Viwe_Model_Index()
+        {
+            receiveProcess = null;
+        }
         #region Text
 
         string ip_adress;
@@ -25,6 +28,13 @@ namespace WpfApp1.ViweModel
         {
             get{ return ip_adress;  }
             set { ip_adress = value; }
+        }
+
+        int port;
+        public string Port
+        {
+            get { return port.ToString(); }
+            set { port = Convert.ToInt32(value); }
         }
 
         string path;
@@ -53,14 +63,22 @@ namespace WpfApp1.ViweModel
 
 
 
-                if (ReceiveProcess != null)
-                    return ReceiveProcess.ToList();
+                if (receiveProcess != null)
+                    return receiveProcess.ToList();
                 else
                     return (new List<My_Process>());
 
             }
 
         }
+
+        My_Process select_Item_Index =null;
+        public My_Process Select_Item_Index
+        {
+            get { return select_Item_Index; }
+            set { select_Item_Index = value; }
+        }
+
         #endregion Pole
 
 
@@ -82,7 +100,7 @@ namespace WpfApp1.ViweModel
         {
 
             Thread thread = new Thread(new ThreadStart(Connect));
-           // thread.SetApartmentState(ApartmentState.STA);
+        
             thread.IsBackground = true;
             thread.Start();
 
@@ -125,11 +143,18 @@ namespace WpfApp1.ViweModel
         }
         private void Execute_button_disconnect(object o)
         {
+            Thread thread = new Thread(new ThreadStart(Exchange));
+
+
+            thread.IsBackground = true;
+            thread.Start();
 
         }
         private bool CanExecute_button_disconnect(object o)
         {
-            return true;
+            if (sock != null && sock.Connected)
+                return true;
+            return false;
         }
 
         #endregion Button disconnect
@@ -151,26 +176,18 @@ namespace WpfApp1.ViweModel
         private void Execute_button_update(object o)
         {
             Thread thread = new Thread(new ThreadStart(Update));
-           // thread.SetApartmentState(ApartmentState.STA);
+          
 
             thread.IsBackground = true;
             thread.Start();
 
-            //try
-            //{
-            //    thread.TrySetApartmentState(ApartmentState.STA);
-            //}
-            //catch (ThreadStateException)
-            //{
-            //    Console.WriteLine("ThreadStateException occurs " +
-            //        "if apartment state is set after starting thread.");
-            //}
-
-            //thread.Join();
+         
         }
         private bool CanExecute_button_update(object o)
         {
-            return true;
+            if (sock != null&& sock.Connected)
+                return true;
+            return false;
         }
 
         #endregion Button update
@@ -191,13 +208,15 @@ namespace WpfApp1.ViweModel
         }
         private void Execute_button_create_task(object o)
         {
-            Thread thread = new Thread(new ThreadStart(Exchange));
+            Thread thread = new Thread(new ThreadStart(New_Proc));
             thread.IsBackground = true;
             thread.Start();
         }
         private bool CanExecute_button_create_task(object o)
         {
+            if(sock != null && sock.Connected&&path !=null&& path.Length>0)
             return true;
+            return false;
         }
 
         #endregion Button create_task
@@ -218,11 +237,15 @@ namespace WpfApp1.ViweModel
         }
         private void Execute_button_close_task(object o)
         {
-
+            Thread thread = new Thread(new ThreadStart(Close));
+            thread.IsBackground = true;
+            thread.Start();
         }
         private bool CanExecute_button_close_task(object o)
         {
+            if (select_Item_Index != null)
             return true;
+            return false;
         }
 
         #endregion Button create_task
@@ -258,8 +281,14 @@ namespace WpfApp1.ViweModel
 
                 // устанавливаем удаленную конечную точку для сокета
                 // уникальный адрес для обслуживания TCP/IP определяется комбинацией IP-адреса хоста с номером порта обслуживания
-                IPEndPoint ipEndPoint = new IPEndPoint(ipAddr /* IP-адрес */, 49152 /* порт */);
-
+                IPEndPoint ipEndPoint = new IPEndPoint(ipAddr /* IP-адрес */, port /* порт */);
+                try
+                {
+                    sock.Shutdown(SocketShutdown.Both); // Блокируем передачу и получение данных для объекта Socket.
+                    sock.Close(); // закрываем соке
+                    
+                }
+                catch { }
                 // создаем потоковый сокет
                 sock = new Socket(AddressFamily.InterNetwork /*схема адресации*/, SocketType.Stream /*тип сокета*/, ProtocolType.Tcp /*протокол*/);
                 /* Значение InterNetwork указывает на то, что при подключении объекта Socket к конечной точке предполагается использование IPv4-адреса.
@@ -284,10 +313,30 @@ namespace WpfApp1.ViweModel
             }
         }
 
+        private void New_Proc()
+        {
+
+            // соединяемся с удаленным устройством
+            try
+            {
+                byte[] msg = Encoding.UTF8.GetBytes("New");
+                int bytesSent = sock.Send(msg);
+
+                 msg = Encoding.UTF8.GetBytes(path);
+                 bytesSent = sock.Send(msg);
+            }
+            catch (Exception ex)
+            {
+                // messeges("Клиент: " + ex.Message);
+
+            }
+        }
+
         private void Update()
         {
             try
             {
+                Select_Item_Index = null;
                 // получим текст сообщения, введенный в текстовое поле
                 byte[] msg = Encoding.UTF8.GetBytes("update"); // конвертируем строку, содержащую сообщение, в массив байтов
                 int bytesSent = sock.Send(msg); // отправляем серверу сообщение через сокет
@@ -300,12 +349,9 @@ namespace WpfApp1.ViweModel
                     bytesRec = sock.Receive(bytes);
                     MemoryStream stream = new MemoryStream(bytes);
                     BinaryFormatter bin = new BinaryFormatter();
-                   receiveProcess = (My_Process[])bin.Deserialize(stream);
+                    ReceiveProcess = (My_Process[])bin.Deserialize(stream);
 
-          //      messeges("Сервер (" + sock.RemoteEndPoint.ToString() + ") ответил: " + Encoding.Default.GetString(bytes, 0, bytesRec) /*конвертируем массив байтов в строку*/);
-
-                  //  sock.Shutdown(SocketShutdown.Both); // Блокируем передачу и получение данных для объекта Socket.
-                  //  sock.Close(); // закрываем сокет
+         
                 
             }
             catch (Exception ex)
@@ -320,19 +366,20 @@ namespace WpfApp1.ViweModel
             try
             {
                 // получим текст сообщения, введенный в текстовое поле
-                byte[] msg = Encoding.Default.GetBytes(path); // конвертируем строку, содержащую сообщение, в массив байтов
-                int bytesSent = sock.Send(msg); // отправляем серверу сообщение через сокет
-                if (path.IndexOf("<end>") > -1) // если клиент отправил эту команду, то принимаем сообщение от сервера
+                byte[] msg = Encoding.UTF8.GetBytes("end"); // конвертируем строку, содержащую сообщение, в массив байтов
+                int bytesSent = sock.Send(msg);
+                if(select_Item_Index!=null)
+                    select_Item_Index = null;
+                if (receiveProcess != null)
                 {
-                    byte[] bytes = new byte[1024];
-                    int bytesRec = sock.Receive(bytes); // принимаем данные, переданные сервером. Если данных нет, поток блокируется
-                 //   messeges("Сервер (" + sock.RemoteEndPoint.ToString() + ") ответил: " + Encoding.Default.GetString(bytes, 0, bytesRec) /*конвертируем массив байтов в строку*/);
-
-                   
-
-                    sock.Shutdown(SocketShutdown.Both); // Блокируем передачу и получение данных для объекта Socket.
-                    sock.Close(); // закрываем сокет
+                    receiveProcess = null;
+                    ReceiveProcess= new My_Process[1];
+                 
                 }
+
+                sock.Shutdown(SocketShutdown.Both); // Блокируем передачу и получение данных для объекта Socket.
+                    sock.Close(); // закрываем сокет
+                
             }
             catch (Exception ex)
             {
@@ -340,7 +387,33 @@ namespace WpfApp1.ViweModel
             }
         }
 
-     
+        private void Close()
+        {
+            try
+            {
+                // получим текст сообщения, введенный в текстовое поле
+                byte[] msg = Encoding.UTF8.GetBytes("Close"); // конвертируем строку, содержащую сообщение, в массив байтов
+                int bytesSent = sock.Send(msg); // отправляем серверу сообщение через сокет
+
+                msg = Encoding.Default.GetBytes(select_Item_Index.FileName); // конвертируем строку, содержащую сообщение, в массив байтов
+                bytesSent = sock.Send(msg); // отправляем серверу сообщение через сокет
+            
+
+                byte[] bytes = new byte[1024];
+                int bytesRec = sock.Receive(bytes); // принимаем данные, переданные сервером. Если данных нет, поток блокируется                
+                string new_str = Encoding.Default.GetString(bytes, 0, bytesRec);
+                if(new_str.IndexOf("Complete")>-1)
+                {
+                    ReceiveProcess.Remove(select_Item_Index);
+                    ReceiveProcess=receiveProcess;
+                }
+            }
+            catch (Exception ex)
+            {
+                //   messeges("Клиент: " + ex.Message);
+                // messeges("Клиент: " + ex.Message);
+            }
+        }
 
         void Form1_FormClosed()
         {
