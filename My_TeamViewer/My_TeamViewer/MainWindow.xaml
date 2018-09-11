@@ -1,0 +1,32 @@
+﻿<Window x:Class="My_TeamViewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:My_TeamViewer"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid >
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <Menu Grid.ColumnSpan="2" Height="auto">
+            <MenuItem Header="Menu">
+                <MenuItem Header="Properti..."/>
+                <MenuItem Header="Close connect"/>
+                <MenuItem Header="Disconnect"/>
+                <MenuItem Header="Exit"/>
+            </MenuItem>
+        </Menu>
+        
+        <
+    </Grid>
+</Window>
