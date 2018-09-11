@@ -54,7 +54,7 @@ namespace Server
         void Update(Socket handler)
         {
           
-              Process[] temp_proc = Process.GetProcesses();
+             Process[] temp_proc = Process.GetProcesses();
             my_proc = new My_Process[temp_proc.Length];
 
             //my_proc = new My_Process[2];
@@ -62,7 +62,7 @@ namespace Server
             //my_proc[1] = new My_Process("hh1", "hh1");         
 
             for (int i = 0; i < temp_proc.Length; i++)
-                my_proc[i] = new My_Process(temp_proc[i].ProcessName, temp_proc[i].Id);//(temp_proc[i].StartInfo.WorkingDirectory, temp_proc[i].StartInfo.FileName);
+                my_proc[i] = new My_Process(temp_proc[i].ProcessName, temp_proc[i].Id);
 
             byte[] msg = Serialize(my_proc);
 
@@ -155,8 +155,8 @@ namespace Server
                         Update(handler);
                     else if (data.IndexOf("Close") > -1)
                         Close(handler);
-                    else if (data.IndexOf("end") > -1)
-                        Close(handler);
+                    else if (data.IndexOf("New") > -1)
+                        New(handler);
                 }
 
                 //string theReply = "Я завершаю обработку сообщений";
