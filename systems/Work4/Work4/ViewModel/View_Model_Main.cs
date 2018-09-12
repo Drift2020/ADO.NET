@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -15,8 +16,9 @@ namespace Work4.ViewModel
             list_product_edit.Add("non");
             list_product_edit.Add("non");
             list_product_edit.Add("non");
+            Semaphore s = new Semaphore(_numValue, _numValue, "My_SEMAPHORE");
         }
-        #region
+        #region list
         List<string> list_product_edit = new List<string>();
         public ICollection<string> List_product_edit
         {
@@ -38,10 +40,31 @@ namespace Work4.ViewModel
         }
         #endregion
 
+        #region CODE
+
+        private Semaphore s ;
+        private Thread[] _ThreadHive = new Thread[10];
+
+        void SetSemafor(int value)
+        {
+            Semaphore temp = s;
+            s = new Semaphore(_numValue, _numValue, "My_SEMAPHORE");
+            for (int i = 0; i < 6; ++i)
+                ThreadPool.QueueUserWorkItem(SomeMethod, s);
+        }
+
+
+        static void SomeMethod(object obj)
+        {
+
+        }
+        #endregion
+
+
         #region UpDown
 
 
-        private int _numValue = 0;
+        private int _numValue = 1;
 
         public string NumValue
         {
@@ -178,3 +201,4 @@ namespace Work4.ViewModel
 
     }
 }
+
