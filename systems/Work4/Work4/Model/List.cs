@@ -12,14 +12,14 @@ namespace Work4
         public My_thread()
         {
             time = 0;
-            time_str = "Я родился";
+          
             temp = null;
         }
         public My_thread(ThreadStart _temp)
         {
             temp = new Thread(_temp);
             time = 0;
-            time_str = "Я родился";
+           
         }
 
         int time = 0;
@@ -39,18 +39,25 @@ namespace Work4
         {
             get;set;
         }
+        public bool isWeit
+        {
+            get; set;
+        }
+      
 
-        string time_str="";
+       
         public string Time_str
         {
-            set
-            {
-                time_str = value;
-                OnPropertyChanged(nameof(Time_str));
-            }
+          
             get
             {
-                return "Поток: "+(temp!=null?temp.ManagedThreadId:0) + " "+time_str;
+
+                if(isWork)
+                    return "Поток: " + temp.ManagedThreadId + " " + "Я";
+                if (!isWeit)
+                    return "Поток: " + temp.ManagedThreadId+ " "+ "Я родился";
+                else if (isWeit)
+                    return "Поток: " + temp.ManagedThreadId + " " + "Я жду";
             }
         }
 

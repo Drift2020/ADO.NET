@@ -333,6 +333,7 @@ namespace Work4.ViewModel
                 OnPropertyChanged(nameof(List1));
                 List2.Add(thread);
                 OnPropertyChanged(nameof(List2));
+                thread.isWeit = true;
                 thread.temp.Start();
             }
         }

@@ -32,7 +32,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate >
 
-                    <TextBlock Text="{Binding ManagedThreadId ,IsAsync=True,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding Time_str ,IsAsync=True,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
 
 
                 </DataTemplate>
@@ -48,7 +48,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate >
 
-                    <TextBlock Text="{Binding ManagedThreadId ,IsAsync=True,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding Time_str ,IsAsync=True,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
 
 
                 </DataTemplate>
