@@ -18,18 +18,17 @@ namespace Work4.ViewModel
         {
           
             s = new Semaphore(1, 30, "My_SEMAPHORE");
+            
+            My_thread temp = new My_thread(My_Thread);
+            _ThreadHive.Add(temp);
+            List1.Add(temp);
 
-            for (int i = 0; i < _ThreadHive.Length; i++)
-            {
-                _ThreadHive[i] = new Thread(My_Thread);
-                List1.Add(_ThreadHive[i]);
-            }
-
+        
         }
         #region list
         #region 1
-        List<Thread> list1 = new List<Thread>();
-        public ICollection<Thread> List1
+        List<My_thread> list1 = new List<My_thread>();
+        public ICollection<My_thread> List1
         {
             set
             {
@@ -48,8 +47,8 @@ namespace Work4.ViewModel
 
         }
 
-        private Thread list1_SelectedIndex;
-      public  Thread List1_SelectedIndex
+        private My_thread list1_SelectedIndex;
+      public My_thread List1_SelectedIndex
         {
             get { return list1_SelectedIndex; }
             set { list1_SelectedIndex = value; }
@@ -60,8 +59,8 @@ namespace Work4.ViewModel
         #endregion 1
 
         #region 2
-        List<Thread> list2 = new List<Thread>();
-        public ICollection<Thread> List2
+        List<My_thread> list2 = new List<My_thread>();
+        public ICollection<My_thread> List2
         {
             set
             {
@@ -80,8 +79,8 @@ namespace Work4.ViewModel
 
         }
 
-        private Thread list2_SelectedIndex;
-        Thread List2_SelectedIndex
+        private My_thread list2_SelectedIndex;
+        My_thread List2_SelectedIndex
         {
             get { return list2_SelectedIndex; }
             set { list2_SelectedIndex = value; }
@@ -89,8 +88,8 @@ namespace Work4.ViewModel
         #endregion 2
 
         #region 3
-        List<Thread> list3 = new List<Thread>();
-        public ICollection<Thread> List3
+        List<My_thread> list3 = new List<My_thread>();
+        public ICollection<My_thread> List3
         {
             set
             {
@@ -109,8 +108,8 @@ namespace Work4.ViewModel
 
         }
 
-        private Thread list3_SelectedIndex;
-        Thread List3_SelectedIndex
+        private My_thread list3_SelectedIndex;
+        My_thread List3_SelectedIndex
         {
             get { return list1_SelectedIndex; }
             set { list1_SelectedIndex = value; }
@@ -122,7 +121,7 @@ namespace Work4.ViewModel
         #region CODE
 
         private Semaphore s ;
-        private Thread[] _ThreadHive = new Thread[1];
+        private List<My_thread> _ThreadHive=new List<My_thread>();
 
         void SetSemafor(int value)
         {
@@ -137,20 +136,32 @@ namespace Work4.ViewModel
         {
             
             s.WaitOne();
-            Thread.Sleep(200);
-            s.Release();
+         
+           
             CallBack(Thread.CurrentThread);
         }
 
 
         private void CallBack(Thread thread)
         {
-            List2.Remove(thread);
-            OnPropertyChanged(nameof(List2));
-            List3.Add(thread);
-            OnPropertyChanged(nameof(List3));
-
+            foreach (var i in _ThreadHive)
+            {
+                if (i.temp.ManagedThreadId == thread.ManagedThreadId)
+                {
+                    i.isWork = true;
+                    List2.Remove(i);
+                    OnPropertyChanged(nameof(List2));
+                    List3.Add(i);
+                    OnPropertyChanged(nameof(List3));              
+                    while (true)
+                    {
+                        Thread.Sleep(1000);
+                        i.Time++;
+                    }
+                }
+            }
         }
+
 
 
         #endregion
@@ -191,6 +202,7 @@ namespace Work4.ViewModel
         }
         private void Execute_up_product(object o)
         {
+            s.Release();
             _numValue += 1;
             OnPropertyChanged(nameof(NumValue));
         }
@@ -220,6 +232,7 @@ namespace Work4.ViewModel
         }
         private void Execute_down_product(object o)
         {
+           
             _numValue -= 1;
             OnPropertyChanged(nameof(NumValue));
         }
@@ -283,7 +296,10 @@ namespace Work4.ViewModel
         }
         private void Execute_button_creature(object o)
         {
-           
+            My_thread temp = new My_thread(My_Thread);
+            _ThreadHive.Add(temp);
+            List1.Add(temp);
+            OnPropertyChanged(nameof(List1));
         }
         private bool CanExecute_button_creature(object o)
         {          
@@ -309,7 +325,7 @@ namespace Work4.ViewModel
         private void Execute_List1_SelectedIndexChanged(object o)
         {
 
-            Thread thread = list1_SelectedIndex;
+            My_thread thread = list1_SelectedIndex;
             list1_SelectedIndex = null;
             if (thread != null)
             {
@@ -317,7 +333,7 @@ namespace Work4.ViewModel
                 OnPropertyChanged(nameof(List1));
                 List2.Add(thread);
                 OnPropertyChanged(nameof(List2));
-                thread.Start();
+                thread.temp.Start();
             }
         }
         private bool CanExecute_List1_SelectedIndexChanged(object o)
@@ -330,6 +346,39 @@ namespace Work4.ViewModel
 
         #endregion
 
+
+        #region Close
+
+        private DelegateCommand _Command_Close;
+        public ICommand Window_close
+        {
+            get
+            {
+                if (_Command_Close == null)
+                {
+                    _Command_Close = new DelegateCommand(Execute_window, CanExecute_window);
+                }
+                return _Command_Close;
+            }
+        }
+        private void Execute_window(object o)
+        {
+            foreach(var i in _ThreadHive)
+            {
+                i.temp.Abort();
+            }
+            s.Close();
+            
+        }
+        private bool CanExecute_window(object o)
+        {
+
+            return true;
+
+        }
+
+
+        #endregion
     }
 }
 

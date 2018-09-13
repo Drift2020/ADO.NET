@@ -6,7 +6,12 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:Work4"
         mc:Ignorable="d"
-        Title="Zip fal" Height="170.625" Width="421.667">
+        Title="Zip fal" Height="170.625" Width="421.667" >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding Window_close}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -20,48 +25,59 @@
         </Grid.RowDefinitions>
 
         <TextBlock HorizontalAlignment="Center" >Работающие потоки:</TextBlock>
-        <DataGrid Grid.Row="1" Margin="2"
-                  ItemsSource="{Binding List3}" 
-                  SelectedItem="{Binding List3_SelectedIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                    AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True"
-                  IsSynchronizedWithCurrentItem="True"
-                   >
-            <DataGrid.Columns >
-                <DataGridTextColumn Header="The"  Binding="{Binding}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+      
+        <ListView  ItemsSource="{Binding List3,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                  Margin="2"   Grid.Row="1" 
+         SelectedItem="{Binding List3_SelectedIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate >
 
+                    <TextBlock Text="{Binding ManagedThreadId ,IsAsync=True,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+          
+
+        </ListView>
         <TextBlock HorizontalAlignment="Center" Grid.Column="1" >Ожидающик потоки:</TextBlock>
-        <DataGrid Grid.Row="1"  Grid.Column="1" Margin="2"
-                  ItemsSource="{Binding List2}" 
-                  SelectedItem="{Binding List2_SelectedIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                    AutoGenerateColumns="False"  CanUserAddRows="False" IsReadOnly="True"
-                  IsSynchronizedWithCurrentItem="True" 
-                    >
-            <DataGrid.Columns >
-                <DataGridTextColumn Header="The"  Binding="{Binding}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+
+        <ListView  ItemsSource="{Binding List2,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                  Margin="2"  Grid.Column="1" Grid.Row="1"
+         SelectedItem="{Binding List2_SelectedIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate >
+
+                    <TextBlock Text="{Binding ManagedThreadId ,IsAsync=True,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+           
+        </ListView>
+    
 
         <TextBlock HorizontalAlignment="Center"  Grid.Column="2" >Созданые потоки:</TextBlock>
-        <DataGrid  Margin="2"  ItemsSource="{Binding List1}" 
-                   SelectedItem="{Binding List1_SelectedIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                   AutoGenerateColumns="False"  CanUserAddRows="False" IsReadOnly="True"
-                   IsSynchronizedWithCurrentItem="True"  Grid.Column="2" Grid.Row="1">
-            <DataGrid.Columns  >
-                <DataGridTextColumn Header="The"  Binding="{Binding}"/>
-            </DataGrid.Columns>
-           
-                
-                <i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseDoubleClick">
-                        <i:InvokeCommandAction Command="{Binding List1_SelectedIndexChanged}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            
-           
-        </DataGrid>
 
+        <ListView  ItemsSource="{Binding List1,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                  Margin="2" Grid.Column="2" Grid.Row="1"
+         SelectedItem="{Binding List1_SelectedIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate >
+
+                    <TextBlock Text="{Binding Time_str ,IsAsync=True,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding List1_SelectedIndexChanged}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+        </ListView>
+       
       
 
         <WrapPanel Grid.Row="2" Margin="2"  Grid.Column="0" HorizontalAlignment="Center">
