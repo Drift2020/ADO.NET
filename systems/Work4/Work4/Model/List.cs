@@ -28,6 +28,7 @@ namespace Work4
             {
                 time = value;
                 OnPropertyChanged(nameof(Time));
+                OnPropertyChanged(nameof(Time_str));
             }
             get
             {
@@ -43,21 +44,27 @@ namespace Work4
         {
             get; set;
         }
-      
 
-       
+
+        string time_str;
         public string Time_str
         {
-          
+            set
+            {
+                time_str = value;
+                  OnPropertyChanged(nameof(Time_str));
+            }
             get
             {
-
-                if(isWork)
-                    return "Поток: " + temp.ManagedThreadId + " " + "Я";
-                if (!isWeit)
+              
+                if (isWork)
+                    return "Поток: " + temp.ManagedThreadId + " " + "Я работаю уже: " + time +" сек." ;
+                else if (!isWeit)
                     return "Поток: " + temp.ManagedThreadId+ " "+ "Я родился";
                 else if (isWeit)
                     return "Поток: " + temp.ManagedThreadId + " " + "Я жду";
+                return "7 дней...";
+                
             }
         }
 
@@ -74,5 +81,7 @@ namespace Work4
                 return temp;
             }
         }
+
+        public CancellationTokenSource tokenSource = new CancellationTokenSource();
     }
 }

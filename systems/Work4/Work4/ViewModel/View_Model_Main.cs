@@ -17,7 +17,7 @@ namespace Work4.ViewModel
         public View_Model_Main()
         {
           
-            s = new Semaphore(1, 30, "My_SEMAPHORE");
+            s = new Semaphore(1, 0xFFFFF, "My_SEMAPHORE");
             
             My_thread temp = new My_thread(My_Thread);
             _ThreadHive.Add(temp);
@@ -115,7 +115,7 @@ namespace Work4.ViewModel
             set { list1_SelectedIndex = value; }
         }
         #endregion 3
-
+        bool isDell;
         #endregion
 
         #region CODE
@@ -134,16 +134,22 @@ namespace Work4.ViewModel
 
         private void My_Thread()
         {
-            
-            s.WaitOne();
-         
-           
-            CallBack(Thread.CurrentThread);
+            do
+            {
+                if (s.WaitOne() && !isDell)
+                {
+                    CallBack(Thread.CurrentThread);
+                    break;
+                }
+                else
+                    s.Release();
+            } while (true);
         }
 
 
         private void CallBack(Thread thread)
         {
+         
             foreach (var i in _ThreadHive)
             {
                 if (i.temp.ManagedThreadId == thread.ManagedThreadId)
@@ -153,16 +159,34 @@ namespace Work4.ViewModel
                     OnPropertyChanged(nameof(List2));
                     List3.Add(i);
                     OnPropertyChanged(nameof(List3));              
-                    while (true)
+                    while (i.isWork)
                     {
                         Thread.Sleep(1000);
                         i.Time++;
+
                     }
+                    s.Release();
+                   
+                    break;
                 }
             }
         }
 
+        public void DellThread()
+        {
 
+            isDell = true;
+            My_thread temp =_ThreadHive.Where(u => u.Time == _ThreadHive.Max(i => i.Time)).Single();
+            temp.isWork = false;
+         
+            temp.temp.Join();
+            s.WaitOne();
+            List3.Remove(temp);
+            _ThreadHive.Remove(temp);
+            OnPropertyChanged(nameof(List3));
+            
+            isDell = false;
+        }
 
         #endregion
 
@@ -202,9 +226,12 @@ namespace Work4.ViewModel
         }
         private void Execute_up_product(object o)
         {
-            s.Release();
-            _numValue += 1;
-            OnPropertyChanged(nameof(NumValue));
+            if (_numValue < 30)
+            {
+                s.Release();
+                _numValue += 1;
+                OnPropertyChanged(nameof(NumValue));
+            }
         }
         private bool CanExecute_up_product(object o)
         {
@@ -232,7 +259,11 @@ namespace Work4.ViewModel
         }
         private void Execute_down_product(object o)
         {
+
            
+            DellThread();
+           
+
             _numValue -= 1;
             OnPropertyChanged(nameof(NumValue));
         }
@@ -334,7 +365,10 @@ namespace Work4.ViewModel
                 List2.Add(thread);
                 OnPropertyChanged(nameof(List2));
                 thread.isWeit = true;
+
+
                 thread.temp.Start();
+                
             }
         }
         private bool CanExecute_List1_SelectedIndexChanged(object o)
