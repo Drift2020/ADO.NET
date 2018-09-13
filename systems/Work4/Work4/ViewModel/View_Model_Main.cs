@@ -176,7 +176,7 @@ namespace Work4.ViewModel
         {
 
             isDell = true;
-            My_thread temp =_ThreadHive.Where(u => u.Time == _ThreadHive.Max(i => i.Time)).Single();
+            My_thread temp =_ThreadHive.Where(u => u.Time == _ThreadHive.Max(i => i.Time)).ElementAt(0);
             temp.isWork = false;
          
             temp.temp.Join();
