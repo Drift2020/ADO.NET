@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using PathGDE.Code;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Threading;
 
 
@@ -32,9 +33,7 @@ namespace PathGDE.View_model
             //ser.Print_list_deligete += (new FileSearchThread.ConsolDelegate(Sets));
            
         }
-      
-      
-
+           
         #region task
 
         public void SearchFile2(CancellationToken cancellationToken,string name, string path, List<string> str)
@@ -103,7 +102,7 @@ namespace PathGDE.View_model
                     }
                     catch (Exception s)
                     {
-                        MessageBox.Show(s.Message);
+                    System.Windows.MessageBox.Show(s.Message);
                     }
                 
 
@@ -111,16 +110,11 @@ namespace PathGDE.View_model
 
         #endregion task
 
-      
-
         #endregion Code
-
-
-
 
         #region Pole
 
-        #region Name file
+        #region Path
 
         string path;
         public string Path
@@ -137,7 +131,7 @@ namespace PathGDE.View_model
         }
 
 
-        #endregion Name file
+        #endregion Path
 
         #region str_in_file
 
@@ -158,7 +152,6 @@ namespace PathGDE.View_model
 
         #endregion str_in_file
 
-  
         CancellationTokenSource cts;
         FileSearchThread ser ;
         Thread th1;
@@ -170,7 +163,6 @@ namespace PathGDE.View_model
         public Action End { get; set; }
         public Action Stop { get; set; }
         #endregion action
-
 
         #region command
 
@@ -277,7 +269,7 @@ namespace PathGDE.View_model
         #region OpenFolder
 
         
- private DelegateCommand _Command_open_folder;
+        private DelegateCommand _Command_open_folder;
 
         public ICommand Button_open_folder
         {
@@ -292,7 +284,8 @@ namespace PathGDE.View_model
         }
         private void Execute_open_folder(object o)
         {
-
+            FolderBrowserDialog temp = new FolderBrowserDialog();
+            temp.ShowDialog();
         }
         private bool CanExecute_open_folder(object o)
         {
@@ -378,7 +371,10 @@ namespace PathGDE.View_model
         }
         private void Execute_edit(object o)
         {
-
+            View_Model_Words view_model = new View_Model_Words();
+            Word view = new Word();
+            view.DataContext = view_model;
+            view.ShowDialog();
         }
         private bool CanExecute_edit(object o)
         {
@@ -388,9 +384,7 @@ namespace PathGDE.View_model
         }
         #endregion
 
-
         #endregion command
-
 
         #region list
 

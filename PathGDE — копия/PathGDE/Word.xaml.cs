@@ -17,9 +17,9 @@ namespace PathGDE
     /// <summary>
     /// Interaction logic for Words.xaml
     /// </summary>
-    public partial class Words : Window
+    public partial class Word : Window
     {
-        public Words()
+        public Word()
         {
             InitializeComponent();
         }
