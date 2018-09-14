@@ -5,14 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PathGDE"
         mc:Ignorable="d"
-        Title="Words" Height="284.871" Width="284.434">
+        Title="Words" Height="293.482" Width="284.434">
     <Grid>
         <StackPanel>
             <Grid>
-                <ListView Height="200" Margin="2">
-                    
-                    
-                </ListView>
+                <ListView Height="200" Margin="2"
+                          ItemsSource="{Binding List_file,IsAsync=True ,
+                          Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                          SelectedItem="{Binding Select_item_category}">
+                        <ListView.ItemTemplate>
+                        <DataTemplate >
+                            <TextBlock Text="{Binding word,IsAsync=True,
+                                        Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                               HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                        </ListView.ItemTemplate>
+                 </ListView>
+             
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>

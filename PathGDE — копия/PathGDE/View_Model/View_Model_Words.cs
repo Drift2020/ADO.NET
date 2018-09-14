@@ -1,6 +1,7 @@
 ﻿using PathGDE.View_model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +11,11 @@ namespace PathGDE
 {
     class View_Model_Words: View_Model_Base
     {
-        public View_Model_Words()
+        Words model;
+        public View_Model_Words(Words model)
         {
-
+            this.model = model;
+            List_file = model.Prohibited_words.ToList();
         }
 
         #region Pole
@@ -113,7 +116,23 @@ namespace PathGDE
         #endregion Command
 
         #region List
+        
 
+
+        List<Prohibited_words> list_file = new List<Prohibited_words>();
+        public ICollection<Prohibited_words> List_file
+        {
+            set
+            {
+                list_file = value.ToList();
+                OnPropertyChanged(nameof(List_file));
+            }
+            get
+            {
+                return list_file;
+                // return new ObservableCollection<FileInfo>();
+            }
+        }
         #endregion List
 
     }

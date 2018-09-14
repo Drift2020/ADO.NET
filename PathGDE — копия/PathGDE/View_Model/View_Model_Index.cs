@@ -19,7 +19,7 @@ namespace PathGDE.View_model
     class View_Model_Index : View_Model_Base
     {
         #region Code
-
+        Words model;
         public View_Model_Index()
         {
             list_disc = Directory.GetLogicalDrives();
