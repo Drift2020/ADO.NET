@@ -23,7 +23,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Column="0" HorizontalAlignment="Center"  >Папка для найденных файлов</Label>
-              
+                <Button  Command="{Binding Button_clik_edit}" Margin="2" Grid.Column="1" VerticalAlignment="Center">Ред. слов</Button>
                 <Label  Grid.Column="2" HorizontalAlignment="Center">Диск</Label>
                 <Button Command="{Binding Button_clik_search}" Margin="2" Content="Старт" VerticalAlignment="Center" Grid.Column="3"/>
                 <Button Command="{Binding Button_clik_stop}" Margin="2" Content="Стоп" VerticalAlignment="Center" Grid.Column="4"/>
@@ -40,7 +40,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBox Text="{Binding Path,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2" VerticalAlignment="Center" Grid.Column="0"/>
-                <Button Command="{Binding Button_open_folder}" Grid.Column="1"  Margin="2" Content="Открыть"/>
+                <Button Command="{Binding Button_open_folder}" Grid.Column="1" VerticalAlignment="Center" Margin="2" Content="Открыть"/>
                 <ComboBox ItemsSource="{Binding List_disc,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                           SelectedItem="{Binding Select_item_disc,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                           Margin="2"  VerticalAlignment="Center" Grid.Column="2"/>

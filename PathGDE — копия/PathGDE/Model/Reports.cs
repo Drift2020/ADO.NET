@@ -13,6 +13,19 @@ namespace PathGDE.Model
 //запрещенных слов.
     class Reports
     {
+        string name;
+        public string Name
+        {
+            set
+            {
+                name = value;
+            }
+            get
+            {
+                return name;
+            }
+        }
+
         string path;
         public string Path
         {
