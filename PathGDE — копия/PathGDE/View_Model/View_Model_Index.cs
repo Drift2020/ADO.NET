@@ -28,7 +28,7 @@ namespace PathGDE.View_model
             
 
 
-          
+            ser = new FileSearchThread();
             //ser.Print_list_deligete += (new FileSearchThread.ConsolDelegate(Sets));
            
         }
@@ -293,7 +293,6 @@ namespace PathGDE.View_model
 
         #endregion asin
 
-
         #region task
 
         public void SearchFile2(CancellationToken cancellationToken,string name, string path, string str, bool recur)
@@ -441,17 +440,17 @@ namespace PathGDE.View_model
 
         #region Name file
 
-        string name_file;
-        public string Name_file
+        string path;
+        public string Path
         {
             set
             {
-                name_file = value;
-                OnPropertyChanged(nameof(name_file));
+                path = value;
+                OnPropertyChanged(nameof(Path));
             }
             get
             {
-                return name_file;
+                return path;
             }
         }
 
@@ -636,13 +635,97 @@ namespace PathGDE.View_model
 
         #endregion stop
 
+        #region OpenFolder
+
+        
+ private DelegateCommand _Command_open_folder;
+
+        public ICommand Button_open_folder
+        {
+            get
+            {
+                if (_Command_open_folder == null)
+                {
+                    _Command_open_folder = new DelegateCommand(Execute_open_folder, CanExecute_open_folder);
+                }
+                return _Command_open_folder;
+            }
+        }
+        private void Execute_open_folder(object o)
+        {
+
+        }
+        private bool CanExecute_open_folder(object o)
+        {
+
+            return true;
+
+        }
+        #endregion
+
+        #region Pause
+
+
+        private DelegateCommand _Command_pause;
+
+        public ICommand Button_clik_pause
+        {
+            get
+            {
+                if (_Command_pause == null)
+                {
+                    _Command_pause = new DelegateCommand(Execute_pause, CanExecute_pause);
+                }
+                return _Command_pause;
+            }
+        }
+        private void Execute_pause(object o)
+        {
+
+        }
+        private bool CanExecute_pause(object o)
+        {
+
+            return true;
+
+        }
+        #endregion
+        #region resume
+
+
+        private DelegateCommand _Command_resume;
+
+        public ICommand Button_clik_resume
+        {
+            
+            get
+            {
+                if (_Command_resume == null)
+                {
+                    _Command_resume = new DelegateCommand(Execute_resume, CanExecute_resume);
+                }
+                return _Command_resume;
+            }
+        }
+        private void Execute_resume(object o)
+        {
+
+        }
+        private bool CanExecute_resume(object o)
+        {
+
+            return true;
+
+        }
+        #endregion
+
         #endregion command
 
 
         #region list
 
         #region list file
-       
+
 
 
 

@@ -5,47 +5,57 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PathGDE"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="711"
+        Title="MainWindow" Height="350" Width="583.989"
         >
     <Grid>
         <DockPanel>
+            
             <Grid  DockPanel.Dock="Top">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.5*"/>
-                    <ColumnDefinition Width="2.3*"/>
-                    <ColumnDefinition  Width="1.2*"/>
+                    <ColumnDefinition Width="1.8*"/>
+
+                    <ColumnDefinition />
+                    <ColumnDefinition  Width="0.5*"/>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    
+                   
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0" HorizontalAlignment="Center">Файл</Label>
-                <Label  Grid.Column="1" HorizontalAlignment="Center">Слово или фраза в файле</Label>
+                <Label Grid.Column="0" HorizontalAlignment="Center"  >Папка для найденных файлов</Label>
+              
                 <Label  Grid.Column="2" HorizontalAlignment="Center">Диск</Label>
+                <Button Command="{Binding Button_clik_search}" Margin="2" Content="Старт" VerticalAlignment="Center" Grid.Column="3"/>
+                <Button Command="{Binding Button_clik_stop}" Margin="2" Content="Стоп" VerticalAlignment="Center" Grid.Column="4"/>
             </Grid>
             <Grid  DockPanel.Dock="Top">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.5*"/>
-                    <ColumnDefinition Width="2.3*"/>
-                    <ColumnDefinition  Width="1.2*"/>
+                    <ColumnDefinition Width="1.8*"/>
+                  
+                    <ColumnDefinition  />
+                    <ColumnDefinition Width="0.5*"/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    
                 </Grid.ColumnDefinitions>
 
-                <TextBox Text="{Binding Name_file,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2" VerticalAlignment="Center" Grid.Column="0"/>
-                <TextBox Text="{Binding Str_in_file ,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2"  VerticalAlignment="Center" Grid.Column="1"/>
+                <TextBox Text="{Binding Path,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2" VerticalAlignment="Center" Grid.Column="0"/>
+                <Button Command="{Binding Button_open_folder}" Grid.Column="1"  Margin="2" Content="Открыть"/>
                 <ComboBox ItemsSource="{Binding List_disc,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                           SelectedItem="{Binding Select_item_disc,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                           Margin="2"  VerticalAlignment="Center" Grid.Column="2"/>
-                <Button Command="{Binding Button_clik_search}" Margin="2" Content="Найти" VerticalAlignment="Center" Grid.Column="3"/>
-                <Button Command="{Binding Button_clik_stop}" Margin="2" Content="Остановить" VerticalAlignment="Center" Grid.Column="4"/>
-                <CheckBox IsChecked="{Binding Chec_box,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2" Content="Подкаталоги" VerticalAlignment="Center" Grid.Column="5"/>
+                <Button Command="{Binding Button_clik_pause}" Margin="2" Content="Пауза" VerticalAlignment="Center" Grid.Column="3"/>
+                <Button Command="{Binding Button_clik_resume}" Margin="2" Content="Возобновить" VerticalAlignment="Center" Grid.Column="4"/>
+          
+              
             </Grid>
+            
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Top">
 
                 <Label Grid.Column="2" HorizontalAlignment="Center">Результаты поиска: количество найденых файлов -</Label>
                 <Label  Grid.Column="1" HorizontalAlignment="Center"></Label>
+                <Label  Grid.Column="3" HorizontalAlignment="Center">количество изменённых файлов -</Label>
+                <Label  Grid.Column="4" HorizontalAlignment="Center"></Label>
             </StackPanel>
             <Grid  DockPanel.Dock="Top">
                 <ListView
@@ -58,6 +68,7 @@
                             <GridViewColumn DisplayMemberBinding="{Binding FullName }" Header="Папка" Width="300"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Length }" Header="Размер" Width="100"/>
                             <GridViewColumn DisplayMemberBinding="{Binding LastWriteTime }" Header="Дата модификации" Width="150"/>
+                            
                         </GridView>
                     </ListView.View>
                 </ListView>
