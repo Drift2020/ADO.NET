@@ -28,7 +28,7 @@ namespace PathGDE.View_model
             
 
 
-            ser = new FileSearchThread();
+          
             //ser.Print_list_deligete += (new FileSearchThread.ConsolDelegate(Sets));
            
         }
