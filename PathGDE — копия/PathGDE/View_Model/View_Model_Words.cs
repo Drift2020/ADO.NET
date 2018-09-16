@@ -46,7 +46,8 @@ namespace PathGDE
             var temp = new Prohibited_words();
             temp.word = word;
             List_file.Add(temp);
-           
+            model.Prohibited_words.Add(temp);
+            model.SaveChanges();
         }
         private bool CanExecute_add(object o)
         {
@@ -123,17 +124,17 @@ namespace PathGDE
         
 
 
-       // List<Prohibited_words> list_file = new List<Prohibited_words>();
+        List<Prohibited_words> list_file = new List<Prohibited_words>();
         public ICollection<Prohibited_words> List_file
         {
             set
             {
-                model.Prohibited_words = value.ToList();
+                list_file = value.ToList();
                 OnPropertyChanged(nameof(List_file));
             }
             get
             {
-                return model.Prohibited_words;
+                return list_file;
                 // return new ObservableCollection<FileInfo>();
             }
         }

@@ -22,12 +22,13 @@ namespace PathGDE.View_model
       
         public View_Model_Index()
         {
-            list_disc = Directory.GetLogicalDrives();
-            _dispatcher = Dispatcher.CurrentDispatcher;
+            list_disc = Directory.GetLogicalDrives().ToList();
+            list_disc.Add("Any");
+              _dispatcher = Dispatcher.CurrentDispatcher;
             model = new Words();
 
 
-
+           
 
             ser = new FileSearchThread();
             //ser.Print_list_deligete += (new FileSearchThread.ConsolDelegate(Sets));
@@ -36,16 +37,11 @@ namespace PathGDE.View_model
            
         #region task
 
-        public void SearchFile2(CancellationToken cancellationToken,string name, string path, List<string> str)
+        public void SearchFile2(CancellationToken cancellationToken,string name, string path, List<Prohibited_words> str_words)
         {
             cancellationToken.ThrowIfCancellationRequested();
             string[] path_file = null;
             if (list_file != null)
-
-             
-
-            
-
                     try
                     {
                         string[] path_Directories = Directory.GetDirectories(name);
@@ -55,7 +51,7 @@ namespace PathGDE.View_model
                         {
                             cancellationToken.ThrowIfCancellationRequested();
                             if (path_Directories != null)
-                                SearchFile2(cancellationToken, y, path, str);
+                                SearchFile2(cancellationToken, y, path, str_words);
 
                             path_file = Directory.GetFiles(y, path);
 
@@ -65,24 +61,36 @@ namespace PathGDE.View_model
                                 cancellationToken.ThrowIfCancellationRequested();
                                 DispatchService.Invoke(() =>
                                 {
-                                    if (str != null)
+                                    if (str_words != null)
                                     {
                                         if (i.Contains(".txt"))
                                         {
                                             using (StreamReader objReader = new StreamReader(i))
                                             {
+                                                Reports temp_report = new Reports();
+                                                string new_file="";
                                                 string sLine = "";
                                                 while (sLine != null)
                                                 {
                                                     cancellationToken.ThrowIfCancellationRequested();
                                                     sLine = objReader.ReadLine();
-                                                    //if (sLine != null && sLine.Contains(str))
-                                                    //{
-                                                    //    this.list_file.Add(new FileInfo(i));
-                                                    //    this.OnPropertyChanged(nameof(List_file));
-                                                    //    break;
-                                                    //}
-
+                                                    if (sLine != null)
+                                                    {
+                                                        foreach (var temp_words in str_words)
+                                                        {
+                                                            if(sLine.Contains(temp_words.word))
+                                                            {
+                                                                temp_report.Words.Add(temp_words.word);
+                                                                this.list_file.Add(new FileInfo(i));
+                                                                this.OnPropertyChanged(nameof(List_file));
+                                                            }
+                                                        }
+                                                    }
+                                                  
+                                                }
+                                                if(temp_report.Words.Count>0)
+                                                {
+                                                    my_Reports.Add(temp_report);
                                                 }
                                             }
 
@@ -104,8 +112,8 @@ namespace PathGDE.View_model
                     {
                     System.Windows.MessageBox.Show(s.Message);
                     }
-                
 
+          
         }
 
         #endregion task
@@ -157,7 +165,7 @@ namespace PathGDE.View_model
         Thread th1;
         readonly Dispatcher _dispatcher;
         Words model;
-
+        List<Reports> my_Reports = new List<Reports>();
         #endregion Pole
 
         #region action
@@ -196,7 +204,7 @@ namespace PathGDE.View_model
             #region task
 
 
-        //    var task = Task.Run(() => SearchFile2(cts.Token, select_item_disc, "*.txt", str_in_file), cts.Token);
+           var task = Task.Run(() => SearchFile2(cts.Token, select_item_disc, "*.txt", model.Prohibited_words.ToList()), cts.Token);
 
 
             #endregion task
@@ -287,7 +295,9 @@ namespace PathGDE.View_model
         private void Execute_open_folder(object o)
         {
             FolderBrowserDialog temp = new FolderBrowserDialog();
-            temp.ShowDialog();
+           var resurt = temp.ShowDialog();
+         if(resurt==DialogResult.OK)
+            Path = temp.SelectedPath;
         }
         private bool CanExecute_open_folder(object o)
         {
@@ -382,7 +392,7 @@ namespace PathGDE.View_model
         }
         private bool CanExecute_edit(object o)
         {
-
+           
             return true;
 
         }
@@ -417,12 +427,12 @@ namespace PathGDE.View_model
         #endregion list file
 
         #region list disc
-        string [] list_disc;
+        List<string> list_disc;
         public List<string> List_disc
         {
             set
             {
-              
+                list_disc = value;
                 OnPropertyChanged(nameof(List_disc));
             }
             get

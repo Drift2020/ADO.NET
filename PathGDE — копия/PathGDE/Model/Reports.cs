@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PathGDE.Model
+namespace PathGDE
 {
 //    Также нужно создать файл отчета.Он должен содержать
 //информацию обо всех найденных файлах с запрещенными словами, пути
