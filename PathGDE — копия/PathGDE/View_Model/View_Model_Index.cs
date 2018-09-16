@@ -19,14 +19,14 @@ namespace PathGDE.View_model
     class View_Model_Index : View_Model_Base
     {
         #region Code
-        Words model;
+      
         public View_Model_Index()
         {
             list_disc = Directory.GetLogicalDrives();
             _dispatcher = Dispatcher.CurrentDispatcher;
+            model = new Words();
 
-            
-            
+
 
 
             ser = new FileSearchThread();
@@ -156,6 +156,8 @@ namespace PathGDE.View_model
         FileSearchThread ser ;
         Thread th1;
         readonly Dispatcher _dispatcher;
+        Words model;
+
         #endregion Pole
 
         #region action
@@ -371,10 +373,12 @@ namespace PathGDE.View_model
         }
         private void Execute_edit(object o)
         {
-            View_Model_Words view_model = new View_Model_Words();
+            View_Model_Words view_model = new View_Model_Words(model);
             Word view = new Word();
             view.DataContext = view_model;
             view.ShowDialog();
+
+           
         }
         private bool CanExecute_edit(object o)
         {

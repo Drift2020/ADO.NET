@@ -29,7 +29,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <TextBox Margin="2"/>
+                <TextBox Text="{Binding Word, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2"/>
                 <Button Command="{Binding Button_clik_add}" Grid.Column="1" Margin="2" Content="Добавить"/>
             </Grid>
             <Grid>

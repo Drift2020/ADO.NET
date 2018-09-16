@@ -43,12 +43,16 @@ namespace PathGDE
         }
         private void Execute_add(object o)
         {
-
+            var temp = new Prohibited_words();
+            temp.word = word;
+            List_file.Add(temp);
+           
         }
         private bool CanExecute_add(object o)
         {
-
+            if(word!=null&& word.Length>0)
             return true;
+            return false;
 
         }
         #endregion Add
@@ -119,17 +123,17 @@ namespace PathGDE
         
 
 
-        List<Prohibited_words> list_file = new List<Prohibited_words>();
+       // List<Prohibited_words> list_file = new List<Prohibited_words>();
         public ICollection<Prohibited_words> List_file
         {
             set
             {
-                list_file = value.ToList();
+                model.Prohibited_words = value.ToList();
                 OnPropertyChanged(nameof(List_file));
             }
             get
             {
-                return list_file;
+                return model.Prohibited_words;
                 // return new ObservableCollection<FileInfo>();
             }
         }
