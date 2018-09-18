@@ -20,8 +20,8 @@
                
             </MenuItem>
         </Menu>
-        <Image Grid.Row="1">
-            
+        <Image Grid.Row="1" Source="{Binding Path=Image_my, Mode=OneWay}">
+         
         </Image>
     </Grid>
 </Window>

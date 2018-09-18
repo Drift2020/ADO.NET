@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+
+using System.Windows.Forms;
+using System.Windows.Interop;
+using System.Windows.Media.Imaging;
+using System.Windows;
 
 namespace My_TeamViewer
 {
@@ -14,6 +22,11 @@ namespace My_TeamViewer
     {
         public View_model_main()
         {
+            var host = System.Net.Dns.GetHostName();
+
+            var hosst = Dns.GetHostEntry(Dns.GetHostName());
+
+            IP_my = hosst.AddressList[hosst.AddressList.Length - 1].ToString();
 
         }
 
@@ -44,7 +57,8 @@ namespace My_TeamViewer
         public string Status { get { return status; } set { status = value; OnPropertyChanged(nameof(Status)); } }
         #endregion status
 
-        public SynchronizationContext uiContext;
+
+        public SynchronizationContext uiContext = new SynchronizationContext();
 
         #endregion Pole
 
@@ -65,12 +79,19 @@ namespace My_TeamViewer
         }
         private void Execute_button_connect(object o)
         {
-         
+
+           
+
+
+            Translete window2 = new Translete();
+            View_model_translete view = new View_model_translete(ip,port);
+            window2.DataContext = view;
+            window2.ShowDialog();
         }
         private bool CanExecute_button_connect(object o)
         {
            
-            return false;
+            return true;
         }
 
         #endregion Button connect
@@ -91,12 +112,12 @@ namespace My_TeamViewer
         }
         private void Execute_button_open(object o)
         {
-
+            Open_connect();
         }
         private bool CanExecute_button_open(object o)
         {
 
-            return false;
+            return true;
         }
 
         #endregion Button open
@@ -158,6 +179,7 @@ namespace My_TeamViewer
 
         #region code
 
+        #region server
 
         async void Open_connect()
         {
@@ -170,13 +192,11 @@ namespace My_TeamViewer
                     IPAddress.Any /* Предоставляет IP-адрес, указывающий, что сервер должен контролировать действия клиентов на всех сетевых интерфейсах.*/,
                     Convert.ToInt32(port_my) /* порт */);
                     listener.Start(); // Запускаем ожидание входящих запросов на подключение
+                    
                     while (true)
                     {
-                        // Принимаем ожидающий запрос на подключение 
-                        // Метод AcceptTcpClient — это блокирующий метод, возвращающий объект TcpClient, 
-                        // который может использоваться для приема и передачи данных.
                         TcpClient client = listener.AcceptTcpClient();
-                     //   ReadMessage(client);
+                        SendMessage(client);
                     }
                 }
                 catch (Exception ex)
@@ -185,6 +205,66 @@ namespace My_TeamViewer
                 }
             });
         }
+ 
+        private async void SendMessage(TcpClient client)
+        {
+            await Task.Run(() =>
+            {
+                MemoryStream stream = new MemoryStream();
+                BinaryFormatter formatter = new BinaryFormatter();
+                NetworkStream netstream = client.GetStream();
+                netstream = client.GetStream();
+                while (true)
+                {
+                    try
+                    {
+
+
+                       
+                        Image img = CopyScreen();
+                        formatter.Serialize(stream, img); // выполняем сериализацию
+                        byte[] arr = stream.ToArray(); // записываем содержимое потока в байтовый массив
+                        stream.Close();
+                        netstream.Write(arr, 0, arr.Length); // записываем данные в NetworkStream.
+
+                    }
+                    catch (Exception e)
+                    {
+                        
+                    }
+                }
+                netstream.Close();
+                        client.Close();
+            });
+        }
+
+        private Bitmap CopyScreen()
+        {
+            var left = Screen.AllScreens.Min(screen => screen.Bounds.X);
+            var top = Screen.AllScreens.Min(screen => screen.Bounds.Y);
+            var right = Screen.AllScreens.Max(screen => screen.Bounds.X + screen.Bounds.Width);
+            var bottom = Screen.AllScreens.Max(screen => screen.Bounds.Y + screen.Bounds.Height);
+            var width = right - left;
+            var height = bottom - top;
+
+            using (var screenBmp = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb))
+            {
+                using (var bmpGraphics = Graphics.FromImage(screenBmp))
+                {
+                    bmpGraphics.CopyFromScreen(left, top, 0, 0, new System.Drawing.Size(width, height));
+                    return new Bitmap(width, height, bmpGraphics);
+
+                }
+            }
+        }
+
+        #endregion server
+
+        #region client
+
+
+  
+        #endregion client
 
         #endregion code
     }
