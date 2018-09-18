@@ -1,0 +1,27 @@
+﻿<Window x:Class="My_TeamViewer.Translete"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:My_TeamViewer"
+        mc:Ignorable="d"
+        Title="Translete" Height="300" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.ColumnSpan="2" Height="auto">
+            <MenuItem Header="Menu">
+              
+               
+                <MenuItem Header="Disconnect"/>
+               
+            </MenuItem>
+        </Menu>
+        <Image Grid.Row="1">
+            
+        </Image>
+    </Grid>
+</Window>

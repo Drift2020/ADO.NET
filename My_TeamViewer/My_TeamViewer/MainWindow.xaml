@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:My_TeamViewer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="153.37" Width="396.208">
     <Grid >
         
         <Grid.ColumnDefinitions>
@@ -20,13 +20,64 @@
         
         <Menu Grid.ColumnSpan="2" Height="auto">
             <MenuItem Header="Menu">
-                <MenuItem Header="Properti..."/>
-                <MenuItem Header="Close connect"/>
-                <MenuItem Header="Disconnect"/>
-                <MenuItem Header="Exit"/>
+
+                <MenuItem Header="Close connect" Command="{Binding Button_close}"/>
+                <MenuItem Header="Disconnect" Command="{Binding Button_disconnect}"/>
+
             </MenuItem>
         </Menu>
-        
-        
+
+        <Grid Grid.Column="0" Grid.Row="1" Margin="2">
+
+            <Grid.ColumnDefinitions>
+                
+                <ColumnDefinition />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition />
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock  Grid.Column="0" Grid.ColumnSpan="2" Text="Просмотр" HorizontalAlignment="Center"/>
+            <Label Grid.Column="0"  Grid.Row="1" Content="IP:"/>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding IP , Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"  Margin="2"/>
+            <Label Grid.Column="0" Grid.Row="2" Content="Port:"/>
+
+            <TextBox Grid.Column="1" Grid.Row="2" Margin="2" Text="{Binding Port , Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="Connect" Command="{Binding Button_connect}" Grid.Row="4" Margin="2"/>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="1" Margin="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition />
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <WrapPanel  Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                <TextBlock  Text="Моя трансляция:" />
+                <TextBlock  Text="{Binding Status}" />
+            </WrapPanel>
+            
+            <Label Grid.Column="0"  Grid.Row="1" Content="IP:"/>
+            <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding IP_my}"  Margin="2"/>
+            <Label Grid.Column="0" Grid.Row="2" Content="Port:"/>
+            <TextBox Grid.Column="1" Grid.Row="2" Margin="2" Text="{Binding Port_my , Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="Open" Command="{Binding Button_open}" Grid.Row="4" Margin="2"/>
+            <Button Content="Close"  Command="{Binding Button_close}"   Grid.Column="1"  Grid.Row="4" Margin="2"/>
+        </Grid>
+
     </Grid>
 </Window>
