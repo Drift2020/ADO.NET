@@ -59,6 +59,7 @@
     </ApplicationDefinition>
     <Compile Include="CODE\BindingErrorTraceListener.cs" />
     <Compile Include="CODE\DelegateCommand.cs" />
+    <Compile Include="CODE\ImageConverter.cs" />
     <Compile Include="CODE\View_Model_Base.cs" />
     <Compile Include="Translete.xaml.cs">
       <DependentUpon>Translete.xaml</DependentUpon>

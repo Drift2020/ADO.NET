@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using System.Windows;
+using System.Windows.Media;
 
 namespace My_TeamViewer
 {
@@ -219,12 +220,22 @@ namespace My_TeamViewer
                     try
                     {
 
+                        stream = new MemoryStream();
 
-                       
                         Image img = CopyScreen();
+                       
                         formatter.Serialize(stream, img); // выполняем сериализацию
                         byte[] arr = stream.ToArray(); // записываем содержимое потока в байтовый массив
+
+                        int size= arr.Length;
+
+                        formatter.Serialize(stream, size); // выполняем сериализацию
+                        byte[] arr1 = stream.ToArray(); // записываем содержимое потока в байтовый массив
+
                         stream.Close();
+
+
+                        netstream.Write(arr1, 0, arr1.Length);
                         netstream.Write(arr, 0, arr.Length); // записываем данные в NetworkStream.
 
                     }
@@ -238,6 +249,30 @@ namespace My_TeamViewer
             });
         }
 
+
+
+        //private BitmapSource CopyScreen()
+        //{
+        //    var left = Screen.AllScreens.Min(screen => screen.Bounds.X);
+        //    var top = Screen.AllScreens.Min(screen => screen.Bounds.Y);
+        //    var right = Screen.AllScreens.Max(screen => screen.Bounds.X + screen.Bounds.Width);
+        //    var bottom = Screen.AllScreens.Max(screen => screen.Bounds.Y + screen.Bounds.Height);
+        //    var width = right - left;
+        //    var height = bottom - top;
+
+        //    using (var screenBmp = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb))
+        //    {
+        //        using (var bmpGraphics = Graphics.FromImage(screenBmp))
+        //        {
+        //            bmpGraphics.CopyFromScreen(left, top, 0, 0, new System.Drawing.Size(width, height));
+        //            return Imaging.CreateBitmapSourceFromHBitmap(
+        //                screenBmp.GetHbitmap(),
+        //                IntPtr.Zero,
+        //                Int32Rect.Empty,
+        //                BitmapSizeOptions.FromEmptyOptions());
+        //        }
+        //    }
+        //}
         private Bitmap CopyScreen()
         {
             var left = Screen.AllScreens.Min(screen => screen.Bounds.X);
@@ -247,15 +282,16 @@ namespace My_TeamViewer
             var width = right - left;
             var height = bottom - top;
 
-            using (var screenBmp = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb))
-            {
-                using (var bmpGraphics = Graphics.FromImage(screenBmp))
-                {
-                    bmpGraphics.CopyFromScreen(left, top, 0, 0, new System.Drawing.Size(width, height));
-                    return new Bitmap(width, height, bmpGraphics);
+            var screenBmp = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+           // screenBmp.Save("cadr.jpg");
+            // return screenBmp;
 
-                }
-            }
+            var bmpGraphics = Graphics.FromImage(screenBmp);
+            
+                bmpGraphics.CopyFromScreen(left, top, 0, 0, new System.Drawing.Size(width, height));
+
+               
+                return screenBmp;
         }
 
         #endregion server
@@ -263,7 +299,7 @@ namespace My_TeamViewer
         #region client
 
 
-  
+
         #endregion client
 
         #endregion code

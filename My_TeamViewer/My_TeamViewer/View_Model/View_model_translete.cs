@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Input;
@@ -9,6 +6,7 @@ using System.Net.Sockets;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
+
 
 namespace My_TeamViewer
 {
@@ -120,9 +118,15 @@ namespace My_TeamViewer
                        
                         // Получим объект NetworkStream, используемый для приема и передачи данных.
                         
-                        byte[] arr = new byte[client.ReceiveBufferSize /* размер приемного буфера */];
+                        byte[] arr1 = new byte[client.ReceiveBufferSize /* размер приемного буфера */];
                         // Читаем данные из объекта NetworkStream.
-                        int len = netstream.Read(arr, 0, client.ReceiveBufferSize);
+                        int len1 = netstream.Read(arr1, 0, client.ReceiveBufferSize/*client.ReceiveBufferSize*/);
+
+                        netstream = client.GetStream();
+                        byte[] arr = new byte[len1 /* размер приемного буфера */];
+                        // Читаем данные из объекта NetworkStream.
+                        int len = netstream.Read(arr, 0, len1/*client.ReceiveBufferSize*/);
+
                         if (len > 0)
                         {
                             // Создадим поток, резервным хранилищем которого является память.
@@ -133,10 +137,12 @@ namespace My_TeamViewer
                             Image m = (Image)formatter.Deserialize(stream); // выполняем десериализацию
                                                                             // полученную от клиента информацию добавляем в список
 
+
+
                             // uiContext.Send отправляет синхронное сообщение в контекст синхронизации
                             // SendOrPostCallback - делегат указывает метод, вызываемый при отправке сообщения в контекст синхронизации. 
                             uiContext.Send(d => Image_my = m /* Вызываемый делегат SendOrPostCallback */,
-                               null /* Объект, переданный делегату */);
+                              null /* Объект, переданный делегату */);
                             uiContext.Send(d => OnPropertyChanged(nameof(Image_my)) /* Вызываемый делегат SendOrPostCallback */,
                                null /* Объект, переданный делегату */);
                             stream.Close();

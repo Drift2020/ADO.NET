@@ -4,9 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:My_TeamViewer"
+        xmlns:med="clr-namespace:System.Windows.Media"
         mc:Ignorable="d"
         Title="Translete" Height="300" Width="300">
     <Grid>
+        <Grid.Resources>
+            <med:ImageConverter x:Key="imageConverter" />
+        </Grid.Resources>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
@@ -20,7 +25,7 @@
                
             </MenuItem>
         </Menu>
-        <Image Grid.Row="1" Source="{Binding Path=Image_my, Mode=OneWay}">
+        <Image Grid.Row="1"  Source="{ Binding Path=Image_my, Converter={StaticResource imageConverter} }"  >
          
         </Image>
     </Grid>

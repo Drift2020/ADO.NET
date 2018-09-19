@@ -41,8 +41,8 @@ namespace Server
 
             var hosst = Dns.GetHostEntry(Dns.GetHostName());
 
-            ip = hosst.AddressList[hosst.AddressList.Length-1];
-           
+            ip = hosst.AddressList[hosst.AddressList.Length - 1];
+
         }
         public static byte[] Serialize(object Obj)
         {
