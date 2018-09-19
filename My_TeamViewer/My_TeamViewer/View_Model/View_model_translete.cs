@@ -6,15 +6,16 @@ using System.Net.Sockets;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
-
+using System.Net;
+using System.Windows;
 
 namespace My_TeamViewer
 {
     class View_model_translete : View_Model_Base
     {
-        public View_model_translete(string ip,string port)
+        public View_model_translete(TcpClient client)
         {
-            ConnectAndSend(ip,port);
+            ConnectAndSend(client);
         }
         #region pole
 
@@ -27,6 +28,7 @@ namespace My_TeamViewer
             }
             set
             {
+               // image_my.Dispose();
                 image_my = value;
                 OnPropertyChanged(nameof(Image_my));
             }
@@ -79,21 +81,21 @@ namespace My_TeamViewer
 
         #region client
 
-        private async void ConnectAndSend(string ip, string port)
+        private async void ConnectAndSend(TcpClient client)
         {
             await Task.Run(() =>
             {
                 try
                 {
 
-                
-
-                    
-                        ReadMessage(ip,port);
-                    
 
 
-                  // закрываем TCP-подключение и освобождаем все ресурсы, связанные с объектом TcpClient.
+
+                    ReadMessage(client);
+
+
+
+                    // закрываем TCP-подключение и освобождаем все ресурсы, связанные с объектом TcpClient.
 
                 }
                 catch (Exception ex)
@@ -103,93 +105,124 @@ namespace My_TeamViewer
             });
         }
 
-        private async void ReadMessage(string ip, string port)
+        private async void ReadMessage(TcpClient client)
         {
             await Task.Run(() =>
             {
-                
-               
-                TcpClient client = new TcpClient(ip /* имя хоста */, Convert.ToInt32(port));
+
+
+              
                 NetworkStream netstream = client.GetStream();
                 MemoryStream stream;
                 BinaryFormatter formatter;
                 Image m;
-                int len1=0;
+                int len1 = 0;
                 int len;
                 while (true)
                 {
                     try
                     {
 
-                        // Получим объект NetworkStream, используемый для приема и передачи данных.
-                     
-                        byte[] arr1 = new byte[client.ReceiveBufferSize /* размер приемного буфера */];
-                        // Читаем данные из объекта NetworkStream.
-                        len1 = netstream.Read(arr1, 0, client.ReceiveBufferSize/*client.ReceiveBufferSize*/);
-                        if (len1 >0 )
-                        {
-                            // Создадим поток, резервным хранилищем которого является память.
-                            stream = new MemoryStream(arr1);
-                            // BinaryFormatter сериализует и десериализует объект в двоичном формате 
-                            formatter = new BinaryFormatter();
+                        ////////////размер/////////////////////<-
+                        //  byte[] arr1 = new byte[client.ReceiveBufferSize ];                
+                        //  len1 = netstream.Read(arr1, 0, client.ReceiveBufferSize);
+                        ////////////размер/////////////////////<-
+                        //if (len1 >0 )
+                        //{  
+                        //    stream = new MemoryStream(arr1);
 
-                            //len1 = (int)formatter.Deserialize(stream); // выполняем десериализацию
-                            len1= BitConverter.ToInt32(arr1, 0);                                         // полученную от клиента информацию добавляем в список
-
-                            formatter.Serialize(stream, "int"); // выполняем сериализацию
-                            byte[] com1 = stream.ToArray();
-                            netstream.Write(com1, 0, com1.Length);
-
-                        }
+                        //    formatter = new BinaryFormatter();
 
 
+                        //    len1= BitConverter.ToInt32(arr1, 0);              
 
-                     
-                        byte[] arr = new byte[len1 /* размер приемного буфера */];
-                        // Читаем данные из объекта NetworkStream.
-                        len = netstream.Read(arr, 0, len1/*client.ReceiveBufferSize*/);
+                        //    formatter.Serialize(stream, "int"); 
+                        //    byte[] com1 = stream.ToArray();
 
+                        //    ////////////размер ответ/////////////////////->
+                        //    netstream.Write(com1, 0, client.ReceiveBufferSize);
+                        //    ////////////размер ответ/////////////////////->
+
+                        //}
+
+
+
+
+                        byte[] arr = new byte[0xfffff];
+                        ////////////image/////////////////////<-
+
+                        len = netstream.Read(arr, 0, 0xfffff);
+                        ////////////image/////////////////////<-
                         if (len > 0)
                         {
-                            // Создадим поток, резервным хранилищем которого является память.
+
                             stream = new MemoryStream(arr);
-                            // BinaryFormatter сериализует и десериализует объект в двоичном формате 
                             formatter = new BinaryFormatter();
 
-                            m = (Image)formatter.Deserialize(stream); // выполняем десериализацию
-                                                                      // полученную от клиента информацию добавляем в список
+                            m = (Image)formatter.Deserialize(stream);
+                            uiContext.Send(d => Image_my = ((Image)m.Clone()), null);
+                            uiContext.Send(d => OnPropertyChanged(nameof(Image_my)), null);
 
 
+                            // formatter.Serialize(stream, "image"); 
+                            // byte[] com1 = stream.ToArray();
+                            ////////////image otv/////////////////////->
 
-                            // uiContext.Send отправляет синхронное сообщение в контекст синхронизации
-                            // SendOrPostCallback - делегат указывает метод, вызываемый при отправке сообщения в контекст синхронизации. 
-                            uiContext.Send(d => Image_my = m /* Вызываемый делегат SendOrPostCallback */,
-                              null /* Объект, переданный делегату */);
-                            uiContext.Send(d => OnPropertyChanged(nameof(Image_my)) /* Вызываемый делегат SendOrPostCallback */,
-                               null /* Объект, переданный делегату */);
-                           
-
-                            formatter.Serialize(stream, "image"); // выполняем сериализацию
-                            byte[] com1 = stream.ToArray();
-                            netstream.Write(com1, 0, com1.Length);
-
+                            // netstream.Write(com1, 0, client.ReceiveBufferSize);
+                            ////////////image otv/////////////////////->
                             stream.Close();
                             m.Dispose();
+
                         }
 
 
-                        // закрываем TCP-подключение и освобождаем все ресурсы, связанные с объектом TcpClient.
+
                     }
                     catch (Exception ex)
                     {
-                      // закрываем TCP-подключение и освобождаем все ресурсы, связанные с объектом TcpClient.
-                                        //   MessageBox.Show("Сервер: " + ex.Message);
+
                     }
                 }
                 netstream.Close();
                 client.Close();
             });
 
+        }
+        Socket sock;
+        void Conect(string ip, string port)
+        {
+            // соединяемся с удаленным устройством
+            try
+            {
+
+                IPEndPoint ipEndPoint = new IPEndPoint(
+                    IPAddress.Parse(ip),
+                    Convert.ToInt32(port));
+
+
+                sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+                sock.BeginConnect(ipEndPoint, new AsyncCallback(ConnectCallback),
+                    sock);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Сервер: " + ex.Message);
+            }
+        }
+
+        public void ConnectCallback(IAsyncResult ar /* информация о состоянии асинхронной операции */)
+        {
+            try
+            {
+                Socket sclient = (Socket)ar.AsyncState;
+                sclient.EndConnect(ar);
+                MessageBox.Show("Клиент " + Dns.GetHostName() + " установил соединение с " + sclient.RemoteEndPoint.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Клиент: " + ex.Message);
+            }
         }
         #endregion client
     }

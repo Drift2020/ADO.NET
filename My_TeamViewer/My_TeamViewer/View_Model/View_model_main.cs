@@ -78,16 +78,23 @@ namespace My_TeamViewer
                 return _Command_button_connect;
             }
         }
+        TcpClient client1;
         private void Execute_button_connect(object o)
         {
+            try
+            {
+                 client1 = new TcpClient(ip, Convert.ToInt32(port));
 
-           
 
+                Translete window2 = new Translete();
+                View_model_translete view = new View_model_translete(client1);
+                window2.DataContext = view;
+                window2.ShowDialog();
+            }
+            catch
+            {
 
-            Translete window2 = new Translete();
-            View_model_translete view = new View_model_translete(ip,port);
-            window2.DataContext = view;
-            window2.ShowDialog();
+            }
         }
         private bool CanExecute_button_connect(object o)
         {
@@ -193,7 +200,7 @@ namespace My_TeamViewer
                     IPAddress.Any /* Предоставляет IP-адрес, указывающий, что сервер должен контролировать действия клиентов на всех сетевых интерфейсах.*/,
                     Convert.ToInt32(port_my) /* порт */);
                     listener.Start(); // Запускаем ожидание входящих запросов на подключение
-                    
+
                     while (true)
                     {
                         TcpClient client = listener.AcceptTcpClient();
@@ -202,11 +209,11 @@ namespace My_TeamViewer
                 }
                 catch (Exception ex)
                 {
-                   // MessageBox.Show("Сервер: " + ex.Message);
+                    // MessageBox.Show("Сервер: " + ex.Message);
                 }
             });
         }
- 
+
         private async void SendMessage(TcpClient client)
         {
             await Task.Run(() =>
@@ -214,7 +221,7 @@ namespace My_TeamViewer
                 MemoryStream stream = new MemoryStream();
                 BinaryFormatter formatter = new BinaryFormatter();
                 NetworkStream netstream = client.GetStream();
-                netstream = client.GetStream();
+
                 Image img;
                 while (true)
                 {
@@ -224,68 +231,57 @@ namespace My_TeamViewer
                         stream = new MemoryStream();
 
                         img = CopyScreen();
-                       
-                        formatter.Serialize(stream, img); // выполняем сериализацию
-                        byte[] arr = stream.ToArray(); // записываем содержимое потока в байтовый массив
+                        formatter.Serialize(stream, img);
+                        byte[] arr = stream.ToArray();
+                        // byte[] size = BitConverter.GetBytes(arr.Length);
 
 
-                        byte[] size = BitConverter.GetBytes(arr.Length);
-                        stream.Close();
-                        netstream.Write(size, 0, size.Length);
+                        ////////////размер/////////////////////->
+
+                        //   netstream.Write(size, 0, size.Length);
+                        ////////////размер/////////////////////->
+
+                        //  byte[] arr1 = new byte[200];
+                        ////////////размер ответ/////////////////////<-
+
+                        //  int len1 = netstream.Read(arr1, 0, client.ReceiveBufferSize);
+                        ////////////размер ответ/////////////////////<-
+                        //  stream = new MemoryStream(arr1);                    
+                        //   formatter = new BinaryFormatter();
+                        //   var i = (string)formatter.Deserialize(stream);
+
+                        //   byte[] arr2 = new byte[200];
+                        ////////////image/////////////////////->
+                      
+                        netstream.Write(arr, 0, arr.Length);
+                        ////////////image/////////////////////->
 
 
-                        byte[] arr1 = new byte[200 /* размер приемного буфера */];
-                        // Читаем данные из объекта NetworkStream.
-                        int len1 = netstream.Read(arr1, 0, 200/*client.ReceiveBufferSize*/);
-                        stream = new MemoryStream(arr1);                    
-                        formatter = new BinaryFormatter();
-                        var i = (string)formatter.Deserialize(stream);
 
-                        
-                        netstream.Write(arr, 0, arr.Length); // записываем данные в NetworkStream.
-                        img.Dispose();
 
-                        byte[] arr2 = new byte[200];
-                     
-                        int len2 = netstream.Read(arr2, 0, arr2.Length/*client.ReceiveBufferSize*/);
-                        stream = new MemoryStream(arr2);
-                        formatter = new BinaryFormatter();
-                        var i2 = (string)formatter.Deserialize(stream);
+                        ////////////image otv/////////////////////<-
+
+                        //  int len2 = netstream.Read(arr2, 0, client.ReceiveBufferSize);
+                        ////////////image otv/////////////////////<-
+                        //   stream = new MemoryStream(arr2);
+                        //   formatter = new BinaryFormatter();
+                        //  var i2 = (string)formatter.Deserialize(stream);
+                        //   img.Dispose();
                     }
                     catch (Exception e)
                     {
-                        
+
                     }
                 }
                 netstream.Close();
-                        client.Close();
+                client.Close();
             });
         }
 
 
 
-        //private BitmapSource CopyScreen()
-        //{
-        //    var left = Screen.AllScreens.Min(screen => screen.Bounds.X);
-        //    var top = Screen.AllScreens.Min(screen => screen.Bounds.Y);
-        //    var right = Screen.AllScreens.Max(screen => screen.Bounds.X + screen.Bounds.Width);
-        //    var bottom = Screen.AllScreens.Max(screen => screen.Bounds.Y + screen.Bounds.Height);
-        //    var width = right - left;
-        //    var height = bottom - top;
 
-        //    using (var screenBmp = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb))
-        //    {
-        //        using (var bmpGraphics = Graphics.FromImage(screenBmp))
-        //        {
-        //            bmpGraphics.CopyFromScreen(left, top, 0, 0, new System.Drawing.Size(width, height));
-        //            return Imaging.CreateBitmapSourceFromHBitmap(
-        //                screenBmp.GetHbitmap(),
-        //                IntPtr.Zero,
-        //                Int32Rect.Empty,
-        //                BitmapSizeOptions.FromEmptyOptions());
-        //        }
-        //    }
-        //}
+
         private Bitmap CopyScreen()
         {
             var left = Screen.AllScreens.Min(screen => screen.Bounds.X);
@@ -308,12 +304,6 @@ namespace My_TeamViewer
         }
 
         #endregion server
-
-        #region client
-
-
-
-        #endregion client
 
         #endregion code
     }
