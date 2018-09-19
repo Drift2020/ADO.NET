@@ -111,31 +111,53 @@ namespace My_TeamViewer
                
                 TcpClient client = new TcpClient(ip /* имя хоста */, Convert.ToInt32(port));
                 NetworkStream netstream = client.GetStream();
+                MemoryStream stream;
+                BinaryFormatter formatter;
+                Image m;
+                int len1=0;
+                int len;
                 while (true)
                 {
                     try
                     {
-                       
+
                         // Получим объект NetworkStream, используемый для приема и передачи данных.
-                        
+                     
                         byte[] arr1 = new byte[client.ReceiveBufferSize /* размер приемного буфера */];
                         // Читаем данные из объекта NetworkStream.
-                        int len1 = netstream.Read(arr1, 0, client.ReceiveBufferSize/*client.ReceiveBufferSize*/);
+                        len1 = netstream.Read(arr1, 0, client.ReceiveBufferSize/*client.ReceiveBufferSize*/);
+                        if (len1 >0 )
+                        {
+                            // Создадим поток, резервным хранилищем которого является память.
+                            stream = new MemoryStream(arr1);
+                            // BinaryFormatter сериализует и десериализует объект в двоичном формате 
+                            formatter = new BinaryFormatter();
 
-                        netstream = client.GetStream();
+                            //len1 = (int)formatter.Deserialize(stream); // выполняем десериализацию
+                            len1= BitConverter.ToInt32(arr1, 0);                                         // полученную от клиента информацию добавляем в список
+
+                            formatter.Serialize(stream, "int"); // выполняем сериализацию
+                            byte[] com1 = stream.ToArray();
+                            netstream.Write(com1, 0, com1.Length);
+
+                        }
+
+
+
+                     
                         byte[] arr = new byte[len1 /* размер приемного буфера */];
                         // Читаем данные из объекта NetworkStream.
-                        int len = netstream.Read(arr, 0, len1/*client.ReceiveBufferSize*/);
+                        len = netstream.Read(arr, 0, len1/*client.ReceiveBufferSize*/);
 
                         if (len > 0)
                         {
                             // Создадим поток, резервным хранилищем которого является память.
-                            MemoryStream stream = new MemoryStream(arr);
+                            stream = new MemoryStream(arr);
                             // BinaryFormatter сериализует и десериализует объект в двоичном формате 
-                            BinaryFormatter formatter = new BinaryFormatter();
+                            formatter = new BinaryFormatter();
 
-                            Image m = (Image)formatter.Deserialize(stream); // выполняем десериализацию
-                                                                            // полученную от клиента информацию добавляем в список
+                            m = (Image)formatter.Deserialize(stream); // выполняем десериализацию
+                                                                      // полученную от клиента информацию добавляем в список
 
 
 
@@ -145,10 +167,18 @@ namespace My_TeamViewer
                               null /* Объект, переданный делегату */);
                             uiContext.Send(d => OnPropertyChanged(nameof(Image_my)) /* Вызываемый делегат SendOrPostCallback */,
                                null /* Объект, переданный делегату */);
+                           
+
+                            formatter.Serialize(stream, "image"); // выполняем сериализацию
+                            byte[] com1 = stream.ToArray();
+                            netstream.Write(com1, 0, com1.Length);
+
                             stream.Close();
+                            m.Dispose();
                         }
-                      
-                       // закрываем TCP-подключение и освобождаем все ресурсы, связанные с объектом TcpClient.
+
+
+                        // закрываем TCP-подключение и освобождаем все ресурсы, связанные с объектом TcpClient.
                     }
                     catch (Exception ex)
                     {

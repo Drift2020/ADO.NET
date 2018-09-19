@@ -215,6 +215,7 @@ namespace My_TeamViewer
                 BinaryFormatter formatter = new BinaryFormatter();
                 NetworkStream netstream = client.GetStream();
                 netstream = client.GetStream();
+                Image img;
                 while (true)
                 {
                     try
@@ -222,22 +223,34 @@ namespace My_TeamViewer
 
                         stream = new MemoryStream();
 
-                        Image img = CopyScreen();
+                        img = CopyScreen();
                        
                         formatter.Serialize(stream, img); // выполняем сериализацию
                         byte[] arr = stream.ToArray(); // записываем содержимое потока в байтовый массив
 
-                        int size= arr.Length;
 
-                        formatter.Serialize(stream, size); // выполняем сериализацию
-                        byte[] arr1 = stream.ToArray(); // записываем содержимое потока в байтовый массив
-
+                        byte[] size = BitConverter.GetBytes(arr.Length);
                         stream.Close();
+                        netstream.Write(size, 0, size.Length);
 
 
-                        netstream.Write(arr1, 0, arr1.Length);
+                        byte[] arr1 = new byte[200 /* размер приемного буфера */];
+                        // Читаем данные из объекта NetworkStream.
+                        int len1 = netstream.Read(arr1, 0, 200/*client.ReceiveBufferSize*/);
+                        stream = new MemoryStream(arr1);                    
+                        formatter = new BinaryFormatter();
+                        var i = (string)formatter.Deserialize(stream);
+
+                        
                         netstream.Write(arr, 0, arr.Length); // записываем данные в NetworkStream.
+                        img.Dispose();
 
+                        byte[] arr2 = new byte[200];
+                     
+                        int len2 = netstream.Read(arr2, 0, arr2.Length/*client.ReceiveBufferSize*/);
+                        stream = new MemoryStream(arr2);
+                        formatter = new BinaryFormatter();
+                        var i2 = (string)formatter.Deserialize(stream);
                     }
                     catch (Exception e)
                     {
