@@ -148,10 +148,10 @@ namespace My_TeamViewer
 
 
 
-                        byte[] arr = new byte[0xfffff];
+                        byte[] arr = new byte[4000000];
                         ////////////image/////////////////////<-
 
-                        len = netstream.Read(arr, 0, 0xfffff);
+                        len = netstream.Read(arr, 0, 4000000);
                         ////////////image/////////////////////<-
                         if (len > 0)
                         {
