@@ -25,22 +25,26 @@
         </Grid.RowDefinitions>
 
         <GroupBox Header="Message" Grid.Row="0" Grid.ColumnSpan="2" Margin="2">
-            <ListView  ItemsSource="{Binding List_messege,IsAsync=True , Mode=TwoWay,
-                UpdateSourceTrigger=PropertyChanged}" >
+            <ListView  ItemsSource="{Binding List_messege}" >
                 <ListView.ItemTemplate>
                     <DataTemplate >
 
-                        <TextBlock Text="{Binding Name,IsAsync=True,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding All,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
 
 
                     </DataTemplate>
                 </ListView.ItemTemplate>
+                <!--<ListView.View >
+                    <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Employee Information" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                        <GridViewColumn DisplayMemberBinding="{Binding Name , UpdateSourceTrigger=PropertyChanged}" Header="Name" Width="100"/>
+                    </GridView>
+                </ListView.View>-->
             </ListView>
         </GroupBox>
 
         <GroupBox Header="User" Grid.Row="1" Grid.ColumnSpan="2" Margin="2">
-            <ListView  ItemsSource="{Binding List_city,IsAsync=True , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                               SelectedItem="{Binding Select_item_city}">
+            <ListView  ItemsSource="{Binding List_user,IsAsync=True ,
+                Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
                 <ListView.ItemTemplate>
                     <DataTemplate >
 

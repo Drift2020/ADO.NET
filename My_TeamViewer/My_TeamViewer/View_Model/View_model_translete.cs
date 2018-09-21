@@ -123,36 +123,15 @@ namespace My_TeamViewer
                     try
                     {
 
-                        ////////////размер/////////////////////<-
-                        //  byte[] arr1 = new byte[client.ReceiveBufferSize ];                
-                        //  len1 = netstream.Read(arr1, 0, client.ReceiveBufferSize);
-                        ////////////размер/////////////////////<-
-                        //if (len1 >0 )
-                        //{  
-                        //    stream = new MemoryStream(arr1);
-
-                        //    formatter = new BinaryFormatter();
-
-
-                        //    len1= BitConverter.ToInt32(arr1, 0);              
-
-                        //    formatter.Serialize(stream, "int"); 
-                        //    byte[] com1 = stream.ToArray();
-
-                        //    ////////////размер ответ/////////////////////->
-                        //    netstream.Write(com1, 0, client.ReceiveBufferSize);
-                        //    ////////////размер ответ/////////////////////->
-
-                        //}
-
+                    
 
 
 
                         byte[] arr = new byte[4000000];
-                        ////////////image/////////////////////<-
+                      
 
                         len = netstream.Read(arr, 0, 4000000);
-                        ////////////image/////////////////////<-
+                       
                         if (len > 0)
                         {
 
@@ -164,12 +143,6 @@ namespace My_TeamViewer
                             uiContext.Send(d => OnPropertyChanged(nameof(Image_my)), null);
 
 
-                            // formatter.Serialize(stream, "image"); 
-                            // byte[] com1 = stream.ToArray();
-                            ////////////image otv/////////////////////->
-
-                            // netstream.Write(com1, 0, client.ReceiveBufferSize);
-                            ////////////image otv/////////////////////->
                             stream.Close();
                             m.Dispose();
 

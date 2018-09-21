@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Chat
 {
+    [Serializable]
     class Date_massege: My_Date
 
     {
@@ -19,5 +20,7 @@ namespace Chat
             get { return message; }
             set { message = value;}
         }
+        string all;
+        public string All { get { return Time + Name + Messege; } set { all = value; } }
     }
 }

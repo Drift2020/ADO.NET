@@ -230,43 +230,13 @@ namespace My_TeamViewer
 
                         stream = new MemoryStream();
 
-                        img = CopyScreen();
+                        img = CopyScreen();                        
                         formatter.Serialize(stream, img);
                         byte[] arr = stream.ToArray();
-                        // byte[] size = BitConverter.GetBytes(arr.Length);
-
-
-                        ////////////размер/////////////////////->
-
-                        //   netstream.Write(size, 0, size.Length);
-                        ////////////размер/////////////////////->
-
-                        //  byte[] arr1 = new byte[200];
-                        ////////////размер ответ/////////////////////<-
-
-                        //  int len1 = netstream.Read(arr1, 0, client.ReceiveBufferSize);
-                        ////////////размер ответ/////////////////////<-
-                        //  stream = new MemoryStream(arr1);                    
-                        //   formatter = new BinaryFormatter();
-                        //   var i = (string)formatter.Deserialize(stream);
-
-                        //   byte[] arr2 = new byte[200];
-                        ////////////image/////////////////////->
+                       
                       
                         netstream.Write(arr, 0, arr.Length);
-                        ////////////image/////////////////////->
-
-
-
-
-                        ////////////image otv/////////////////////<-
-
-                        //  int len2 = netstream.Read(arr2, 0, client.ReceiveBufferSize);
-                        ////////////image otv/////////////////////<-
-                        //   stream = new MemoryStream(arr2);
-                        //   formatter = new BinaryFormatter();
-                        //  var i2 = (string)formatter.Deserialize(stream);
-                        //   img.Dispose();
+                     
                     }
                     catch (Exception e)
                     {

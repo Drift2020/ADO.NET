@@ -54,8 +54,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CODE\Date_massege.cs" />
-    <Compile Include="CODE\My_Date.cs" />
+    <Compile Include="Interface\IUser.cs" />
+    <Compile Include="Model\Date_massege.cs" />
+    <Compile Include="Interface\My_Date.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="View_model\View_model_main.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -67,8 +69,7 @@
     </Compile>
     <Compile Include="CODE\BindingErrorTraceListener.cs" />
     <Compile Include="CODE\DelegateCommand.cs" />
-    <Compile Include="CODE\ImageConverter.cs" />
-    <Compile Include="CODE\View_Model_Base.cs" />
+    <Compile Include="View_model\View_Model_Base.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

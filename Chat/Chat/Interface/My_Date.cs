@@ -11,5 +11,7 @@ namespace Chat
         string Name { get; set; }
         string Time { get; set; }
         string Messege { get; set; }
+
+        string All { get; set; }
     }
 }
