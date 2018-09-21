@@ -136,7 +136,7 @@ namespace Chat
                 {
                     // Инициализируем новый экземпляр класса UdpClient и устанавливаем удаленный узел
                     
-                    UdpClient client = new UdpClient("10.2.220.255", 49185);
+                    UdpClient client = new UdpClient(IP_my, 49185);
                     client.EnableBroadcast = true;
                     // Создадим поток, резервным хранилищем которого является память.
                     MemoryStream stream = new MemoryStream();
@@ -162,10 +162,10 @@ namespace Chat
 
         string GetIP(IPAddress masc,string ip )
         {
-            string temp= masc.Address.ToString(); ;
-            string[] words_masc = temp.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
-          
-            string[] words_ip = ip.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+            string temp= "";
+            String[] words_masc = masc.ToString().Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+
+            String[] words_ip = ip.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
 
             for(var i=0;i< words_masc.Length; i++)
             {
