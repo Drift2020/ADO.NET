@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace Chat
 {
     [Serializable]
-    class User:View_Model_Base, IUser
+    class User: IUser
     {
         string name;
-        public string Name { set { name = value; OnPropertyChanged(nameof(Name)); } get { return name; } }
+        public string Name { set { name = value; } get { return name; } }
     }
 }

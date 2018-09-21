@@ -21,6 +21,6 @@ namespace Chat
             set { message = value;}
         }
         string all;
-        public string All { get { return Time + Name + Messege; } set { all = value; } }
+        public string All { get { return Time+" "+ Name+"\n" + Messege; } set { all = value; } }
     }
 }

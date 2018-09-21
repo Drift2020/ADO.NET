@@ -3,9 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:Chat"
         mc:Ignorable="d"
-        Title="MainWindow" Height="441" Width="288.522">
+        Title="MainWindow" Height="441" Width="288.522" >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding Button_close}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -25,7 +31,10 @@
         </Grid.RowDefinitions>
 
         <GroupBox Header="Message" Grid.Row="0" Grid.ColumnSpan="2" Margin="2">
-            <ListView  ItemsSource="{Binding List_messege}" >
+            <ScrollViewer >
+            <ListView  ItemsSource="{Binding List_messege}" 
+                    
+                       ScrollViewer.VerticalScrollBarVisibility="Disabled">
                 <ListView.ItemTemplate>
                     <DataTemplate >
 
@@ -40,10 +49,11 @@
                     </GridView>
                 </ListView.View>-->
             </ListView>
+            </ScrollViewer>
         </GroupBox>
 
         <GroupBox Header="User" Grid.Row="1" Grid.ColumnSpan="2" Margin="2">
-            <ListView  ItemsSource="{Binding List_user,IsAsync=True ,
+            <ListView  ItemsSource="{Binding List_user ,
                 Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
                 <ListView.ItemTemplate>
                     <DataTemplate >
