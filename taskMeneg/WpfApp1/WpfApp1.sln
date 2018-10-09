@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Blend for Visual Studio 15
 VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{BB9E8ACF-8DC6-4AF8-BD23-20AA7D0BBC0B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{CB487267-7728-4F50-8135-F3F9F5379473}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyProcess", "MyProcess\MyProcess.csproj", "{61366094-F669-4501-92D0-16879CD57892}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyProcess", "MyProcess\MyProcess.csproj", "{61366094-F669-4501-92D0-16879CD57892}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

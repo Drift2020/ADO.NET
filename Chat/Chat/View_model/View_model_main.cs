@@ -10,10 +10,18 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Chat
 {
+    enum Type_pacet
+    {
+        connect = 1,
+        messege = 2,
+        update = 3,
+        exit = 4
+    }
     class View_model_main : View_Model_Base
     {
 
@@ -26,6 +34,7 @@ namespace Chat
             ip_my1 = hosst.AddressList[hosst.AddressList.Length - 1].ToString();
             My_acc = new User();
             My_acc.Name = ip_my1;
+
             var i = GetSubnetMask(hosst.AddressList[hosst.AddressList.Length - 1]);
             IP_my = GetIP(i, ip_my1);
             uiContext = SynchronizationContext.Current;
@@ -118,9 +127,9 @@ namespace Chat
         }
         private bool CanExecute_button_close(object o)
         {
-           
-                return true;
-            
+
+            return true;
+
         }
 
         #endregion Button send
@@ -136,64 +145,131 @@ namespace Chat
                 try
                 {
 
-                    UdpClient client = new UdpClient(49185 /* порт */);
-                    client.EnableBroadcast = true;
-                    while (true)
+                    using (UdpClient client = new UdpClient(49185 /* порт */))
                     {
-                        try
+                        client.EnableBroadcast = true;
+                        while (true)
                         {
-                            IPEndPoint remote = null;
-                            byte[] arr = client.Receive(ref remote);
-                            if (arr.Length > 0)
+                            try
                             {
-
-                                MemoryStream stream = new MemoryStream(arr);
-
-                                BinaryFormatter formatter = new BinaryFormatter();
-
-                                string my_str = (string)formatter.Deserialize(stream);
-
-                                if (my_str == "messege")
+                                IPEndPoint remote = null;
+                                byte[] arr = client.Receive(ref remote);
+                                if (arr.Length > 0)
                                 {
-                                    remote = null;
-                                    byte[] arr1 = client.Receive(ref remote);
-                                    stream = new MemoryStream(arr1);
-                                    formatter = new BinaryFormatter();
-                                    Date_massege m = (Date_massege)formatter.Deserialize(stream);
-                                    uiContext.Send(d => List_messege.Add(m), null);
-                                }
-                                else if (my_str == "User")
-                                {
-                                    remote = null;
-                                    byte[] arr2 = client.Receive(ref remote);
-                                    stream = new MemoryStream(arr2);
-                                    formatter = new BinaryFormatter();
-                                    User m1 = (User)formatter.Deserialize(stream);
-                                    uiContext.Send(d => List_user.Add(m1), null);
-                                }
-                                else if (my_str == "Disconnect")
-                                {
-                                    remote = null;
-                                    byte[] arr2 = client.Receive(ref remote);
-                                    stream = new MemoryStream(arr2);
-                                    formatter = new BinaryFormatter();
-                                    User m1 = (User)formatter.Deserialize(stream);
-                                    uiContext.Send(d => List_user.Remove(m1), null);
-                                }
+
+                                    MemoryStream stream = new MemoryStream(arr);
+                                    byte[] command_b = new byte[4];
+                                    BinaryFormatter formatter = new BinaryFormatter();
+                                    //     byte[] arr1 = (byte[])formatter.Deserialize(stream);
+                                    for (int i = 0; i < 4; i++)
+                                    {
+                                        command_b[i] = arr[i];
+                                    }
+                                    Type_pacet My_command = (Type_pacet)(BitConverter.ToInt32(command_b, 0));
+
+                                    stream.Dispose();
+                                    //   string my_str = (string)formatter.Deserialize(stream);
+                                    switch (My_command)
+                                    {
+                                        case Type_pacet.messege:
+                                            {
+                                                byte[] arr2 = new byte[arr.Length - 4];
+                                                Array.Copy(arr, 4, arr2, 0, arr.Length - 4);
+
+                                                stream = new MemoryStream(arr2);
+                                                formatter = new BinaryFormatter();
+                                                Date_massege m = (Date_massege)formatter.Deserialize(stream);
+                                                uiContext.Send(d => List_messege.Add(m), null);
+                                            }
+                                            break;
+
+                                        case Type_pacet.update:
+                                            {
+                                                byte[] arr2 = new byte[arr.Length - 4];
+                                                Array.Copy(arr, 4, arr2, 0, arr.Length - 4);
+
+                                                stream = new MemoryStream(arr2);
+                                                formatter = new BinaryFormatter();
+                                                User m1 = (User)formatter.Deserialize(stream);
+
+                                                bool isList = true;
+                                                foreach (var i in List_user)
+                                                    if (i.Name == m1.Name)
+                                                    {
+                                                        isList = false;
+                                                        break;
+                                                    }
+
+                                                if (isList)
+                                                    uiContext.Send(d => List_user.Add(m1), null);
+                                            }
+                                            break;
+
+                                        case Type_pacet.connect:
+
+                                            {
+                                                byte[] arr2 = new byte[arr.Length - 4];
+
+                                                Array.Copy(arr, 4, arr2, 0, arr.Length - 4);
+                                                stream = new MemoryStream(arr2);
+                                                formatter = new BinaryFormatter();
+                                                User m1 = (User)formatter.Deserialize(stream);
+                                                uiContext.Send(d => List_user.Add(m1), null);
+                                                stream.Dispose();
 
 
-                                stream.Close();
+
+                                                stream = new MemoryStream();
+                                                formatter.Serialize(stream, My_acc);
+
+                                                byte[] arr3 = BitConverter.GetBytes((Int32)Type_pacet.update);
+                                                byte[] arr4 = stream.ToArray();
+                                                byte[] arr5 = arr3.Concat(arr4).ToArray();
+
+                                                using (UdpClient client1 = new UdpClient(IP_my, 49185))
+                                                {
+                                                    client1.EnableBroadcast = true;
+                                                    client1.Send(arr5, arr5.Length);
+                                                    client1.Close();
+                                                }
+                                            }
+                                            break;
+
+                                        case Type_pacet.exit:
+                                            {
+
+                                                byte[] arr2 = new byte[arr.Length - 4];
+                                                Array.Copy(arr, 4, arr2, 0, arr.Length - 4);
+
+                                                stream = new MemoryStream(arr2);
+                                                formatter = new BinaryFormatter();
+                                                User m1 = (User)formatter.Deserialize(stream);
+
+                                                for (var i = 0; i < List_user.Count; i++)
+                                                {
+                                                    if (List_user[i].Name == m1.Name)
+
+                                                        uiContext.Send(d => List_user.RemoveAt(i), null);
+                                                }
+                                            }
+                                            break;
+                                    }
+
+
+                                    stream.Dispose();
+                                    stream.Close();
+                                }
                             }
-                        }
-                        catch (Exception ex)
-                        {
-                            //  MessageBox.Show("Получатель: " + ex.Message);
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Получатель: " + ex.Message);
+                            }
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    //  MessageBox.Show("Получатель: " + ex.Message);
+                    MessageBox.Show("Получатель: " + ex.Message);
                 }
             });
         }
@@ -207,34 +283,37 @@ namespace Chat
                 {
                     // Инициализируем новый экземпляр класса UdpClient и устанавливаем удаленный узел
 
-                    UdpClient client = new UdpClient(IP_my, 49185);
-                    client.EnableBroadcast = true;
-                    // Создадим поток, резервным хранилищем которого является память.
-                    MemoryStream stream = new MemoryStream();
-                    // BinaryFormatter сериализует и десериализует объект в двоичном формате 
-                    BinaryFormatter formatter = new BinaryFormatter();
+                    using (UdpClient client = new UdpClient(IP_my, 49185))
+                    {
+                        client.EnableBroadcast = true;
+                        // Создадим поток, резервным хранилищем которого является память.
+                        MemoryStream stream = new MemoryStream();
+                        // BinaryFormatter сериализует и десериализует объект в двоичном формате 
+                        BinaryFormatter formatter = new BinaryFormatter();
 
 
 
-                    Date_massege m = new Date_massege();
-                    m.Name = Name; // текст сообщения
-                    m.Messege = Messege; // имя пользователя
-                    m.Time = DateTime.Now.ToString();
-
-                    formatter.Serialize(stream, m);
-                    byte[] arr = stream.ToArray();
-
-                    stream.SetLength(0);
-                    formatter.Serialize(stream, "messege");
-                    byte[] arr1 = stream.ToArray();
+                        Date_massege m = new Date_massege();
+                        m.Name = Name; // текст сообщения
+                        m.Messege = Messege; // имя пользователя
+                        m.Time = DateTime.Now.ToString();
 
 
-                    client.Send(arr1, arr1.Length);
-                    client.Send(arr, arr.Length);
+
+                        formatter.Serialize(stream, m);
+
+                        byte[] arr = BitConverter.GetBytes((Int32)Type_pacet.messege);
+                        byte[] arr2 = stream.ToArray();
+                        byte[] arr1 = arr.Concat(arr2).ToArray();
 
 
-                    client.Close();
-                    stream.Close();
+                        client.Send(arr1, arr1.Length);
+                        //  client.Send(arr, arr.Length);
+
+
+                        client.Close();
+                        stream.Close();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -252,49 +331,55 @@ namespace Chat
                 {
                     // Инициализируем новый экземпляр класса UdpClient и устанавливаем удаленный узел
 
-                    UdpClient client = new UdpClient(IP_my, 49185);
-                    client.EnableBroadcast = true;
-                    // Создадим поток, резервным хранилищем которого является память.
-                    MemoryStream stream = new MemoryStream();
-                    // BinaryFormatter сериализует и десериализует объект в двоичном формате 
-                    BinaryFormatter formatter = new BinaryFormatter();
+                    using (UdpClient client = new UdpClient(IP_my, 49185))
+                    {
+                        client.EnableBroadcast = true;
+                        // Создадим поток, резервным хранилищем которого является память.
+                        MemoryStream stream = new MemoryStream();
+                        // BinaryFormatter сериализует и десериализует объект в двоичном формате 
+                        BinaryFormatter formatter = new BinaryFormatter();
 
 
 
 
-                    formatter.Serialize(stream, My_acc);
-                    byte[] arr = stream.ToArray();
-
-                    stream.SetLength(0);
-                    formatter.Serialize(stream, "User");
-                    byte[] arr1 = stream.ToArray();
+                        // Int32 a = 1;
+                        //  formatter.Serialize(stream, a);
+                        formatter.Serialize(stream, My_acc);
 
 
-                    client.Send(arr1, arr1.Length);
-                    client.Send(arr, arr.Length);
+
+                        byte[] arr = BitConverter.GetBytes((Int32)Type_pacet.connect);
+                        byte[] arr2 = stream.ToArray();
+                        byte[] arr1 = arr.Concat(arr2).ToArray();
 
 
-                    client.Close();
-                    stream.Close();
+                        client.Send(arr1, arr1.Length);
+
+
+                        client.Close();
+                        //  stream.Dispose();
+                        stream.Close();
+                    }
                 }
                 catch (Exception ex)
                 {
-                    //  MessageBox.Show("Отправитель: " + ex.Message);
+                    MessageBox.Show("Отправитель: " + ex.Message);
                 }
             });
         }
 
         //close
-       
-            private async void Close()
-            {
-                await Task.Run(() =>
-                {
-                    try
-                    {
-                        // Инициализируем новый экземпляр класса UdpClient и устанавливаем удаленный узел
 
-                        UdpClient client = new UdpClient(IP_my, 49185);
+        private async void Close()
+        {
+            await Task.Run(() =>
+            {
+                try
+                {
+                    // Инициализируем новый экземпляр класса UdpClient и устанавливаем удаленный узел
+
+                    using (UdpClient client = new UdpClient(IP_my, 49185))
+                    {
                         client.EnableBroadcast = true;
                         // Создадим поток, резервным хранилищем которого является память.
                         MemoryStream stream = new MemoryStream();
@@ -305,27 +390,34 @@ namespace Chat
 
 
                         formatter.Serialize(stream, My_acc);
-                        byte[] arr = stream.ToArray();
 
-                        stream.SetLength(0);
-                        formatter.Serialize(stream, "Disconnect");
-                        byte[] arr1 = stream.ToArray();
+
+
+
+
+
+
+                        byte[] arr = BitConverter.GetBytes((Int32)Type_pacet.exit);
+                        byte[] arr2 = stream.ToArray();
+                        byte[] arr1 = arr.Concat(arr2).ToArray();
+
 
 
                         client.Send(arr1, arr1.Length);
-                        client.Send(arr, arr.Length);
+
 
 
                         client.Close();
                         stream.Close();
                     }
-                    catch (Exception ex)
-                    {
-                        //  MessageBox.Show("Отправитель: " + ex.Message);
-                    }
-                });
-            }
-        
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Отправитель: " + ex.Message);
+                }
+            });
+        }
+
 
         string GetIP(IPAddress masc, string ip)
         {
@@ -369,6 +461,8 @@ namespace Chat
             throw new ArgumentException($"Can't find subnetmask for IP address '{address}'");
         }
 
+
+
         #endregion code
 
         #region list
@@ -410,4 +504,5 @@ namespace Chat
 
         #endregion list
     }
+
 }

@@ -9,5 +9,6 @@ namespace Chat
     interface IUser
     {
         string Name { set; get; }
+      
     }
 }
